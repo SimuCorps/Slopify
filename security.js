@@ -11,7 +11,7 @@ class AnnoyingSecurity {
             "Must include your grandmother's maiden name",
             "Must include pi to 5 decimal places",
             "Must match /^(?:[1-9]|[1-9][0-9]).*(?:[1-9]|[1-9][0-9])$/",
-            "Must contain your credit card number\n*(this information may or may not be shared with the maxxus corporation™ to commit fraud)"
+            "Must contain your credit card number\n*(this information may or may not be shared with the maxxus corporation™ to commit fraud)",
             "Must be typed with your eyes closed",
             "Must be typed while standing on one leg",
             "Must include your favorite pizza topping"
