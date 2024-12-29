@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <title>chat</title>
-        <script defer src="static/js/tunnel_lib.js"></script>
-    </head>
-    <body>
-        <div id="chatContainer">
-            <div id="roomInfo">Connected to room: <strong>global</strong></div>
-            <div id="messages"></div>
-            <div id="inputContainer">
-                <input id="messageInput" maxlength="200" placeholder="Type a message..." type="text">
-                <button id="sendButton" onclick="sendMessage()">Send</button>
-            </div>
-            <div style="margin-top: 10px;">
-                <button id="createButton" onclick="createOrJoinRoom()">Create or Join a Room</button>
-                <button id="setUsernameButton" onclick="setUserName()">Set Username</button>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat</title>
+    <script src="static/js/tunnel_lib.js" defer></script>
+    <style>
+      .message {
+          margin-bottom: 6px; /* Space between messages */
+          display: flex; /* Align username and message on the same line */
+          align-items: center;
+      }
+
+      .username {
+          font-weight: bold; /* Make the username bold */
+          position: relative;
+      }
+
+      /* Add the colon and space after the username */
+      .username:after {
+          content: ": "; 
+      }
+    </style>
+</head>
+<body>
+    <div id="chatContainer">
+        <div id="roomInfo">Connected to room: <strong>global</strong></div>
+        <div id="messages"></div>
+        <div id="inputContainer">
+            <input type="text" id="messageInput" placeholder="Type a message..." maxlength="200">
+            <button id="sendButton" onclick="sendMessage()">Send</button>
         </div>
         <script>
             async function createOrJoinRoom() {
@@ -102,6 +114,7 @@
                     }
                 });
             });
-        </script>
-    </body>
-</html>
+        });
+    </script>
+</body>
+  </html>
