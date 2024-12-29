@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="static/css/error.css">
     <title>Slopify</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="luxembourg.js"></script>
     <script>
       const THE_OPPENHEIMER_INDEX = 69;
       function getRandomInt(max) {
@@ -284,6 +285,26 @@
         text-shadow: 2px 2px 0px #FF00FF;
         background-color: yellow;
       }
+
+      .creationButton {
+          font-family: sans-serif;
+          font-size: 5em;
+          padding: 1em;
+          border-radius: 2em;
+          transition-duration: 200ms;
+          transition-delay: 100ms;
+          background-color: rgb(69, 69, 69);
+      }
+
+      .creationButton:hover {
+          background-color: rgb(42, 42, 42);
+          border-radius: 1em;
+      }
+
+      .creationButton:active {
+          background-color: rgb(7, 7, 7);
+          border-radius: 3em;
+      }
     </style>
     <audio id="vibeAudio" loop>
       <source
@@ -449,6 +470,7 @@
     </div>
 
     <header>
+        <button class="creationButton" id="creation">Creation!</button>
       <marquee><img src="static/images/epic-logo.gif" /></marquee>
       <img src="SlopifyLogo.png" width="400px" />
       <p>
