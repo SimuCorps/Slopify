@@ -133,6 +133,50 @@
         width: 400px;
         height: 400px;
       }
+      .ad-section {
+        position: fixed;
+        right: 120px;
+        top: 200px; /* Adjust this value to position ads lower/higher */
+        width: 150px;
+        height: 350px;
+        z-index: 100;
+        scale: 0.4;
+      }
+
+      .ad-container {
+        position: relative;
+        margin-bottom: 20px;
+        width: fit-content;
+      }
+
+      .ad-close {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        background: rgba(255, 255, 255, 0.8);
+        border: none;
+        cursor: pointer;
+        padding: 1px;
+        font-size: 8px;
+        line-height: 8px;
+        height: 12px;
+        width: 12px;
+        scale: 2;
+      }
+
+      .ad-error {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 4px;
+        display: none;
+        z-index: 101;
+        scale: 2;
+      }
     </style>
     <audio id="vibeAudio">
       <source
@@ -321,6 +365,16 @@
         </ul>
         <p>The only rules? Everything must work together and remain legal.</p>
       </section>
+      <section>
+        <div class="ad-section">
+          <div class="ad-container">
+            <a href="https://www.linkedin.com/" target="_blank">
+              <img src="static/images/ad.png" alt="Advertisement" />
+            </a>
+            <button class="ad-close">✕</button>
+            <div class="ad-error">There was an error</div>
+          </div>
+        </div>
       <section class="importante">
         <section>
           <canvas id="glCanvas" width="400" height="400"></canvas>
@@ -760,6 +814,19 @@
         document.getElementById("stock_ticker").textContent = ticker;
         document.getElementById("stock_msg").textContent = msg;
       }
+    </script>
+    <script>
+      document.querySelectorAll('.ad-close').forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const errorMsg = this.nextElementSibling;
+          errorMsg.style.display = 'block';
+          setTimeout(() => {
+            errorMsg.style.display = 'none';
+          }, 2000);
+        });
+});
     </script>
   </body>
 </html>
