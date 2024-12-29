@@ -21,9 +21,12 @@ function getStuff(name) {
 function main() {
     const creation = getStuff("creation")
     const maincontent = getStuff("maincontent")
+    const schisse = getStuff("schisse")
 
     creation.onclick = () => {
+        console.log("hello")
         maincontent.innerHTML = ""
+        schisse.innerHTML = ""
     }
 }
 
