@@ -1,0 +1,18 @@
+// Following https://vercel.com/docs/storage/vercel-postgres/using-an-orm
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider  = "postgresql"
+    url       = env("DATABASE_URL")
+    directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model Comments {
+    id Int @id @default(autoincrement())
+    twitter_handle String?
+    content String
+    createdAt DateTime @default(now())
+}

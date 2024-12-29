@@ -242,6 +242,7 @@
         background-repeat: no-repeat;
       }
     </style>
+    <link rel="stylesheet" href="./comments.css">
     <audio id="vibeAudio" loop>
       <source
         src="https://cdn.pixabay.com/download/audio/2024/10/22/audio_5b87be5f9b.mp3?filename=smooth-jazz-saxophone-solo-with-a-lofi-vibe-253950.mp3"
@@ -745,6 +746,35 @@
           });
         </script>
       </section>
+
+      <a href="#comments-title">
+        <div id="comment-alert-top">
+          <span class="rainbow rainbow_text_animated">LEAVE A COMMENT!</span>
+        </div>
+      </a>
+
+
+      <h1 style="text-align: center; color: white;" id="comments-title">
+        COMMENTS
+      </h1>
+
+      <button onclick="fetchComments()">Refresh</button>
+
+      <div style="display: flex; flex-direction: column; margin-bottom: 25px;">
+        <h3>Write something</h3>
+
+        <input id="comment-twitter-handle" type="text" placeholder="@TwitterHandle (without the @)">
+        <textarea placeholder="Hello World!" id="comment-content"></textarea>
+
+        <button onclick="comment()">Post Slop</button>
+      </div>
+
+
+      <div id="comments">
+        Fetching comments..
+      </div>
+
+      <button onclick="showMore()">Load More</button>
     </main>
     <footer>
       <div style="text-align: center; margin-top: 20px">
@@ -791,6 +821,7 @@
     </footer>
 
     <script src="security.js"></script>
+    <script src="comments.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const security = new AnnoyingSecurity();

@@ -2,6 +2,9 @@
   "name": "slopify",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "vercel-build": "prisma generate && prisma migrate deploy"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
@@ -9,7 +12,11 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@prisma/client": "^6.1.0",
     "@stripe/stripe-js": "^5.4.0",
-    "stripe": "^17.5.0"
+    "@vercel/node": "^5.0.0",
+    "prisma": "^6.1.0",
+    "stripe": "^17.5.0",
+    "vercel": "^39.2.2"
   }
 }

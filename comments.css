@@ -1,0 +1,77 @@
+@keyframes comment-alert-box {
+    from {
+        transform: scale(1.0);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    to {
+        transform: scale(1.0);
+    }
+}
+
+div#comment-alert-top {
+    position: fixed;
+    bottom: 10px;
+    left: 20px;
+
+    height: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border: 1px solid green;
+    background: lightgreen;
+    color: black;
+    font-size: 30px;
+
+    animation: infinite 0.5s linear comment-alert-box;
+}
+
+/** https://stackoverflow.com/questions/54702124/rainbow-text-animation-using-only-css#54702294 */
+.rainbow {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 32px;
+    font-family: monospace;
+    letter-spacing: 5px;
+}
+.rainbow_text_animated {
+    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 6s ease-in-out infinite;
+    background-size: 400% 100%;
+}
+
+@keyframes rainbow_animation {
+    0%,100% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 100% 0;
+    }
+}
+/** END STACK OVERFLOW RAINBOW ANIM */
+
+div#comments {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+div#comment {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    border: 1px solid darkgreen;
+    padding: 5px;
+}
+
+div#comment > div {
+    display: flex;
+    justify-content: space-between;
+}
