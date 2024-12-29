@@ -85,7 +85,22 @@
         }
         #stock_img {
             width: 400px;
-            heigh: 400px;
+            height: 400px;
+        }
+
+        .spinning-stuff {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .donut-container {
+            background-color: #000;
+            width: 500px;
+            height: 400px;
+        }
+        #donut {
+            font-size: 0.75em;
         }
     </style>
 </head>
@@ -106,7 +121,13 @@
             </ul>
             <p>The only rules? Everything must work together and remain legal.</p>
         </section>
-        <canvas id="glCanvas" width="400" height="400"></canvas>
+        <div class="spinning-stuff">
+            <canvas id="glCanvas" width="400" height="400"></canvas>
+            <div class="donut-container">
+                <pre class="center" id="donut"></pre>
+            </div>
+        </div>
+        <script src="donut.js"></script>
         <script>
             const canvas = document.getElementById('glCanvas');
             const gl = canvas.getContext('webgl2');
