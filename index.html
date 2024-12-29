@@ -85,15 +85,30 @@
         }
         #stock_img {
             width: 400px;
-            heigh: 400px;
+            height: 400px;
+        }
+        #header {
+            position: relative;
+            overflow: hidden;
+        }
+        #header > *:not(#noise-cloud) {
+            position: relative;
+            z-index: 1;
+        }
+        #noise-cloud {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <header>
+    <header id="header">
         <h1>Slopify</h1>
         <p><em>"The <a href="https://www.newmanmentalism.com/blog/a-mentalist-explains-how-ouija-boards-work-and-the-ideomotor-effect" target="_blank">ideomotor effect</a> of software"</em></p>
         <image id="frog" src="static/images/frog.webp"></image>
+        <canvas id="noise-cloud"></canvas>
     </header>
     <main>
         <section>
@@ -331,5 +346,6 @@
         }
 
     </script>
+    <script type="text/javascript" src="./noise-cloud.js"></script>
 </body>
 </html>
