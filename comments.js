@@ -57,7 +57,7 @@ const comment = async () => {
     document.getElementById("comment-content").value = "";
 
     try {
-        await fetch("/api/comments", {
+        const response = await fetch("/api/comments", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"  
@@ -67,6 +67,12 @@ const comment = async () => {
                 content
             })
         });
+
+        if(response.status != 200) {
+            throw new (class extends Error {
+                name = response.status.toString();
+            })(await response.text());
+        }
 
         console.log("Posted!");
     } catch(e) {
