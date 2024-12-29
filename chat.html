@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>chat</title>
     <script src="static/js/tunnel_lib.js" defer></script>
+    <style>
+      .message {
+          margin-bottom: 6px; /* Space between messages */
+          display: flex; /* Align username and message on the same line */
+          align-items: center;
+      }
+
+      .username {
+          font-weight: bold; /* Make the username bold */
+          position: relative;
+      }
+
+      /* Add the colon and space after the username */
+      .username:after {
+          content: ": "; 
+      }
+    </style>
 </head>
 <body>
     <div id="chatContainer">
@@ -47,10 +64,21 @@
         function localMessage(username, message, isSystem) {
             if (!isSystem) isSystem = false;
             let messagesContainer = document.getElementById('messages');
-            let messageElement = document.createElement('div');
-            messageElement.textContent = `${username}: ${message}`;
-            if (isSystem) messageElement.style.color = '#f00';
-            messagesContainer.appendChild(messageElement);
+            let messageContainer = document.createElement('div');
+            messageContainer.classList.add('message');
+            let usernameElement = document.createElement('div');
+            usernameElement.textContent = username;
+            usernameElement.classList.add('username');
+            let messageTextElement = document.createElement('div');
+            messageTextElement.textContent = message;
+            messageTextElement.classList.add('message-text');
+            if (isSystem) {
+                usernameElement.style.color = '#f00';
+                messageTextElement.style.color = '#f00';
+            }
+            messageContainer.appendChild(usernameElement);
+            messageContainer.appendChild(messageTextElement);
+            messagesContainer.appendChild(messageContainer);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 

@@ -26,6 +26,11 @@ moreVibeAudio.addEventListener('ended', function() {
 moreVibeAudio.addEventListener('ended', () => frog.src = 'static/images/frog.webp');
 moreVibeAudio.addEventListener('pause', () => frog.src = 'static/images/frog.webp');
 
+if (window.location.search.includes("slopcursion=true")) {
+	document.getElementById('slopcursion').style.display = 'none';
+}
+
+// TODO: Delete dead code
 // TODO: Refactor random number generation
 
 // document.body.style.background = 'hsl('+Math.floor(Math.random() * 255)+', 40%, 50%)';

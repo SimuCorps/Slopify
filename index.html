@@ -425,10 +425,12 @@
           <a href="/embr" style="color: #b8bb26">Embr</a>
         </p>
       </div>
+      <img src="static/images/kofte.jpg" id="kofte" style="width: 400px; height: 400px;">
       <image id="frog" src="static/images/frog.webp"></image>
       <button id="vibeButton">Improve the Mood</button>
       <button id="wisdomButton">ENABLE FROG WISDOM</button>
       <p>Vist SlopChat™ to chat with other slop enthusiasts. <a href="chat.html">Click here!/a></p>
+      <button id="clickme">Click me!</button>
       <a href="https://www.hitwebcounter.com" target="_blank">
         <img
           src="https://hitwebcounter.com/counter/counter.php?page=18132009&style=0010&nbdigits=9&type=page&initCount=0"
@@ -467,6 +469,7 @@
 
         </div>
       </div>
+      <img src="https://secret.kgncengiz.com/F.jpg" />
       <section>
         <div align="center">
           <button id="l8rgt" onclick="location.href='O3O.mp4'">click me</button>
@@ -775,6 +778,16 @@
       </div>
 
       <button onclick="showMore()">Load More</button>
+			<section id="slopcursion">
+			<h2>So you can Slopify while you Slopify</h2>
+			<iframe src="index.html?slopcursion=true" width="100%" height="500px" frameborder="0">
+			</section>
+      <section>
+        <h2>oh hewwo thewe, you gwot twhis fwar uwu~! wouwd you wike to wead somethin’ awesome~? >w<</h2>
+        <button type="button">
+          <a href='/uwu.html'>wets seee~ >w<<a/>
+        </button>
+      </section>
     </main>
     <footer>
       <div style="text-align: center; margin-top: 20px">
@@ -1034,6 +1047,25 @@
       }
 
       runOnKonami(coolVideo)
+    </script>
+    <script>
+        const clickMeBtn = document.getElementById("clickme");
+        const clickMeBtnRect = clickMeBtn.getBoundingClientRect();
+        const clickMeBtnWidth = clickMeBtnRect.width;
+        const clickMeBtnHeight = clickMeBtnRect.height;
+
+        clickMeBtn.addEventListener("mouseover", function() {
+          let newTop = Math.random() * (window.innerHeight - clickMeBtnHeight);
+          let newRight = Math.random() * (window.innerWidth - clickMeBtnWidth);
+
+          clickMeBtn.style.position = "fixed";
+          clickMeBtn.style.top = `${newTop}px`;
+          clickMeBtn.style.right = `${newRight}px`;
+        });
+
+        window.addEventListener("scroll", function() {
+          clickMeBtn.style.position = "static";
+        });
     </script>
 </body>
 </html>
