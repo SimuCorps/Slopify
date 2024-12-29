@@ -7,9 +7,10 @@
     <script src="static/js/tunnel_lib.js" defer></script>
     <style>
       .message {
-          margin-bottom: 6px; /* Space between messages */
+          margin-bottom: 10px; /* Space between messages */
           display: flex; /* Align username and message on the same line */
           align-items: center;
+          text-shadow: 2px 2px 3px white;
       }
 
       .username {
@@ -19,8 +20,20 @@
 
       /* Add the colon and space after the username */
       .username:after {
-          content: ": "; 
+          content: ": ";
+          margin-right:5px;
       }
+      
+    #chatContainer {
+        width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: sans-serif;
+      padding: 40px;
+      overflow: scroll;
+      overflow-wrap: break-word;
+        background-color: burlywood;
+    }
     </style>
 </head>
 <body>
@@ -80,6 +93,7 @@
             messageContainer.appendChild(messageTextElement);
             messagesContainer.appendChild(messageContainer);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            window.scrollTo(0, document.body.scrollHeight);
         }
 
         function processMessage(message) {
