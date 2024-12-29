@@ -75,7 +75,6 @@
         padding: 0;
         color: #ebdbb2;
       }
-
       .skipnav {
         text-decoration: none;
         padding: 4px 8px;
@@ -84,7 +83,6 @@
         top: 0;
         font-weight: bold;
       }
-      
       .skipnav:focus,
       .skipnav:active {
         z-index: 99;
@@ -96,7 +94,6 @@
         width: fit-content;
         outline-offset: 2px;
       }
-
       header {
         color: #ebdbb2;
         padding: 20px 0;
@@ -106,30 +103,25 @@
         align-items: center;
         justify-content: center;
       }
-
       header h1 {
         margin: 0;
         font-size: 2.5rem;
       }
-
       main {
         padding: 20px;
         max-width: 800px;
         margin: 0 auto;
       }
-
       footer {
         text-align: center;
         padding: 10px 0;
         color: #ebdbb2;
         margin-top: 20px;
       }
-
       a {
         color: #b8bb26;
         text-decoration: underline;
       }
-
       a:hover {
         color: #83a598;
       }
@@ -181,7 +173,6 @@
         width: 400px;
         margin: 10px;
       }
-
       @keyframes frogPulse {
         0% {
           transform: scale(1);
@@ -201,8 +192,6 @@
         margin: 10px;
         animation: frogPulse 5s infinite;
       }
-
-
       #stock_img {
         width: 400px;
         height: 400px;
@@ -213,26 +202,30 @@
         width: 400px;
         height: 400px;
       }
-
       #d {
         font-size: 0.75em;
       }
-       
       .fourier-container {
         text-align: center;
       }
 
-      #foxy {
-        height: 600px;
-        width: auto;
-        background: url('static/images/cute.jpg');
-        background-repeat: no-repeat;
+      .blink {
+        animation: blink 1s linear infinite;
       }
 
-      #foxy:hover {
-        background: url('static/images/snarl.jpg');
-        background-repeat: no-repeat;
-
+      @keyframes blink {
+        0% {
+          opacity: 1;
+          color: blue;
+        }
+        50% {
+          opacity: 0.2;
+          color: limegreen;
+        }
+        100% {
+          opacity: 1;
+          color: red;
+        }
       }
     </style>
     <audio id="vibeAudio" loop>
@@ -246,11 +239,6 @@
       <source src="/static/audio/rick.m4a" type="audio/mp3" />
       Your browser does not support the audio element.
     </audio>
-    <script type="module">
-          import { rainbowCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
-
-          new rainbowCursor();
-    </script>
     <script type="module" src="static/js/index.js"></script>
     <script>
       !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -288,6 +276,7 @@
       >
         <h2 style="color: #ebdbb2; text-align: center">
           🔒 Welcome to Slopify 🔒
+          <a class="blink" style="font-family: 'Comic Sans MS', serif; font-size: 1.5em" href="https://www.youtube.com/watch?v=0AV2_VLY7I8">Click to learn about the Dancing Plague of 1518</a>
         </h2>
 
         <div
@@ -420,7 +409,6 @@
       <image id="frog" src="static/images/frog.webp"></image>
       <button id="vibeButton">Improve the Mood</button>
       <button id="wisdomButton">ENABLE FROG WISDOM</button>
-      <p>Vist SlopChat™ to chat with other slop enthusiasts. <a href="chat.html">Click here!/a></p>
       <a href="https://www.hitwebcounter.com" target="_blank">
         <img
           src="https://hitwebcounter.com/counter/counter.php?page=18132009&style=0010&nbdigits=9&type=page&initCount=0"
@@ -477,7 +465,7 @@
                     in vec4 color;
                     out vec4 vColor;
                     uniform mat4 mvp;
-
+        
                     void main() {
                         vColor = color;
                         gl_Position = mvp * position;
@@ -492,7 +480,7 @@
                     precision mediump float;
                     in vec4 vColor;
                     out vec4 fragColor;
-
+        
                     void main() {
                         fragColor = vColor;
                     }`
@@ -669,10 +657,6 @@
           src="https://www.shadertoy.com/embed/ld3Gz2?gui=false&paused=false&muted=false"
           allowfullscreen
         ></iframe>
-      </section>
-      <section>
-        <h1>The Fennec Fox in dis bish</h1>
-        <div id="foxy"></div>
       </section>
       <section>
         <h2>Things people should know</h2>
@@ -992,3 +976,25 @@
     </script>
 </body>
 </html>
+
+<!-- this file needs to be exactly 1000 lines f31c41d2-f515-4345-8772-bed4dd8ffd27 ->
+<!-- this file needs to be exactly 1000 lines 1fb1f7a3-a3ca-4a3b-a668-e51533582fe3 ->
+<!-- this file needs to be exactly 1000 lines b8a91301-1758-414c-94c7-3472c7b1404f ->
+<!-- this file needs to be exactly 1000 lines 13c2ebaa-9a75-4567-bc24-1b1f2f0084e4 ->
+<!-- this file needs to be exactly 1000 lines 6433f77e-36cb-48d9-8172-96eec40e6169 ->
+<!-- this file needs to be exactly 1000 lines c165e140-0621-4627-a3f6-c006fd96b594 ->
+<!-- this file needs to be exactly 1000 lines 31bccbf8-7c6e-45de-8b00-35695e28da6d ->
+<!-- this file needs to be exactly 1000 lines 9e5fd8f8-ed72-4501-80ad-6ae2afb438f2 ->
+<!-- this file needs to be exactly 1000 lines 3b9e3a9d-592c-45b3-9dd2-1d5a9d672958 ->
+<!-- this file needs to be exactly 1000 lines 435b4099-eb9c-4e29-a8ec-b7a1c95d9219 ->
+<!-- this file needs to be exactly 1000 lines 8a2542f4-5dcf-451f-a386-b9e74e1f484d ->
+<!-- this file needs to be exactly 1000 lines 7a889c5c-2af2-460e-8503-030ea2e6e686 ->
+<!-- this file needs to be exactly 1000 lines 55512fd2-a194-4461-9129-9f3f707d35d3 ->
+<!-- this file needs to be exactly 1000 lines 0cb55622-1511-49ca-a4ac-46267d0cb4f0 ->
+<!-- this file needs to be exactly 1000 lines 3cf84bd1-8bc0-4e18-9655-17569052644d ->
+<!-- this file needs to be exactly 1000 lines d2e26306-47ad-42b8-8a59-3f14e085f790 ->
+<!-- this file needs to be exactly 1000 lines 6a27d988-d975-431e-8d65-be147421de6b ->
+<!-- this file needs to be exactly 1000 lines 69786ed4-64bd-4a86-9078-d7b374bcc249 ->
+<!-- this file needs to be exactly 1000 lines 970a91a3-22eb-495b-8e3b-1a71ce055bc6 ->
+<!-- this file needs to be exactly 1000 lines c712c515-7e61-48cf-8763-cf8643694972 ->
+<!-- this file needs to be exactly 1000 lines ffbb21a1-ce07-41f1-abbd-cd7b17805b13 ->
