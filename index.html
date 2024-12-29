@@ -135,12 +135,11 @@
       }
       .ad-section {
         position: fixed;
-        right: 120px;
+        right: 40px;
         top: 200px; /* Adjust this value to position ads lower/higher */
-        width: 150px;
-        height: 350px;
+        width: 300px;
         z-index: 100;
-        scale: 0.4;
+        scale: 0.5;
       }
 
       .ad-container {
@@ -161,7 +160,7 @@
         line-height: 8px;
         height: 12px;
         width: 12px;
-        scale: 2;
+        scale: 1.8;
       }
 
       .ad-error {
@@ -171,11 +170,12 @@
         transform: translate(-50%, -50%);
         background: rgba(0, 0, 0, 0.8);
         color: white;
-        padding: 8px 16px;
+        padding: 16px 32px;
         border-radius: 4px;
         display: none;
         z-index: 101;
-        scale: 2;
+        font-size: 40px;
+        white-space: nowrap; /* Ensures text does not wrap if it's too long */
       }
     </style>
     <audio id="vibeAudio">
