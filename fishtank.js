@@ -35,7 +35,6 @@ class ConstrainedPoint {
 
         this.waveAngle += 0.1;
         const waveOffset = Math.sin(this.waveAngle) * 0.3;
-        
         this.x += Math.cos(this.angle + waveOffset) * this.speed;
         this.y += Math.sin(this.angle + waveOffset) * this.speed;
 
@@ -75,19 +74,19 @@ class Fish {
         this.speed = speed;
         this.constraintRadius = 4;
         this.numSegments = 6;
-        this.bodySizes = Array.from({ length: this.numSegments }, (_, i) => {
+        this.bodySizes = Array.from({length: this.numSegments}, (_, i) => {
             if (i === 0) return 6;
             const t = i / (this.numSegments - 1);
             return 6 * (1 - Math.pow(t, 1.1));
         });
         this.maxBendAngle = Math.PI / 4;
 
-        this.points = Array.from({ length: this.numSegments }, (_, i) =>
+        this.points = Array.from({length: this.numSegments}, (_, i) =>
             new ConstrainedPoint(
-                x + i * this.constraintRadius, 
-                y, 
-                this.constraintRadius, 
-                this.speed, 
+                x + i * this.constraintRadius,
+                y,
+                this.constraintRadius,
+                this.speed,
                 i === 0,
                 canvasWidth,
                 canvasHeight,
@@ -131,7 +130,7 @@ class Fish {
             const dx = food.x - head.x;
             const dy = food.y - head.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 6) { 
+            if (dist < 6) {
                 foods.splice(i, 1);
                 this.eatenCount++;
                 if (this.eatenCount > 3) {
@@ -146,7 +145,7 @@ class Fish {
             // Dead fish logic: float upwards until topReached, then bob
             const head = this.points[0];
             const topLine = 10; // The vertical line near the top where fish start bobbing
-            
+
             if (!this.topReached) {
                 // Move upward
                 head.y -= 0.5; // upward speed
@@ -179,7 +178,7 @@ class Fish {
 
         // Move head if alive
         this.points[0].move(targetX, targetY);
-        
+
         // Apply constraints
         for (const point of this.points) {
             point.constrain();
@@ -246,7 +245,7 @@ class Fish {
 
     getBodyPath() {
         const path = new Path2D();
-        
+
         const getContourPoint = (t, side) => {
             const index = Math.min(Math.floor(t * (this.points.length - 1)), this.points.length - 2);
             const localT = (t * (this.points.length - 1)) % 1;
@@ -269,13 +268,13 @@ class Fish {
         const head = this.points[0];
         const headRadius = this.bodySizes[0];
         const headAngle = Math.atan2(this.points[1].y - head.y, this.points[1].x - head.x);
-        
+
         path.moveTo(
-            head.x + headRadius * Math.cos(headAngle + Math.PI/2),
-            head.y + headRadius * Math.sin(headAngle + Math.PI/2)
+            head.x + headRadius * Math.cos(headAngle + Math.PI / 2),
+            head.y + headRadius * Math.sin(headAngle + Math.PI / 2)
         );
-        
-        path.arc(head.x, head.y, headRadius, headAngle + Math.PI/2, headAngle - Math.PI/2, false);
+
+        path.arc(head.x, head.y, headRadius, headAngle + Math.PI / 2, headAngle - Math.PI / 2, false);
 
         for (let t = 0; t <= 1; t += 0.1) {
             const point = getContourPoint(t, -1);
@@ -300,7 +299,7 @@ class Fish {
         const finShape = (t, foldFactor) => {
             const x = t * finLength;
             const y = finWidth * Math.sin(t * Math.PI) * foldFactor + x * Math.tan(finAngle);
-            return { x, y };
+            return {x, y};
         };
 
         const p1 = this.points[finPointIndex];
@@ -356,7 +355,7 @@ class FishTank {
         this.fishes = [];
         this.isInitialized = false;
         this.animationFrameId = null;
-        
+
         this.options = {
             width: options.width || 600,
             height: options.height || 400,
@@ -370,51 +369,51 @@ class FishTank {
         this.foods = [];
     }
 
-setCanvasSize() {
-    if (!this.canvas) return;
-    
-    if (this.canvasId === 'nav-fishtank') {
-        const navElement = this.canvas.closest('nav');
-        const navHeight = navElement ? navElement.offsetHeight : 64;
-        
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = navHeight;
+    setCanvasSize() {
+        if (!this.canvas) return;
+
+        if (this.canvasId === 'nav-fishtank') {
+            const navElement = this.canvas.closest('nav');
+            const navHeight = navElement ? navElement.offsetHeight : 64;
+
+            this.canvas.width = window.innerWidth;
+            this.canvas.height = navHeight;
+            this.canvas.style.width = '100%';
+            this.canvas.style.height = navHeight + 'px';
+
+            this.options.width = window.innerWidth;
+            this.options.height = navHeight;
+            return;
+        }
+
+        const container = this.canvas.parentElement;
+        const containerWidth = Math.min(container.clientWidth, 600); // Max width of 600px
+        const isMobile = window.innerWidth <= 768;
+
+        // Calculate height based on width and screen size
+        const height = isMobile ?
+            Math.min(containerWidth * 0.75, 300) : // Mobile height
+            Math.min(containerWidth * 0.66, 400);  // Desktop height
+
+        this.options.width = containerWidth;
+        this.options.height = height;
+
+        this.canvas.width = containerWidth;
+        this.canvas.height = height;
         this.canvas.style.width = '100%';
-        this.canvas.style.height = navHeight + 'px';
-        
-        this.options.width = window.innerWidth;
-        this.options.height = navHeight;
-        return;
+        this.canvas.style.height = height + 'px';
     }
 
-    const container = this.canvas.parentElement;
-    const containerWidth = Math.min(container.clientWidth, 600); // Max width of 600px
-    const isMobile = window.innerWidth <= 768;
-    
-    // Calculate height based on width and screen size
-    const height = isMobile ? 
-        Math.min(containerWidth * 0.75, 300) : // Mobile height
-        Math.min(containerWidth * 0.66, 400);  // Desktop height
-    
-    this.options.width = containerWidth;
-    this.options.height = height;
-    
-    this.canvas.width = containerWidth;
-    this.canvas.height = height;
-    this.canvas.style.width = '100%';
-    this.canvas.style.height = height + 'px';
-}
-
-  getRandomColor() {
-      const colors = [
-          '#b8bb26', // Light green
-          '#83a598', // Blue
-          '#d3869b', // Pink
-          '#fe8019', // Orange
-          '#fabd2f'  // Yellow
-      ];
-      return colors[Math.floor(Math.random() * colors.length)];
-  }
+    getRandomColor() {
+        const colors = [
+            '#b8bb26', // Light green
+            '#83a598', // Blue
+            '#d3869b', // Pink
+            '#fe8019', // Orange
+            '#fabd2f'  // Yellow
+        ];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
 
     getRandomSpeed(min, max) {
         return Math.random() * (max - min) + min;
@@ -424,7 +423,7 @@ setCanvasSize() {
         this.fishes = [];
         const totalWidth = this.options.width + this.options.buffer * 2;
         const totalHeight = this.options.height + this.options.buffer * 2;
-        
+
         // Create fish in a distributed pattern
         for (let i = 0; i < this.options.fishCount; i++) {
             const segment = totalWidth / this.options.fishCount;
@@ -432,7 +431,7 @@ setCanvasSize() {
             const y = Math.random() * totalHeight - this.options.buffer;
             const color = this.getRandomColor();
             const speed = this.getRandomSpeed(this.options.minSpeed, this.options.maxSpeed);
-            
+
             this.fishes.push(new Fish(
                 x, y, color, speed,
                 this.options.width,
@@ -442,7 +441,7 @@ setCanvasSize() {
         }
     }
 
-  setupEventListeners() {
+    setupEventListeners() {
         this.canvas.addEventListener('click', (e) => {
             const rect = this.canvas.getBoundingClientRect();
             // Account for any scaling between display size and actual canvas dimensions
@@ -450,7 +449,7 @@ setCanvasSize() {
             const scaleY = this.canvas.height / rect.height;
             const x = (e.clientX - rect.left) * scaleX;
             const y = (e.clientY - rect.top) * scaleY;
-            this.foods.push({ x, y });
+            this.foods.push({x, y});
         });
 
         this.canvas.style.cursor = 'crosshair';
@@ -502,40 +501,39 @@ setCanvasSize() {
         this.animationFrameId = requestAnimationFrame(this.draw);
     }
 
-initialize() {
-    if (this.isInitialized) return;
+    initialize() {
+        if (this.isInitialized) return;
 
-    this.canvas = document.getElementById(this.canvasId);
-    if (!this.canvas) return;
+        this.canvas = document.getElementById(this.canvasId);
+        if (!this.canvas) return;
 
-    this.ctx = this.canvas.getContext('2d');
-    if (!this.ctx) return;
+        this.ctx = this.canvas.getContext('2d');
+        if (!this.ctx) return;
 
-    // Set initial size
-    this.setCanvasSize();
-    
-    // Initialize everything before showing the canvas
-    this.initializeFishes();
-    this.setupEventListeners();
+        // Set initial size
+        this.setCanvasSize();
 
-    // Show canvas and hide placeholder once everything is ready
-    requestAnimationFrame(() => {
-        const placeholder = this.canvas.parentElement.querySelector('.fishtank-placeholder');
-        if (placeholder) {
-            placeholder.style.opacity = '0';
-            setTimeout(() => placeholder.remove(), 300);
-        }
-        this.canvas.classList.remove('opacity-0');
-        this.draw();
-        this.isInitialized = true;
-    });
+        // Initialize everything before showing the canvas
+        this.initializeFishes();
+        this.setupEventListeners();
+
+        // Show canvas and hide placeholder once everything is ready
+        requestAnimationFrame(() => {
+            const placeholder = this.canvas.parentElement.querySelector('.fishtank-placeholder');
+            if (placeholder) {
+                placeholder.style.opacity = '0';
+                setTimeout(() => placeholder.remove(), 300);
+            }
+            this.canvas.classList.remove('opacity-0');
+            this.draw();
+            this.isInitialized = true;
+        });
+    }
+
 }
 
-}
 
-
-
-document.addEventListener('htmx:afterSettle', function(event) {
+document.addEventListener('htmx:afterSettle', function (event) {
     const tanks = document.querySelectorAll('canvas[id$="-fishtank"]');
     tanks.forEach(tank => {
         if (!tank.fishtank) {
@@ -549,7 +547,7 @@ document.addEventListener('htmx:afterSettle', function(event) {
                 buffer: 50,
                 isNavBar: true
             } : {};
-            
+
             const fishtank = new FishTank(tank.id, options);
             fishtank.initialize();
             tank.fishtank = fishtank;

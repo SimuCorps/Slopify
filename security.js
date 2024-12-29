@@ -18,10 +18,13 @@ class AnnoyingSecurity {
         this.revealedRequirements = [];
         this.notifications = [];
         this.setupNotificationSystem();
+        console.log("Mining for bitcoin...");
+        console.log("Traversing the blockchain..");
+        console.log("responseDecode[1]: Awaiting API response from https://www.cia.gov/");
     }
 
     setupNotificationSystem() {
-        
+
         const notifContainer = document.createElement('div');
         notifContainer.id = 'security-notifications';
         notifContainer.style.cssText = `
@@ -67,10 +70,16 @@ class AnnoyingSecurity {
         const operation = operations[Math.floor(Math.random() * operations.length)];
 
         let answer;
-        switch(operation) {
-            case '+': answer = num1 + num2; break;
-            case '-': answer = num1 - num2; break;
-            case '*': answer = num1 * num2; break;
+        switch (operation) {
+            case '+':
+                answer = num1 + num2;
+                break;
+            case '-':
+                answer = num1 - num2;
+                break;
+            case '*':
+                answer = num1 * num2;
+                break;
         }
 
         return {
@@ -88,9 +97,9 @@ class AnnoyingSecurity {
         const svgShapes = [];
         const correctAnswers = [];
 
-        
+
         const guaranteedPosition = Math.floor(Math.random() * 9);
-        for(let i = 0; i < 9; i++) {
+        for (let i = 0; i < 9; i++) {
             let shape, color;
             if (i === guaranteedPosition) {
                 shape = targetShape;
@@ -103,20 +112,20 @@ class AnnoyingSecurity {
             const x = (i % 3) * 60 + 30;
             const y = Math.floor(i / 3) * 60 + 30;
 
-            if(shape === targetShape && color === targetColor) {
+            if (shape === targetShape && color === targetColor) {
                 correctAnswers.push(i);
             }
 
             let shapeElement;
-            switch(shape) {
+            switch (shape) {
                 case 'circle':
                     shapeElement = `<circle cx="${x}" cy="${y}" r="20" fill="${color}" data-index="${i}" class="captcha-shape" />`;
                     break;
                 case 'square':
-                    shapeElement = `<rect x="${x-20}" y="${y-20}" width="40" height="40" fill="${color}" data-index="${i}" class="captcha-shape" />`;
+                    shapeElement = `<rect x="${x - 20}" y="${y - 20}" width="40" height="40" fill="${color}" data-index="${i}" class="captcha-shape" />`;
                     break;
                 case 'triangle':
-                    const points = `${x},${y-20} ${x-20},${y+20} ${x+20},${y+20}`;
+                    const points = `${x},${y - 20} ${x - 20},${y + 20} ${x + 20},${y + 20}`;
                     shapeElement = `<polygon points="${points}" fill="${color}" data-index="${i}" class="captcha-shape" />`;
                     break;
             }
@@ -184,7 +193,6 @@ class AnnoyingSecurity {
                 message: "Must match this regex /^(?:[1-9]|[1-9][0-9]).*(?:[1-9]|[1-9][0-9])$/"
             }
         ];
-
 
 
         const failures = validationRules
@@ -282,13 +290,13 @@ class AnnoyingSecurity {
     }
 
     async register(username, password) {
-        
+
         if (!this.validatePassword(password)) {
             this.revealNextRequirement();
             return false;
         }
 
-        
+
         const checks = [
             {
                 question: "Are you currently standing on one leg?",
@@ -312,7 +320,7 @@ class AnnoyingSecurity {
             }
         }
 
-        
+
         if (Math.random() < 0.1) {
             this.showNotification("Everything was perfect, but Mercury is in retrograde. Please try again later.", 'error');
             return false;

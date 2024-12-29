@@ -19,7 +19,7 @@
 
         .navbar {
             height: 30px;
-            background-color: #2d2d2d;
+            background-color: #2c2b2b;
             display: flex;
             align-items: center;
             padding: 0 10px;
@@ -86,7 +86,7 @@
             font-family: 'Consolas', monospace;
             overflow-y: auto;
             white-space: pre-wrap;
-            color: #d4d4d4;
+            color: #a9a9a9;
         }
 
         .tab {
@@ -187,7 +187,7 @@
         // Initialize Module before loading embr.js
         var Module = {
             onRuntimeInitialized: function() {
-                console.log('Runtime initialized');
+                console.log("~~~ wobble wobble wobble ~~~");
                 moduleInitialized = true;
             },
             print: function(text) {
@@ -306,7 +306,7 @@
                     var ptr = Module._malloc(code.length + 1);
                     Module.stringToUTF8(code, ptr, code.length + 1);
 
-                    var result = Module.ccall(
+                    Module.ccall(
                         'interpretString',
                         'number',
                         ['number'],

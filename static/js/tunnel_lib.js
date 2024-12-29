@@ -14,9 +14,9 @@ class TunnelConnection {
             compression: false,
             random: false,
         };
-        
+
         this.eventSource = null;
-        
+
         // Ensure config properties are set
         this.config.encryption = !!this.config.encryption;
         this.config.compression = !!this.config.compression;
@@ -30,10 +30,10 @@ class TunnelConnection {
 
             // Bind the handler to preserve 'this' context
             this.keyExchange = new TunnelConnection(
-                this.host, 
-                this.tunnelId, 
-                'keyExchange', 
-                this.#handleKeyExchange.bind(this), 
+                this.host,
+                this.tunnelId,
+                'keyExchange',
+                this.#handleKeyExchange.bind(this),
                 null
             );
             await this.keyExchange.init();
@@ -67,15 +67,15 @@ class TunnelConnection {
         return decoder.decode(decompressedArrayBuffer);
     }
 
-    async #base64ToArrayBuffer(base64){
+    async #base64ToArrayBuffer(base64) {
         return Uint8Array.from(atob(base64), c => c.charCodeAt(0)).buffer;
     }
 
-    async #arrayBufferToBase64(buffer){
+    async #arrayBufferToBase64(buffer) {
         return btoa(String.fromCharCode.apply(null, new Uint8Array(buffer)));
     }
 
-    #hextoArrayBuffer(hex){
+    #hextoArrayBuffer(hex) {
         let bytes = [];
         for (let c = 0; c < hex.length; c += 2) {
             bytes.push(parseInt(hex.substr(c, 2), 16));
@@ -83,13 +83,13 @@ class TunnelConnection {
         return new Uint8Array(bytes).buffer;
     }
 
-    #arrayBufferToHex(buffer){
+    #arrayBufferToHex(buffer) {
         return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
     }
 
     async #decryptData(data, privateKey) {
         console.log("Decrypting data...");
-        
+
         const privateKeyObj = await window.crypto.subtle.importKey(
             "pkcs8",
             this.#hextoArrayBuffer(privateKey),
@@ -100,9 +100,9 @@ class TunnelConnection {
             false,
             ["decrypt"]
         );
-    
+
         const encryptedBuffer = this.#hextoArrayBuffer(data);
-        
+
         const decryptedBuffer = await window.crypto.subtle.decrypt(
             {
                 name: "RSA-OAEP"
@@ -110,15 +110,15 @@ class TunnelConnection {
             privateKeyObj,
             encryptedBuffer
         );
-    
+
         const decryptedText = new TextDecoder().decode(decryptedBuffer);
         console.log("Data decrypted.");
         return decryptedText;
     }
-    
+
     async #encryptData(data, publicKey) {
         console.log("Encrypting data...");
-    
+
         const publicKeyObj = await window.crypto.subtle.importKey(
             "spki",
             this.#hextoArrayBuffer(publicKey),
@@ -129,9 +129,9 @@ class TunnelConnection {
             false,
             ["encrypt"]
         );
-    
+
         const dataBuffer = new TextEncoder().encode(data);
-    
+
         const encryptedBuffer = await window.crypto.subtle.encrypt(
             {
                 name: "RSA-OAEP"
@@ -139,13 +139,13 @@ class TunnelConnection {
             publicKeyObj,
             dataBuffer
         );
-    
+
         const encryptedHex = this.#arrayBufferToHex(encryptedBuffer);
         console.log("Data encrypted.");
         return encryptedHex;
     }
-    
-    async #generateKeys(){
+
+    async #generateKeys() {
         console.log("Generating keys...");
         this.userID = window.crypto.getRandomValues(new Uint32Array(4)).join('');
         this.tunnelKey = window.crypto.getRandomValues(new Uint32Array(1)).join('');
@@ -162,8 +162,8 @@ class TunnelConnection {
         );
         console.log("Key pair generated.");
         const exportedKey = await window.crypto.subtle.exportKey("spki", this.keyPair.publicKey);
-        this.keys[this.userID] = { 
-            publicKey: this.#arrayBufferToHex(exportedKey) 
+        this.keys[this.userID] = {
+            publicKey: this.#arrayBufferToHex(exportedKey)
         };
         console.log("Keys stored:", this.keys);
     }
@@ -171,33 +171,33 @@ class TunnelConnection {
     async #handleKeyExchange(event) {
         try {
             let keyExchangeData = typeof event === 'string' ? JSON.parse(event) : event;
-            
+
             console.log(`Received key exchange event from userID: ${keyExchangeData.userID}`);
-            
+
             if (!keyExchangeData.userID || !keyExchangeData.publicKey) {
                 console.error("Invalid key exchange data received");
                 return;
             }
-    
+
             if (keyExchangeData.userID === this.userID) {
                 console.log("Ignoring key exchange event from self.");
                 return;
             }
-    
+
             this.keys = this.keys || {};
-            
+
             if (this.keys[keyExchangeData.userID]) {
                 console.log("Public key for this userID already exists.");
                 return;
             }
-    
-            this.keys[keyExchangeData.userID] = { 
-                publicKey: keyExchangeData.publicKey 
+
+            this.keys[keyExchangeData.userID] = {
+                publicKey: keyExchangeData.publicKey
             };
-            
+
             console.log("Updated keys:", this.keys);
             await this.#sendKeys();
-    
+
         } catch (error) {
             console.error("Error handling key exchange:", error);
         }
@@ -211,17 +211,17 @@ class TunnelConnection {
         return this.#arrayBufferToHex(exportedKey);
     }
 
-    async #sendKeys(){
+    async #sendKeys() {
         while (!this.keys[this.userID]?.publicKey) {
             await new Promise(resolve => setTimeout(resolve, 100));
         }
         let encodedPublicKey = this.keys[this.userID]?.publicKey;
-        let keyExchangeData = { userID: this.userID, publicKey: encodedPublicKey };
+        let keyExchangeData = {userID: this.userID, publicKey: encodedPublicKey};
         this.keyExchange.send(JSON.stringify(keyExchangeData));
     }
 
-    async create(){
-        if(!this.config.random){
+    async create() {
+        if (!this.config.random) {
             let createURL = new URL('api/v3/tunnel/create', this.host);
             let requestBody = {
                 id: this.tunnelId,
@@ -254,17 +254,17 @@ class TunnelConnection {
         }
     }
 
-    connect(){
-        let SSEURL = new URL('api/v3/tunnel/stream', this.host); 
+    connect() {
+        let SSEURL = new URL('api/v3/tunnel/stream', this.host);
         SSEURL.searchParams.append('id', this.tunnelId);
         SSEURL.searchParams.append('subChannel', this.subChannel);
         let eventSource = new EventSource(SSEURL);
 
-        if(this.callback && !this.config.encryption && !this.config.compression){
+        if (this.callback && !this.config.encryption && !this.config.compression) {
             eventSource.addEventListener('message', (event) => {
                 this.callback(event.data);
             });
-        } else if (this.callback && this.config.encryption){
+        } else if (this.callback && this.config.encryption) {
             eventSource.addEventListener('message', async (event) => {
                 let message = JSON.parse(event.data);
                 if (message[this.userID]) {
@@ -278,7 +278,7 @@ class TunnelConnection {
                 }
             });
         }
-        
+
         this.eventSource = eventSource;
         return eventSource;
     }
@@ -289,7 +289,7 @@ class TunnelConnection {
             let messageBody = {};
             for (let userID in this.keys) {
                 if (this.keys.hasOwnProperty(userID)) {
-                    if(userID === this.userID) return;
+                    if (userID === this.userID) return;
                     messageBody[userID] = await this.#encryptData(data, this.keys[userID].publicKey);
                     console.log(`Encrypted message for userID: ${userID}`, messageBody[userID]);
                 }
@@ -332,8 +332,8 @@ class TunnelConnection {
         }
     }
 
-    close(){
-        if(this.eventSource){
+    close() {
+        if (this.eventSource) {
             this.eventSource.close();
         }
     }

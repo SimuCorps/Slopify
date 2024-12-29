@@ -1,103 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chat</title>
-    <script src="static/js/tunnel_lib.js" defer></script>
-</head>
-<body>
-    <div id="chatContainer">
-        <div id="roomInfo">Connected to room: <strong>global</strong></div>
-        <div id="messages"></div>
-        <div id="inputContainer">
-            <input type="text" id="messageInput" placeholder="Type a message..." maxlength="200">
-            <button id="sendButton" onclick="sendMessage()">Send</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>chat</title>
+        <script defer src="static/js/tunnel_lib.js"></script>
+    </head>
+    <body>
+        <div id="chatContainer">
+            <div id="roomInfo">Connected to room: <strong>global</strong></div>
+            <div id="messages"></div>
+            <div id="inputContainer">
+                <input id="messageInput" maxlength="200" placeholder="Type a message..." type="text">
+                <button id="sendButton" onclick="sendMessage()">Send</button>
+            </div>
+            <div style="margin-top: 10px;">
+                <button id="createButton" onclick="createOrJoinRoom()">Create or Join a Room</button>
+                <button id="setUsernameButton" onclick="setUserName()">Set Username</button>
+            </div>
         </div>
-        <div style="margin-top: 10px;">
-            <button id="createButton" onclick="createOrJoinRoom()">Create or Join a Room</button>
-            <button id="setUsernameButton" onclick="setUserName()">Set Username</button>
-        </div>
-    </div>
-    <script>
-        async function createOrJoinRoom() {
-            let room = prompt("Enter the name of the room you want to join or create, leave it blank to randomize:");
-            window.chatConnection.close();
-            if (room) {
-                window.chatConnection = getTunnelConnection(room);
-            } else window.chatConnection = getTunnelConnection('');
-            await window.chatConnection.init();
-            await window.chatConnection.create();
-            await window.chatConnection.connect();
-            room = window.chatConnection.tunnelId;
-            document.getElementById('roomInfo').textContent = `Connected to room: ${window.chatConnection.tunnelId}`;
-            localMessage('System:', `${window.userName} connected to room ${room}. ---`, true);
-        }
-
-        function getTunnelConnection(id) {
-            return new TunnelConnection(
-                'https://lluck.hackclub.app',
-                id,
-                "main",
-                processMessage,
-                { encryption: false, compression: false }
-            )
-        }
-
-        function localMessage(username, message, isSystem) {
-            if (!isSystem) isSystem = false;
-            let messagesContainer = document.getElementById('messages');
-            let messageElement = document.createElement('div');
-            messageElement.textContent = `${username}: ${message}`;
-            if (isSystem) messageElement.style.color = '#f00';
-            messagesContainer.appendChild(messageElement);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function processMessage(message) {
-            try {
-                let messageData = JSON.parse(message);
-                if (!messageData.username || !messageData.message) throw new Error('Invalid message data: ' + message);
-                localMessage(messageData.username, messageData.message);
-            } catch (e) {
-                console.log(e);
+        <script>
+            async function createOrJoinRoom() {
+                let room = prompt("Enter the name of the room you want to join or create, leave it blank to randomize:");
+                window.chatConnection.close();
+                if (room) {
+                    window.chatConnection = getTunnelConnection(room);
+                } else window.chatConnection = getTunnelConnection('');
+                await window.chatConnection.init();
+                await window.chatConnection.create();
+                await window.chatConnection.connect();
+                room = window.chatConnection.tunnelId;
+                document.getElementById('roomInfo').textContent = `Connected to room: ${window.chatConnection.tunnelId}`;
+                localMessage('System:', `${window.userName} connected to room ${room}. ---`, true);
             }
-        }
 
-        function sendMessage() {
-            let userMessage = document.getElementById('messageInput').value;
-            let messageData = {
-                username: window.userName,
-                message: userMessage
-            };
-            window.chatConnection.send(JSON.stringify(messageData));
-            document.getElementById('messageInput').value = '';
-        }
-
-        function setUserName() {
-            let username = prompt('Enter your username:');
-            if (username) {
-                window.userName = username;
-                localStorage['userName'] = username;
-            } else {
-                setUserName();
+            function getTunnelConnection(id) {
+                return new TunnelConnection(
+                    'https://lluck.hackclub.app',
+                    id,
+                    "main",
+                    processMessage,
+                    {encryption: false, compression: false}
+                )
             }
-        }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            window.userName = localStorage['userName'] || null;
-            if (!window.userName) setUserName();
-            window.chatConnection = getTunnelConnection('global');
-            window.chatConnection.init();
-            window.chatConnection.create();
-            window.chatConnection.connect();
+            function localMessage(username, message, isSystem) {
+                if (!isSystem) isSystem = false;
+                let messagesContainer = document.getElementById('messages');
+                let messageElement = document.createElement('div');
+                messageElement.textContent = `${username}: ${message}`;
+                if (isSystem) messageElement.style.color = '#f00';
+                messagesContainer.appendChild(messageElement);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
 
-            document.addEventListener("keydown", function(event) {
-                if (event.key === "Enter") {
-                    sendMessage();
+            function processMessage(message) {
+                try {
+                    let messageData = JSON.parse(message);
+                    if (!messageData.username || !messageData.message) {
+                        throw new Error('Invalid message data: ' + message);
+                    }
+                    localMessage(messageData.username, messageData.message);
+                } catch (e) {
+                    console.log(e);
                 }
+            }
+
+            function sendMessage() {
+                let userMessage = document.getElementById('messageInput').value;
+                let messageData = {
+                    username: window.userName,
+                    message: userMessage
+                };
+                window.chatConnection.send(JSON.stringify(messageData));
+                document.getElementById('messageInput').value = '';
+            }
+
+            function setUserName() {
+                let username = prompt('Enter your username:');
+                if (username) {
+                    window.userName = username;
+                    localStorage['userName'] = username;
+                } else {
+                    setUserName();
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                window.userName = localStorage['userName'] || null;
+                if (!window.userName) {
+                    setUserName();
+                }
+                window.chatConnection = getTunnelConnection('global');
+                window.chatConnection.init();
+                window.chatConnection.create();
+                window.chatConnection.connect();
+
+                document.addEventListener("keydown", function (event) {
+                    if (event.key === "Enter") {
+                        sendMessage();
+                    }
+                });
             });
-        });
-    </script>
-</body>
+        </script>
+    </body>
 </html>
