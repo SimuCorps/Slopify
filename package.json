@@ -1,15 +1,17 @@
 {
-  "name": "slopify",
-  "module": "index.ts",
+  "name": "nuxt-app",
+  "private": true,
   "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@stripe/stripe-js": "^5.4.0",
-    "stripe": "^17.5.0"
+    "nuxt": "^3.15.0",
+    "vue": "latest",
+    "vue-router": "latest"
   }
 }
