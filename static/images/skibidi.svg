@@ -1,0 +1,81 @@
+	  <svg width="441.067" height="441.067" xmlns="http://www.w3.org/2000/svg">>
+	<path
+       style="fill:#7c7c7c;stroke:#000000;stroke-width:0.7;stroke-opacity:1;fill-opacity:1"
+       d="M 58.938818,117.96988 55.710557,109.5764 53.681365,89.468943 52.20559,89.653416 52.021118,83.196895 h 55.593072 l 0.0652,5.764165 -1.2392,0.978311 -2.60883,23.675119 -3.52191,5.54376 -1.500081,-0.71742 z"
+       id="path6" /><path
+       style="fill:#a7a7a7;stroke:#000000;stroke-width:0.7;stroke-opacity:1;fill-opacity:1"
+       d="m 89.1,117.13975 5.165217,-2.3059 3.043788,-8.94689 1.106831,-8.762428 -0.18447,-5.995339 -2.121429,-8.762423 -3.68944,-6.364288 -7.840064,-5.165217 -5.810869,-0.737888 -8.301242,4.335095 -6.272051,9.315838 -2.305899,8.024535 0.922361,14.849995 3.043788,8.67019 4.150622,1.0146 0,1.19907"
+       id="path10" /><path
+       style="opacity:1;fill:#ffda8b;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="m 71.113975,118.84612 -3.73556,-17.20202 0.23059,-9.500312 1.851059,-1.813094 4.435009,-0.717429 c 0,0 4.565452,0.521767 5.152438,0.456547 0.586986,-0.06522 4.630671,-1.239195 4.630671,-1.239195 l 2.217502,1.434857 1.891403,9.978766 -0.78265,7.82649 -3.065373,11.0223 z"
+       id="path11">  <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" /> </path>
+	   <path
+       style="opacity:1;fill:#ffda8b;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="m 67.373002,101.71171 -2.119673,-2.804492 0.06522,2.184892 1.239195,4.56545 1.630516,1.8914 z"
+       id="path12">  <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" />  </path>
+	   <path
+       style="opacity:1;fill:#ffda8b;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="m 87.656645,100.14641 c 0.195662,0.0978 1.597909,-2.543607 1.597909,-2.543607 0,0 0.260882,2.576217 0.195662,2.739267 -0.06522,0.16306 -0.847871,4.72851 -0.847871,4.72851 l -1.597908,1.10875 z"
+       id="path13"> <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" /> </path>
+	   <path
+       style="opacity:1;fill:#292827;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="m 67.438222,100.04858 -2.543607,-7.043835 c 0,0 2.478387,-5.28288 2.543607,-5.543762 0.06522,-0.260884 7.565604,-3.978465 7.565604,-3.978465 l 8.674356,1.434856 4.695891,6.195968 0.521767,3.978465 -1.108753,4.108905 -1.956623,-8.674356 -2.021842,-1.630516 -4.826333,1.369634 -4.761111,-0.652209 -4.761114,0.717429 -1.630518,1.82618 z"
+       id="path14" > <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" /> </path>
+	   <path
+       style="opacity:1;fill:#292827;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="M 69.525287,97.570194 76.24302,94.635261"
+       id="path15" > <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" /> </path>
+	   <path
+       style="opacity:1;fill:#292827;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="m 78.525745,94.765703 6.065525,1.760961"
+       id="path16" > <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" /> </path>
+	   <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="m 71.025363,100.89645 0.913088,-2.543608 h 1.82618 l 1.565299,2.152288 -0.260884,0.78264 z"
+       id="path17" > <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" /> </path>
+	   <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="m 80.547587,99.526816 1.760959,-1.500076 1.630518,1.304414 c 0,0 0.06522,0.913086 0,1.173976 -0.06522,0.26088 -3.587139,0.6522 -3.587139,0.6522 z"
+       id="path18" > <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" /> </path>
+	   <path
+       style="opacity:1;fill:#de2c15;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="m 70.634036,106.89676 4.695894,6.45685 3.587139,0.97831 1.630518,-1.10875 4.174125,-6.19597 -4.500229,1.56529 c 0,0 0.782648,0.45655 -0.782648,0.65221 -1.565299,0.19566 -1.8914,0.26088 -2.869713,0.0652 -0.97831,-0.19566 -4.174125,-1.17397 -4.174125,-1.17397 z"
+       id="path19" > <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" /> </path>
+	   <path
+       style="opacity:1;fill:#292827;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="m 69.655726,107.48374 0.260885,-1.56529 2.217504,0.26088"
+       id="path20" > <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" /> </path>
+	   <path
+       style="opacity:1;fill:#292827;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="m 84.59127,106.04889 1.565299,-0.26089 -0.391324,2.08707"
+       id="path21"> <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" /> </path>
+	   <path
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="m 75.003826,105.65756 1.500076,1.5653 2.021843,-0.19566 2.152282,-1.10875 -2.413167,-7.500386 -1.369634,-0.260884 z"
+       id="path24"> <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" /> </path>
+	   <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="m 73.242867,100.04858 -0.84787,-0.456544 1.173972,-0.195662 z"
+       id="path25"> <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" /> </path>
+	   <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.7;stroke-opacity:1"
+       d="m 81.721561,99.265932 1.108752,0.586986 -1.500076,0.195662 z"
+       id="path26"> <animateTransform attributeName="transform" type="translate" dur="2s" values="0,-10; 0,10; 0,-10" repeatCount="indefinite" /> </path>
+	      <path
+       style="fill:#e4e4e4;stroke:#000000;stroke-width:0.7;stroke-opacity:1;fill-opacity:1"
+       d="m 56.171739,117.7854 -0.276709,10.05373 7.840062,1.47577 35.234163,-0.73788 1.199065,-1.56802 -1.291302,-8.94689"
+       id="path2"/>
+	   <path
+       style="fill:#382121;stroke:#000000;stroke-width:0.7;stroke-opacity:1;fill-opacity:1"
+       d="m 70.929502,117.32422 -12.082918,0.64566 -2.674845,0.0922 5.903106,1.0146 15.495651,0.83012 21.029813,-0.83012 0.184473,-1.0146 -14.665529,-0.92236"
+       id="path1" /><path
+       style="fill:#b8b8b8;stroke:#000000;stroke-width:0.7;stroke-opacity:1;fill-opacity:1"
+       d="m 57.094098,127.83913 3.412733,9.31584 6.548758,5.25745 h 19.830746 l 8.57795,-5.9031 3.597203,-8.20901"
+       id="path3" /><path
+       style="fill:#626262;stroke:#000000;stroke-width:0.7;stroke-opacity:1;fill-opacity:1"
+       d="m 66.963353,142.32019 -2.121429,18.26273 23.151242,0.36894 -1.291304,-18.26273"
+       id="path4" /><path
+       style="fill:#292929;stroke:#000000;stroke-width:0.7;stroke-opacity:1;fill-opacity:1"
+       d="m 88.362112,161.0441 1.56801,-6.45652 -1.752483,-13.37423 -1.452716,1.19907"
+       id="path5" />
+	   </svg>

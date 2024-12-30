@@ -7,7 +7,6 @@
     <title>chat</title>
     <script src="static/js/tunnel_lib.js" defer></script>
     <style>
-
         :root {
             --bg-primary: #1a1a1a;
             --bg-secondary: #252525;
@@ -53,13 +52,13 @@
         }
 
         #messages {
-            height: calc(100% - 80px);
+            height: calc(100% - 100px);
             /* Subtract room info height */
             overflow-y: auto;
             padding: 20px;
             background-color: var(--bg-secondary);
             color: white;
-            font-weight: lighter;
+            font-weight: 300;
         }
 
 
@@ -70,10 +69,19 @@
             padding: 15px;
         }
 
+        .bot {
+            font-weight: 600;
+            font-size: smaller;
+            background-color: #555;
+            padding: 2px 3px 2px 4px;
+            margin-right: 5px;
+            border-radius: 3px;
+        }
+
         .message {
             margin-bottom: 6px;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
         }
 
         .username {
@@ -145,7 +153,9 @@
         }
 
         .hi {
-            position:absolute;top: 35px;left:700px;
+            position: absolute;
+            top: 35px;
+            left: 700px;
             transform: rotate3d(0, 1, 1, 0deg);
             animation-name: gay;
             animation-duration: 4s;
@@ -156,20 +166,54 @@
             0% {
                 transform: rotate3d(0, 1, 1, 0deg);
             }
-            
+
             100% {
                 transform: rotate3d(0, 1, 1, 360deg);
             }
         }
-        
+
         body.hide-images .chat-image {
             display: none;
+        }
+
+        body.blur-images .chat-image {
+            filter: blur(1rem);
+        }
+
+        body.blur-images .chat-image:hover {
+            filter: none;
+            transition: 0.25s filter linear;
+            -webkit-transition: 0.25s -webkit-filter linear;
+            -moz-transition: 0.25s -moz-filter linear;
+            -ms-transition: 0.25s -ms-filter linear;
+            -o-transition: 0.25s -o-filter linear;
         }
 
         .chat-image {
             max-width: 50vw;
             max-height: 50vh;
+        }
 
+        .message-text {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .message-text span {
+            white-space: pre-wrap;
+            padding-right: 5px;
+        }
+
+        .message-text img {
+            max-width: 50vw;
+            max-height: 50vh;
+            margin-right: 5px;
+        }
+
+        .message-text img.emoji {
+            max-width: 2em;
+            max-height: 2em;
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -189,7 +233,7 @@
         </div>
         <div class="hi">
             <a href="/index.html">
-                <img src="/static/images//4db62b6a70d285b0efb299ee6816504e.jpg" width="100" height="100">
+                <img src="/static/images/4db62b6a70d285b0efb299ee6816504e.jpg" width="100" height="100">
                 <p style="color:magenta;">Go BACK</p>
             </a>
         </div>
@@ -206,17 +250,21 @@
 
             <div id="usernameError"></div>
         </div>
-        
+
     </div>
     <script>
         // Track usernames in the current room
         window.usernames = new Set();
+        window.mutedUsernames = new Set();
         window.usernameConnection = null;
+        window.chatState = 0; // 0 show 1 hide 2 blur
         let notificationSound = new Audio("/static/audio/youvegotmail.mp3")
+
+        let emojis = {};
 
         function getRandomSoftColor() {
             const hue = Math.floor(Math.random() * 360);
-            return `hsl(${hue}, 65%, 75%)`; // fairly soft 
+            return `hsl(${hue}, 65%, 75%)`; // fairly soft
         }
 
         async function initUsernameTracking(room) {
@@ -367,48 +415,76 @@
             )
         }
 
-        function handleImages(messageText) {
-            const re = /^(https?:\/\/[^ ]+)\.pic$/;
+        function textContainsEmoji(text) {
+            return text.match(/:[a-z_]+:/g);
+        }
+
+        function splitImageFromText(messageText) {
             let messageTextElement = document.createElement('div');
             messageTextElement.classList.add('message-text');
 
-            let match = messageText.match(re);
-
-            if (!match) {
-                messageTextElement.textContent = messageText;
-            } else {
-                let imageElement = document.createElement('img');
-                imageElement.classList.add('chat-image');
-                imageElement.src = match[1];
-                messageTextElement.appendChild(imageElement);
-            }
+            messageText.split(' ').map((word) => {
+                if (word.endsWith('.pic') && window.chatState !== 1 /* Hide images */) {
+                    let imageElement = document.createElement('img');
+                    imageElement.classList.add('chat-image');
+                    imageElement.src = word.slice(0, -4);
+                    messageTextElement.appendChild(imageElement);
+                } else if (textContainsEmoji(word) && emojis[word.slice(1, -1)]) {
+                    let emojiElement = document.createElement('img');
+                    emojiElement.classList.add('emoji');
+                    emojiElement.src = emojis[word.slice(1, -1)];
+                    messageTextElement.appendChild(emojiElement);
+                } else {
+                    let textElement = document.createElement('span');
+                    textElement.textContent = word;
+                    messageTextElement.appendChild(textElement);
+                }
+            });
 
             return messageTextElement;
         }
 
-        function toggleImages() {
-            let btn = document.getElementById('toggleImagesButton');
-
-            if (document.body.classList.contains('hide-images')) {
-                document.body.classList.remove('hide-images');
-                btn.innerText = 'Hide Images';
-                localStorage.setItem('hideImages', "false");
+        function toggleImages(state) {
+            if (typeof(state) !== 'undefined') {
+                window.chatState = state;
             } else {
-                document.body.classList.add('hide-images');
-                btn.innerText = 'Show Images';
-                localStorage.setItem('hideImages', "true");
+                window.chatState++;
+                if (window.chatState > 2) {
+                    window.chatState = 0;
+                }
             }
+            console.log(window.chatState);
+            let btn = document.getElementById('toggleImagesButton');
+            document.body.classList.remove('hide-images');
+            document.body.classList.remove('blur-images');
+
+            switch (window.chatState) {
+                case 0:
+                    btn.innerText = 'Hide Images';
+                    break; 
+                case 1:
+                    btn.innerText = 'Blur Images';
+                    document.body.classList.add('hide-images');
+                    break;
+                case 2:
+                    btn.innerText = 'Show Images';
+                    document.body.classList.add('blur-images');
+                    break;
+            }
+
+            localStorage.setItem('imageState', String(window.chatState));
         }
 
-        function localMessage(username, message, isSystem) {
+        function localMessage(username, message, isBot, isSystem) {
             if (!isSystem) isSystem = false;
+            if (window.mutedUsernames.has(username)) { return };
             let messagesContainer = document.getElementById('messages');
             let messageContainer = document.createElement('div');
             messageContainer.classList.add('message');
             let usernameElement = document.createElement('div');
             usernameElement.textContent = username;
             usernameElement.classList.add('username');
-            let messageTextElement = handleImages(message);
+            let messageTextElement = splitImageFromText(message);
             if (isSystem) {
                 usernameElement.style.color = '#ff6b6b';
                 messageTextElement.style.color = '#ff6b6b';
@@ -419,6 +495,12 @@
                 }
                 usernameElement.style.color = window.userColors[username];
             }
+            if (isBot) {
+                let botElement = document.createElement('div')
+                botElement.textContent = "bot";
+                botElement.classList.add('bot');
+                messageContainer.appendChild(botElement);
+            }
             messageContainer.appendChild(usernameElement);
             messageContainer.appendChild(messageTextElement);
             messagesContainer.appendChild(messageContainer);
@@ -427,13 +509,34 @@
             if (message.includes(localStorage['userName'])) {
                 notificationSound.play();
             }
+
+            if (username == localStorage['userName']) {
+                if (message[0] == '~') {
+                    let s = message.split(' ')
+                    let command = s[0];
+
+                    switch (command) {
+                        case '~mute':
+                            let userToMute = s[1]
+                            window.mutedUsernames.add(userToMute);
+                            alert("User " + userToMute + " muted succesfully.")
+                            break;
+                        case '~unmute':
+                            let userToUnmute = s[1]
+                            window.mutedUsernames.delete(userToUnmute);
+                            alert("User " + userToMute + " unmuted succesfully.")
+                            break;
+                    }
+                }
+            }
         }
 
         function processMessage(message) {
             try {
                 let messageData = JSON.parse(message);
+                if (!messageData.bot) { messageData.bot = false } else { messageData.bot = true; }
                 if (!messageData.username || !messageData.message) throw new Error('Invalid message data: ' + message);
-                localMessage(messageData.username, messageData.message);
+                localMessage(messageData.username, messageData.message, messageData.bot);
                 if (messageData.flash) {
                     flashGreen();
                 }
@@ -466,6 +569,7 @@
             await window.chatConnection.init();
             await window.chatConnection.create();
             await window.chatConnection.connect();
+            emojis = await fetch('https://api.github.com/emojis').then(response => response.json()).catch(() => ({}));
 
             await initUsernameTracking('global');
 
@@ -485,9 +589,19 @@
                 }
             });
 
-            if (localStorage.getItem('hideImages') === "true") {
-                toggleImages();
+            window.chatState =  localStorage.getItem('imageState');
+            if(null === window.chatState)
+            {
+                window.chatState = 1;
             }
+    
+            
+            if (localStorage.getItem('hideImages') === "true") {
+                window.chatState = 1;
+                localStorage.removeItem('hideImages');
+            }
+
+            toggleImages(window.chatState);
         });
 
         function flashGreen() {
