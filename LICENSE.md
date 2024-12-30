@@ -18,11 +18,10 @@ The software may NOT be used by:
 - Any entity or individual engaging in activities deemed harmful, unethical, or exploitative, defined as:
     - Actions that directly or indirectly cause physical, psychological, social, or environmental harm.
     - Practices that violate widely accepted principles of human rights, equity, or sustainability, including but not limited to exploitation of vulnerable populations or destruction of natural habitats.
-- Members of the klu Klux Klan or any other ethno-nationalist organisation
-- Members of any fascist organisation
-- Lawyers
-- Investment bankers
--
+    - Members of the klu Klux Klan or any other ethno-nationalist organisation 
+    - Members of any fascist organisation
+    - Lawyers
+    - Investment bankers
 
 ## 4. Ethical Standards
 
