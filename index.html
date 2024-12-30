@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="static/css/error.css" />
     <link rel="stylesheet" href="static/css/index.css" />
 
-    <audio id="vibeAudio" loop>
+    <audio id="vibeAudio" loop crossorigin="anonymous">
       <source
         src="https://cdn.pixabay.com/download/audio/2024/10/22/audio_5b87be5f9b.mp3?filename=smooth-jazz-saxophone-solo-with-a-lofi-vibe-253950.mp3"
         type="audio/mp3"
       />
       Your browser does not support the audio element.
     </audio>
-    <audio id="moreVibeAudio" loop>
+    <audio id="moreVibeAudio" loop crossorigin="anonymous">
       <source src="/static/audio/rick.m4a" type="audio/mp3" />
       Your browser does not support the audio element.
     </audio>
@@ -113,9 +113,9 @@
 
     <header>
       <marquee>
-        <img src="static/images/epic-logo.gif" />
+        <img src="static/images/epic-logo.gif" decoding="async" loading="lazy" />
       </marquee>
-      <img src="SlopifyLogo.png" width="400px" />
+      <img src="SlopifyLogo.png" width="400px" decoding="async" loading="lazy" />
       <p>
         <em>
           "The
@@ -144,7 +144,7 @@
       <a href="/second.html">
         <button style="position: fixed; left: 1%; top: 2%">
           <p>alan becker</p>
-          <img src="static/images/alanbecker/alan.png" width="50" height="50" />
+          <img src="static/images/alanbecker/alan.png" width="50" height="50" decoding="async" loading="lazy" />
         </button>
       </a>
 
@@ -155,7 +155,7 @@
           <div class="bg-black rounded-2xl w-16 as"></div>
         </div>
         <h1>SUPPORT A CREATOR CODE:</h1>
-        <img src="static/images/sac.png" />
+        <img src="static/images/sac.png" decoding="async" loading="lazy" />
       </div>
       <div
         id="news-container"
@@ -185,9 +185,9 @@
         </p>
       </div>
       <div id="gallery">
-        <img src="static/images/bobi.jpg" alt="Bobi" class="gallery-item" style="width: 480px; height: 640px" />
-        <img src="static/images/kofte.jpg" alt="Kofte" class="gallery-item" style="width: 400px; height: 400px" />
-        <img src="static/images/frog.webp" alt="Frog" class="gallery-item" />
+        <img src="static/images/bobi.jpg" alt="Bobi" class="gallery-item" decoding="async" loading="lazy" style="width: 480px; height: 640px" />
+        <img src="static/images/kofte.jpg" alt="Kofte" class="gallery-item" decoding="async" loading="lazy" style="width: 400px; height: 400px" />
+        <img src="static/images/frog.webp" alt="Frog" class="gallery-item" decoding="async" loading="lazy" />
       </div>
 
       <button id="vibeButton">Improve the Mood</button>
@@ -200,6 +200,9 @@
           title="Counter Widget"
           alt="Visit counter For Websites"
           border="0"
+          decoding="async"
+          loading="eager"
+          crossorigin="anonymous"
         />
       </a>
       <button id="worseThemeButton">This can't get any worse, right?</button>
@@ -222,38 +225,38 @@
         <p>They're like testimonials, but for twitter moaning</p>
 
         <div style="display: flex; flex-direction: row">
-          <blockquote class="twitter-tweet" data-theme="dark">
+          <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true">
             <p lang="en" dir="ltr">hahahaha this is fire</p>
             &mdash; ily⚡️ (@0xIlyy)
-            <a href="https://twitter.com/0xIlyy/status/1873179308153553050?ref_src=twsrc%5Etfw">December 29, 2024</a>
+            <a href="https://twitter.com/0xIlyy/status/1873179308153553050">December 29, 2024</a>
           </blockquote>
 
-          <blockquote class="twitter-tweet" data-conversation="none" data-theme="dark">
+          <blockquote class="twitter-tweet" data-conversation="none" data-theme="dark" data-dnt="true">
             <p lang="en" dir="ltr">
               WHO THE FUCK ADDED PASSWORD GAME TO THE REGISTRATION PAGE
               <a href="https://t.co/FYpWT5dycz">pic.twitter.com/FYpWT5dycz</a>
             </p>
             &mdash; Aterron (@_aterron_)
-            <a href="https://twitter.com/_aterron_/status/1873444464255254743?ref_src=twsrc%5Etfw">December 29, 2024</a>
+            <a href="https://twitter.com/_aterron_/status/1873444464255254743">December 29, 2024</a>
           </blockquote>
 
-          <blockquote class="twitter-tweet" data-theme="dark">
+          <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true">
             <p lang="en" dir="ltr">
               help i played the sexy frog music and now it keeps playing even after i close the browser
             </p>
             &mdash; colin ricardo (@_colinricardo)
-            <a href="https://twitter.com/_colinricardo/status/1873429683368505464?ref_src=twsrc%5Etfw">
+            <a href="https://twitter.com/_colinricardo/status/1873429683368505464">
               December 29, 2024
             </a>
           </blockquote>
 
-          <blockquote class="twitter-tweet" data-theme="dark">
+          <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true">
             <p lang="en" dir="ltr">
               This project is awesome the amount of random slop added in the last 24 hours alone is crazy. Check it out
               <a href="https://t.co/GDD8ut9A4S">https://t.co/GDD8ut9A4S</a>
             </p>
             &mdash; Gil (@TylerGilman01)
-            <a href="https://twitter.com/TylerGilman01/status/1873429461410234849?ref_src=twsrc%5Etfw">
+            <a href="https://twitter.com/TylerGilman01/status/1873429461410234849">
               December 29, 2024
             </a>
           </blockquote>
@@ -273,11 +276,11 @@
         >
           do you like penguins?
         </h2>
-        <img src="static/images/penguin.webp" />
-        <img src="https://secret.kgncengiz.com/F.jpg" />
-        <img src="static/images/Jesus.png" />
+        <img src="static/images/penguin.webp" decoding="async" loading="lazy" />
+        <img src="https://secret.kgncengiz.com/F.jpg" decoding="async" loading="lazy" />
+        <img src="static/images/Jesus.png" decoding="async" loading="lazy" />
       </div>
-      <img src="https://secret.kgncengiz.com/F.jpg" />
+      <img src="https://secret.kgncengiz.com/F.jpg" decoding="async" loading="lazy" crossorigin="anonymous" />
 
       <section class="importante" style="display: flex; justify-content: center; align-items: center; height:">
         <section id="mandelbrot-section">
@@ -296,7 +299,7 @@
       </section>
       <section class="fourier-container">
         <a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Fourier_series_and_transform.gif" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Fourier_series_and_transform.gif" decoding="async" loading="lazy" crossorigin="anonymous" />
         </a>
       </section>
       <section class="fishtank-container">
@@ -315,7 +318,7 @@
           <span id="stock_ticker" style="color: yellow"></span>
           <span id="stock_msg"></span>
         </p>
-        <img src="" id="stock_img" />
+        <img src="" id="stock_img" decoding="async" loading="lazy" />
       </section>
       <section>
         <input type="button" value="SHADERZ" onclick="setShaderToy()" />
@@ -364,7 +367,7 @@
       <section>
         <center>
           <a href="static/images/monster_zero_ultra.jpg">
-            <img src="static/images/come_here_marisa_kirisame.gif" />
+            <img src="static/images/come_here_marisa_kirisame.gif" decoding="async" loading="lazy" />
           </a>
         </center>
       </section>
@@ -406,11 +409,11 @@
     </main>
     <footer>
       <div style="text-align: center; margin-top: 20px">
-        <img src="static/images/aol-sucks.gif" alt="Banner 1" width="88" height="31" />
-        <img src="static/images/bestview.gif" alt="Banner 2" width="88" height="31" />
-        <img src="static/images/w95link.gif" alt="Banner 3" width="88" height="31" />
-        <img src="static/images/800x600.gif" alt="Banner 3" width="88" height="31" />
-        <img src="static/images/lowtiergod.gif" alt="Banner 4" width="88" height="31" />
+        <img src="static/images/aol-sucks.gif" alt="Banner 1" width="88" height="31" decoding="async" loading="lazy" />
+        <img src="static/images/bestview.gif" alt="Banner 2" width="88" height="31" decoding="async" loading="lazy" />
+        <img src="static/images/w95link.gif" alt="Banner 3" width="88" height="31" decoding="async" loading="lazy" />
+        <img src="static/images/800x600.gif" alt="Banner 3" width="88" height="31" decoding="async" loading="lazy" />
+        <img src="static/images/lowtiergod.gif" alt="Banner 4" width="88" height="31" decoding="async" loading="lazy" />
       </div>
       <div
         id="error-0"
@@ -436,6 +439,9 @@
             src="https://assets.codepen.io/416221/win95_error_icon.png"
             width="32"
             height="32"
+            decoding="async"
+            loading="lazy"
+            crossorigin="anonymous"
           />
           <p id="error-desc-0" class="window__body-text" data-desc></p>
         </div>
@@ -444,7 +450,7 @@
         </div>
       </div>
       <div>
-        <iframe src="https://poeskatprinter.zepje.space/" width="600" height="400" style="border: none"></iframe>
+        <iframe src="https://poeskatprinter.zepje.space/" width="600" height="400" credentialless loading="lazy" referrerpolicy="no-referrer" style="border: none"></iframe>
       </div>
       <p>
         &copy; 2024 DishpitDev.
@@ -452,9 +458,9 @@
       </p>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" crossorigin="anonymous"></script>
-    <script src="https://sleepie.uk/oneko.js" async crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" referrerpolicy="no-referrer" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" referrerpolicy="no-referrer" crossorigin="anonymous"></script>
+    <script src="https://sleepie.uk/oneko.js" async referrerpolicy="no-referrer" crossorigin="anonymous"></script>
     <script src="static/js/handsome.js"></script>
     <script src="static/js/cursor.js" type="module"></script>
     <script src="static/js/index.js" type="module"></script>
@@ -463,7 +469,7 @@
     <script src="static/js/oneko.js"></script>
     <script src="static/js/articles.js"></script>
 
-    <script src="https://platform.twitter.com/widgets.js" async crossorigin="anonymous"></script>
+    <script src="https://platform.twitter.com/widgets.js" async referrerpolicy="no-referrer" crossorigin="anonymous"></script>
 
     <script src="static/js/mandelbrot_uwu.js"></script>
     <script src="static/js/glcanvas.js"></script>
@@ -474,7 +480,7 @@
     <script src="static/js/cookieclick.js"></script>
     <script src="static/js/flappyMusk.js"></script>
 
-    <script src="https://unpkg.com/webamp" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/webamp" referrerpolicy="no-referrer" crossorigin="anonymous"></script>
     <script src="static/js/webamp.js"></script>
 
     <script src="static/js/error.js"></script>
