@@ -31,9 +31,24 @@
 	 #cfs-ad a:hover {
 		 color: #FFF !important;
 	 }
-	</style>
-    <link rel="stylesheet" href="static/css/error.css">
-    <title>Slopify</title>
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scale {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(2) rotate(360deg); }
+}
+
+@keyframes colorChange {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(720deg); }
+}
+
+img {
+  animation: spin 2s linear infinite, scale 1s infinite, colorChange 1s infinite;
+}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.19.0/css/xterm.css" />
     <script src="https://cdn.jsdelivr.net/npm/xterm@4.19.0/lib/xterm.js"></script>
@@ -679,6 +694,8 @@
         <div class="w-full flex gap-2">
           <div class="bg-black rounded-2xl w-16 as"></div>
         </div>
+	<h1>SUPPORT A CREATOR CODE:</h1>
+	      <img src="static/images/sac.png">
       </div>
 <div id="news-container" style="
     position: absolute;
