@@ -5,19 +5,20 @@ function startReloadChain(start) {
 
     if (!(current || start)) return;
 
-    if (Math.random() == Math.random()) {
-        window.alert("Random has stopped the reload chain for you");
+    let newLocation = window.location.href;
+    if (Math.random() > 0.7) {
+        window.alert("Someone has saved u from the reload chain");
         localStorage.removeItem(key);
-        return;
+        newLocation = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+    } else {
+        current++;
+        console.log("this is reload #" + current);
+        localStorage.setItem(key, current.toString(16));
     }
 
-    current++;
-    console.log("this is reload #" + current);
-        
-    localStorage.setItem(key, current.toString(16));
     setTimeout(function () {
-        location.replace(window.location.href);
-    }, 5000);
+        location.replace(newLocation);
+    }, 1000);
 }
 
 window.onload = startReloadChain(false);
