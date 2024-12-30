@@ -5,21 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="apple-touch-icon" sizes="128x128" href="/static/images/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="static/css/page-nav.css">
+
 	<style>
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 
-@keyframes scale {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(2) rotate(360deg); }
-}
-
-@keyframes colorChange {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(720deg); }
-}
 
 img {
   animation: spin 2s linear infinite, scale 1s infinite, colorChange 1s infinite;
@@ -365,12 +354,6 @@ img {
         transform: rotate(0deg);
       }
 
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes shake {
 
       0%,
       100% {
@@ -471,6 +454,25 @@ img {
     ]
     let chosenFlag = FLAGS[Math.floor(Math.random() * FLAGS.length)];
 
+      .bottom-left-button {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        padding: 10px 20px;
+        background-color: #5ef7d6;
+        color: #282828;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+        z-index: 1000;
+      }
+
+      .bottom-left-button:hover {
+        background-color: #258e92;
+      }
+
+
     new rainbowCursor({ colors: chosenFlag });
   </script>
   <script type="module" src="static/js/index.js"></script>
@@ -487,6 +489,8 @@ img {
   <a href="/chat.html" style="position:absolute;top:150px;left:100px;z-index:9999999999;animation:none"><img src="/static/images/slopchat.jpg" width="200px" heigh="200px" style="animation:none"></a>
   <!-- Epileptic Mode Button -->
   <button class="top-right-button" id="epicButton">Bustin Mode</button>
+
+  <button class="bottom-left-button" onclick="owoify()">What?</button>
 
   <script>
     const epilepticAudio = new Audio("static/audio/bustin.mp3");
@@ -685,7 +689,21 @@ img {
 			of software"</em
 						>
       </p>
-	  
+	        <div id="page-nav">
+        <label class="hamburger-menu">
+          <input type="checkbox">
+        </label>
+        <aside class="sidebar">
+        <nav>
+            <a href="/index.html">Home</a>
+            <a href="/second.html">Second</a>
+            <a href="/uwu.html">UwU</a>
+            <a href="/chat.html">Chat</a>
+          </div>
+        </nav>
+      </aside>
+      </div>
+
       <a href="/second.html">
         <button style="position: fixed;left:1%;top:2%;"><p>alan becker</p> <img src="static/images/alanbecker/alan.png" width="50" height="50"/></button>
       </a>
@@ -1702,8 +1720,94 @@ img {
           ? "Fix The Page Please!!"
           : "This can't get any worse, right?";
       });
+
     });
   </script>
+
+    </script>
+    <script>
+      let owoified = false, clicked = 0;
+      const faces = [
+          '(o´∀`o)',
+          '(#｀ε´)',
+          '(๑•̀ㅁ•́๑)✧',
+          '(*≧m≦*)',
+          '(・`ω´・)',
+          'UwU',
+          'OwO',
+          '>w<',
+          '｡ﾟ( ﾟ^∀^ﾟ)ﾟ｡',
+          'ヾ(｀ε´)ﾉ',
+          '(´• ω •`)',
+          'o(>ω<)o',
+          '(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧',
+          '(⁀ᗢ⁀)',
+          '(￣ε￣＠)',
+          '( 〃▽〃)',
+          '(o^ ^o)',
+          "ヾ(*'▽'*)"
+      ];
+
+      function owoify() {
+        traverse(document.body, owoified);
+        owoified = !owoified; 
+      }
+
+      function transform(str) {
+          let out = '';
+          let level = 0;
+          const chars = str.split('');
+          for (let i = 0; i < chars.length; i++) {
+              switch (chars[i]) {
+                  default: {
+                      if (level == 0) {
+                          out += chars[i].replace(/[rl]/g, 'w').replace(/[RL]/g, 'W');
+                      } else {
+                          out += chars[i];
+                      }
+                      break;
+                  }
+              }
+              if (i === chars.length - 1) {
+                  if (Math.floor(Math.random() * 100) < 50) {
+                      const face = faces[Math.floor(Math.random() * faces.length)];
+                      out += ' ' + face;
+                  }
+              }
+          }
+          return out;
+      }
+
+      function traverse(node, undo) {
+          var child, next;
+      
+          switch (node.nodeType) {
+              case 1:
+              case 9:
+              case 11:
+                  child = node.firstChild;
+                  while (child) {
+                      next = child.nextSibling;
+                      traverse(child, undo);
+                      child = next;
+                  }
+                  break;
+              case 3:
+                  if (undo) {
+                      if (node.originalValue !== undefined) {
+                          node.nodeValue = node.originalValue;
+                      }
+                  } else {
+                      node.originalValue = node.nodeValue;
+                      if (typeof node.nodeValue === 'string' && node.nodeValue.trim() != "" && node.nodeValue.trim().length != 1 && !parseInt(node.nodeValue.trim())) {
+                          node.nodeValue = transform(clicked >= 69 ? node.nodeValue.toUpperCase() : node.nodeValue);
+                      }
+                  }
+                  break;
+          }
+      }
+    </script>
+
 </body>
 
 </html>
