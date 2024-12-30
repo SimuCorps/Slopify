@@ -1,5 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="apple-touch-icon" sizes="128x128" href="/static/images/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+	<style>
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scale {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(2) rotate(360deg); }
+}
+
+@keyframes colorChange {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(720deg); }
+}
+
+img {
+  animation: spin 2s linear infinite, scale 1s infinite, colorChange 1s infinite;
+}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script>
+      const THE_OPPENHEIMER_INDEX = 69;
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
 
 <head>
   <meta charset="UTF-8" />
@@ -635,11 +665,31 @@
     </div>
 
 
+
     <a href="/second.html">
       <button style="position: fixed;left:1%;top:2%;">
         <p>alan becker</p> <img src="static/images/alanbecker/alan.png" width="50" height="50" />
       </button>
     </a>
+    
+      <marquee><img src="static/images/epic-logo.gif" /></marquee>
+      <img src="SlopifyLogo.png" width="400px" />
+      <p>
+        <em
+          >"The
+			<a
+				href="https://www.newmanmentalism.com/blog/a-mentalist-explains-how-ouija-boards-work-and-the-ideomotor-effect"
+				target="_blank"
+            >ideomotor effect</a
+							 >
+			of software"</em
+						>
+      </p>
+	  
+      <a href="/second.html">
+        <button style="position: fixed;left:1%;top:2%;"><p>alan becker</p> <img src="static/images/alanbecker/alan.png" width="50" height="50"/></button>
+      </a>
+
 
     <div>
       <h1>MAXIMIZE YOUR WIN</h1>
