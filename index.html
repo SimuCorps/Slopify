@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="static/css/error.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.19.0/css/xterm.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm@4.19.0/lib/xterm.js"></script>
 
 	<meta property="og:image" content="https://sleepie.dev/rock.gif"><meta property="og:type" content="video.other"><meta property="og:video:url" content="https://sleepie.dev/looking.mp4"><!--https://sleepie.dev/therock.gif--><meta property="og:video:width" content="640"><meta property="og:video:height" content="360">
 	  <!--bad apple-->
@@ -653,6 +655,70 @@ userInput.addEventListener('keypress', function(e) {
   <button class="top-right-button" id="epicButton">Bustin Mode</button>
 
   <button class="bottom-left-button" onclick="owoify()">What?</button>
+
+  <div id="terminal-modal" class="window window--active" role="alertdialog" aria-modal="true" aria-labelledby="error-label-0" aria-describedby="error-desc-0" data-window>
+    <div class="window__header" data-header>
+      <div id="error-label-0" class="window__title" data-label>Bash Knoweldge Check</div>
+      <button class="window__button" id="terminalCloseButton" type="button">
+        <span class="window__sprite window__sprite--close"></span>
+        <span class="window__sr">Close</span>
+      </button>
+    </div>
+    <div class="window__body">
+      <div id="term" class="Terminal"></div>
+    </div>
+  </div>
+  
+    <!-- <span>Please type <kbd>`rm -fr ./*`</kbd> to continue to this website.</span> !-->
+  <script>
+    const xterm = new Terminal();
+    const termElement = document.getElementById("term");
+  
+    if (termElement) {
+      xterm.open(termElement);
+      xterm.write("Please enter the following to continue using this site: \x1B[1;3;31mrm -fr ./*\x1B[0m, or type \x1B[1;3;31msudo shutdown now\x1B[0m, $");
+  
+      let currentInput = "";
+  
+      // Listen for key events
+      xterm.onKey(({ key, domEvent }) => {
+        const code = domEvent.keyCode;
+        console.log(code)
+  
+        switch (code) {
+          case 13:
+            console.log(currentInput)
+            if (currentInput == "rm-fr./*") {
+              window.close();
+            } else if (currentInput == "sudoshutdownnow") {
+              document.querySelector("body").innerHTML = "<span>Goodbye.</span>"
+            } else if (currentInput == "cls") {
+              console.log("clear!")
+              xterm.write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+            }
+            xterm.write("\n$ ");
+            currentInput = "";
+            break;
+          case 8:
+            if (currentInput.length > 0) {
+              currentInput = currentInput.slice(0, -1);
+              xterm.write("\b \b");
+            }
+            break;
+          default:
+            if (!domEvent.ctrlKey && !domEvent.metaKey && !domEvent.altKey) {
+              currentInput += key;
+              xterm.write(key);
+            }
+        }
+      });
+    } else {
+      console.error("Terminal not found");
+    }
+    document.getElementById("terminalCloseButton").addEventListener("click", () => {
+      document.getElementById("terminal-modal").setAttribute("hidden", "")
+    })
+  </script>
 
   <script>
 window.addEventListener('click', function(event) { if ((event.target).closest("#security-overlay") == null) { if (!event.target.hasAttribute('data-duplicated')) { event.target.setAttribute("data-duplicated", "1"); event.target.insertAdjacentHTML("afterend", event.target.innerHTML)}}})
