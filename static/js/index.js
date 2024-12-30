@@ -4,7 +4,6 @@ const vibeAudio = document.getElementById('vibeAudio');
 let allQuotes = [];
 
 function vibe() {
-    document.getElementById("soundCloudIFrame").src = "";
     moreVibeAudio.pause(); moreVibeAudio.currentTime = 0;
     vibeAudio.pause(); vibeAudio.currentTime = 0;
     const asd = Math.round(Math.random() * 690);
@@ -58,7 +57,6 @@ if (window.location.search.includes("slopcursion=true")) {
 document.getElementById('vibeButton').addEventListener('click', vibe);
 
 function enableQuotes() {
-  document.getElementById("soundCloudIFrame").src = "";
   if (!("speechSynthesis" in window)) {
     alert("Your browser does not support the wisdom of the frog.");
     return;
@@ -95,3 +93,8 @@ function readQuote() {
 }
 
 document.getElementById("wisdomButton").addEventListener("click", enableQuotes);
+
+document.addEventListener("DOMContentLoaded", function() {
+  vibe();
+  enableQuotes();
+});
