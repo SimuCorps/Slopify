@@ -497,70 +497,9 @@
     <script src="static/js/securityloader.js"></script>
 
     <script src="fishtank.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const container = document.querySelector(".fishtank-container");
+    <script src="static/js/fishtankloader.js"></script>
 
-        function initFishtank() {
-          const projectTank = new FishTank("main-fishtank", {
-            fishCount: 8,
-            minSpeed: 0.3,
-            maxSpeed: 1.5,
-            buffer: 50,
-          });
-          projectTank.initialize();
-
-          // Remove placeholder after initialization
-          const placeholder = container.querySelector(".fishtank-placeholder");
-          if (placeholder) {
-            placeholder.style.opacity = "0";
-            setTimeout(() => placeholder.remove(), 300);
-          }
-        }
-
-        initFishtank();
-
-        // Handle window resize
-        window.addEventListener("resize", () => {
-          const width = container.clientWidth;
-          const canvas = document.getElementById("main-fishtank");
-          canvas.width = width;
-          canvas.height = width < 480 ? 250 : width < 768 ? 300 : 400;
-        });
-      });
-    </script>
-
-    <script type="text/javascript">
-      var stock_url =
-        "https://raw.githubusercontent.com/rreichel3/US-Stock-Symbols/main/all/all_tickers.txt";
-      var stock_list;
-      var ticker;
-      var buy = Math.random() < 0.5;
-
-      fetch(stock_url).then(function (resp) {
-        resp.text().then(function (text) {
-          stock_list = text.split("\n");
-          stock_list.pop();
-          ticker = stock_list[Math.floor(Math.random() * stock_list.length)];
-          done();
-        });
-      });
-
-      function done() {
-        var msg = "";
-        if (buy) {
-          msg = " to the moon! BUY BUY BUY";
-          document.getElementById("stock_img").src =
-            "static/images/wojak_stock_up.webp";
-        } else {
-          msg = " down the toilet! SELL SELL SELL";
-          document.getElementById("stock_img").src =
-            "static/images/wojak_stock_down.gif";
-        }
-        document.getElementById("stock_ticker").textContent = ticker;
-        document.getElementById("stock_msg").textContent = msg;
-      }
-    </script>
+    <script src="static/js/stocks.js"></script>
     <script>
         function rainbowPulse() {
             const hue0 = (Date.now() /10) % 360;
@@ -626,87 +565,6 @@
         });
       });
     </script>
-    <script>
-      let owoified = false, clicked = 0;
-      const faces = [
-          '(o´∀`o)',
-          '(#｀ε´)',
-          '(๑•̀ㅁ•́๑)✧',
-          '(*≧m≦*)',
-          '(・`ω´・)',
-          'UwU',
-          'OwO',
-          '>w<',
-          '｡ﾟ( ﾟ^∀^ﾟ)ﾟ｡',
-          'ヾ(｀ε´)ﾉ',
-          '(´• ω •`)',
-          'o(>ω<)o',
-          '(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧',
-          '(⁀ᗢ⁀)',
-          '(￣ε￣＠)',
-          '( 〃▽〃)',
-          '(o^ ^o)',
-          "ヾ(*'▽'*)"
-      ];
-
-      function owoify() {
-        traverse(document.body, owoified);
-        owoified = !owoified; 
-      }
-
-      function transform(str) {
-          let out = '';
-          let level = 0;
-          const chars = str.split('');
-          for (let i = 0; i < chars.length; i++) {
-              switch (chars[i]) {
-                  default: {
-                      if (level == 0) {
-                          out += chars[i].replace(/[rl]/g, 'w').replace(/[RL]/g, 'W');
-                      } else {
-                          out += chars[i];
-                      }
-                      break;
-                  }
-              }
-              if (i === chars.length - 1) {
-                  if (Math.floor(Math.random() * 100) < 50) {
-                      const face = faces[Math.floor(Math.random() * faces.length)];
-                      out += ' ' + face;
-                  }
-              }
-          }
-          return out;
-      }
-
-      function traverse(node, undo) {
-          var child, next;
-      
-          switch (node.nodeType) {
-              case 1:
-              case 9:
-              case 11:
-                  child = node.firstChild;
-                  while (child) {
-                      next = child.nextSibling;
-                      traverse(child, undo);
-                      child = next;
-                  }
-                  break;
-              case 3:
-                  if (undo) {
-                      if (node.originalValue !== undefined) {
-                          node.nodeValue = node.originalValue;
-                      }
-                  } else {
-                      node.originalValue = node.nodeValue;
-                      if (typeof node.nodeValue === 'string' && node.nodeValue.trim() != "" && node.nodeValue.trim().length != 1 && !parseInt(node.nodeValue.trim())) {
-                          node.nodeValue = transform(clicked >= 69 ? node.nodeValue.toUpperCase() : node.nodeValue);
-                      }
-                  }
-                  break;
-          }
-      }
-    </script>
+    <script src="static/js/owo.js"></script>
 </body>
 </html>
