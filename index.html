@@ -5,50 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="apple-touch-icon" sizes="128x128" href="/static/images/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
-	<style>
-	 #cfs-ad {
-		 background: #000;
-		 width: 800px;
-		 min-height: 480px;
-		 margin: 0 auto;
-		 padding: 32px;
-		 font-family: sans-serif;
-		 border-radius: 16px;
-	 }
-	 #cfs-ad img {
-		 float: left;
-		 margin: 16px;
-		 transition: 100ms ease all;
-	 }
-	 #cfs-ad img:hover {
-		 transform: scale(1.1);
-	 }
-	 #cfs-ad a {
-		 font-size: 16pt;
-		 text-decoration: none;
-		 transition: 100ms ease all;
-	 }
-	 #cfs-ad a:hover {
-		 color: #FFF !important;
-	 }
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes scale {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(2) rotate(360deg); }
-}
-
-@keyframes colorChange {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(720deg); }
-}
-
-img {
-  animation: spin 2s linear infinite, scale 1s infinite, colorChange 1s infinite;
-}
+	
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.19.0/css/xterm.css" />
     <script src="https://cdn.jsdelivr.net/npm/xterm@4.19.0/lib/xterm.js"></script>
@@ -356,8 +313,51 @@ img {
         animation: epilepticFlash 0.1s infinite;
       }
 
+	 #cfs-ad {
+		 background: #000;
+		 width: 800px;
+		 min-height: 480px;
+		 margin: 0 auto;
+		 padding: 32px;
+		 font-family: sans-serif;
+		 border-radius: 16px;
+	 }
+	 #cfs-ad img {
+		 float: left;
+		 margin: 16px;
+		 transition: 100ms ease all;
+	 }
+	 #cfs-ad img:hover {
+		 transform: scale(1.1);
+	 }
+	 #cfs-ad a {
+		 font-size: 16pt;
+		 text-decoration: none;
+		 transition: 100ms ease all;
+	 }
+	 #cfs-ad a:hover {
+		 color: #FFF !important;
+	 }
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
-    </style>
+@keyframes scale {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(2) rotate(360deg); }
+}
+
+@keyframes colorChange {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(720deg); }
+}
+
+img {
+  animation: spin 2s linear infinite, scale 1s infinite, colorChange 1s infinite;
+}
+</style>
+
     <div id="terminal-modal" class="window window--active" role="alertdialog" aria-modal="true" aria-labelledby="error-label-0" aria-describedby="error-desc-0" data-window>
       <div class="window__header" data-header>
         <div id="error-label-0" class="window__title" data-label>Bash Knoweldge Check</div>
