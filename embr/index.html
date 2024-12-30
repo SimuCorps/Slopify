@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Embr Web IDE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs/loader.min.js"></script>
-    
+
     <style>
         body {
             margin: 0;
@@ -123,202 +123,202 @@
             align-items: center;
             border-bottom: 1px solid #454545;
         }
-        
+
         .header-title {
             color: #d4d4d4;
             font-size: 14px;
             margin: 0;
         }
-        
+
         .header-version {
             color: #888;
             font-size: 12px;
             margin-left: 10px;
         }
-        
+
         .header-credits {
             color: #888;
             font-size: 12px;
             margin-left: auto;
         }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="header">
-        <h1 class="header-title">Embr Web Editor</h1>
-        <span class="header-version">v0.19.0-wasm</span>
-        <span class="header-credits">Embr by Dishpit & Compiled for Web by Shafil</span>
+      <h1 class="header-title">Embr Web Editor</h1>
+      <span class="header-version">v0.19.0-wasm</span>
+      <span class="header-credits">Embr by Dishpit & Compiled for Web by Shafil</span>
     </div>
     <div class="navbar">
-        <div class="tab active">
-            <i class="far fa-file-code"></i>
-            <span style="margin-left: 5px;">main.embr</span>
-        </div>
-        <button class="run-button" id="runButton">
-            <i class="fas fa-play"></i> Run
-        </button>
+      <div class="tab active">
+        <i class="far fa-file-code"></i>
+        <span style="margin-left: 5px;">main.embr</span>
+      </div>
+      <button class="run-button" id="runButton">
+        <i class="fas fa-play"></i> Run
+      </button>
     </div>
     <div class="main-container">
-        <div class="editor-terminal-container">
-            <div class="editor-container" id="editor"></div>
-            <div class="terminal-container">
-                <div class="terminal-header">
-                    <div class="tab active">
-                        <i class="fas fa-terminal"></i>
-                        <span style="margin-left: 5px;">Terminal</span>
-                    </div>
-                </div>
-                <div class="terminal-content" id="output"></div>
+      <div class="editor-terminal-container">
+        <div class="editor-container" id="editor"></div>
+        <div class="terminal-container">
+          <div class="terminal-header">
+            <div class="tab active">
+              <i class="fas fa-terminal"></i>
+              <span style="margin-left: 5px;">Terminal</span>
             </div>
+          </div>
+          <div class="terminal-content" id="output"></div>
         </div>
-        <div class="docs-container">
-            <div class="docs-header">
-                <div class="tab active">
-                    <i class="fas fa-book"></i>
-                    <span style="margin-left: 5px;">Documentation</span>
-                </div>
-            </div>
-            <iframe class="docs-iframe" src="https://www.embrlang.com/docs/home"></iframe>
+      </div>
+      <div class="docs-container">
+        <div class="docs-header">
+          <div class="tab active">
+            <i class="fas fa-book"></i>
+            <span style="margin-left: 5px;">Documentation</span>
+          </div>
         </div>
+        <iframe class="docs-iframe" src="https://www.embrlang.com/docs/home"></iframe>
+      </div>
     </div>
 
     <script>
-        var moduleInitialized = false;  // Add this line
-        // Initialize Module before loading embr.js
-        var Module = {
-            onRuntimeInitialized: function() {
-                console.log('Runtime initialized');
-                moduleInitialized = true;
-            },
-            print: function(text) {
-                document.getElementById('output').textContent += text + '\n';
-            },
-            printErr: function(text) {
-                document.getElementById('output').textContent += 'Error: ' + text + '\n';
-            }
-        };
+      var moduleInitialized = false;  // Add this line
+      // Initialize Module before loading embr.js
+      var Module = {
+        onRuntimeInitialized: function() {
+          console.log("Runtime initialized");
+          moduleInitialized = true;
+        },
+        print: function(text) {
+          document.getElementById("output").textContent += text + "\n";
+        },
+        printErr: function(text) {
+          document.getElementById("output").textContent += "Error: " + text + "\n";
+        },
+      };
     </script>
     <script src="/embr/embr.js"></script>
     <script>
-        require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs' }});
-        require(['vs/editor/editor.main'], function() {
-            // Register Embr language
-            monaco.languages.register({ id: 'embr' });
-            
-            // Define Embr language syntax
-            monaco.languages.setMonarchTokensProvider('embr', {
-                keywords: [
-                    'var', 'fn', 'class', 'out'
-                ],
-                typeKeywords: [
-                    '@void', '@int', '@bool', '@str'
-                ],
-                builtins: [
-                    'out', 'clock', 'time', 'length', 'rest', 'tail', 'head',
-                    'append', 'prepend', 'remove'
-                ],
-                tokenizer: {
-                    root: [
-                        [/@[a-zA-Z]+/, 'type'],
-                        [/\b(var|fn|class|out)\b/, 'keyword'],
-                        [/\b(out|clock|time|length|rest|tail|head|append|prepend|remove)\b/, 'builtin'],
-                        [/"([^"\\]|\\.)*$/, 'string.invalid'],
-                        [/"/, { token: 'string.quote', next: '@string' }],
-                        [/[a-zA-Z_]\w*/, 'variable'],
-                        [/[=+\-*/<>!]+/, 'operator'],
-                        [/\d+/, 'number'],
-                    ],
-                    string: [
-                        [/[^\\"]+/, 'string'],
-                        [/"/, { token: 'string.quote', next: '@pop' }]
-                    ]
-                }
-            });
+      require.config({ paths: { vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs" } });
+      require(["vs/editor/editor.main"], function() {
+        // Register Embr language
+        monaco.languages.register({ id: "embr" });
 
-            // Define Embr language completion
-            monaco.languages.registerCompletionItemProvider('embr', {
-                provideCompletionItems: function(model, position) {
-                    const suggestions = [
-                        {
-                            label: 'var',
-                            kind: monaco.languages.CompletionItemKind.Keyword,
-                            insertText: 'var ${1:name} = ${2:value}',
-                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet
-                        },
-                        {
-                            label: 'fn',
-                            kind: monaco.languages.CompletionItemKind.Keyword,
-                            insertText: 'fn ${1:name}() @${2:void} {\n\t${3}\n}',
-                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet
-                        },
-                        {
-                            label: 'out',
-                            kind: monaco.languages.CompletionItemKind.Keyword,
-                            insertText: 'out "${1:text}"',
-                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet
-                        }
-                    ];
-
-                    // Add type suggestions
-                    ['@void', '@int', '@bool', '@str'].forEach(type => {
-                        suggestions.push({
-                            label: type,
-                            kind: monaco.languages.CompletionItemKind.TypeParameter,
-                            insertText: type
-                        });
-                    });
-
-                    // Add builtin function suggestions
-                    ['out()', 'clock()', 'time()', 'length()', 'rest()', 'tail()', 'head()', 
-                     'append()', 'prepend()', 'remove()'].forEach(func => {
-                        suggestions.push({
-                            label: func,
-                            kind: monaco.languages.CompletionItemKind.Function,
-                            insertText: func
-                        });
-                    });
-
-                    return { suggestions: suggestions };
-                }
-            });
-
-            // Create editor with Embr language
-            var editor = monaco.editor.create(document.getElementById('editor'), {
-                value: '',
-                language: 'embr',
-                theme: 'vs-dark',
-                minimap: { enabled: true },
-                automaticLayout: true,
-                suggestOnTriggerCharacters: true,
-            });
-
-            document.getElementById('runButton').onclick = function() {
-                if (!moduleInitialized) {
-                    document.getElementById('output').textContent = 'Error: Runtime not initialized yet. Please wait...\n';
-                    return;
-                }
-
-                var code = editor.getValue();
-                document.getElementById('output').textContent = '';
-
-                try {
-                    // Here we do some fun C stuff with malloc and free in JS
-                    var ptr = Module._malloc(code.length + 1);
-                    Module.stringToUTF8(code, ptr, code.length + 1);
-
-                    var result = Module.ccall(
-                        'interpretString',
-                        'number',
-                        ['number'],
-                        [ptr]
-                    );
-
-                    Module._free(ptr);
-                } catch (e) {
-                    document.getElementById('output').textContent = 'Error: ' + e.message + '\n';
-                }
-            };
+        // Define Embr language syntax
+        monaco.languages.setMonarchTokensProvider("embr", {
+          keywords: [
+            "var", "fn", "class", "out",
+          ],
+          typeKeywords: [
+            "@void", "@int", "@bool", "@str",
+          ],
+          builtins: [
+            "out", "clock", "time", "length", "rest", "tail", "head",
+            "append", "prepend", "remove",
+          ],
+          tokenizer: {
+            root: [
+              [/@[a-zA-Z]+/, "type"],
+              [/\b(var|fn|class|out)\b/, "keyword"],
+              [/\b(out|clock|time|length|rest|tail|head|append|prepend|remove)\b/, "builtin"],
+              [/"([^"\\]|\\.)*$/, "string.invalid"],
+              [/"/, { token: "string.quote", next: "@string" }],
+              [/[a-zA-Z_]\w*/, "variable"],
+              [/[=+\-*/<>!]+/, "operator"],
+              [/\d+/, "number"],
+            ],
+            string: [
+              [/[^\\"]+/, "string"],
+              [/"/, { token: "string.quote", next: "@pop" }],
+            ],
+          },
         });
+
+        // Define Embr language completion
+        monaco.languages.registerCompletionItemProvider("embr", {
+          provideCompletionItems: function(model, position) {
+            const suggestions = [
+              {
+                label: "var",
+                kind: monaco.languages.CompletionItemKind.Keyword,
+                insertText: "var ${1:name} = ${2:value}",
+                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+              },
+              {
+                label: "fn",
+                kind: monaco.languages.CompletionItemKind.Keyword,
+                insertText: "fn ${1:name}() @${2:void} {\n\t${3}\n}",
+                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+              },
+              {
+                label: "out",
+                kind: monaco.languages.CompletionItemKind.Keyword,
+                insertText: "out \"${1:text}\"",
+                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+              },
+            ];
+
+            // Add type suggestions
+            ["@void", "@int", "@bool", "@str"].forEach(type => {
+              suggestions.push({
+                label: type,
+                kind: monaco.languages.CompletionItemKind.TypeParameter,
+                insertText: type,
+              });
+            });
+
+            // Add builtin function suggestions
+            ["out()", "clock()", "time()", "length()", "rest()", "tail()", "head()",
+              "append()", "prepend()", "remove()"].forEach(func => {
+              suggestions.push({
+                label: func,
+                kind: monaco.languages.CompletionItemKind.Function,
+                insertText: func,
+              });
+            });
+
+            return { suggestions: suggestions };
+          },
+        });
+
+        // Create editor with Embr language
+        var editor = monaco.editor.create(document.getElementById("editor"), {
+          value: "",
+          language: "embr",
+          theme: "vs-dark",
+          minimap: { enabled: true },
+          automaticLayout: true,
+          suggestOnTriggerCharacters: true,
+        });
+
+        document.getElementById("runButton").onclick = function() {
+          if (!moduleInitialized) {
+            document.getElementById("output").textContent = "Error: Runtime not initialized yet. Please wait...\n";
+            return;
+          }
+
+          var code = editor.getValue();
+          document.getElementById("output").textContent = "";
+
+          try {
+            // Here we do some fun C stuff with malloc and free in JS
+            var ptr = Module._malloc(code.length + 1);
+            Module.stringToUTF8(code, ptr, code.length + 1);
+
+            var result = Module.ccall(
+              "interpretString",
+              "number",
+              ["number"],
+              [ptr],
+            );
+
+            Module._free(ptr);
+          } catch (e) {
+            document.getElementById("output").textContent = "Error: " + e.message + "\n";
+          }
+        };
+      });
     </script>
-</body>
+  </body>
 </html>

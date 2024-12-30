@@ -1,72 +1,73 @@
 body {
-  background-image: url("/static/images/alanbecker/alan.png"),
+    background-image: url("/static/images/alanbecker/alan.png"),
     linear-gradient(
-      90deg,
-      rgba(255, 0, 0, 1) 0%,
-      rgba(255, 154, 0, 1) 10%,
-      rgba(208, 222, 33, 1) 20%,
-      rgba(79, 220, 74, 1) 30%,
-      rgba(63, 218, 216, 1) 40%,
-      rgba(47, 201, 226, 1) 50%,
-      rgba(28, 127, 238, 1) 60%,
-      rgba(95, 21, 242, 1) 70%,
-      rgba(186, 12, 248, 1) 80%,
-      rgba(251, 7, 217, 1) 90%,
-      rgba(255, 0, 0, 1) 100%
+            90deg,
+            rgba(255, 0, 0, 1) 0%,
+            rgba(255, 154, 0, 1) 10%,
+            rgba(208, 222, 33, 1) 20%,
+            rgba(79, 220, 74, 1) 30%,
+            rgba(63, 218, 216, 1) 40%,
+            rgba(47, 201, 226, 1) 50%,
+            rgba(28, 127, 238, 1) 60%,
+            rgba(95, 21, 242, 1) 70%,
+            rgba(186, 12, 248, 1) 80%,
+            rgba(251, 7, 217, 1) 90%,
+            rgba(255, 0, 0, 1) 100%
     );
-  animation: rainbow_animation 6s ease-in-out infinite;
-  background-size: 200% 100%, 400% 100%;
+    animation: rainbow_animation 6s ease-in-out infinite;
+    background-size: 200% 100%, 400% 100%;
 }
 
 #shadowBox {
-  background-color: rgb(0, 0, 0);
-  /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.2);
-  /* Black w/opacity/see-through */
-  border: 3px solid;
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.2);
+    /* Black w/opacity/see-through */
+    border: 3px solid;
 }
 
 .rainbow {
-  text-align: center;
-  text-decoration: underline;
-  font-size: 32px;
-  font-family: monospace;
-  letter-spacing: 5px;
+    text-align: center;
+    text-decoration: underline;
+    font-size: 32px;
+    font-family: monospace;
+    letter-spacing: 5px;
 }
+
 .rainbow_text_animated {
-  background: linear-gradient(
-    to right,
-    #6666ff,
-    #0099ff,
-    #00ff00,
-    #ff3399,
-    #6666ff
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: rainbow_animation 6s ease-in-out infinite;
-  background-size: 400% 100%;
+    background: linear-gradient(
+            to right,
+            #6666ff,
+            #0099ff,
+            #00ff00,
+            #ff3399,
+            #6666ff
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 6s ease-in-out infinite;
+    background-size: 400% 100%;
 }
 
 @keyframes rainbow_animation {
-  0%,
-  100% {
-    background-position: 0 0;
-  }
+    0%,
+    100% {
+        background-position: 0 0;
+    }
 
-  50% {
-    background-position: 100% 0;
-  }
+    50% {
+        background-position: 100% 0;
+    }
 }
 
 @keyframes rainbow_bg_animation {
-  0%,
-  100% {
-    background-position: 0 0;
-  }
+    0%,
+    100% {
+        background-position: 0 0;
+    }
 
-  50% {
-    background-position: 100% 0;
-  }
+    50% {
+        background-position: 100% 0;
+    }
 }

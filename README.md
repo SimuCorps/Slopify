@@ -16,6 +16,7 @@ The premise? Commit whatever code you want for whatever features you want in wha
 <br>
 
 # Current features
+
 * Chat
 * Various visual themes (dark mode, Windows 95 style, retro)
 * Discord embed integrations

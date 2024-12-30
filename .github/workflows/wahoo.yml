@@ -1,5 +1,5 @@
 name: 🐟 🐠 🐡
-on: [push, workflow_dispatch]
+on: [ push, workflow_dispatch ]
 
 jobs:
   print-wahoo:

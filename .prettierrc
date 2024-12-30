@@ -1,9 +1,9 @@
 {
-	"endOfLine": "crlf",
-	"printWidth": 120,
-	"quoteProps": "as-needed",
-	"semi": true,
-	"tabWidth": 2,
-	"trailingComma": "es5",
-	"useTabs": false
+  "endOfLine": "crlf",
+  "printWidth": 120,
+  "quoteProps": "as-needed",
+  "semi": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "useTabs": false
 }

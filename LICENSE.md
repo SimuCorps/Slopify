@@ -16,8 +16,13 @@ The software may NOT be used by:
 - Companies or organizations engaged in the production or sale of weapons, surveillance tools, or related services.
 - Specific prohibited entities, including but not limited to: Palantir Technologies, Northrop Grumman, Lockheed Martin, Raytheon, and OpenAI.
 - Any entity or individual engaging in activities deemed harmful, unethical, or exploitative, defined as:
-  - Actions that directly or indirectly cause physical, psychological, social, or environmental harm.
-  - Practices that violate widely accepted principles of human rights, equity, or sustainability, including but not limited to exploitation of vulnerable populations or destruction of natural habitats.
+    - Actions that directly or indirectly cause physical, psychological, social, or environmental harm.
+    - Practices that violate widely accepted principles of human rights, equity, or sustainability, including but not limited to exploitation of vulnerable populations or destruction of natural habitats.
+- Members of the klu Klux Klan or any other ethno-nationalist organisation
+- Members of any fascist organisation
+- Lawyers
+- Investment bankers
+-
 
 ## 4. Ethical Standards
 
@@ -50,5 +55,6 @@ This license is compatible with GPLv2 and may coexist with other open-source lic
 ## 10. Enforcement
 
 Violations of these terms will result in the immediate termination of the license for the violator. Enforcement actions may be initiated by:
- - The original authors or maintainers of this software.
- - Third-party organizations explicitly authorized by the authors to monitor and enforce compliance.
+
+- The original authors or maintainers of this software.
+- Third-party organizations explicitly authorized by the authors to monitor and enforce compliance.

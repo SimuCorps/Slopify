@@ -3,56 +3,61 @@
   <head>
     <!-- Oneko -->
     <script async src="https://sleepie.uk/oneko.js"></script>
-	  <script async src="https://sleepie.dev/slopifyvids/loader.js"></script>
+    <script async src="https://sleepie.dev/slopifyvids/loader.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="apple-touch-icon" sizes="128x128" href="/static/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/static/images/apple-touch-icon.png">
     <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
     <link rel="stylesheet" href="static/css/page-nav.css">
     <link rel="stylesheet" href="static/css/error.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 
-	<meta property="og:image" content="https://sleepie.dev/rock.gif"><meta property="og:type" content="video.other"><meta property="og:video:url" content="https://sleepie.dev/looking.mp4"><!--https://sleepie.dev/therock.gif--><meta property="og:video:width" content="640"><meta property="og:video:height" content="360">
-	  <!--bad apple-->
+    <meta property="og:image" content="https://sleepie.dev/rock.gif">
+    <meta property="og:type" content="video.other">
+    <meta property="og:video:url" content="https://sleepie.dev/looking.mp4"><!--https://sleepie.dev/therock.gif-->
+    <meta property="og:video:width" content="640">
+    <meta property="og:video:height" content="360">
+    <!--bad apple-->
     <script>
-      fetch('static/text/play.txt')
-          .then(response => response.text())
-          .then(frameData => {
-              const frames = frameData.split("SPLIT");
-              startAnimation(frames);
-          })
-          .catch(error => console.error('Error loading play.txt:', error));
-  
+      fetch("static/text/play.txt")
+        .then(response => response.text())
+        .then(frameData => {
+          const frames = frameData.split("SPLIT");
+          startAnimation(frames);
+        })
+        .catch(error => console.error("Error loading play.txt:", error));
+
       function startAnimation(frames) {
-          const frameRate = 50;
-          let startTime = Date.now();
-  
-          function animate() {
-              const elapsedTime = Date.now() - startTime;
-              const frameIndex = Math.floor(elapsedTime / frameRate) % frames.length;
-  
-              console.clear(); 
-              console.log(frames[frameIndex]); 
-  
-              if (elapsedTime < frames.length * frameRate) {
-                  requestAnimationFrame(animate);
-              }
+        const frameRate = 50;
+        let startTime = Date.now();
+
+        function animate() {
+          const elapsedTime = Date.now() - startTime;
+          const frameIndex = Math.floor(elapsedTime / frameRate) % frames.length;
+
+          console.clear();
+          console.log(frames[frameIndex]);
+
+          if (elapsedTime < frames.length * frameRate) {
+            requestAnimationFrame(animate);
           }
-  
-          animate();
+        }
+
+        animate();
       }
-  </script>
-	<style>
+    </script>
+    <style>
 
 
-img {
-  animation: spin 2s linear infinite, scale 1s infinite, colorChange 1s infinite;
-}
-		</style>
+        img {
+            animation: spin 2s linear infinite, scale 1s infinite, colorChange 1s infinite;
+        }
+    </style>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script>
       const THE_OPPENHEIMER_INDEX = 69;
+
       function getRandomInt(max) {
         return Math.floor(Math.random() * max);
       }
@@ -60,7 +65,7 @@ img {
       function showFullScreenImage(
         imageUrl,
         displayDuration = 2000,
-        fadeDuration = 1500
+        fadeDuration = 1500,
       ) {
         const overlay = document.createElement("div");
         overlay.style.position = "fixed";
@@ -102,7 +107,7 @@ img {
       }
 
       var audio = new Audio("static/audio/protocol.mp3");
-      document.addEventListener("click", function (event) {
+      document.addEventListener("click", function(event) {
         // Check if the clicked element is a button
 
         var LUCKY_NUMBER = getRandomInt(THE_OPPENHEIMER_INDEX);
@@ -114,305 +119,318 @@ img {
       });
     </script>
     <style>
-      * {
-        border: 0;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        cursor: url(static/images/win95_cursor_regular.png) 0 0, default;
-      }
+        * {
+            border: 0;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: url(static/images/win95_cursor_regular.png) 0 0, default;
+        }
 
-      body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 0;
-        color: #ebdbb2;
-        display: grid;
-        height: 100vh;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #ebdbb2;
+            display: grid;
+            height: 100vh;
+        }
 
-      .skipnav {
-        text-decoration: none;
-        padding: 4px 8px;
-        position: absolute;
-        left: -1000em;
-        top: 0;
-        font-weight: bold;
-      }
-      
-      .skipnav:focus,
-      .skipnav:active {
-        z-index: 99;
-        top: 1rem;
-        left: 1rem;
-        color: #ebdbb2;
-        outline: 4px dotted #ebdbb2;
-        background: #282828;
-        width: fit-content;
-        outline-offset: 2px;
-      }
+        .skipnav {
+            text-decoration: none;
+            padding: 4px 8px;
+            position: absolute;
+            left: -1000em;
+            top: 0;
+            font-weight: bold;
+        }
 
-      header {
-        color: #ebdbb2;
-        padding: 20px 0;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
+        .skipnav:focus,
+        .skipnav:active {
+            z-index: 99;
+            top: 1rem;
+            left: 1rem;
+            color: #ebdbb2;
+            outline: 4px dotted #ebdbb2;
+            background: #282828;
+            width: fit-content;
+            outline-offset: 2px;
+        }
 
-      header h1 {
-        margin: 0;
-        font-size: 2.5rem;
-      }
+        header {
+            color: #ebdbb2;
+            padding: 20px 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-      main {
-        padding: 20px;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-			
-			main img {
-				transform: perspective(700px) rotateX(20deg);
-				-webkit-transform: perspective(700px) rotateX(20deg);
-				 box-shadow: 6px 6px 9px rgba(0,0,0, 0.5);
-			}
-			
-      footer {
-        text-align: center;
-        padding: 10px 0;
-        color: #ebdbb2;
-        margin-top: 20px;
-      }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
 
-      a {
-        color: #b8bb26;
-        text-decoration: underline;
-      }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-      a:hover {
-        color: #83a598;
-      }
+        main img {
+            transform: perspective(700px) rotateX(20deg);
+            -webkit-transform: perspective(700px) rotateX(20deg);
+            box-shadow: 6px 6px 9px rgba(0, 0, 0, 0.5);
+        }
 
-      section {
-        margin-bottom: 20px;
-      }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            color: #ebdbb2;
+            margin-top: 20px;
+        }
 
-      section:last-of-type {
-        margin-bottom: 0;
-      }
+        a {
+            color: #b8bb26;
+            text-decoration: underline;
+        }
 
-      .importante {
-        display: inline-flex;
-      }
+        a:hover {
+            color: #83a598;
+        }
 
-      .fishtank-container {
-        position: relative;
-        width: 100%;
-        height: 400px;
-        margin: 20px 0;
-        overflow: hidden;
-        background: rgba(40, 40, 40, 0.5);
-        border-radius: 8px;
-      }
+        section {
+            margin-bottom: 20px;
+        }
 
-      .fishtank-canvas {
-        width: 100%;
-        height: 100%;
-        cursor: crosshair;
-      }
+        section:last-of-type {
+            margin-bottom: 0;
+        }
 
-      @media (max-width: 768px) {
+        .importante {
+            display: inline-flex;
+        }
+
         .fishtank-container {
-          height: 300px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .fishtank-container {
-          height: 250px;
-        }
-      }
-
-      /* Optional loading placeholder */
-      .fishtank-placeholder {
-        position: absolute;
-        inset: 0;
-        background: #3c3836;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.3s ease-out;
-      }
-
-      #frog {
-        width: 400px;
-        margin: 10px;
-      }
-
-      @keyframes frogPulse {
-        0% {
-          transform: scale(1);
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+            overflow: hidden;
+            background: rgba(40, 40, 40, 0.5);
+            border-radius: 8px;
         }
 
-        50% {
-          transform: scale(1.5);
+        .fishtank-canvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
         }
 
-        100% {
-          transform: scale(1);
+        @media (max-width: 768px) {
+            .fishtank-container {
+                height: 300px;
+            }
         }
-      }
 
-      #dancing-frog {
-        width: 400px;
-        margin: 10px;
-        animation: frogPulse 5s infinite;
-      }
+        @media (max-width: 480px) {
+            .fishtank-container {
+                height: 250px;
+            }
+        }
+
+        /* Optional loading placeholder */
+        .fishtank-placeholder {
+            position: absolute;
+            inset: 0;
+            background: #3c3836;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease-out;
+        }
+
+        #frog {
+            width: 400px;
+            margin: 10px;
+        }
+
+        @keyframes frogPulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        #dancing-frog {
+            width: 400px;
+            margin: 10px;
+            animation: frogPulse 5s infinite;
+        }
 
 
-      #stock_img {
-        width: 400px;
-        height: 400px;
-      }
+        #stock_img {
+            width: 400px;
+            height: 400px;
+        }
 
-      .donut-container {
-        background-color: #000;
-        width: 400px;
-        height: 400px;
-      }
+        .donut-container {
+            background-color: #000;
+            width: 400px;
+            height: 400px;
+        }
 
-      #d {
-        font-size: 0.75em;
-      }
-       
-      #mandelbrot-section {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-      }
+        #d {
+            font-size: 0.75em;
+        }
 
-      canvas {
-          border: 2px solid black; /* Borde visible para el canvas */
-      }
+        #mandelbrot-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            border: 2px solid black; /* Borde visible para el canvas */
+        }
 
 
-      .fourier-container {
-        text-align: center;
-      }
+        .fourier-container {
+            text-align: center;
+        }
 
-      #sun button {
-        display: block;
-        margin: 10px 0;
-        padding: 15px 30px;
-        font-size: 20px;
-        color: white;
-        background-color: #000;
-        border-radius: 20px;
-      }
+        #sun button {
+            display: block;
+            margin: 10px 0;
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            background-color: #000;
+            border-radius: 20px;
+        }
 
-      #l8rgt{
-      #l8rgt {
-        display: block;
-        margin: 10px 0;
-        padding: 15px 30px;
-        font-size: 20px;
-        font-family: var(--font);
-        background: radial-gradient(circle, #b00b69, rgb(145, 69, 221));
-        color: white;
-      }
-      
-      #foxy {
-        height: 600px;
-        width: auto;
-        background: url('static/images/cute.jpg');
-        background-repeat: no-repeat;
-      }
+        #l8rgt {
+            #l8rgt {
+                display: block;
+                margin: 10px 0;
+                padding: 15px 30px;
+                font-size: 20px;
+                font-family: var(--font);
+                background: radial-gradient(circle, #b00b69, rgb(145, 69, 221));
+                color: white;
+            }
 
-      #foxy:hover {
-        background: url('static/images/snarl.jpg');
-        background-repeat: no-repeat;
-      }
+            #foxy {
+                height: 600px;
+                width: auto;
+                background: url('static/images/cute.jpg');
+                background-repeat: no-repeat;
+            }
 
-      @keyframes shake {
-        0%, 100% { transform: translate(0, 0); }
-        10%, 30%, 50%, 70%, 90% { transform: translate(-5px, 5px); }
-        20%, 40%, 60%, 80% { transform: translate(5px, -5px); }
-      }
+            #foxy:hover {
+                background: url('static/images/snarl.jpg');
+                background-repeat: no-repeat;
+            }
 
-      .shake {
-        animation: shake 1s ease-in-out;
-      }
+            @keyframes shake {
+                0%, 100% {
+                    transform: translate(0, 0);
+                }
+                10%, 30%, 50%, 70%, 90% {
+                    transform: translate(-5px, 5px);
+                }
+                20%, 40%, 60%, 80% {
+                    transform: translate(5px, -5px);
+                }
+            }
 
-      @keyframes flash {
-        0% { background-color: black; }
-        50% { background-color: white; }
-        100% { background-color: black; }
-      }
+            .shake {
+                animation: shake 1s ease-in-out;
+            }
 
-      .worst-theme {
-        font-family: 'Comic Sans MS', cursive, sans-serif;
-        animation: spin 10s linear infinite, flash 1s step-start infinite;
-      }
+            @keyframes flash {
+                0% {
+                    background-color: black;
+                }
+                50% {
+                    background-color: white;
+                }
+                100% {
+                    background-color: black;
+                }
+            }
 
-      .worst-theme * {
-        animation: rainbow 1s linear infinite, shake 0.5s ease-in-out infinite;
-        text-shadow: 2px 2px 0px #FF00FF;
-        background-color: yellow;
-      }
+            .worst-theme {
+                font-family: 'Comic Sans MS', cursive, sans-serif;
+                animation: spin 10s linear infinite, flash 1s step-start infinite;
+            }
 
-      .top-right-button {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        padding: 10px 20px;
-        background-color: #b8bb26;
-        color: #282828;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-        border-radius: 5px;
-        z-index: 1000;
-      }
+            .worst-theme * {
+                animation: rainbow 1s linear infinite, shake 0.5s ease-in-out infinite;
+                text-shadow: 2px 2px 0px #FF00FF;
+                background-color: yellow;
+            }
 
-      .top-right-button:hover {
-        background-color: #a1b024;
-      }
+            .top-right-button {
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                padding: 10px 20px;
+                background-color: #b8bb26;
+                color: #282828;
+                border: none;
+                cursor: pointer;
+                font-size: 16px;
+                border-radius: 5px;
+                z-index: 1000;
+            }
 
-      @keyframes epilepticFlash {
-        0%, 100% { background-color: white; }
-        50% { background-color: black; }
-      }
+            .top-right-button:hover {
+                background-color: #a1b024;
+            }
 
-      .epileptic-mode {
-        animation: epilepticFlash 0.1s infinite;
-      }
+            @keyframes epilepticFlash {
+                0%, 100% {
+                    background-color: white;
+                }
+                50% {
+                    background-color: black;
+                }
+            }
 
-      .bottom-left-button {
-        position: fixed;
-        bottom: 10px;
-        left: 10px;
-        padding: 10px 20px;
-        background-color: #5ef7d6;
-        color: #282828;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-        border-radius: 5px;
-        z-index: 1000;
-      }
+            .epileptic-mode {
+                animation: epilepticFlash 0.1s infinite;
+            }
 
-      .bottom-left-button:hover {
-        background-color: #258e92;
-      }
+            .bottom-left-button {
+                position: fixed;
+                bottom: 10px;
+                left: 10px;
+                padding: 10px 20px;
+                background-color: #5ef7d6;
+                color: #282828;
+                border: none;
+                cursor: pointer;
+                font-size: 16px;
+                border-radius: 5px;
+                z-index: 1000;
+            }
+
+            .bottom-left-button:hover {
+                background-color: #258e92;
+            }
     </style>
     <audio id="vibeAudio" loop>
-      <source
-        src="https://cdn.pixabay.com/download/audio/2024/10/22/audio_5b87be5f9b.mp3?filename=smooth-jazz-saxophone-solo-with-a-lofi-vibe-253950.mp3"
-        type="audio/mp3"
-      />
+      <source src="https://cdn.pixabay.com/download/audio/2024/10/22/audio_5b87be5f9b.mp3?filename=smooth-jazz-saxophone-solo-with-a-lofi-vibe-253950.mp3" type="audio/mp3" />
       Your browser does not support the audio element.
     </audio>
     <audio id="moreVibeAudio" loop>
@@ -420,43 +438,63 @@ img {
       Your browser does not support the audio element.
     </audio>
     <script type="module">
-          import { rainbowCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
+      import { rainbowCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
 
-          const FLAGS = [
-            ["#FE0000", "#FD8C00", "#FFE500", "#119F0B", "#0644B3", "#C22EDC"],
-            ["#59C8F3","#F2A6B5","#fff","#F2A6B5","#59C8F3"]
-          ]
-          let chosenFlag = FLAGS[Math.floor(Math.random() * FLAGS.length)];
-          
-          new rainbowCursor({ colors: chosenFlag });
+      const FLAGS = [
+        ["#FE0000", "#FD8C00", "#FFE500", "#119F0B", "#0644B3", "#C22EDC"],
+        ["#59C8F3", "#F2A6B5", "#fff", "#F2A6B5", "#59C8F3"],
+      ];
+      let chosenFlag = FLAGS[Math.floor(Math.random() * FLAGS.length)];
+
+      new rainbowCursor({ colors: chosenFlag });
     </script>
     <script type="module" src="static/js/index.js"></script>
     <script>
-      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-      posthog.init('phc_tMS2IpaHh8OfPPuSqH4feNvaEP8ht6wrZMQHYfL2fX9', {
-          api_host:'https://us.i.posthog.com',
-          person_profiles: 'identified_only' // or 'always' to create profiles for anonymous users as well
-      })
-  </script>
+      !function(t, e) {
+        var o, n, p, r;
+        e.__SV || (window.posthog = e, e._i = [], e.init = function(i, s, a) {
+          function g(t, e) {
+            var o = e.split(".");
+            2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function() {
+              t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+            };
+          }
+
+          (p = t.createElement("script")).type = "text/javascript", p.crossOrigin = "anonymous", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r);
+          var u = e;
+          for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function(t) {
+            var e = "posthog";
+            return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e;
+          }, u.people.toString = function() {
+            return u.toString(1) + ".people (stub)";
+          }, o = "init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "), n = 0; n < o.length; n++) g(u, o[n]);
+          e._i.push([i, s, a]);
+        }, e.__SV = 1);
+      }(document, window.posthog || []);
+      posthog.init("phc_tMS2IpaHh8OfPPuSqH4feNvaEP8ht6wrZMQHYfL2fX9", {
+        api_host: "https://us.i.posthog.com",
+        person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
+      });
+    </script>
   </head>
   <script>
     let hasInteracted = false;
-    const initialSound = document.getElementById('initialnotification');
-    
+    const initialSound = document.getElementById("initialnotification");
+
     function handleFirstInteraction() {
-      console.log('User has interacted with the page');
+      console.log("User has interacted with the page");
       if (!hasInteracted) {
         // const messageSound = new Audio('static/audio/droid.mp3');
         // messageSound.play(); DO NOT PLAY - OTHERWISE WE CANCEL THE AWESOME MUSIC
         hasInteracted = true;
       }
     }
-    
+
     // Add interaction listeners
-    document.addEventListener('click', handleFirstInteraction, { once: true });
+    document.addEventListener("click", handleFirstInteraction, { once: true });
     // document.addEventListener('keypress', handleFirstInteraction, { once: true });
   </script>
-    <div id="chatbot" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+  <div id="chatbot" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
     <div class="chat-header">
       <span>Chat Support</span>
       <button onclick="toggleChat()" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; hover: { background: #ff6666; }">×</button>
@@ -473,257 +511,260 @@ img {
       <input type="text" id="userInput" placeholder="Type a message...">
       <button onclick="sendMessage()">Send</button>
     </div>
-</div>
-  
+  </div>
+
   <style>
-    #chatbot {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 300px;
-      background: #1e1e1e;
-      border: 1px solid #333;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      color: #fff;
-    }
-    
-    .chat-header {
-      padding: 10px;
-      background: #2d2d2d;
-      border-bottom: 1px solid #333;
-      display: flex;
-      justify-content: space-between;
-      color: #fff;
-    }
-    
-    .chat-messages {
-      height: 300px;
-      overflow-y: auto;
-      padding: 10px;
-      background: #1e1e1e;
-    }
-    
-    .chat-input {
-      padding: 10px;
-      border-top: 1px solid #333;
-      display: flex;
-      background: #2d2d2d;
-    }
-    
-    .chat-input input {
-      flex: 1;
-      margin-right: 10px;
-      background: #3d3d3d;
-      border: 1px solid #444;
-      color: #fff;
-      padding: 5px;
-      border-radius: 3px;
-    }
-    
-    .chat-input button {
-      background: #0078d4;
-      color: white;
-      border: none;
-      padding: 5px 15px;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-    
-    .bot-message {
-      background: #2d2d2d;
-      padding: 10px;
-      border-radius: 5px;
-      margin: 10px;
-      color: #fff;
-    }
-    
-    .user-message {
-      background: #0078d4;
-      padding: 10px;
-      border-radius: 5px;
-      margin: 10px;
-      text-align: right;
-      color: #fff;
-    }
-    
-    .clippy-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .clippy-image {
-      width: 40px;
-      height: 40px;
-    }
-    </style>
-  
+      #chatbot {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          width: 300px;
+          background: #1e1e1e;
+          border: 1px solid #333;
+          border-radius: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          color: #fff;
+      }
+
+      .chat-header {
+          padding: 10px;
+          background: #2d2d2d;
+          border-bottom: 1px solid #333;
+          display: flex;
+          justify-content: space-between;
+          color: #fff;
+      }
+
+      .chat-messages {
+          height: 300px;
+          overflow-y: auto;
+          padding: 10px;
+          background: #1e1e1e;
+      }
+
+      .chat-input {
+          padding: 10px;
+          border-top: 1px solid #333;
+          display: flex;
+          background: #2d2d2d;
+      }
+
+      .chat-input input {
+          flex: 1;
+          margin-right: 10px;
+          background: #3d3d3d;
+          border: 1px solid #444;
+          color: #fff;
+          padding: 5px;
+          border-radius: 3px;
+      }
+
+      .chat-input button {
+          background: #0078d4;
+          color: white;
+          border: none;
+          padding: 5px 15px;
+          border-radius: 3px;
+          cursor: pointer;
+      }
+
+      .bot-message {
+          background: #2d2d2d;
+          padding: 10px;
+          border-radius: 5px;
+          margin: 10px;
+          color: #fff;
+      }
+
+      .user-message {
+          background: #0078d4;
+          padding: 10px;
+          border-radius: 5px;
+          margin: 10px;
+          text-align: right;
+          color: #fff;
+      }
+
+      .clippy-container {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+      }
+
+      .clippy-image {
+          width: 40px;
+          height: 40px;
+      }
+  </style>
+
   <script>
-  function toggleChat() {
-    const chatbot = document.getElementById('chatbot');
-    chatbot.style.display = chatbot.style.display === 'none' ? 'block' : 'none';
-  }
-  
-  // Add preset responses array
-  const botResponses = [
-    "Nice opinion, too bad it's wrong.",
-    "Cry harder, it's music to my ears.",
-    "Do you even hear yourself right now?",
-    "Imagine thinking this was a good idea to type.",
-    "Keep going, you're almost at peak cringe.",
-    "You're one message away from being ignored forever.",
-    "Tell me you're insecure without telling me you're insecure.",
-    "This feels like a skill issue, not my problem.",
-    "Get a grip, or better yet, a life.",
-    "I'm impressed, you somehow made it worse.",
-    "Your existence is an unskippable cutscene.",
-    "Say that again, but this time try being clever.",
-    "You're the reason they added 'block' buttons.",
-    "Send one more emoji, I dare you.",
-    "The clown emoji isn’t enough for this conversation.",
-    "Bold of you to assume I care.",
-    "Your profile pic says everything I need to know.",
-    "Thanks for the laugh, unintentional comedy is the best.",
-    "You're like a captcha—annoying and unnecessary.",
-    "Wow, this is like watching a train wreck in slow motion.",
-    "I can’t believe you thought this would land.",
-    "Go touch grass and leave me alone.",
-    "You must really enjoy embarrassing yourself.",
-    "This level of delusion is almost impressive.",
-    "Friendly reminder: Nobody asked.",
-    "Try harder, you’re not even worth my good insults.",
-    "No need to project your insecurities onto me.",
-    "Why are you like this? Genuinely curious.",
-    "Your takes are so bad they're almost performance art.",
-    "If stupidity was a sport, you'd be a gold medalist.",
-    "Keep talking, I'm logging all this for my cringe compilation.",
-    "Imagine thinking you're the main character right now.",
-    "This feels like a waste of pixels."
-  ];
+    function toggleChat() {
+      const chatbot = document.getElementById("chatbot");
+      chatbot.style.display = chatbot.style.display === "none" ? "block" : "none";
+    }
 
-  // Add notification sound element
-  const messageSound = new Audio('static/audio/droid.mp3');
+    // Add preset responses array
+    const botResponses = [
+      "Nice opinion, too bad it's wrong.",
+      "Cry harder, it's music to my ears.",
+      "Do you even hear yourself right now?",
+      "Imagine thinking this was a good idea to type.",
+      "Keep going, you're almost at peak cringe.",
+      "You're one message away from being ignored forever.",
+      "Tell me you're insecure without telling me you're insecure.",
+      "This feels like a skill issue, not my problem.",
+      "Get a grip, or better yet, a life.",
+      "I'm impressed, you somehow made it worse.",
+      "Your existence is an unskippable cutscene.",
+      "Say that again, but this time try being clever.",
+      "You're the reason they added 'block' buttons.",
+      "Send one more emoji, I dare you.",
+      "The clown emoji isn’t enough for this conversation.",
+      "Bold of you to assume I care.",
+      "Your profile pic says everything I need to know.",
+      "Thanks for the laugh, unintentional comedy is the best.",
+      "You're like a captcha—annoying and unnecessary.",
+      "Wow, this is like watching a train wreck in slow motion.",
+      "I can’t believe you thought this would land.",
+      "Go touch grass and leave me alone.",
+      "You must really enjoy embarrassing yourself.",
+      "This level of delusion is almost impressive.",
+      "Friendly reminder: Nobody asked.",
+      "Try harder, you’re not even worth my good insults.",
+      "No need to project your insecurities onto me.",
+      "Why are you like this? Genuinely curious.",
+      "Your takes are so bad they're almost performance art.",
+      "If stupidity was a sport, you'd be a gold medalist.",
+      "Keep talking, I'm logging all this for my cringe compilation.",
+      "Imagine thinking you're the main character right now.",
+      "This feels like a waste of pixels.",
+    ];
 
-  function sendMessage() {
-  const input = document.getElementById('userInput');
-  const messages = document.getElementById('chatMessages');
-  
-  if (input.value.trim() === '') return;
-  
-  // Add user message
-  messages.innerHTML += `<div class="user-message">${input.value}</div>`;
-  
-  // Get random response with Clippy container
-  const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
-  messages.innerHTML += `
+    // Add notification sound element
+    const messageSound = new Audio("static/audio/droid.mp3");
+
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const messages = document.getElementById("chatMessages");
+
+      if (input.value.trim() === "") return;
+
+      // Add user message
+      messages.innerHTML += `<div class="user-message">${input.value}</div>`;
+
+      // Get random response with Clippy container
+      const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
+      messages.innerHTML += `
     <div class="bot-message">
       <div class="clippy-container">
         <img src="https://static.wikia.nocookie.net/the-scrappy/images/c/cb/Clippy.png/revision/latest?cb=20231027172058" class="clippy-image" alt="Clippy">
         <span>${randomResponse}</span>
       </div>
     </div>`;
-  
-  messageSound.play();
-  input.value = '';
-  messages.scrollTop = messages.scrollHeight;
-}
 
-// Update event listeners
-const userInput = document.getElementById('userInput');
-
-userInput.addEventListener('keydown', function(e) {
-  e.stopPropagation();
-});
-
-userInput.addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    sendMessage();
-  }
-});
-  </script>
-  <body>
-<div style="position: absolute;top:200px;left:300px;z-index:99999;">
-  <a href="/chat.html">
-    <img src="/static/images/slopchat.jpg" width="400px" height="200px">
-  </a>
-</div>
-  <!-- Epileptic Mode Button -->
-  <button class="top-right-button" id="epicButton">Bustin Mode</button>
-
-  <button class="bottom-left-button" onclick="owoify()">What?</button>
-
-  <script>
-window.addEventListener('click', function(event) { if ((event.target).closest("#security-overlay") == null) { if (!event.target.hasAttribute('data-duplicated')) { event.target.setAttribute("data-duplicated", "1"); event.target.insertAdjacentHTML("afterend", event.target.innerHTML)}}})
-    const epilepticAudio = new Audio("static/audio/bustin.mp3");
-    epilepticAudio.loop = true; // Enable looping
-  
-    let isEpilepticModeOn = false;
-    let spawnInterval;
-    let spawnCount = 10; // Start with 10 images
-  
-    function spawnImage() {
-      const img = document.createElement("img");
-      img.src = "static/images/ray-parker-jr.webp";
-      img.style.position = "absolute";
-      img.style.width = "100px";
-      img.style.height = "auto";
-      img.style.left = Math.random() * window.innerWidth + "px";
-      img.style.top = Math.random() * window.innerHeight + "px";
-      img.style.transition = "transform 3s ease-in-out";
-  
-      document.body.appendChild(img);
-  
-      setTimeout(() => {
-        img.style.transform = `translateY(-${window.innerHeight}px)`;
-        setTimeout(() => img.remove(), 3000);
-      }, 100);
+      messageSound.play();
+      input.value = "";
+      messages.scrollTop = messages.scrollHeight;
     }
-  
-    document.getElementById("epicButton").addEventListener("click", () => {
-      const images = document.querySelectorAll("img");
-      if (isEpilepticModeOn) {
-        document.body.classList.remove("epileptic-mode");
-        epilepticAudio.pause();
-        epilepticAudio.currentTime = 0;
-        clearInterval(spawnInterval);
-        images.forEach(img => {
-          if (img.src.includes("/static/images/")) {
-            img.src = img.dataset.originalSrc || img.src;
-          }
-        });
-      } else {
-        document.body.classList.add("epileptic-mode");
-        epilepticAudio.volume = 1;
-        epilepticAudio.play();
-  
-        spawnCount = 10; // Start with 10 images
-        spawnInterval = setInterval(() => {
-          spawnCount++;
-          for (let i = 0; i < spawnCount; i++) {
-            spawnImage();
-          }
-        }, 3000);
-  
-        images.forEach(img => {
-          if (img.src.includes("/static/images/")) {
-            img.dataset.originalSrc = img.src;
-            img.src = "static/images/ray-parker-jr.webp";
-          }
-        });
+
+    // Update event listeners
+    const userInput = document.getElementById("userInput");
+
+    userInput.addEventListener("keydown", function(e) {
+      e.stopPropagation();
+    });
+
+    userInput.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        sendMessage();
       }
-      isEpilepticModeOn = !isEpilepticModeOn;
     });
   </script>
+  <body>
+    <div style="position: absolute;top:200px;left:300px;z-index:99999;">
+      <a href="/chat.html"> <img src="/static/images/slopchat.jpg" width="400px" height="200px"> </a>
+    </div>
+    <!-- Epileptic Mode Button -->
+    <button class="top-right-button" id="epicButton">Bustin Mode</button>
 
-  
-	<script src="static/js/oneko.js"></script>
-	<script src="static/js/icey-oneko.js"></script>
+    <button class="bottom-left-button" onclick="owoify()">What?</button>
+
+    <script>
+      window.addEventListener("click", function(event) {
+        if ((event.target).closest("#security-overlay") == null) {
+          if (!event.target.hasAttribute("data-duplicated")) {
+            event.target.setAttribute("data-duplicated", "1");
+            event.target.insertAdjacentHTML("afterend", event.target.innerHTML);
+          }
+        }
+      });
+      const epilepticAudio = new Audio("static/audio/bustin.mp3");
+      epilepticAudio.loop = true; // Enable looping
+
+      let isEpilepticModeOn = false;
+      let spawnInterval;
+      let spawnCount = 10; // Start with 10 images
+
+      function spawnImage() {
+        const img = document.createElement("img");
+        img.src = "static/images/ray-parker-jr.webp";
+        img.style.position = "absolute";
+        img.style.width = "100px";
+        img.style.height = "auto";
+        img.style.left = Math.random() * window.innerWidth + "px";
+        img.style.top = Math.random() * window.innerHeight + "px";
+        img.style.transition = "transform 3s ease-in-out";
+
+        document.body.appendChild(img);
+
+        setTimeout(() => {
+          img.style.transform = `translateY(-${window.innerHeight}px)`;
+          setTimeout(() => img.remove(), 3000);
+        }, 100);
+      }
+
+      document.getElementById("epicButton").addEventListener("click", () => {
+        const images = document.querySelectorAll("img");
+        if (isEpilepticModeOn) {
+          document.body.classList.remove("epileptic-mode");
+          epilepticAudio.pause();
+          epilepticAudio.currentTime = 0;
+          clearInterval(spawnInterval);
+          images.forEach(img => {
+            if (img.src.includes("/static/images/")) {
+              img.src = img.dataset.originalSrc || img.src;
+            }
+          });
+        } else {
+          document.body.classList.add("epileptic-mode");
+          epilepticAudio.volume = 1;
+          epilepticAudio.play();
+
+          spawnCount = 10; // Start with 10 images
+          spawnInterval = setInterval(() => {
+            spawnCount++;
+            for (let i = 0; i < spawnCount; i++) {
+              spawnImage();
+            }
+          }, 3000);
+
+          images.forEach(img => {
+            if (img.src.includes("/static/images/")) {
+              img.dataset.originalSrc = img.src;
+              img.src = "static/images/ray-parker-jr.webp";
+            }
+          });
+        }
+        isEpilepticModeOn = !isEpilepticModeOn;
+      });
+    </script>
+
+
+    <script src="static/js/oneko.js"></script>
+    <script src="static/js/icey-oneko.js"></script>
     <a href="#maincontent" class="skipnav">Skip to Content (Press Enter)</a>
-    <div
-      id="security-overlay"
-      style="
+    <div id="security-overlay" style="
         position: fixed;
         top: 0;
         left: 0;
@@ -734,62 +775,43 @@ window.addEventListener('click', function(event) { if ((event.target).closest("#
         display: flex;
         justify-content: center;
         align-items: center;
-      "
-    >
-      <div
-        style="
+      ">
+      <div style="
           background: #3c3836;
           padding: 20px;
           border-radius: 8px;
           max-width: 400px;
           width: 100%;
-        "
-      >
+        ">
         <h2 style="color: #ebdbb2; text-align: center">
           🔒 Welcome to Slopify 🔒
         </h2>
 
-        <div
-          id="captcha-container"
-          style="margin-bottom: 20px; text-align: center"
-        >
-          <div
-            id="captcha-prompt"
-            style="margin-bottom: 10px; color: #ebdbb2"
-          ></div>
+        <div id="captcha-container" style="margin-bottom: 20px; text-align: center">
+          <div id="captcha-prompt" style="margin-bottom: 10px; color: #ebdbb2"></div>
           <div id="captcha-content"></div>
-          <input
-            type="text"
-            id="captcha-input"
-            placeholder="Enter your answer"
-            style="
+          <input type="text" id="captcha-input" placeholder="Enter your answer" style="
               padding: 8px;
               margin: 10px 0;
               background: #282828;
               color: #ebdbb2;
               border: 1px solid #b8bb26;
               width: 100%;
-            "
-          />
-          <button
-            id="submit-captcha"
-            style="
+            " />
+          <button id="submit-captcha" style="
               background: #b8bb26;
               color: #282828;
               padding: 10px;
               border: none;
               cursor: pointer;
               width: 100%;
-            "
-          >
+            ">
             Submit CAPTCHA
           </button>
         </div>
 
         <!-- Skip Security Button -->
-        <button
-          id="skip-security"
-          style="
+        <button id="skip-security" style="
             background: #d9534f;
             color: #fff;
             padding: 10px;
@@ -797,53 +819,33 @@ window.addEventListener('click', function(event) { if ((event.target).closest("#
             cursor: pointer;
             width: 100%;
             margin-top: 20px;
-          "
-        >
+          ">
           Skip Security :(
         </button>
 
-        <form
-          id="registration-form"
-          style="display: none; flex-direction: column; gap: 10px"
-        >
-          <input
-            type="text"
-            id="username"
-            placeholder="Username"
-            style="
+        <form id="registration-form" style="display: none; flex-direction: column; gap: 10px">
+          <input type="text" id="username" placeholder="Username" style="
               padding: 8px;
               margin: 5px 0;
               background: #282828;
               color: #ebdbb2;
               border: 1px solid #b8bb26;
-            "
-          />
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            style="
+            " />
+          <input type="password" id="password" placeholder="Password" style="
               padding: 8px;
               margin: 5px 0;
               background: #282828;
               color: #ebdbb2;
               border: 1px solid #b8bb26;
-            "
-          />
-          <div
-            id="requirements-list"
-            style="color: #ebdbb2; font-size: 0.9em; margin: 10px 0"
-          ></div>
-          <button
-            type="submit"
-            style="
+            " />
+          <div id="requirements-list" style="color: #ebdbb2; font-size: 0.9em; margin: 10px 0"></div>
+          <button type="submit" style="
               background: #b8bb26;
               color: #282828;
               padding: 10px;
               border: none;
               cursor: pointer;
-            "
-          >
+            ">
             Register
           </button>
         </form>
@@ -854,36 +856,22 @@ window.addEventListener('click', function(event) { if ((event.target).closest("#
       <marquee><img src="static/images/epic-logo.gif" /></marquee>
       <img src="SlopifyLogo.png" width="400px" />
       <p>
-        <em
-          >"The
-          <a
-            href="https://www.newmanmentalism.com/blog/a-mentalist-explains-how-ouija-boards-work-and-the-ideomotor-effect"
-            target="_blank"
-            >ideomotor effect</a
-          >
-          of software"</em
-        >
+        <em>"The <a href="https://www.newmanmentalism.com/blog/a-mentalist-explains-how-ouija-boards-work-and-the-ideomotor-effect" target="_blank">ideomotor effect</a> of software"</em>
       </p>
-	        <div id="page-nav">
+      <div id="page-nav">
         <label class="hamburger-menu">
           <input type="checkbox">
         </label>
         <aside class="sidebar">
-        <nav>
-            <a href="/index.html">Home</a>
-            <a href="/second.html">Second</a>
-            <a href="/uwu.html">UwU</a>
-            <a href="/chat.html">Chat</a>
-            <a href="/thebible.html">The Bible</a>
-            <a href="/touhouproject.html">Touhou Project</a>
-            <a href="/mizdiary.html">miz's weekly diary</a>
-          </div>
-        </nav>
-      </aside>
+          <nav>
+            <a href="/index.html">Home</a> <a href="/second.html">Second</a> <a href="/uwu.html">UwU</a> <a href="/chat.html">Chat</a> <a href="/thebible.html">The Bible</a> <a href="/touhouproject.html">Touhou Project</a> <a href="/mizdiary.html">miz's weekly diary</a>
       </div>
+      </nav></aside></div>
 
       <a href="/second.html">
-        <button style="position: fixed;left:1%;top:2%;"><p>alan becker</p> <img src="static/images/alanbecker/alan.png" width="50" height="50"/></button>
+        <button style="position: fixed;left:1%;top:2%;">
+          <p>alan becker</p>
+          <img src="static/images/alanbecker/alan.png" width="50" height="50" /></button>
       </a>
 
       <div>
@@ -897,7 +885,7 @@ window.addEventListener('click', function(event) { if ((event.target).closest("#
         Your potato browser does not support the video tag. Please stop using your grandma's computer.
       </video>
 
-<div id="news-container" style="
+      <div id="news-container" style="
     position: absolute;
     top: 50%;
     left: 0;
@@ -906,255 +894,255 @@ window.addEventListener('click', function(event) { if ((event.target).closest("#
     pointer-events: none;
     z-index: 1;
 ">
-    <div id="news-grid" style="
+        <div id="news-grid" style="
         display: flex;
         justify-content: space-between;
         padding: 0 20px;
         max-width: 100%;
         margin: 0 auto;
     ">
-        <div class="left-column" style="
+          <div class="left-column" style="
             width: 300px;
             position: fixed;
             left: 20px;
             pointer-events: auto;
         "></div>
-        <div class="right-column" style="
+          <div class="right-column" style="
             width: 300px;
             position: fixed;
             right: 20px;
             pointer-events: auto;
         "></div>
-    </div>
-</div>
+        </div>
+      </div>
 
-<script>
-const onionArticles = {
-    "articles": [
-        {
-            "title": "Pope Francis Decries Legal Head Shops Overrunning Vatican City",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Pope_Francis_Decries-NIB_IHA_GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "Surgeon General: 'You Are Supposed To Be Able To Button Your Pants'",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Surgeon_General_NIB_IHA_GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "Santa Confirms Everyone Getting Bag Of Glitter Labeled 'Fairy Dust' His Sister-In-Law Sells On Etsy",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Untitled-2Santa_Confirms_NIB_IHA_GR_copy.jpg?w=1024"
-        },
-        {
-            "title": "Timeline Of Trendy Christmas Toys",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Trendy_Toys_INFO-G-PH.jpg?w=1024"
-        },
-        {
-            "title": "Experts Recommend Putting Injured Person In Some Sort Of Cylindrical Tank Filled With Fluid",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Experts_Recommend_NIB_IHA_GR.jpg?w=1024"
-        },
-        {
-            "title": "God Locks Heavenly Gates After Spotting Mormon Missionaries Milling Around Outside",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/God_Locks_NIB_IHA-GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "FEMA Administrator Resigns After Accidentally Playing Porn On Emergency Alert System",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/FEMA_Administrator_NIB_S_PH.webp?w=1024"
-        },
-        {
-            "title": "'No Way To Prevent This,' Says Only Nation Where This Regularly Happens",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/No_Way_To_Prevent-Madison_NIB_G-PH.jpg?w=1024"
-        },
-        {
-            "title": "KitchenAid Unveils New Culinary Mech Suit",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/KitchenAid_Unveils_NIB_IHA-GR_23524d.webp?w=1024"
-        },
-        {
-            "title": "Large, Playful Sheepdog Knocks Over Houston Skyline",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Large_Playful_NIB_IHA-GR-C.jpg?w=1024"
-        },
-        {
-            "title": "Pete Hegseth Clarifies Women Allowed In Combat Roles But It's A Huge Turnoff",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Pete_Hegseth_Clarifies_NIB_PH.jpg?w=1024"
-        },
-        {
-            "title": "Secretary Of Interior Asks Nation's Help Identifying Leaf",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Secretary_Of_Interior_NIB-IHA-GR-C.jpg?w=1024"
-        },
-        {
-            "title": "Emotional Nation Gathers Outside Main Street TV Store To Watch Monster Truck Land On Smaller Truck",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Emotional_NAtion_NIB-IHA-GR.jpg?w=1024"
-        },
-        {
-            "title": "Canine Breeding-Activists Firebomb Spay-And-Neuter Clinic",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Canine_Breeding_Activists_SB_IHA-GR.webp?w=1024"
-        },
-        {
-            "title": "How To Perform A Breast Self-Exam",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/INFO_Breast_Self_Exam_S_PH.webp?w=1024"
-        },
-        {
-            "title": "MrBeast Offers To Give $1 Million To First Person Who Can Teach Him To Blink",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/MrBeast_Offers_NIB_G_PH.webp?w=1024"
-        },
-        {
-            "title": "Assad Returns To Ophthalmology At Moscow LensCrafters",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Assad_Returns_NIB_IHA_GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "Nation Tires Of Deals, Bargains",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Nation_Tires_Of_Deals_NIB_PH.webp?w=1024"
-        },
-        {
-            "title": "Judge Delays Decision After Learning One Menendez Brother Always Lies, One Always Tells The Truth",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Judge_Delays_NIB_NC_PH.webp?w=1024"
-        },
-        {
-            "title": "Nation's Mumblers March On Washington Demanding Something Or Other",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Nations_Mumblers_March_NIB_PH.webp?w=1024"
-        },
-        {
-            "title": "Pros And Cons Of Eliminating The Department Of Education",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Eliminating_Education_INFO-G-PH.jpg?w=1024"
-        },
-        {
-            "title": "American Express Launches Small Sweatshop Saturday",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/American_Express_Launches_NIB_IHA_GR.webp?w=1024"
-        },
-        {
-            "title": "Study: Overuse Of Hair Detangler Giving Rise To Product-Resistant Supertangles",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Study_Overuse_Of_Hair_NIB_IHA_GR.webp?w=1024"
-        },
-        {
-            "title": "Macy's Thanksgiving Day Balloon Floats Away After Handlers Let Go To Check Their Phones",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Macys_Thanksgiving_SB_IHA_GR.webp?w=1024"
-        },
-        {
-            "title": "FDA Bans Captain Morgan Rum After Having Way Too Much Of That Shit In College",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/FDA_Bans_NIB_IHA_GR.webp?w=1024"
-        },
-        {
-            "title": "Report: Most Americans Have Enough Saved For Absolutely Incredible Single Day Of Retirement",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Report_Most_Americans_NIB_PH.webp?w=1024"
-        },
-        {
-            "title": "Barron Trump Returns Home To Find Melania Converted Room To Unending Labyrinth Of Darkness",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Baron_Trump_NIB_IHA_GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "God Looks 400 Millennia Younger After Infusing Self With Son's Blood",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/God_Looks_NIB_IHA-GR.jpg?w=1024"
-        },
-        {
-            "title": "NASA: Potential Link Between Extraterrestrials, Giant Metal Claw Picking Up Earth",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/NASA_Potential_NIB_IHA-GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "Study: Anxiety Natural Response To Suited Men Wearing Shades Closing In From All Angles",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Anxiety_Natural_Response_NIB_IHA_GR.jpg?w=1024"
-        },
-        {
-            "title": "Kenji López-Alt Returns From Beef Dimension With New Sear Method Beyond Human Comprehension",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Kenji_Lopez_Alt_NIB-IHA_GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "What To Know About Zyn",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/What_-Zyn_INFO-G-PH.png?w=1024"
-        },
-        {
-            "title": "Today's Historic Front Page: November 6, 2024",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/ELECTION_Front_Page_Site.jpg?w=1024"
-        },
-        {
-            "title": "Mentally Broken Nation Starts Dressing, Speaking Like Frank Sinatra",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Mentally_Broken_NIB_IHA_GR.jpg?w=1024"
-        },
-        {
-            "title": "Piss-Soaked Tucker Carlson Claims Demon Urinated On Him While He Slept",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Piss-Soaked_Tucker_NIB_PH.jpg?w=1024"
-        },
-        {
-            "title": "Historians Unearth Final Fundraising Telegraph Hitler Sent From Bunker",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Historians_Unearth_Final_NIB_GR.webp?w=1024"
-        },
-        {
-            "title": "Pros And Cons Of Prosecuting School Shooters' Parents",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Prosecuting_Parents_INFO-G-PH.png?w=1024"
-        },
-        {
-            "title": "Revised Citizenship Test Requires Immigrants To Name Every U.S. State Where They Not Welcome",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Revised_Citizenship_Test_NIB_G_PH.jpg?w=1024"
-        },
-        {
-            "title": "Report Finds You Should Get To Retire After, Like, 6 Years Working Full-Time Job",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Report_Finds_You_Should_NIB_IHA_GR.jpg?w=1024"
-        },
-        {
-            "title": "America's Loneliness Epidemic By The Numbers",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Loneliness_Epidemic_INFO-G-PH.png?w=1024"
-        },
-        {
-            "title": "All The Ways Elon Musk Is Supporting Trump's Campaign",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Musk_Trump_INFO-G-PH.png?w=1024"
-        },
-        {
-            "title": "Pope Francis Excommunicates All Of World's Catholics So He Can Have Quiet Weekend Alone",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Pope_Francis_NIB-IHA-GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "Tips For Organizing A Trunk-Or-Treat",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Trunk_Treat_INFO-G-PH.png?w=1024"
-        },
-        {
-            "title": "Indecisive Hostage-Taker Asks What People Usually Demand",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Indecisive_Hostage_Taker_NIB_IHA-GR.jpg?w=1024"
-        },
-        {
-            "title": "'New York Times' To Cease Publication",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/New_York_Times_SS_S-PH.jpg?w=1024"
-        },
-        {
-            "title": "Supreme Court Rules 6-3 To Open Evil Tomb Of Batibat",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Supreme_Court_Rules_SS_IHA-GR.jpg?w=1024"
-        },
-        {
-            "title": "Neither Ex Keeps Friends After Breakup",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/08/Niether_Ex_NIB-PH-S.jpg?w=1024"
-        },
-        {
-            "title": "Tourist Impressed By Size Of Chicago Residents",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Tourist_Impressed_NIB-IHA-GR.jpg?w=1024"
-        },
-        {
-            "title": "Tips For Saving Money On Groceries",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Money_Groceries_INFO-G-PH.png?w=1024"
-        },
-        {
-            "title": "Taco Bell Announces It's Plumb Out Of Ideas For New Places To Put Beef",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Taco_Bell_Announces_NIB_G-PH.jpg?w=1024"
+      <script>
+        const onionArticles = {
+          "articles": [
+            {
+              "title": "Pope Francis Decries Legal Head Shops Overrunning Vatican City",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Pope_Francis_Decries-NIB_IHA_GR-copy.jpg?w=1024",
+            },
+            {
+              "title": "Surgeon General: 'You Are Supposed To Be Able To Button Your Pants'",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Surgeon_General_NIB_IHA_GR-copy.jpg?w=1024",
+            },
+            {
+              "title": "Santa Confirms Everyone Getting Bag Of Glitter Labeled 'Fairy Dust' His Sister-In-Law Sells On Etsy",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Untitled-2Santa_Confirms_NIB_IHA_GR_copy.jpg?w=1024",
+            },
+            {
+              "title": "Timeline Of Trendy Christmas Toys",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Trendy_Toys_INFO-G-PH.jpg?w=1024",
+            },
+            {
+              "title": "Experts Recommend Putting Injured Person In Some Sort Of Cylindrical Tank Filled With Fluid",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Experts_Recommend_NIB_IHA_GR.jpg?w=1024",
+            },
+            {
+              "title": "God Locks Heavenly Gates After Spotting Mormon Missionaries Milling Around Outside",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/God_Locks_NIB_IHA-GR-copy.jpg?w=1024",
+            },
+            {
+              "title": "FEMA Administrator Resigns After Accidentally Playing Porn On Emergency Alert System",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/FEMA_Administrator_NIB_S_PH.webp?w=1024",
+            },
+            {
+              "title": "'No Way To Prevent This,' Says Only Nation Where This Regularly Happens",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/No_Way_To_Prevent-Madison_NIB_G-PH.jpg?w=1024",
+            },
+            {
+              "title": "KitchenAid Unveils New Culinary Mech Suit",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/KitchenAid_Unveils_NIB_IHA-GR_23524d.webp?w=1024",
+            },
+            {
+              "title": "Large, Playful Sheepdog Knocks Over Houston Skyline",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Large_Playful_NIB_IHA-GR-C.jpg?w=1024",
+            },
+            {
+              "title": "Pete Hegseth Clarifies Women Allowed In Combat Roles But It's A Huge Turnoff",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Pete_Hegseth_Clarifies_NIB_PH.jpg?w=1024",
+            },
+            {
+              "title": "Secretary Of Interior Asks Nation's Help Identifying Leaf",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Secretary_Of_Interior_NIB-IHA-GR-C.jpg?w=1024",
+            },
+            {
+              "title": "Emotional Nation Gathers Outside Main Street TV Store To Watch Monster Truck Land On Smaller Truck",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Emotional_NAtion_NIB-IHA-GR.jpg?w=1024",
+            },
+            {
+              "title": "Canine Breeding-Activists Firebomb Spay-And-Neuter Clinic",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Canine_Breeding_Activists_SB_IHA-GR.webp?w=1024",
+            },
+            {
+              "title": "How To Perform A Breast Self-Exam",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/INFO_Breast_Self_Exam_S_PH.webp?w=1024",
+            },
+            {
+              "title": "MrBeast Offers To Give $1 Million To First Person Who Can Teach Him To Blink",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/MrBeast_Offers_NIB_G_PH.webp?w=1024",
+            },
+            {
+              "title": "Assad Returns To Ophthalmology At Moscow LensCrafters",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Assad_Returns_NIB_IHA_GR-copy.jpg?w=1024",
+            },
+            {
+              "title": "Nation Tires Of Deals, Bargains",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Nation_Tires_Of_Deals_NIB_PH.webp?w=1024",
+            },
+            {
+              "title": "Judge Delays Decision After Learning One Menendez Brother Always Lies, One Always Tells The Truth",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Judge_Delays_NIB_NC_PH.webp?w=1024",
+            },
+            {
+              "title": "Nation's Mumblers March On Washington Demanding Something Or Other",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Nations_Mumblers_March_NIB_PH.webp?w=1024",
+            },
+            {
+              "title": "Pros And Cons Of Eliminating The Department Of Education",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/12/Eliminating_Education_INFO-G-PH.jpg?w=1024",
+            },
+            {
+              "title": "American Express Launches Small Sweatshop Saturday",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/American_Express_Launches_NIB_IHA_GR.webp?w=1024",
+            },
+            {
+              "title": "Study: Overuse Of Hair Detangler Giving Rise To Product-Resistant Supertangles",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/Study_Overuse_Of_Hair_NIB_IHA_GR.webp?w=1024",
+            },
+            {
+              "title": "Macy's Thanksgiving Day Balloon Floats Away After Handlers Let Go To Check Their Phones",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/Macys_Thanksgiving_SB_IHA_GR.webp?w=1024",
+            },
+            {
+              "title": "FDA Bans Captain Morgan Rum After Having Way Too Much Of That Shit In College",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/FDA_Bans_NIB_IHA_GR.webp?w=1024",
+            },
+            {
+              "title": "Report: Most Americans Have Enough Saved For Absolutely Incredible Single Day Of Retirement",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/Report_Most_Americans_NIB_PH.webp?w=1024",
+            },
+            {
+              "title": "Barron Trump Returns Home To Find Melania Converted Room To Unending Labyrinth Of Darkness",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/Baron_Trump_NIB_IHA_GR-copy.jpg?w=1024",
+            },
+            {
+              "title": "God Looks 400 Millennia Younger After Infusing Self With Son's Blood",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/God_Looks_NIB_IHA-GR.jpg?w=1024",
+            },
+            {
+              "title": "NASA: Potential Link Between Extraterrestrials, Giant Metal Claw Picking Up Earth",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/NASA_Potential_NIB_IHA-GR-copy.jpg?w=1024",
+            },
+            {
+              "title": "Study: Anxiety Natural Response To Suited Men Wearing Shades Closing In From All Angles",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/Anxiety_Natural_Response_NIB_IHA_GR.jpg?w=1024",
+            },
+            {
+              "title": "Kenji López-Alt Returns From Beef Dimension With New Sear Method Beyond Human Comprehension",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/Kenji_Lopez_Alt_NIB-IHA_GR-copy.jpg?w=1024",
+            },
+            {
+              "title": "What To Know About Zyn",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/What_-Zyn_INFO-G-PH.png?w=1024",
+            },
+            {
+              "title": "Today's Historic Front Page: November 6, 2024",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/ELECTION_Front_Page_Site.jpg?w=1024",
+            },
+            {
+              "title": "Mentally Broken Nation Starts Dressing, Speaking Like Frank Sinatra",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/Mentally_Broken_NIB_IHA_GR.jpg?w=1024",
+            },
+            {
+              "title": "Piss-Soaked Tucker Carlson Claims Demon Urinated On Him While He Slept",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/11/Piss-Soaked_Tucker_NIB_PH.jpg?w=1024",
+            },
+            {
+              "title": "Historians Unearth Final Fundraising Telegraph Hitler Sent From Bunker",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/Historians_Unearth_Final_NIB_GR.webp?w=1024",
+            },
+            {
+              "title": "Pros And Cons Of Prosecuting School Shooters' Parents",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/Prosecuting_Parents_INFO-G-PH.png?w=1024",
+            },
+            {
+              "title": "Revised Citizenship Test Requires Immigrants To Name Every U.S. State Where They Not Welcome",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/Revised_Citizenship_Test_NIB_G_PH.jpg?w=1024",
+            },
+            {
+              "title": "Report Finds You Should Get To Retire After, Like, 6 Years Working Full-Time Job",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/Report_Finds_You_Should_NIB_IHA_GR.jpg?w=1024",
+            },
+            {
+              "title": "America's Loneliness Epidemic By The Numbers",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/Loneliness_Epidemic_INFO-G-PH.png?w=1024",
+            },
+            {
+              "title": "All The Ways Elon Musk Is Supporting Trump's Campaign",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/Musk_Trump_INFO-G-PH.png?w=1024",
+            },
+            {
+              "title": "Pope Francis Excommunicates All Of World's Catholics So He Can Have Quiet Weekend Alone",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/Pope_Francis_NIB-IHA-GR-copy.jpg?w=1024",
+            },
+            {
+              "title": "Tips For Organizing A Trunk-Or-Treat",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/Trunk_Treat_INFO-G-PH.png?w=1024",
+            },
+            {
+              "title": "Indecisive Hostage-Taker Asks What People Usually Demand",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/Indecisive_Hostage_Taker_NIB_IHA-GR.jpg?w=1024",
+            },
+            {
+              "title": "'New York Times' To Cease Publication",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/New_York_Times_SS_S-PH.jpg?w=1024",
+            },
+            {
+              "title": "Supreme Court Rules 6-3 To Open Evil Tomb Of Batibat",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/Supreme_Court_Rules_SS_IHA-GR.jpg?w=1024",
+            },
+            {
+              "title": "Neither Ex Keeps Friends After Breakup",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/08/Niether_Ex_NIB-PH-S.jpg?w=1024",
+            },
+            {
+              "title": "Tourist Impressed By Size Of Chicago Residents",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/Tourist_Impressed_NIB-IHA-GR.jpg?w=1024",
+            },
+            {
+              "title": "Tips For Saving Money On Groceries",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/Money_Groceries_INFO-G-PH.png?w=1024",
+            },
+            {
+              "title": "Taco Bell Announces It's Plumb Out Of Ideas For New Places To Put Beef",
+              "image_url": "https://theonion.com/wp-content/uploads/2024/10/Taco_Bell_Announces_NIB_G-PH.jpg?w=1024",
+            },
+          ],
+        };
+
+        function loadAndDisplayNews() {
+          try {
+            const randomArticles = getRandomArticles(onionArticles.articles, 6);
+            const leftArticles = randomArticles.slice(0, 3);
+            const rightArticles = randomArticles.slice(3, 6);
+
+            displayArticles(leftArticles, "left-column");
+            displayArticles(rightArticles, "right-column");
+          } catch (error) {
+            console.error("Error:", error);
+          }
         }
-    ]
-};
 
-function loadAndDisplayNews() {
-    try {
-        const randomArticles = getRandomArticles(onionArticles.articles, 6);
-        const leftArticles = randomArticles.slice(0, 3);
-        const rightArticles = randomArticles.slice(3, 6);
-        
-        displayArticles(leftArticles, 'left-column');
-        displayArticles(rightArticles, 'right-column');
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+        function getRandomArticles(articles, count) {
+          const shuffled = [...articles].sort(() => 0.5 - Math.random());
+          return shuffled.slice(0, count);
+        }
 
-function getRandomArticles(articles, count) {
-    const shuffled = [...articles].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
-}
-
-function displayArticles(articles, columnClass) {
-    const column = document.querySelector(`.${columnClass}`);
-    column.innerHTML = articles.map(article => `
+        function displayArticles(articles, columnClass) {
+          const column = document.querySelector(`.${columnClass}`);
+          column.innerHTML = articles.map(article => `
         <div style="
             background: rgba(40, 40, 40, 0.8);
             border-radius: 12px;
@@ -1191,61 +1179,51 @@ function displayArticles(articles, columnClass) {
                 ">${new Date().toLocaleDateString()}</div>
             </div>
         </div>
-    `).join('');
-}
+    `).join("");
+        }
 
-function handleResponsiveLayout() {
-    const container = document.getElementById('news-container');
-    
-    if (window.innerWidth < 1600) {
-        container.style.display = 'none';
-    } else {
-        container.style.display = 'block';
-    }
-}
+        function handleResponsiveLayout() {
+          const container = document.getElementById("news-container");
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadAndDisplayNews();
-    handleResponsiveLayout();
-});
+          if (window.innerWidth < 1600) {
+            container.style.display = "none";
+          } else {
+            container.style.display = "block";
+          }
+        }
 
-window.addEventListener('resize', handleResponsiveLayout);
-</script>
+        document.addEventListener("DOMContentLoaded", () => {
+          loadAndDisplayNews();
+          handleResponsiveLayout();
+        });
+
+        window.addEventListener("resize", handleResponsiveLayout);
+      </script>
 
       <div>
         <p>
-          Try out the new coding language that is 100% better than anything:
-          <a href="/embr" style="color: #b8bb26">Embr</a>
+          Try out the new coding language that is 100% better than anything: <a href="/embr" style="color: #b8bb26">Embr</a>
         </p>
       </div>
       <div id="gallery">
-        <img src="static/images/bobi.jpg" alt="Bobi" class="gallery-item" style="width: 480px; height: 640px;">
-        <img src="static/images/kofte.jpg" alt="Kofte" class="gallery-item" style="width: 400px; height: 400px;">
-        <img src="static/images/frog.webp" alt="Frog" class="gallery-item">
+        <img src="static/images/bobi.jpg" alt="Bobi" class="gallery-item" style="width: 480px; height: 640px;"> <img src="static/images/kofte.jpg" alt="Kofte" class="gallery-item" style="width: 400px; height: 400px;"> <img src="static/images/frog.webp" alt="Frog" class="gallery-item">
       </div>
 
-    <canvas id="caleb-canvas"></canvas>
-    <script src="bouncy-caleb.js"></script>
+      <canvas id="caleb-canvas"></canvas>
+      <script src="bouncy-caleb.js"></script>
 
       <button id="vibeButton">Improve the Mood</button>
       <button id="wisdomButton">ENABLE FROG WISDOM</button>
       <p>Vist SlopChat™ to chat with other slop enthusiasts. <a href="chat.html">Click here!/a></p>
       <button id="clickme">Click me!</button>
-      <a href="https://www.hitwebcounter.com" target="_blank">
-        <img
-          src="https://hitwebcounter.com/counter/counter.php?page=18132009&style=0010&nbdigits=9&type=page&initCount=0"
-          title="Counter Widget"
-          alt="Visit counter For Websites"
-          border="0"
-      /></a>
+      <a href="https://www.hitwebcounter.com" target="_blank"> <img src="https://hitwebcounter.com/counter/counter.php?page=18132009&style=0010&nbdigits=9&type=page&initCount=0" title="Counter Widget" alt="Visit counter For Websites" border="0" /></a>
       <button id="worseThemeButton">This can't get any worse, right?</button>
     </header>
     <main id="maincontent">
       <section>
         <h2>About Slopify</h2>
         <p>
-          Slopify is a 100% community-built open-source website and product. Its
-          unique premise invites contributors to:
+          Slopify is a 100% community-built open-source website and product. Its unique premise invites contributors to:
         </p>
         <ul>
           <li>Commit whatever code they want</li>
@@ -1260,22 +1238,27 @@ window.addEventListener('resize', handleResponsiveLayout);
 
         <div style="display: flex; flex-direction: row;">
 
-          <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">hahahaha this is fire</p>&mdash; ily⚡️ (@0xIlyy) <a href="https://twitter.com/0xIlyy/status/1873179308153553050?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
-          
-          <blockquote class="twitter-tweet" data-conversation="none" data-theme="dark"><p lang="en" dir="ltr">WHO THE FUCK ADDED PASSWORD GAME TO THE REGISTRATION PAGE <a href="https://t.co/FYpWT5dycz">pic.twitter.com/FYpWT5dycz</a></p>&mdash; Aterron (@_aterron_) <a href="https://twitter.com/_aterron_/status/1873444464255254743?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+          <blockquote class="twitter-tweet" data-theme="dark">
+            <p lang="en" dir="ltr">hahahaha this is fire</p>&mdash; ily⚡️ (@0xIlyy) <a href="https://twitter.com/0xIlyy/status/1873179308153553050?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-          <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">help i played the sexy frog music and now it keeps playing even after i close the browser</p>&mdash; colin ricardo (@_colinricardo) <a href="https://twitter.com/_colinricardo/status/1873429683368505464?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+          <blockquote class="twitter-tweet" data-conversation="none" data-theme="dark">
+            <p lang="en" dir="ltr">WHO THE FUCK ADDED PASSWORD GAME TO THE REGISTRATION PAGE <a href="https://t.co/FYpWT5dycz">pic.twitter.com/FYpWT5dycz</a></p>&mdash; Aterron (@_aterron_) <a href="https://twitter.com/_aterron_/status/1873444464255254743?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-          <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">This project is awesome the amount of random slop added in the last 24 hours alone is crazy. Check it out <a href="https://t.co/GDD8ut9A4S">https://t.co/GDD8ut9A4S</a></p>&mdash; Gil (@TylerGilman01) <a href="https://twitter.com/TylerGilman01/status/1873429461410234849?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+          <blockquote class="twitter-tweet" data-theme="dark">
+            <p lang="en" dir="ltr">help i played the sexy frog music and now it keeps playing even after i close the browser</p>&mdash; colin ricardo (@_colinricardo) <a href="https://twitter.com/_colinricardo/status/1873429683368505464?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+          <blockquote class="twitter-tweet" data-theme="dark">
+            <p lang="en" dir="ltr">This project is awesome the amount of random slop added in the last 24 hours alone is crazy. Check it out <a href="https://t.co/GDD8ut9A4S">https://t.co/GDD8ut9A4S</a></p>&mdash; Gil (@TylerGilman01) <a href="https://twitter.com/TylerGilman01/status/1873429461410234849?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
         </div>
       </div>
       <div class="center" style="display:flex; flex-direction: column; justify-content: center;">
         <h2 style="font-family: Comic Sans MS, Comic Sans, cursive; color:snow; font-size: 50px; text-align: center;">do you like penguins?</h2>
-        <img src="static/images/penguin.webp" />
-        <img src="https://secret.kgncengiz.com/F.jpg" />
-        <img src="static/images/Jesus.png" />
-	<img src="static/images/raccoon.jpg" />
+        <img src="static/images/penguin.webp" /> <img src="https://secret.kgncengiz.com/F.jpg" /> <img src="static/images/Jesus.png" /> <img src="static/images/raccoon.jpg" />
       </div>
       <section>
         <div align="center">
@@ -1284,15 +1267,15 @@ window.addEventListener('resize', handleResponsiveLayout);
       </section>
       <img src="https://secret.kgncengiz.com/F.jpg" />
 
-      <section class="importante" style="display: flex; justify-content: center; align-items: center; height:">        
+      <section class="importante" style="display: flex; justify-content: center; align-items: center; height:">
         <section id="mandelbrot-section">
-            <canvas id="fractalCanvas" width="400" height="400"></canvas>
+          <canvas id="fractalCanvas" width="400" height="400"></canvas>
         </section>
         <section class="mandelbrot-script">
-            <script src="mandelbrot_uwu.js"></script> 
+          <script src="mandelbrot_uwu.js"></script>
         </section>
       </section>
-      
+
       <section class="importante">
         <section>
           <canvas id="glCanvas" width="400" height="400"></canvas>
@@ -1317,7 +1300,7 @@ window.addEventListener('resize', handleResponsiveLayout);
                     void main() {
                         vColor = color;
                         gl_Position = mvp * position;
-                    }`
+                    }`,
             );
             gl.compileShader(vertexShader);
 
@@ -1331,7 +1314,7 @@ window.addEventListener('resize', handleResponsiveLayout);
 
                     void main() {
                         fragColor = vColor;
-                    }`
+                    }`,
             );
             gl.compileShader(fragmentShader);
 
@@ -1416,7 +1399,7 @@ window.addEventListener('resize', handleResponsiveLayout);
                 Math.PI / 4,
                 aspect,
                 0.1,
-                100.0
+                100.0,
               );
 
               const modelViewMatrix = mat4.create();
@@ -1434,7 +1417,7 @@ window.addEventListener('resize', handleResponsiveLayout);
                 gl.TRIANGLES,
                 indices.length,
                 gl.UNSIGNED_SHORT,
-                0
+                0,
               );
 
               requestAnimationFrame(render);
@@ -1457,9 +1440,7 @@ window.addEventListener('resize', handleResponsiveLayout);
         </section>
       </section>
       <section class="fourier-container">
-        <a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Fourier_series_and_transform.gif" />
-        </a>
+        <a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B"> <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Fourier_series_and_transform.gif" /> </a>
       </section>
       <section class="fishtank-container">
         <div class="fishtank-placeholder">
@@ -1470,12 +1451,11 @@ window.addEventListener('resize', handleResponsiveLayout);
       <section>
         <h2>Stockify</h2>
         <p>
-          Throw your money to the wind with random stock decisions! Outperform
-          the hedge funds with our incredible algorithm!
+          Throw your money to the wind with random stock decisions! Outperform the hedge funds with our incredible algorithm!
         </p>
         <p>
-          <span id="stock_ticker" style="color: yellow"></span
-          ><span id="stock_msg"></span>
+          <span id="stock_ticker" style="color: yellow"></span>
+          <span id="stock_msg"></span>
         </p>
         <img src="" id="stock_img" />
       </section>
@@ -1497,14 +1477,7 @@ window.addEventListener('resize', handleResponsiveLayout);
 
         <input type="button" value="SHADERZ" onclick="setShaderToy()" />
         <br />
-        <iframe
-          id="ifrm_shadertoy"
-          width="640"
-          height="360"
-          frameborder="0"
-          src="https://www.shadertoy.com/embed/ld3Gz2?gui=false&paused=false&muted=false"
-          allowfullscreen
-        ></iframe>
+        <iframe id="ifrm_shadertoy" width="640" height="360" frameborder="0" src="https://www.shadertoy.com/embed/ld3Gz2?gui=false&paused=false&muted=false" allowfullscreen></iframe>
       </section>
       <section>
         <h1>The Fennec Fox in dis bish</h1>
@@ -1523,20 +1496,19 @@ window.addEventListener('resize', handleResponsiveLayout);
         </p>
         <ul>
           <li><a href="https://motherfuckingwebsite.com/" target="_blank">This is a motherfucking website. And it's fucking perfect.</a></li>
-          <li><a href="http://bettermotherfuckingwebsite.com/" target="_blank">This is still a motherfucking website.
-          And it's more fucking perfect than the last guy's.</a>
+          <li><a href="http://bettermotherfuckingwebsite.com/" target="_blank">This is still a motherfucking website. And it's more fucking perfect than the last guy's.</a>
           <li><a href="https://nohello.net/" target="_blank">no hello - please don't say just hello in chat</a></li>
           <li><a href="https://dontasktoask.com/" target="_blank">Don't ask to ask, just ask</a></li>
         </ul>
       </section>
       <section>
         <button id="widenButton">Toggle Widening</button>
-      
+
         <script>
           const widenButton = document.getElementById("widenButton");
           let widening = false;
           let interval;
-      
+
           widenButton.addEventListener("click", () => {
             if (!widening) {
               widening = true;
@@ -1555,7 +1527,7 @@ window.addEventListener('resize', handleResponsiveLayout);
         <button id="lengthenButton">Toggle Lengthening</button>
 
         <script>
-        const lengthenButton = document.getElementById("lengthenButton");
+          const lengthenButton = document.getElementById("lengthenButton");
           let lengthening = false;
           let lengthenInterval;
 
@@ -1578,83 +1550,81 @@ window.addEventListener('resize', handleResponsiveLayout);
 
         <script>
           /* some variables */
-          const sunBtn = document.getElementById("sunBtn")
-          const sunSect = document.getElementById("sun")
-          const noSound = new Audio('./static/audio/no.mp3')
-          const deadlySound = new Audio('./static/audio/deadly.mp3')
+          const sunBtn = document.getElementById("sunBtn");
+          const sunSect = document.getElementById("sun");
+          const noSound = new Audio("./static/audio/no.mp3");
+          const deadlySound = new Audio("./static/audio/deadly.mp3");
 
-          const whyBtn = document.createElement('button');
-          whyBtn.textContent = 'why?'
-          whyBtn.id = 'whyBtn';
-          whyBtn.type = 'button';
+          const whyBtn = document.createElement("button");
+          whyBtn.textContent = "why?";
+          whyBtn.id = "whyBtn";
+          whyBtn.type = "button";
 
           /* when clicked */
-          sunBtn.addEventListener('click', () => {
+          sunBtn.addEventListener("click", () => {
             noSound.play();
-            sunBtn.insertAdjacentElement('afterend', whyBtn);
-          })
+            sunBtn.insertAdjacentElement("afterend", whyBtn);
+          });
 
           /* just making the flashbang :3 */
-          const overlay = document.createElement('div');
-          overlay.style.position = 'fixed';
-          overlay.style.top = '0';
-          overlay.style.left = '0';
-          overlay.style.width = '100%';
-          overlay.style.height = '100%';
-          overlay.style.backgroundColor = 'white';
-          overlay.style.opacity = '0';
-          overlay.style.pointerEvents = 'none';
-          overlay.style.transition = 'opacity 0.1s ease-in, opacity 2s ease-out';
-          overlay.style.zIndex = '9999';
+          const overlay = document.createElement("div");
+          overlay.style.position = "fixed";
+          overlay.style.top = "0";
+          overlay.style.left = "0";
+          overlay.style.width = "100%";
+          overlay.style.height = "100%";
+          overlay.style.backgroundColor = "white";
+          overlay.style.opacity = "0";
+          overlay.style.pointerEvents = "none";
+          overlay.style.transition = "opacity 0.1s ease-in, opacity 2s ease-out";
+          overlay.style.zIndex = "9999";
           document.body.appendChild(overlay);
 
-          const deadlyGif = document.createElement('img');
-          deadlyGif.src = './static/images/deadly.gif';
-          deadlyGif.style.position = 'absolute';
-          deadlyGif.style.top = '0';
-          deadlyGif.style.left = '0';
-          deadlyGif.style.width = '100%';
-          deadlyGif.style.height = '100%';
-          deadlyGif.style.opacity = '0.9';
-          deadlyGif.style.objectFit = 'cover';
+          const deadlyGif = document.createElement("img");
+          deadlyGif.src = "./static/images/deadly.gif";
+          deadlyGif.style.position = "absolute";
+          deadlyGif.style.top = "0";
+          deadlyGif.style.left = "0";
+          deadlyGif.style.width = "100%";
+          deadlyGif.style.height = "100%";
+          deadlyGif.style.opacity = "0.9";
+          deadlyGif.style.objectFit = "cover";
           overlay.appendChild(deadlyGif);
 
-          whyBtn.addEventListener('click', () => {
+          whyBtn.addEventListener("click", () => {
             deadlySound.play();
-            overlay.style.opacity = '1';
-            overlay.style.transition = 'opacity 0.1s ease-in';
+            overlay.style.opacity = "1";
+            overlay.style.transition = "opacity 0.1s ease-in";
 
             setTimeout(() => {
-              overlay.style.transition = 'opacity 1.5s ease-out';
-              overlay.style.opacity = '0';
+              overlay.style.transition = "opacity 1.5s ease-out";
+              overlay.style.opacity = "0";
             }, 200);
           });
         </script>
       </section>
-	  <section>
-		<center>
-		<a href="static/images/monster_zero_ultra.jpg">
-          <img src="static/images/come_here_marisa_kirisame.gif" />
-        </a>
-		</center>
-	  </section>
+      <section>
+        <center>
+          <a href="static/images/monster_zero_ultra.jpg"> <img src="static/images/come_here_marisa_kirisame.gif" /> </a>
+        </center>
+      </section>
 
-    <section>
-      <h2>Slopify can now play Doom</h2>
-      <embed src="https://wadcmd.com/" style="width:960px; height: 600px;">
-    </section>
-    
+      <section>
+        <h2>Slopify can now play Doom</h2>
+        <embed src="https://wadcmd.com/" style="width:960px; height: 600px;">
+      </section>
+
       <div id="cookiebanner" style="background: black; position:fixed; bottom:0px; height:auto !important;">
-      <p>This site may or may not use cookies. I actually don't know.</p>
-      <button id="hmmm yummy cookies" onclick="cookieclick()">Uh ok i guess</button>
-      <button id="ewww cookies no yummy" onclick="cookieclick()">Get out of my face</button>
-      <script type="text/javascript">
-        function cookieclick() {
+        <p>This site may or may not use cookies. I actually don't know.</p>
+        <button id="hmmm yummy cookies" onclick="cookieclick()">Uh ok i guess</button>
+        <button id="ewww cookies no yummy" onclick="cookieclick()">Get out of my face</button>
+        <script type="text/javascript">
+          function cookieclick() {
             let gfg_down =
-                document.getElementById("cookiebanner");
+              document.getElementById("cookiebanner");
             gfg_down.parentNode.removeChild(cookiebanner);
-        }
-      </script>
+          }
+        </script>
       </div>
       <section>
         <iframe width="5%" height="1" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1633786749&auto_play=true"></iframe>
@@ -1662,61 +1632,25 @@ window.addEventListener('resize', handleResponsiveLayout);
       <section>
         <h2>Flappy Musk</h2>
         <canvas id="flappyMuskCanvas" width="400" height="600" style="border: 1px solid #000;"></canvas>
-        <br/>
+        <br />
         <Button id="flappyMuskButton">Make it gayer?</Button>
         <p>Click to make Elon Musk fly! Avoid the obstacles!</p>
       </section>
       <script src="flappyMusk.js"></script>
-			<section id="slopcursion">
-			<h2>So you can Slopify while you Slopify</h2>
-			<iframe src="index.html?slopcursion=true" width="100%" height="500px" frameborder="0">
-      </iframe>
-			</section>
+      <section id="slopcursion">
+        <h2>So you can Slopify while you Slopify</h2>
+        <iframe src="index.html?slopcursion=true" width="100%" height="500px" frameborder="0"></iframe>
+      </section>
       <section>
         <h2>oh hewwo thewe, you gwot twhis fwar uwu~! wouwd you wike to wead somethin' awesome~? >w<</h2>
         <button type="button">
-          <a href='/uwu.html'>wets seee~ >w<<a/>
+          <a href='/uwu.html'>wets seee~ >w<<a />
         </button>
       </section>
     </main>
     <footer>
       <div style="text-align: center; margin-top: 20px">
-        <img
-          src="static/images/aol-sucks.gif"
-          alt="Banner 1"
-          width="88"
-          height="31"
-        />
-	        <img
-          src="static/images/heimdal.png"
-          alt="Banner 2"
-          width="88"
-          height="31"
-        />
-        <img
-          src="static/images/bestview.gif"
-          alt="Banner 3"
-          width="88"
-          height="31"
-        />
-        <img
-          src="static/images/w95link.gif"
-          alt="Banner 4"
-          width="88"
-          height="31"
-        />
-        <img
-          src="static/images/800x600.gif"
-          alt="Banner 5"
-          width="88"
-          height="31"
-        />
-        <img
-          src="static/images/lowtiergod.gif"
-          alt="Banner 6"
-          width="88"
-          height="31"
-        />
+        <img src="static/images/aol-sucks.gif" alt="Banner 1" width="88" height="31" /> <img src="static/images/heimdal.png" alt="Banner 2" width="88" height="31" /> <img src="static/images/bestview.gif" alt="Banner 3" width="88" height="31" /> <img src="static/images/w95link.gif" alt="Banner 4" width="88" height="31" /> <img src="static/images/800x600.gif" alt="Banner 5" width="88" height="31" /> <img src="static/images/lowtiergod.gif" alt="Banner 6" width="88" height="31" />
       </div>
       <div id="error-0" class="window window--active" role="alertdialog" aria-modal="true" aria-labelledby="error-label-0" aria-describedby="error-desc-0" data-window hidden>
         <div class="window__header" data-header>
@@ -1737,13 +1671,12 @@ window.addEventListener('resize', handleResponsiveLayout);
       <div>
         <iframe src="https://poeskatprinter.zepje.space/" width="600" height="400" style="border:none;"></iframe>
       </div>
-	    <div>
-	    <a href="https://sleepie.dev/femboy-not-gay" target="_blank">Why its not gay to like femboys</a>
-		    <iframe width="560" height="315" src="https://www.youtube.com/embed/mFfYORTqzog?si=i3uW4a8OnDXaAKEI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-	    </div>
+      <div>
+        <a href="https://sleepie.dev/femboy-not-gay" target="_blank">Why its not gay to like femboys</a>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/mFfYORTqzog?si=i3uW4a8OnDXaAKEI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
       <p>
-        &copy; 2024 DishpitDev.
-        <a href="https://github.com/dishpitdev/slopify">Built by the community</a>, against the community.
+        &copy; 2024 DishpitDev. <a href="https://github.com/dishpitdev/slopify">Built by the community</a>, against the community.
       </p>
     </footer>
     <script src="static/js/error.js"></script>
@@ -1773,10 +1706,10 @@ window.addEventListener('resize', handleResponsiveLayout);
             case 1:
               isValid =
                 currentCaptcha.correctAnswers.every((answer) =>
-                  currentCaptcha.selectedShapes.has(answer)
+                  currentCaptcha.selectedShapes.has(answer),
                 ) &&
                 currentCaptcha.selectedShapes.size ===
-                  currentCaptcha.correctAnswers.length;
+                currentCaptcha.correctAnswers.length;
               break;
             case 2:
               isValid = captchaInput.value.trim().length > 0;
@@ -1807,7 +1740,7 @@ window.addEventListener('resize', handleResponsiveLayout);
                     .forEach((shape) => {
                       shape.onclick = (e) => {
                         const index = Number(
-                          e.target.getAttribute("data-index")
+                          e.target.getAttribute("data-index"),
                         );
                         if (selectedShapes.has(index)) {
                           selectedShapes.delete(index);
@@ -1863,20 +1796,20 @@ window.addEventListener('resize', handleResponsiveLayout);
     </script>
     <script>
       /* Intensifies the page by adding a mouseover that shakes the target */
-      document.addEventListener('mouseover', (event) => {
+      document.addEventListener("mouseover", (event) => {
         const target = event.target;
 
-        target.classList.add('shake');
+        target.classList.add("shake");
 
         // the animation can be retriggered on multiple mouseovers, it always cleans up after
-        target.addEventListener('animationend', () => {
-          target.classList.remove('shake');
+        target.addEventListener("animationend", () => {
+          target.classList.remove("shake");
         }, { once: true });
       });
     </script>
     <script src="fishtank.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener("DOMContentLoaded", function() {
         const container = document.querySelector(".fishtank-container");
 
         function initFishtank() {
@@ -1915,8 +1848,8 @@ window.addEventListener('resize', handleResponsiveLayout);
       var ticker;
       var buy = Math.random() < 0.5;
 
-      fetch(stock_url).then(function (resp) {
-        resp.text().then(function (text) {
+      fetch(stock_url).then(function(resp) {
+        resp.text().then(function(text) {
           stock_list = text.split("\n");
           stock_list.pop();
           ticker = stock_list[Math.floor(Math.random() * stock_list.length)];
@@ -1940,57 +1873,57 @@ window.addEventListener('resize', handleResponsiveLayout);
       }
     </script>
     <script>
-        function rainbowPulse() {
-            const hue0 = (Date.now() /10) % 360;
-            const hue2 = (hue0+ 250) % 360;
-            document.body.style.background = `linear-gradient(90deg, hsl(${hue0}, 70%, 20%), hsl(${hue2}, 70%, 30%))`;
-            requestAnimationFrame(rainbowPulse);
-        }
-        rainbowPulse();
-    </script>
-    <script type="text/javascript">
-      "use strict"
-
-      const coolVideo = ()=>{
-        window.location = "https://youtu.be/dQw4w9WgXcQ"
+      function rainbowPulse() {
+        const hue0 = (Date.now() / 10) % 360;
+        const hue2 = (hue0 + 250) % 360;
+        document.body.style.background = `linear-gradient(90deg, hsl(${hue0}, 70%, 20%), hsl(${hue2}, 70%, 30%))`;
+        requestAnimationFrame(rainbowPulse);
       }
 
+      rainbowPulse();
+    </script>
+    <script type="text/javascript">
+      "use strict";
+
+      const coolVideo = () => {
+        window.location = "https://youtu.be/dQw4w9WgXcQ";
+      };
+
       // Konami Code Detection
-      const runOnKonami = (run)=>{
-        const KONAMI_KEYS = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","KeyB","KeyA","Enter"];
+      const runOnKonami = (run) => {
+        const KONAMI_KEYS = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "KeyB", "KeyA", "Enter"];
         let currLevel = -1;
-        document.addEventListener("keydown",(event)=>{
-          if(event.code===KONAMI_KEYS[currLevel+1]){
+        document.addEventListener("keydown", (event) => {
+          if (event.code === KONAMI_KEYS[currLevel + 1]) {
             currLevel++;
-            if(currLevel === KONAMI_KEYS.length-1) {
+            if (currLevel === KONAMI_KEYS.length - 1) {
               run();
               currLevel = -1;
             }
-          }
-          else currLevel = -1;
-        })
-      }
+          } else currLevel = -1;
+        });
+      };
 
-      runOnKonami(coolVideo)
+      runOnKonami(coolVideo);
     </script>
     <script>
-        const clickMeBtn = document.getElementById("clickme");
-        const clickMeBtnRect = clickMeBtn.getBoundingClientRect();
-        const clickMeBtnWidth = clickMeBtnRect.width;
-        const clickMeBtnHeight = clickMeBtnRect.height;
+      const clickMeBtn = document.getElementById("clickme");
+      const clickMeBtnRect = clickMeBtn.getBoundingClientRect();
+      const clickMeBtnWidth = clickMeBtnRect.width;
+      const clickMeBtnHeight = clickMeBtnRect.height;
 
-        clickMeBtn.addEventListener("mouseover", function() {
-          let newTop = Math.random() * (window.innerHeight - clickMeBtnHeight);
-          let newRight = Math.random() * (window.innerWidth - clickMeBtnWidth);
+      clickMeBtn.addEventListener("mouseover", function() {
+        let newTop = Math.random() * (window.innerHeight - clickMeBtnHeight);
+        let newRight = Math.random() * (window.innerWidth - clickMeBtnWidth);
 
-          clickMeBtn.style.position = "fixed";
-          clickMeBtn.style.top = `${newTop}px`;
-          clickMeBtn.style.right = `${newRight}px`;
-        });
+        clickMeBtn.style.position = "fixed";
+        clickMeBtn.style.top = `${newTop}px`;
+        clickMeBtn.style.right = `${newRight}px`;
+      });
 
-        window.addEventListener("scroll", function() {
-          clickMeBtn.style.position = "static";
-        });
+      window.addEventListener("scroll", function() {
+        clickMeBtn.style.position = "static";
+      });
     </script>
     <script>
       const worseThemeButton = document.getElementById("worseThemeButton");
@@ -1998,8 +1931,8 @@ window.addEventListener('resize', handleResponsiveLayout);
         const worseThemeButton = document.getElementById("worseThemeButton");
         worseThemeButton.addEventListener("click", () => {
           document.body.classList.toggle("worst-theme");
-          worseThemeButton.textContent = document.body.classList.contains("worst-theme") 
-            ? "Fix The Page Please!!" 
+          worseThemeButton.textContent = document.body.classList.contains("worst-theme")
+            ? "Fix The Page Please!!"
             : "This can't get any worse, right?";
         });
       });
@@ -2007,90 +1940,90 @@ window.addEventListener('resize', handleResponsiveLayout);
     <script>
       let owoified = false, clicked = 0;
       const faces = [
-          '(o´∀`o)',
-          '(#｀ε´)',
-          '(๑•̀ㅁ•́๑)✧',
-          '(*≧m≦*)',
-          '(・`ω´・)',
-          'UwU',
-          'OwO',
-          '>w<',
-          '｡ﾟ( ﾟ^∀^ﾟ)ﾟ｡',
-          'ヾ(｀ε´)ﾉ',
-          '(´• ω •`)',
-          'o(>ω<)o',
-          '(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧',
-          '(⁀ᗢ⁀)',
-          '(￣ε￣＠)',
-          '( 〃▽〃)',
-          '(o^ ^o)',
-          "ヾ(*'▽'*)"
+        "(o´∀`o)",
+        "(#｀ε´)",
+        "(๑•̀ㅁ•́๑)✧",
+        "(*≧m≦*)",
+        "(・`ω´・)",
+        "UwU",
+        "OwO",
+        ">w<",
+        "｡ﾟ( ﾟ^∀^ﾟ)ﾟ｡",
+        "ヾ(｀ε´)ﾉ",
+        "(´• ω •`)",
+        "o(>ω<)o",
+        "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧",
+        "(⁀ᗢ⁀)",
+        "(￣ε￣＠)",
+        "( 〃▽〃)",
+        "(o^ ^o)",
+        "ヾ(*'▽'*)",
       ];
 
       function owoify() {
         traverse(document.body, owoified);
-        owoified = !owoified; 
+        owoified = !owoified;
       }
 
       function transform(str) {
-          let out = '';
-          let level = 0;
-          const chars = str.split('');
-          for (let i = 0; i < chars.length; i++) {
-              switch (chars[i]) {
-                  default: {
-                      if (level == 0) {
-                          out += chars[i].replace(/[rl]/g, 'w').replace(/[RL]/g, 'W');
-                      } else {
-                          out += chars[i];
-                      }
-                      break;
-                  }
+        let out = "";
+        let level = 0;
+        const chars = str.split("");
+        for (let i = 0; i < chars.length; i++) {
+          switch (chars[i]) {
+            default: {
+              if (level == 0) {
+                out += chars[i].replace(/[rl]/g, "w").replace(/[RL]/g, "W");
+              } else {
+                out += chars[i];
               }
-              if (i === chars.length - 1) {
-                  if (Math.floor(Math.random() * 100) < 50) {
-                      const face = faces[Math.floor(Math.random() * faces.length)];
-                      out += ' ' + face;
-                  }
-              }
+              break;
+            }
           }
-          return out;
+          if (i === chars.length - 1) {
+            if (Math.floor(Math.random() * 100) < 50) {
+              const face = faces[Math.floor(Math.random() * faces.length)];
+              out += " " + face;
+            }
+          }
+        }
+        return out;
       }
 
       function traverse(node, undo) {
-          var child, next;
-      
-          switch (node.nodeType) {
-              case 1:
-              case 9:
-              case 11:
-                  child = node.firstChild;
-                  while (child) {
-                      next = child.nextSibling;
-                      traverse(child, undo);
-                      child = next;
-                  }
-                  break;
-              case 3:
-                  if (undo) {
-                      if (node.originalValue !== undefined) {
-                          node.nodeValue = node.originalValue;
-                      }
-                  } else {
-                      node.originalValue = node.nodeValue;
-                      if (typeof node.nodeValue === 'string' && node.nodeValue.trim() != "" && node.nodeValue.trim().length != 1 && !parseInt(node.nodeValue.trim())) {
-                          node.nodeValue = transform(clicked >= 69 ? node.nodeValue.toUpperCase() : node.nodeValue);
-                      }
-                  }
-                  break;
-          }
+        var child, next;
+
+        switch (node.nodeType) {
+          case 1:
+          case 9:
+          case 11:
+            child = node.firstChild;
+            while (child) {
+              next = child.nextSibling;
+              traverse(child, undo);
+              child = next;
+            }
+            break;
+          case 3:
+            if (undo) {
+              if (node.originalValue !== undefined) {
+                node.nodeValue = node.originalValue;
+              }
+            } else {
+              node.originalValue = node.nodeValue;
+              if (typeof node.nodeValue === "string" && node.nodeValue.trim() != "" && node.nodeValue.trim().length != 1 && !parseInt(node.nodeValue.trim())) {
+                node.nodeValue = transform(clicked >= 69 ? node.nodeValue.toUpperCase() : node.nodeValue);
+              }
+            }
+            break;
+        }
       }
     </script>
     <div id="dvd-bounce" style="position: fixed; z-index: 999; pointer-events: none;">
       <img src="static/images/DVD_logo.png" width="500" height="250" alt="Bouncing DVD Logo">
     </div>
     <script>
-      const dvdElement = document.getElementById('dvd-bounce');
+      const dvdElement = document.getElementById("dvd-bounce");
       const minSpeed = 0.2;
       const maxSpeed = 4;
       const dvdWidth = 500;
@@ -2132,7 +2065,7 @@ window.addEventListener('resize', handleResponsiveLayout);
       requestAnimationFrame(moveDvd);
 
       // Handle window resize
-      window.addEventListener('resize', () => {
+      window.addEventListener("resize", () => {
         // Ensure both width and height stay within bounds on resize
         dvdX = Math.min(dvdX, window.innerWidth - dvdWidth);
         dvdY = Math.min(dvdY, window.innerHeight - dvdHeight);
@@ -2140,24 +2073,24 @@ window.addEventListener('resize', handleResponsiveLayout);
     </script>
     <script>
       function playPrettyGoodVideo() {
-        const videoContainer = document.createElement('div');
-        videoContainer.style.width = '30%';
-        videoContainer.style.position = 'fixed';
-        videoContainer.style.right = '20px';
-        videoContainer.style.bottom = '20px';
-        videoContainer.style.zIndex = '999';
-        videoContainer.style.borderRadius = '8px';
-        videoContainer.style.overflow = 'hidden';
-        videoContainer.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+        const videoContainer = document.createElement("div");
+        videoContainer.style.width = "30%";
+        videoContainer.style.position = "fixed";
+        videoContainer.style.right = "20px";
+        videoContainer.style.bottom = "20px";
+        videoContainer.style.zIndex = "999";
+        videoContainer.style.borderRadius = "8px";
+        videoContainer.style.overflow = "hidden";
+        videoContainer.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
 
-        const video = document.createElement('video');
-        video.src = 'static/video/pretty_good.mp4';
-        video.style.width = '100%';
-        video.style.display = 'block';
-        
+        const video = document.createElement("video");
+        video.src = "static/video/pretty_good.mp4";
+        video.style.width = "100%";
+        video.style.display = "block";
+
         videoContainer.appendChild(video);
         document.body.appendChild(videoContainer);
-        
+
         // Play after a short delay
         setTimeout(() => {
           video.play();
@@ -2169,5 +2102,24 @@ window.addEventListener('resize', handleResponsiveLayout);
       }
     </script>
     <script src="8ball.js"></script>
-</body>
+    <!-- Humans are NOW welcome to this site - Management at The Intergalactic Federation. -->
+    <!--               _                      _______                      _               -->
+    <!--            _dMMMb._              .adOOOOOOOOOba.              _,dMMMb_            -->
+    <!--           dP'  ~YMMb            dOOOOOOOOOOOOOOOb            aMMP~  `Yb           -->
+    <!--                  ~"Mb          dOOOOOOOOOOOOOOOOOb          dM"~      V           -->
+    <!--                    `Mb.       dOOOOOOOOOOOOOOOOOOOb       ,dM'                    -->
+    <!--                     `YMb._   |OOOOOOOOOOOOOOOOOOOOO|   _,dMP'                     -->
+    <!--                __     `YMMM| OP'~"YOOOOOOOOOOOP"~`YO |MMMP'     __                -->
+    <!--              ,dMMMb.     ~~' OO     `YOOOOOP'     OO `~~     ,dMMMb.              -->
+    <!--           _,dP~  `YMba_      OOb      `OOO'      dOO      _aMMP'  ~Yb._           -->
+    <!--                       `YMMMM\`OOOo     OOO     oOOO'/MMMMP'                       -->
+    <!--               ,aa.     `~YMMb `OOOb._,dOOOb._,dOOO'dMMP~'       ,aa.              -->
+    <!--             ,dMYYMba._         `OOOOOOOOOOOOOOOOO'          _,adMYYMb.            -->
+    <!--            ,MP'   `YMMba._      OOOOOOOOOOOOOOOOO       _,adMMP'   `YM.           -->
+    <!--            MP'        ~YMMMba._ YOOOOPVVVVVYOOOOP  _,adMMMMP~       `YM           -->
+    <!--            YMb           ~YMMMM\`OOOOI`````IOOOOO'/MMMMP~           dMP           -->
+    <!--             `Mb.           `YMMMb`OOOI,,,,,IOOOO'dMMMP'           ,dM'            -->
+    <!--               `'                  `OObNNNNNdOO'                   `'              -->
+    <!--                                     `~OOOOO~'                                     -->
+  </body>
 </html>

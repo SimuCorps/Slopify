@@ -1,52 +1,55 @@
-const frog = document.getElementById('frog');
-const moreVibeAudio = document.getElementById('moreVibeAudio');
-const vibeAudio = document.getElementById('vibeAudio');
+const frog = document.getElementById("frog");
+const moreVibeAudio = document.getElementById("moreVibeAudio");
+const vibeAudio = document.getElementById("vibeAudio");
 let allQuotes = [];
 
 function vibe() {
-    document.getElementById("soundCloudIFrame").src = "";
-    moreVibeAudio.pause(); moreVibeAudio.currentTime = 0;
-    vibeAudio.pause(); vibeAudio.currentTime = 0;
-    const asd = Math.round(Math.random() * 690);
-    console.log(asd)
-    if (String(asd).includes("69") || String(asd).includes("42")) {
-        frog.src = 'static/images/rick.gif';
-        moreVibeAudio.play();
-        navigator.mediaSession.metadata = new MediaMetadata({
-          title: 'Never Gonna Give You Up',
-          artist: 'Rick Astley',
-          album: 'Whenever You Need Somebody',
-          artwork: [
-            { src: '../images/rick.gif',  sizes: '256x256', type: 'image/png' },
-          ],
-        });
-    } else {
-        vibeAudio.play();
-        if ('mediaSession' in navigator) {
-          navigator.mediaSession.metadata = new MediaMetadata({
-            title: 'Froggy Jazz',
-            artist: 'THE FROG',
-            album: 'Hoppin\' Tunes',
-            artwork: [
-              { src: '../images/frog.webp', sizes: '256x256', type: 'image/png' },
-            ],
-          });
-        }
+  console.log("~~~ wobble wobble wobble ~~~");
+  document.getElementById("soundCloudIFrame").src = "";
+  moreVibeAudio.pause();
+  moreVibeAudio.currentTime = 0;
+  vibeAudio.pause();
+  vibeAudio.currentTime = 0;
+  const asd = Math.round(Math.random() * 690);
+  console.log(asd);
+  if (String(asd).includes("69") || String(asd).includes("42")) {
+    frog.src = "static/images/rick.gif";
+    moreVibeAudio.play();
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: "Never Gonna Give You Up",
+      artist: "Rick Astley",
+      album: "Whenever You Need Somebody",
+      artwork: [
+        { src: "../images/rick.gif", sizes: "256x256", type: "image/png" },
+      ],
+    });
+  } else {
+    vibeAudio.play();
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: "Froggy Jazz",
+        artist: "THE FROG",
+        album: "Hoppin' Tunes",
+        artwork: [
+          { src: "../images/frog.webp", sizes: "256x256", type: "image/png" },
+        ],
+      });
     }
-    frog.id = 'dancing-frog';
+  }
+  frog.id = "dancing-frog";
 }
 
 // no more dancing and no more rick
-vibeAudio.addEventListener('ended', () => frog.id = 'frog');
-moreVibeAudio.addEventListener('ended', function() {
-    frog.id = 'frog';
-    frog.src = 'static/images/frog.webp';
+vibeAudio.addEventListener("ended", () => frog.id = "frog");
+moreVibeAudio.addEventListener("ended", function() {
+  frog.id = "frog";
+  frog.src = "static/images/frog.webp";
 });
-moreVibeAudio.addEventListener('ended', () => frog.src = 'static/images/frog.webp');
-moreVibeAudio.addEventListener('pause', () => frog.src = 'static/images/frog.webp');
+moreVibeAudio.addEventListener("ended", () => frog.src = "static/images/frog.webp");
+moreVibeAudio.addEventListener("pause", () => frog.src = "static/images/frog.webp");
 
 if (window.location.search.includes("slopcursion=true")) {
-	document.getElementById('slopcursion').style.display = 'none';
+  document.getElementById("slopcursion").style.display = "none";
 }
 
 // TODO: Delete dead code
@@ -55,7 +58,7 @@ if (window.location.search.includes("slopcursion=true")) {
 // document.body.style.background = 'hsl('+Math.floor(Math.random() * 255)+', 40%, 50%)';
 // document.getElementsByTagName('header')[0].style.background = 'hsl('+Math.floor(Math.random() * 255)+', 50%, 40%)';
 // document.getElementsByTagName('footer')[0].style.background = 'hsl('+Math.floor(Math.random() * 255)+', 50%, 40%)';
-document.getElementById('vibeButton').addEventListener('click', vibe);
+document.getElementById("vibeButton").addEventListener("click", vibe);
 
 function enableQuotes() {
   document.getElementById("soundCloudIFrame").src = "";
