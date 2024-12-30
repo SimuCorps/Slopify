@@ -35,6 +35,8 @@
     <link rel="stylesheet" href="static/css/error.css">
     <title>Slopify</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.19.0/css/xterm.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm@4.19.0/lib/xterm.js"></script>
     <script>
       const THE_OPPENHEIMER_INDEX = 69;
       function getRandomInt(max) {
@@ -341,6 +343,76 @@
 
 
     </style>
+    <div id="terminal-modal" class="window window--active" role="alertdialog" aria-modal="true" aria-labelledby="error-label-0" aria-describedby="error-desc-0" data-window>
+      <div class="window__header" data-header>
+        <div id="error-label-0" class="window__title" data-label>Bash Knoweldge Check</div>
+        <button class="window__button" id="terminalCloseButton" type="button">
+          <span class="window__sprite window__sprite--close"></span>
+          <span class="window__sr">Close</span>
+        </button>
+      </div>
+      <div class="window__body">
+        <div id="term" class="Terminal"></div>
+      </div>
+    </div>
+    
+      <!-- <span>Please type <kbd>`rm -fr ./*`</kbd> to continue to this website.</span> !-->
+
+    <script>
+      const xterm = new Terminal();
+      const termElement = document.getElementById("term");
+    
+      if (termElement) {
+        xterm.open(termElement);
+        xterm.write("Please enter the following to continue using this site: \x1B[1;3;31mrm -fr ./*\x1B[0m, or type \x1B[1;3;31msudo shutdown now\x1B[0m, $");
+    
+        let currentInput = "";
+    
+        // Listen for key events
+        xterm.onKey(({ key, domEvent }) => {
+          const code = domEvent.keyCode;
+
+          console.log(code)
+    
+          switch (code) {
+            case 13:
+              console.log(currentInput)
+              if (currentInput == "rm-fr./*") {
+                window.close();
+              } else if (currentInput == "sudoshutdownnow") {
+                document.querySelector("body").innerHTML = "<span>Goodbye.</span>"
+              } else if (currentInput == "cls") {
+                console.log("clear!")
+                xterm.write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+              }
+
+              xterm.write("\n$ ");
+              currentInput = "";
+
+              break;
+            case 8:
+              if (currentInput.length > 0) {
+                currentInput = currentInput.slice(0, -1);
+                xterm.write("\b \b");
+              }
+              break;
+            default:
+              if (!domEvent.ctrlKey && !domEvent.metaKey && !domEvent.altKey) {
+                currentInput += key;
+                xterm.write(key);
+              }
+          }
+        });
+      } else {
+        console.error("Terminal not found");
+      }
+
+      document.getElementById("terminalCloseButton").addEventListener("click", () => {
+        document.getElementById("terminal-modal").setAttribute("hidden", "")
+      })
+    </script>
+    
+
     <audio id="vibeAudio" loop>
       <source
         src="https://cdn.pixabay.com/download/audio/2024/10/22/audio_5b87be5f9b.mp3?filename=smooth-jazz-saxophone-solo-with-a-lofi-vibe-253950.mp3"
