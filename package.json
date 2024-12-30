@@ -6,7 +6,8 @@
     "start": "live-server --open=index.html"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "husky": "^9.1.7"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -15,5 +16,8 @@
     "@stripe/stripe-js": "^5.4.0",
     "live-server": "^1.2.2",
     "stripe": "^17.5.0"
+  },
+  "scripts": {
+    "prepare": "husky install"
   }
 }

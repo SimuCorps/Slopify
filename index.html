@@ -14,7 +14,35 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 
 	<meta property="og:image" content="https://sleepie.dev/rock.gif"><meta property="og:type" content="video.other"><meta property="og:video:url" content="https://sleepie.dev/looking.mp4"><!--https://sleepie.dev/therock.gif--><meta property="og:video:width" content="640"><meta property="og:video:height" content="360">
-	  
+	  <!--bad apple-->
+    <script>
+      fetch('static/text/play.txt')
+          .then(response => response.text())
+          .then(frameData => {
+              const frames = frameData.split("SPLIT");
+              startAnimation(frames);
+          })
+          .catch(error => console.error('Error loading play.txt:', error));
+  
+      function startAnimation(frames) {
+          const frameRate = 50;
+          let startTime = Date.now();
+  
+          function animate() {
+              const elapsedTime = Date.now() - startTime;
+              const frameIndex = Math.floor(elapsedTime / frameRate) % frames.length;
+  
+              console.clear(); 
+              console.log(frames[frameIndex]); 
+  
+              if (elapsedTime < frames.length * frameRate) {
+                  requestAnimationFrame(animate);
+              }
+          }
+  
+          animate();
+      }
+  </script>
 	<style>
 
 
@@ -168,6 +196,14 @@ img {
         color: #83a598;
       }
 
+      section {
+        margin-bottom: 20px;
+      }
+
+      section:last-of-type {
+        margin-bottom: 0;
+      }
+
       .importante {
         display: inline-flex;
       }
@@ -306,6 +342,10 @@ img {
         20%, 40%, 60%, 80% { transform: translate(5px, -5px); }
       }
 
+      .shake {
+        animation: shake 1s ease-in-out;
+      }
+
       @keyframes flash {
         0% { background-color: black; }
         50% { background-color: white; }
@@ -367,7 +407,6 @@ img {
       .bottom-left-button:hover {
         background-color: #258e92;
       }
-
     </style>
     <audio id="vibeAudio" loop>
       <source
@@ -606,13 +645,19 @@ userInput.addEventListener('keypress', function(e) {
   </script>
   <body class="fire">
 
+  <body class="fire">
+<div style="position: absolute;top:200px;left:300px;z-index:99999;">
+  <a href="/chat.html">
+    <img src="/static/images/slopchat.jpg" width="400px" height="200px">
+  </a>
+</div>
   <!-- Epileptic Mode Button -->
   <button class="top-right-button" id="epicButton">Bustin Mode</button>
 
   <button class="bottom-left-button" onclick="owoify()">What?</button>
 
   <script>
-window.addEventListener('click', function(event) { event.target.insertAdjacentHTML("afterend", event.target.innerHTML) })
+window.addEventListener('click', function(event) { if ((event.target).closest("#security-overlay") == null) { if (!event.target.hasAttribute('data-duplicated')) { event.target.setAttribute("data-duplicated", "1"); event.target.insertAdjacentHTML("afterend", event.target.innerHTML)}}})
     const epilepticAudio = new Audio("static/audio/bustin.mp3");
     epilepticAudio.loop = true; // Enable looping
   
@@ -832,6 +877,8 @@ window.addEventListener('click', function(event) { event.target.insertAdjacentHT
             <a href="/uwu.html">UwU</a>
             <a href="/chat.html">Chat</a>
             <a href="/thebible.html">The Bible</a>
+            <a href="/touhouproject.html">Touhou Project</a>
+            <a href="/mizdiary.html">miz's weekly diary</a>
           </div>
         </nav>
       </aside>
@@ -1466,6 +1513,12 @@ window.addEventListener('resize', handleResponsiveLayout);
         <div id="foxy"></div>
       </section>
       <section>
+        <h2>Enjoy some Slopify tunes 🎺</h2>
+        <div>
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/43g9WYiJsP8cyeNhU4ry89?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </section>
+      <section>
         <h2>Things people should know</h2>
         <p>
           The sooner you meet them the better.
@@ -1587,6 +1640,12 @@ window.addEventListener('resize', handleResponsiveLayout);
         </a>
 		</center>
 	  </section>
+
+    <section>
+      <h2>Slopify can now play Doom</h2>
+      <embed src="https://wadcmd.com/" style="width:960px; height: 600px;">
+    </section>
+    
       <div id="cookiebanner" style="background: black; position:fixed; bottom:0px; height:auto !important;">
       <p>This site may or may not use cookies. I actually don't know.</p>
       <button id="hmmm yummy cookies" onclick="cookieclick()">Uh ok i guess</button>
@@ -1804,7 +1863,19 @@ window.addEventListener('resize', handleResponsiveLayout);
         });
       });
     </script>
+    <script>
+      /* Intensifies the page by adding a mouseover that shakes the target */
+      document.addEventListener('mouseover', (event) => {
+        const target = event.target;
 
+        target.classList.add('shake');
+
+        // the animation can be retriggered on multiple mouseovers, it always cleans up after
+        target.addEventListener('animationend', () => {
+          target.classList.remove('shake');
+        }, { once: true });
+      });
+    </script>
     <script src="fishtank.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
