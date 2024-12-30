@@ -5,3 +5,4 @@ _"The [ideomotor effect](https://www.newmanmentalism.com/blog/a-mentalist-explai
 A 100% community-built open source website + product.
 
 The premise? Commit whatever code you want for whatever features you want in whatever language you want, as long as everything works together and is legal.
+you digging in me 
