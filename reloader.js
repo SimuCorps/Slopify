@@ -17,7 +17,7 @@ function startReloadChain(start) {
     localStorage.setItem(key, current.toString(16));
     setTimeout(function () {
         location.replace(window.location.href);
-    }, 10000);
+    }, 5000);
 }
 
 window.onload = startReloadChain(false);
