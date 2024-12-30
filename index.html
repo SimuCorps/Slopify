@@ -5,19 +5,19 @@
     <script async src="https://sleepie.uk/oneko.js"></script>
     <script async src="https://sleepie.dev/slopifyvids/loader.js"></script>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="128x128" href="/static/images/apple-touch-icon.png">
-    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
-    <link rel="stylesheet" href="static/css/page-nav.css">
-    <link rel="stylesheet" href="static/css/error.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="/static/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="128x128">
+    <link href="/static/images/favicon.ico" rel="icon" type="image/x-icon">
+    <link href="static/css/page-nav.css" rel="stylesheet">
+    <link href="static/css/error.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 
-    <meta property="og:image" content="https://sleepie.dev/rock.gif">
-    <meta property="og:type" content="video.other">
-    <meta property="og:video:url" content="https://sleepie.dev/looking.mp4"><!--https://sleepie.dev/therock.gif-->
-    <meta property="og:video:width" content="640">
-    <meta property="og:video:height" content="360">
+    <meta content="https://sleepie.dev/rock.gif" property="og:image">
+    <meta content="video.other" property="og:type">
+    <meta content="https://sleepie.dev/looking.mp4" property="og:video:url"><!--https://sleepie.dev/therock.gif-->
+    <meta content="640" property="og:video:width">
+    <meta content="360" property="og:video:height">
     <!--bad apple-->
     <script>
       fetch("static/text/play.txt")
@@ -54,7 +54,7 @@
             animation: spin 2s linear infinite, scale 1s infinite, colorChange 1s infinite;
         }
     </style>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" type="text/javascript"></script>
     <script>
       const THE_OPPENHEIMER_INDEX = 69;
 
@@ -319,115 +319,114 @@
         }
 
         #l8rgt {
-            #l8rgt {
-                display: block;
-                margin: 10px 0;
-                padding: 15px 30px;
-                font-size: 20px;
-                font-family: var(--font);
-                background: radial-gradient(circle, #b00b69, rgb(145, 69, 221));
-                color: white;
-            }
+            display: block;
+            margin: 10px 0;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-family: var(--font);
+            background: radial-gradient(circle, #b00b69, rgb(145, 69, 221));
+            color: white;
+        }
 
-            #foxy {
-                height: 600px;
-                width: auto;
-                background: url('static/images/cute.jpg');
-                background-repeat: no-repeat;
-            }
+        #foxy {
+            height: 600px;
+            width: auto;
+            background: url('static/images/cute.jpg');
+            background-repeat: no-repeat;
+        }
 
-            #foxy:hover {
-                background: url('static/images/snarl.jpg');
-                background-repeat: no-repeat;
-            }
+        #foxy:hover {
+            background: url('static/images/snarl.jpg');
+            background-repeat: no-repeat;
+        }
 
-            @keyframes shake {
-                0%, 100% {
-                    transform: translate(0, 0);
-                }
-                10%, 30%, 50%, 70%, 90% {
-                    transform: translate(-5px, 5px);
-                }
-                20%, 40%, 60%, 80% {
-                    transform: translate(5px, -5px);
-                }
+        @keyframes shake {
+            0%, 100% {
+                transform: translate(0, 0);
             }
+            10%, 30%, 50%, 70%, 90% {
+                transform: translate(-5px, 5px);
+            }
+            20%, 40%, 60%, 80% {
+                transform: translate(5px, -5px);
+            }
+        }
 
-            .shake {
-                animation: shake 1s ease-in-out;
-            }
+        .shake {
+            animation: shake 1s ease-in-out;
+        }
 
-            @keyframes flash {
-                0% {
-                    background-color: black;
-                }
-                50% {
-                    background-color: white;
-                }
-                100% {
-                    background-color: black;
-                }
+        @keyframes flash {
+            0% {
+                background-color: black;
             }
+            50% {
+                background-color: white;
+            }
+            100% {
+                background-color: black;
+            }
+        }
 
-            .worst-theme {
-                font-family: 'Comic Sans MS', cursive, sans-serif;
-                animation: spin 10s linear infinite, flash 1s step-start infinite;
-            }
+        .worst-theme {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            animation: spin 10s linear infinite, flash 1s step-start infinite;
+        }
 
-            .worst-theme * {
-                animation: rainbow 1s linear infinite, shake 0.5s ease-in-out infinite;
-                text-shadow: 2px 2px 0px #FF00FF;
-                background-color: yellow;
-            }
+        .worst-theme * {
+            animation: rainbow 1s linear infinite, shake 0.5s ease-in-out infinite;
+            text-shadow: 2px 2px 0px #FF00FF;
+            background-color: yellow;
+        }
 
-            .top-right-button {
-                position: fixed;
-                top: 10px;
-                right: 10px;
-                padding: 10px 20px;
-                background-color: #b8bb26;
-                color: #282828;
-                border: none;
-                cursor: pointer;
-                font-size: 16px;
-                border-radius: 5px;
-                z-index: 1000;
-            }
+        .top-right-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #b8bb26;
+            color: #282828;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
 
-            .top-right-button:hover {
-                background-color: #a1b024;
-            }
+        .top-right-button:hover {
+            background-color: #a1b024;
+        }
 
-            @keyframes epilepticFlash {
-                0%, 100% {
-                    background-color: white;
-                }
-                50% {
-                    background-color: black;
-                }
+        @keyframes epilepticFlash {
+            0%, 100% {
+                background-color: white;
             }
+            50% {
+                background-color: black;
+            }
+        }
 
-            .epileptic-mode {
-                animation: epilepticFlash 0.1s infinite;
-            }
+        .epileptic-mode {
+            animation: epilepticFlash 0.1s infinite;
+        }
 
-            .bottom-left-button {
-                position: fixed;
-                bottom: 10px;
-                left: 10px;
-                padding: 10px 20px;
-                background-color: #5ef7d6;
-                color: #282828;
-                border: none;
-                cursor: pointer;
-                font-size: 16px;
-                border-radius: 5px;
-                z-index: 1000;
-            }
+        .bottom-left-button {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #5ef7d6;
+            color: #282828;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
 
-            .bottom-left-button:hover {
-                background-color: #258e92;
-            }
+        .bottom-left-button:hover {
+            background-color: #258e92;
+        }
     </style>
     <audio id="vibeAudio" loop>
       <source src="https://cdn.pixabay.com/download/audio/2024/10/22/audio_5b87be5f9b.mp3?filename=smooth-jazz-saxophone-solo-with-a-lofi-vibe-253950.mp3" type="audio/mp3" />
@@ -448,7 +447,7 @@
 
       new rainbowCursor({ colors: chosenFlag });
     </script>
-    <script type="module" src="static/js/index.js"></script>
+    <script src="static/js/index.js" type="module"></script>
     <script>
       !function(t, e) {
         var o, n, p, r;
@@ -476,6 +475,7 @@
         person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
       });
     </script>
+    <title></title>
   </head>
   <script>
     let hasInteracted = false;
@@ -497,18 +497,19 @@
   <div id="chatbot" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
     <div class="chat-header">
       <span>Chat Support</span>
-      <button onclick="toggleChat()" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; hover: { background: #ff6666; }">×</button>
+      <button onclick="toggleChat()" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">×</button>
     </div>
     <div id="chatMessages">
       <div class="bot-message">
         <div class="clippy-container">
-          <img src="https://static.wikia.nocookie.net/the-scrappy/images/c/cb/Clippy.png/revision/latest?cb=20231027172058" class="clippy-image" alt="Clippy">
+          <img alt="Clippy" class="clippy-image" src="https://static.wikia.nocookie.net/the-scrappy/images/c/cb/Clippy.png/revision/latest?cb=20231027172058">
           <span>how can i help you today?</span>
         </div>
       </div>
     </div>
     <div class="chat-input">
-      <input type="text" id="userInput" placeholder="Type a message...">
+      <label for="userInput">Type a message:</label>
+      <input id="userInput" placeholder="Type a message..." type="text">
       <button onclick="sendMessage()">Send</button>
     </div>
   </div>
@@ -683,7 +684,7 @@
   </script>
   <body>
     <div style="position: absolute;top:200px;left:300px;z-index:99999;">
-      <a href="/chat.html"> <img src="/static/images/slopchat.jpg" width="400px" height="200px"> </a>
+      <a href="/chat.html"> <img alt="Slop chat" height="200px" src="/static/images/slopchat.jpg" width="400px"> </a>
     </div>
     <!-- Epileptic Mode Button -->
     <button class="top-right-button" id="epicButton">Bustin Mode</button>
@@ -763,7 +764,7 @@
 
     <script src="static/js/oneko.js"></script>
     <script src="static/js/icey-oneko.js"></script>
-    <a href="#maincontent" class="skipnav">Skip to Content (Press Enter)</a>
+    <a class="skipnav" href="#maincontent">Skip to Content (Press Enter)</a>
     <div id="security-overlay" style="
         position: fixed;
         top: 0;
@@ -790,14 +791,15 @@
         <div id="captcha-container" style="margin-bottom: 20px; text-align: center">
           <div id="captcha-prompt" style="margin-bottom: 10px; color: #ebdbb2"></div>
           <div id="captcha-content"></div>
-          <input type="text" id="captcha-input" placeholder="Enter your answer" style="
+          <label for="captcha-input">Enter your answer:</label>
+          <input id="captcha-input" placeholder="Enter your answer" style="
               padding: 8px;
               margin: 10px 0;
               background: #282828;
               color: #ebdbb2;
               border: 1px solid #b8bb26;
               width: 100%;
-            " />
+            " type="text" />
           <button id="submit-captcha" style="
               background: #b8bb26;
               color: #282828;
@@ -824,28 +826,30 @@
         </button>
 
         <form id="registration-form" style="display: none; flex-direction: column; gap: 10px">
-          <input type="text" id="username" placeholder="Username" style="
+          <label for="username"></label>
+          <input id="username" placeholder="Username" style="
               padding: 8px;
               margin: 5px 0;
               background: #282828;
               color: #ebdbb2;
               border: 1px solid #b8bb26;
-            " />
-          <input type="password" id="password" placeholder="Password" style="
+            " type="text" />
+          <label for="password"></label>
+          <input id="password" placeholder="Password" style="
               padding: 8px;
               margin: 5px 0;
               background: #282828;
               color: #ebdbb2;
               border: 1px solid #b8bb26;
-            " />
+            " type="password" />
           <div id="requirements-list" style="color: #ebdbb2; font-size: 0.9em; margin: 10px 0"></div>
-          <button type="submit" style="
+          <button style="
               background: #b8bb26;
               color: #282828;
               padding: 10px;
               border: none;
               cursor: pointer;
-            ">
+            " type="submit">
             Register
           </button>
         </form>
@@ -853,8 +857,8 @@
     </div>
 
     <header>
-      <marquee><img src="static/images/epic-logo.gif" /></marquee>
-      <img src="SlopifyLogo.png" width="400px" />
+      <marquee><img alt="logo" src="static/images/epic-logo.gif" /></marquee>
+      <img alt="logo also" src="SlopifyLogo.png" width="400px" />
       <p>
         <em>"The <a href="https://www.newmanmentalism.com/blog/a-mentalist-explains-how-ouija-boards-work-and-the-ideomotor-effect" target="_blank">ideomotor effect</a> of software"</em>
       </p>
@@ -865,13 +869,12 @@
         <aside class="sidebar">
           <nav>
             <a href="/index.html">Home</a> <a href="/second.html">Second</a> <a href="/uwu.html">UwU</a> <a href="/chat.html">Chat</a> <a href="/thebible.html">The Bible</a> <a href="/touhouproject.html">Touhou Project</a> <a href="/mizdiary.html">miz's weekly diary</a>
-      </div>
       </nav></aside></div>
 
       <a href="/second.html">
         <button style="position: fixed;left:1%;top:2%;">
           <p>alan becker</p>
-          <img src="static/images/alanbecker/alan.png" width="50" height="50" /></button>
+          <img alt="Alan" height="50" src="static/images/alanbecker/alan.png" width="50" /></button>
       </a>
 
       <div>
@@ -881,7 +884,7 @@
         </div>
       </div>
 
-      <video src="https://sleepie.dev/dwl-youtube.com__E_videodlyoutubegQzWr8MoJXA.mp4" controls style="width: 300px; height: 200px;">
+      <video controls src="https://sleepie.dev/dwl-youtube.com__E_videodlyoutubegQzWr8MoJXA.mp4" style="width: 300px; height: 200px;">
         Your potato browser does not support the video tag. Please stop using your grandma's computer.
       </video>
 
@@ -1206,7 +1209,7 @@
         </p>
       </div>
       <div id="gallery">
-        <img src="static/images/bobi.jpg" alt="Bobi" class="gallery-item" style="width: 480px; height: 640px;"> <img src="static/images/kofte.jpg" alt="Kofte" class="gallery-item" style="width: 400px; height: 400px;"> <img src="static/images/frog.webp" alt="Frog" class="gallery-item">
+        <img alt="Bobi" class="gallery-item" src="static/images/bobi.jpg" style="width: 480px; height: 640px;"> <img alt="Kofte" class="gallery-item" src="static/images/kofte.jpg" style="width: 400px; height: 400px;"> <img alt="Frog" class="gallery-item" src="static/images/frog.webp">
       </div>
 
       <canvas id="caleb-canvas"></canvas>
@@ -1214,9 +1217,9 @@
 
       <button id="vibeButton">Improve the Mood</button>
       <button id="wisdomButton">ENABLE FROG WISDOM</button>
-      <p>Vist SlopChat™ to chat with other slop enthusiasts. <a href="chat.html">Click here!/a></p>
+      <p>Vist SlopChat™ to chat with other slop enthusiasts. <a href="chat.html">Click here!</a></p>
       <button id="clickme">Click me!</button>
-      <a href="https://www.hitwebcounter.com" target="_blank"> <img src="https://hitwebcounter.com/counter/counter.php?page=18132009&style=0010&nbdigits=9&type=page&initCount=0" title="Counter Widget" alt="Visit counter For Websites" border="0" /></a>
+      <a href="https://www.hitwebcounter.com" target="_blank"> <img alt="Visit counter For Websites" border="0" src="https://hitwebcounter.com/counter/counter.php?page=18132009&style=0010&nbdigits=9&type=page&initCount=0" title="Counter Widget" /></a>
       <button id="worseThemeButton">This can't get any worse, right?</button>
     </header>
     <main id="maincontent">
@@ -1239,37 +1242,37 @@
         <div style="display: flex; flex-direction: row;">
 
           <blockquote class="twitter-tweet" data-theme="dark">
-            <p lang="en" dir="ltr">hahahaha this is fire</p>&mdash; ily⚡️ (@0xIlyy) <a href="https://twitter.com/0xIlyy/status/1873179308153553050?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote>
-          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <p dir="ltr" lang="en">hahahaha this is fire</p>&mdash; ily⚡️ (@0xIlyy) <a href="https://twitter.com/0xIlyy/status/1873179308153553050?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote>
+          <script async charset="utf-8" src="https://platform.twitter.com/widgets.js"></script>
 
           <blockquote class="twitter-tweet" data-conversation="none" data-theme="dark">
-            <p lang="en" dir="ltr">WHO THE FUCK ADDED PASSWORD GAME TO THE REGISTRATION PAGE <a href="https://t.co/FYpWT5dycz">pic.twitter.com/FYpWT5dycz</a></p>&mdash; Aterron (@_aterron_) <a href="https://twitter.com/_aterron_/status/1873444464255254743?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote>
-          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <p dir="ltr" lang="en">WHO THE FUCK ADDED PASSWORD GAME TO THE REGISTRATION PAGE <a href="https://t.co/FYpWT5dycz">pic.twitter.com/FYpWT5dycz</a></p>&mdash; Aterron (@_aterron_) <a href="https://twitter.com/_aterron_/status/1873444464255254743?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote>
+          <script async charset="utf-8" src="https://platform.twitter.com/widgets.js"></script>
 
           <blockquote class="twitter-tweet" data-theme="dark">
-            <p lang="en" dir="ltr">help i played the sexy frog music and now it keeps playing even after i close the browser</p>&mdash; colin ricardo (@_colinricardo) <a href="https://twitter.com/_colinricardo/status/1873429683368505464?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote>
-          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <p dir="ltr" lang="en">help i played the sexy frog music and now it keeps playing even after i close the browser</p>&mdash; colin ricardo (@_colinricardo) <a href="https://twitter.com/_colinricardo/status/1873429683368505464?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote>
+          <script async charset="utf-8" src="https://platform.twitter.com/widgets.js"></script>
 
           <blockquote class="twitter-tweet" data-theme="dark">
-            <p lang="en" dir="ltr">This project is awesome the amount of random slop added in the last 24 hours alone is crazy. Check it out <a href="https://t.co/GDD8ut9A4S">https://t.co/GDD8ut9A4S</a></p>&mdash; Gil (@TylerGilman01) <a href="https://twitter.com/TylerGilman01/status/1873429461410234849?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote>
-          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <p dir="ltr" lang="en">This project is awesome the amount of random slop added in the last 24 hours alone is crazy. Check it out <a href="https://t.co/GDD8ut9A4S">https://t.co/GDD8ut9A4S</a></p>&mdash; Gil (@TylerGilman01) <a href="https://twitter.com/TylerGilman01/status/1873429461410234849?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote>
+          <script async charset="utf-8" src="https://platform.twitter.com/widgets.js"></script>
 
         </div>
       </div>
       <div class="center" style="display:flex; flex-direction: column; justify-content: center;">
         <h2 style="font-family: Comic Sans MS, Comic Sans, cursive; color:snow; font-size: 50px; text-align: center;">do you like penguins?</h2>
-        <img src="static/images/penguin.webp" /> <img src="https://secret.kgncengiz.com/F.jpg" /> <img src="static/images/Jesus.png" /> <img src="static/images/raccoon.jpg" />
+        <img alt="Penguin" src="static/images/penguin.webp" /> <img alt="F" src="https://secret.kgncengiz.com/F.jpg" /> <img alt="Jesus" src="static/images/Jesus.png" /> <img alt="Raccoon" src="static/images/raccoon.jpg" />
       </div>
       <section>
         <div align="center">
           <button id="l8rgt" onclick="location.href='O3O.mp4'">click me</button>
         </div>
       </section>
-      <img src="https://secret.kgncengiz.com/F.jpg" />
+      <img alt="F" src="https://secret.kgncengiz.com/F.jpg" />
 
-      <section class="importante" style="display: flex; justify-content: center; align-items: center; height:">
+      <section class="importante" style="display: flex; justify-content: center; align-items: center;">
         <section id="mandelbrot-section">
-          <canvas id="fractalCanvas" width="400" height="400"></canvas>
+          <canvas height="400" id="fractalCanvas" width="400"></canvas>
         </section>
         <section class="mandelbrot-script">
           <script src="mandelbrot_uwu.js"></script>
@@ -1278,7 +1281,7 @@
 
       <section class="importante">
         <section>
-          <canvas id="glCanvas" width="400" height="400"></canvas>
+          <canvas height="400" id="glCanvas" width="400"></canvas>
           <script>
             const canvas = document.getElementById("glCanvas");
             const gl = canvas.getContext("webgl2");
@@ -1440,13 +1443,13 @@
         </section>
       </section>
       <section class="fourier-container">
-        <a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B"> <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Fourier_series_and_transform.gif" /> </a>
+        <a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B"> <img alt="Transform" src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Fourier_series_and_transform.gif" /> </a>
       </section>
       <section class="fishtank-container">
         <div class="fishtank-placeholder">
           <div class="loading-spinner">Loading...</div>
         </div>
-        <canvas id="main-fishtank" class="fishtank-canvas"></canvas>
+        <canvas class="fishtank-canvas" id="main-fishtank"></canvas>
       </section>
       <section>
         <h2>Stockify</h2>
@@ -1457,7 +1460,7 @@
           <span id="stock_ticker" style="color: yellow"></span>
           <span id="stock_msg"></span>
         </p>
-        <img src="" id="stock_img" />
+        <img alt="Stock img" id="stock_img" src="" />
       </section>
       <section>
         <script>
@@ -1475,9 +1478,9 @@
           }
         </script>
 
-        <input type="button" value="SHADERZ" onclick="setShaderToy()" />
+        <input onclick="setShaderToy()" type="button" value="SHADERZ" />
         <br />
-        <iframe id="ifrm_shadertoy" width="640" height="360" frameborder="0" src="https://www.shadertoy.com/embed/ld3Gz2?gui=false&paused=false&muted=false" allowfullscreen></iframe>
+        <iframe allowfullscreen frameborder="0" height="360" id="ifrm_shadertoy" src="https://www.shadertoy.com/embed/ld3Gz2?gui=false&paused=false&muted=false" width="640"></iframe>
       </section>
       <section>
         <h1>The Fennec Fox in dis bish</h1>
@@ -1486,7 +1489,7 @@
       <section>
         <h2>Enjoy some Slopify tunes 🎺</h2>
         <div>
-          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/43g9WYiJsP8cyeNhU4ry89?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <iframe allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen="" frameBorder="0" height="352" loading="lazy" src="https://open.spotify.com/embed/playlist/43g9WYiJsP8cyeNhU4ry89?utm_source=generator&theme=0" style="border-radius:12px" width="100%"></iframe>
         </div>
       </section>
       <section>
@@ -1546,7 +1549,7 @@
         </script>
       </section>
       <section id="sun">
-        <button type="button" id="sunBtn">hey, can we go on land?</button>
+        <button id="sunBtn" type="button">hey, can we go on land?</button>
 
         <script>
           /* some variables */
@@ -1605,7 +1608,7 @@
       </section>
       <section>
         <center>
-          <a href="static/images/monster_zero_ultra.jpg"> <img src="static/images/come_here_marisa_kirisame.gif" /> </a>
+          <a href="static/images/monster_zero_ultra.jpg"> <img alt="marisa kirisame" src="static/images/come_here_marisa_kirisame.gif" /> </a>
         </center>
       </section>
 
@@ -1627,11 +1630,11 @@
         </script>
       </div>
       <section>
-        <iframe width="5%" height="1" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1633786749&auto_play=true"></iframe>
+        <iframe allow="autoplay" frameborder="no" height="1" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1633786749&auto_play=true" width="5%"></iframe>
       </section>
       <section>
         <h2>Flappy Musk</h2>
-        <canvas id="flappyMuskCanvas" width="400" height="600" style="border: 1px solid #000;"></canvas>
+        <canvas height="600" id="flappyMuskCanvas" style="border: 1px solid #000;" width="400"></canvas>
         <br />
         <Button id="flappyMuskButton">Make it gayer?</Button>
         <p>Click to make Elon Musk fly! Avoid the obstacles!</p>
@@ -1639,41 +1642,41 @@
       <script src="flappyMusk.js"></script>
       <section id="slopcursion">
         <h2>So you can Slopify while you Slopify</h2>
-        <iframe src="index.html?slopcursion=true" width="100%" height="500px" frameborder="0"></iframe>
+        <iframe frameborder="0" height="500px" src="index.html?slopcursion=true" width="100%"></iframe>
       </section>
       <section>
         <h2>oh hewwo thewe, you gwot twhis fwar uwu~! wouwd you wike to wead somethin' awesome~? >w<</h2>
         <button type="button">
-          <a href='/uwu.html'>wets seee~ >w<<a />
+          <a href='/uwu.html'>wets seee~ >w<</a>
         </button>
       </section>
     </main>
     <footer>
       <div style="text-align: center; margin-top: 20px">
-        <img src="static/images/aol-sucks.gif" alt="Banner 1" width="88" height="31" /> <img src="static/images/heimdal.png" alt="Banner 2" width="88" height="31" /> <img src="static/images/bestview.gif" alt="Banner 3" width="88" height="31" /> <img src="static/images/w95link.gif" alt="Banner 4" width="88" height="31" /> <img src="static/images/800x600.gif" alt="Banner 5" width="88" height="31" /> <img src="static/images/lowtiergod.gif" alt="Banner 6" width="88" height="31" />
+        <img alt="Banner 1" height="31" src="static/images/aol-sucks.gif" width="88" /> <img alt="Banner 2" height="31" src="static/images/heimdal.png" width="88" /> <img alt="Banner 3" height="31" src="static/images/bestview.gif" width="88" /> <img alt="Banner 4" height="31" src="static/images/w95link.gif" width="88" /> <img alt="Banner 5" height="31" src="static/images/800x600.gif" width="88" /> <img alt="Banner 6" height="31" src="static/images/lowtiergod.gif" width="88" />
       </div>
-      <div id="error-0" class="window window--active" role="alertdialog" aria-modal="true" aria-labelledby="error-label-0" aria-describedby="error-desc-0" data-window hidden>
+      <div aria-describedby="error-desc-0" aria-labelledby="error-label-0" aria-modal="true" class="window window--active" data-window hidden id="error-0" role="alertdialog">
         <div class="window__header" data-header>
-          <div id="error-label-0" class="window__title" data-label>Error</div>
-          <button class="window__button" type="button" disabled>
+          <div class="window__title" data-label id="error-label-0">Error</div>
+          <button class="window__button" disabled type="button">
             <span class="window__sprite window__sprite--close-disabled"></span>
             <span class="window__sr">Close</span>
           </button>
         </div>
         <div class="window__body">
-          <img class="window__body-icon" alt="White X on a red circle with dark red outline and drop shadow" src="https://assets.codepen.io/416221/win95_error_icon.png" width="32" height="32">
-          <p id="error-desc-0" class="window__body-text" data-desc></p>
+          <img alt="White X on a red circle with dark red outline and drop shadow" class="window__body-icon" height="32" src="https://assets.codepen.io/416221/win95_error_icon.png" width="32">
+          <p class="window__body-text" data-desc id="error-desc-0"></p>
         </div>
         <div class="window__footer">
-          <button class="window__button window__button--lg" type="button" data-ok>OK</button>
+          <button class="window__button window__button--lg" data-ok type="button">OK</button>
         </div>
       </div>
       <div>
-        <iframe src="https://poeskatprinter.zepje.space/" width="600" height="400" style="border:none;"></iframe>
+        <iframe height="400" src="https://poeskatprinter.zepje.space/" style="border:none;" width="600"></iframe>
       </div>
       <div>
         <a href="https://sleepie.dev/femboy-not-gay" target="_blank">Why its not gay to like femboys</a>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/mFfYORTqzog?si=i3uW4a8OnDXaAKEI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/mFfYORTqzog?si=i3uW4a8OnDXaAKEI" title="YouTube video player" width="560"></iframe>
       </div>
       <p>
         &copy; 2024 DishpitDev. <a href="https://github.com/dishpitdev/slopify">Built by the community</a>, against the community.
@@ -2020,7 +2023,7 @@
       }
     </script>
     <div id="dvd-bounce" style="position: fixed; z-index: 999; pointer-events: none;">
-      <img src="static/images/DVD_logo.png" width="500" height="250" alt="Bouncing DVD Logo">
+      <img alt="Bouncing DVD Logo" height="250" src="static/images/DVD_logo.png" width="500">
     </div>
     <script>
       const dvdElement = document.getElementById("dvd-bounce");
