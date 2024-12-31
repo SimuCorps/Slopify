@@ -3,7 +3,8 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "start": "live-server --open=index.html"
+    "start": "live-server --open=index.html",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -16,8 +17,5 @@
     "@stripe/stripe-js": "^5.4.0",
     "live-server": "^1.2.2",
     "stripe": "^17.5.0"
-  },
-  "scripts": {
-    "prepare": "husky install"
   }
 }
