@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLOP TV</title>
+    <style>
+        .move {
+            position: absolute;
+            top: 68px;
+            left: 104px;
+            width: 517px;
+            height: 290px;
+        }
+
+        .silly {
+            background-color: rgba(202, 202, 202, 0.795);
+            mix-blend-mode: color-dodge;
+        }
+
+        /* Add these new styles */
+        .feed {
+            z-index: 99;
+            /* This ensures the new image loads before becoming visible */
+            opacity: 1;
+        }
+
+        body {
+            background-color: black;
+        }
+    </style>
+    <script>
+        window.addEventListener('load', function () {
+            const feedImage = document.querySelector('.feed');
+
+            function refreshImage() {
+                // Create a new image element
+                const newImage = new Image();
+                const timestamp = new Date().getTime();
+
+                // When the new image is ready...
+                newImage.onload = function () {
+                    // Only update the source once it's fully loaded
+                    feedImage.src = newImage.src;
+                    feedImage.classList.remove('loading');
+                };
+
+                // If there's an error loading the image...
+                newImage.onerror = function (e) {
+                    console.log('Error loading image, will try again next interval');
+                    feedImage.classList.remove('loading');
+                };
+
+                // Start loading the new image
+                feedImage.classList.add('loading');
+                newImage.src = `http://127.0.0.1:3000/screenshot?t=${timestamp}`;
+            }
+
+            // Start the refresh cycle
+            setInterval(refreshImage, 1000);
+        });
+    </script>
+</head>
+
+<body>
+    <img src="/static/images/TV.webp" alt="">
+    <img class="feed move" src="http://127.0.0.1:3000/screenshot" alt="">
+    <div class="silly move"></div>
+</body>
+
+</html>
