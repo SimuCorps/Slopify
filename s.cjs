@@ -25,7 +25,7 @@ async function initialize() {
         await page.goto('https://thedaddy.to/embed/stream-321.php');
         console.log("Navigated to stream site")
 
-        setInterval(takeScreenshot, 500);
+        setInterval(takeScreenshot, 800);
         console.log("Started taking screenshots!")
     } catch (error) {
         console.error('Initialization failed:', error);
@@ -33,7 +33,6 @@ async function initialize() {
     }
 }
 
-// Route to serve the screenshot
 app.get('/screenshot', async (req, res) => {
     try {
         //console.log(`Screenshot requested from ${req.ip} at ${new Date().toISOString()}`);

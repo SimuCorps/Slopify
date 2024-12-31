@@ -176,3 +176,5 @@ dist
 
 # Rust target
 /target
+
+/example.png
