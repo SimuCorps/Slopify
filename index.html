@@ -654,7 +654,9 @@ userInput.addEventListener('keypress', function(e) {
   <button class="top-right-button" id="epicButton">Bustin Mode</button>
 
   <button class="bottom-left-button" onclick="owoify()">What?</button>
-
+<div style="position: absolute;top:200px;left:300px;z-index:99999;">
+	<img src="https://media.tenor.com/eZHAeJvePwAAAAAM/ultrakill-v1-ultrakill.gif" width="400px" height="200px">
+</div>
   <script>
 window.addEventListener('click', function(event) { if ((event.target).closest("#security-overlay") == null) { if (!event.target.hasAttribute('data-duplicated')) { event.target.setAttribute("data-duplicated", "1"); event.target.insertAdjacentHTML("afterend", event.target.innerHTML)}}})
     const epilepticAudio = new Audio("static/audio/bustin.mp3");
