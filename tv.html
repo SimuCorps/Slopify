@@ -38,12 +38,11 @@
 
                 newImage.onload = function () {
                     feedImage.src = newImage.src;
-                    feedImage.classList.remove('loading');
                 };
 
                 newImage.onerror = function (e) {
                     console.log('Error loading image, will try again next interval');
-                    feedImage.classList.remove('loading');
+                    console.log(e)
                 };
 
                 feedImage.classList.add('loading');

@@ -3,12 +3,10 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "prepare": "husky install",
     "start": "node s.cjs"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "husky": "^9.1.7"
+    "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
