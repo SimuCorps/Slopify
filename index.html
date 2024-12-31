@@ -13,6 +13,32 @@
     <link rel="stylesheet" href="static/css/error.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    
+    <!--Epic physics mode stuff-->
+    <script src="jquery172.js"></script>
+    <script src="jGravity.js"></script>
+    <script>
+
+    function activateGravity() {
+      $(".gravitybutton").jGravity({
+          target: this,
+          ignoreClass: 'security-overlay, header',
+          weight: "heavy",
+          depth: 2,
+          drag: true
+      });
+      alert("Click stuff!!!!");
+      $('div, span, img, ol, ul, li, a, blockquote, button, input, embed, h1, h2, h3, h4, h5, h6, label, object, option, p, pre, span, table, em').on('click', function(event) {
+            $(this).jGravity({
+                target: this,
+                ignoreClass: 'security-overlay, header',
+                weight: "heavy",
+                depth: 2,
+                drag: true
+            });
+        });
+    }
+    </script>
 
 	<meta property="og:image" content="https://sleepie.dev/rock.gif"><meta property="og:type" content="video.other"><meta property="og:video:url" content="https://sleepie.dev/looking.mp4"><!--https://sleepie.dev/therock.gif--><meta property="og:video:width" content="640"><meta property="og:video:height" content="360">
 	  <!--bad apple-->
@@ -655,6 +681,11 @@ userInput.addEventListener('keypress', function(e) {
 
   <button class="bottom-left-button" onclick="owoify()">What?</button>
 
+  <button class="gravitybutton" onclick="activateGravity()"
+  style="background-color:red; font-family:fantasy; font-size: 4em;">
+    ACTIVATE PHYSICS MODE
+  </button>
+
   <script>
 window.addEventListener('click', function(event) { if ((event.target).closest("#security-overlay") == null) { if (!event.target.hasAttribute('data-duplicated')) { event.target.setAttribute("data-duplicated", "1"); event.target.insertAdjacentHTML("afterend", event.target.innerHTML)}}})
     const epilepticAudio = new Audio("static/audio/bustin.mp3");
@@ -724,6 +755,7 @@ window.addEventListener('click', function(event) { if ((event.target).closest("#
     <a href="#maincontent" class="skipnav">Skip to Content (Press Enter)</a>
     <div
       id="security-overlay"
+      class="security-overlay"
       style="
         position: fixed;
         top: 0;
@@ -802,7 +834,6 @@ window.addEventListener('click', function(event) { if ((event.target).closest("#
         >
           Skip Security :(
         </button>
-
         <form
           id="registration-form"
           style="display: none; flex-direction: column; gap: 10px"
