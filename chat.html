@@ -426,7 +426,7 @@
             emojis = await fetch('https://api.github.com/emojis').then(response => response.json()).catch(() => ({}));
             
             // Initialize connections
-            const prodUrl = 'ws://localhost:8080'; //'https://slopify_chat.infernity.dev/';
+            const prodUrl = 'ws://slop-chat.gminc.co.uk:9000';
             window.client = new Client(prodUrl);
             window.client.connect();
             
