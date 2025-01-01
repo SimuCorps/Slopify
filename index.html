@@ -469,7 +469,6 @@
     </div>
 
     <header id="schisse">
-        <button class="creationButton" id="creation">Creation!</button>
       <marquee><img src="static/images/epic-logo.gif" /></marquee>
       <img src="SlopifyLogo.png" width="400px" />
       <p>
@@ -1191,7 +1190,6 @@ window.addEventListener('resize', handleResponsiveLayout);
         </button>
       </section>
     </main>
-    <script src="luxembourg.js"></script>
     <footer>
       <div style="text-align: center; margin-top: 20px">
         <img
@@ -1499,13 +1497,17 @@ window.addEventListener('resize', handleResponsiveLayout);
 
     <style>
         #megaheader {
-            font-size: 64em;
+            max-width: auto;
             position: absolute;
+            text-align: center;
             background-color: white;
             z-index: 4;
             opacity: 0.5;
         }
         </style>
-    <h1 id="megaheader">Hello!</h1>
+    <div id="megaheader">
+        <button class="creationButton" id="creation">Creation!</button>
+    </div>
+    <script src="luxembourg.js"></script>
 </body>
 </html>
