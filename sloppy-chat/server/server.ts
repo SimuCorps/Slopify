@@ -134,10 +134,7 @@ const onMessage = async (ws: WSocket, message: WMessage) => {
         //  Broadcast to all
         for (const { userId, socket } of clients.values()) {
             const senderItself = req.userId === userId; 
-            
-            if (!senderItself) {
-                socket.send(JSON.stringify(rp));    
-            }
+            socket.send(JSON.stringify(rp));    
 
             if (botReply){
                 if (botReply.onlyToSender && !senderItself) 
