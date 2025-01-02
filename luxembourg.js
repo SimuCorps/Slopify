@@ -42,7 +42,9 @@ function main() {
             luxembourg.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/d/da/Flag_of_Luxembourg.svg")
             luxembourg.setAttribute("alt", "Can't load, bozo!")
             luxembourg.setAttribute("width", "128")
-            luxembourg.style.cssText = `transform: translate(${event.x, event.y}); position: absolute;`
+            // let style = `transform: translate(${event.x}, ${event.y}); position: absolute;`
+            luxembourg.style.transform = `translateX(${event.x}px) translateY(${event.y}px)`
+            luxembourg.style.position = "absolute"
 
             maincontent.appendChild(luxembourg)
             console.log("Hello?")
