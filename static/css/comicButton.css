@@ -1,0 +1,17 @@
+#comicButton {
+  width: 200px;
+  height: 100px;
+  position: absolute;
+  right: 0;
+  top: auto;
+  bottom: auto;
+}
+
+@font-face {
+  font-family: "Comic Sans MS";
+  src: url(./static/fonts/Comic\ Sans\ MS.ttf);
+}
+
+#comic-font {
+  font-family: "Comic Sans MS" !important;
+}

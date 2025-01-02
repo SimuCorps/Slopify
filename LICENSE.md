@@ -50,5 +50,6 @@ This license is compatible with GPLv2 and may coexist with other open-source lic
 ## 10. Enforcement
 
 Violations of these terms will result in the immediate termination of the license for the violator. Enforcement actions may be initiated by:
- - The original authors or maintainers of this software.
- - Third-party organizations explicitly authorized by the authors to monitor and enforce compliance.
+
+- The original authors or maintainers of this software.
+- Third-party organizations explicitly authorized by the authors to monitor and enforce compliance.

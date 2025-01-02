@@ -1,0 +1,15 @@
+#katamari-container {
+  width: 400px;
+  height: 600px;
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+#katamariFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

@@ -11,8 +11,8 @@ MODIFIED BY KOSAN https://github.com/MegaKosan
 
 (async function oneko() {
   const nekoEl = document.createElement("div");
-  let nekoPosX = window.innerWidth*0.5,
-    nekoPosY = window.innerHeight*0.2,
+  let nekoPosX = window.innerWidth * 0.5,
+    nekoPosY = window.innerHeight * 0.2,
     mousePosX = 0,
     mousePosY = 0,
     frameCount = 0,
@@ -208,42 +208,41 @@ MODIFIED BY KOSAN https://github.com/MegaKosan
       window.addEventListener("mousemove", mousemove);
       window.addEventListener("mouseup", mouseup);
     });
-    
+
     //Double Click to go through skins
     nekoEl.addEventListener("dblclick", (e) => {
-        e.preventDefault();
-        
-        let activeVariantIndex = -1; // Default index if not found, it iterates up to default or 0
-        
-        // Iterate through the variants array to find the index of the active variant
-        for (let i = 0; i < variants.length; i++) {
-            //console.log("PASS "+i+"| Variant in array: " + variants[i][0]);
-            //console.log("Variant in localStorage: " + localStorage.getItem('oneko:variant'));
-            //console.log("Comparing:", variants[i][0], "===", localStorage.getItem('oneko:variant'));
-            if (variants[i][0] == localStorage.getItem('oneko:variant')) {
-                //console.log("BREAKING THA LOOP");
-                activeVariantIndex = i; // Update the index if found
-                break; // Exit the loop once found
-            }
+      e.preventDefault();
+
+      let activeVariantIndex = -1; // Default index if not found, it iterates up to default or 0
+
+      // Iterate through the variants array to find the index of the active variant
+      for (let i = 0; i < variants.length; i++) {
+        //console.log("PASS "+i+"| Variant in array: " + variants[i][0]);
+        //console.log("Variant in localStorage: " + localStorage.getItem('oneko:variant'));
+        //console.log("Comparing:", variants[i][0], "===", localStorage.getItem('oneko:variant'));
+        if (variants[i][0] == localStorage.getItem("oneko:variant")) {
+          //console.log("BREAKING THA LOOP");
+          activeVariantIndex = i; // Update the index if found
+          break; // Exit the loop once found
         }
-        
-        if (activeVariantIndex+1 < variants.length) {
-            setVariant(variants[activeVariantIndex+1]);
-        } else {
-            setVariant(variants[0]);
-        }
-        
+      }
+
+      if (activeVariantIndex + 1 < variants.length) {
+        setVariant(variants[activeVariantIndex + 1]);
+      } else {
+        setVariant(variants[0]);
+      }
     });
 
     //Right click for force-sleep
     nekoEl.addEventListener("contextmenu", (e) => {
-        e.preventDefault();
-        forceSleep = !forceSleep;
-        nudge = false;
-        if (!forceSleep) {
-            resetIdleAnimation();
-            return;
-        }
+      e.preventDefault();
+      forceSleep = !forceSleep;
+      nudge = false;
+      if (!forceSleep) {
+        resetIdleAnimation();
+        return;
+      }
     });
 
     window.onekoInterval = setInterval(frame, 100);
@@ -273,7 +272,7 @@ MODIFIED BY KOSAN https://github.com/MegaKosan
       idleAnimation == null
     ) {
       let avalibleIdleAnimations = ["sleeping", "scratchSelf"];
-      
+
       if (nekoPosX < 32) {
         avalibleIdleAnimations.push("scratchWallW");
       }
@@ -407,11 +406,10 @@ MODIFIED BY KOSAN https://github.com/MegaKosan
   }
 
   function setVariant(arr) {
-    console.log("Setting oneko variant to: "+arr[1]);
-    
+    console.log("Setting oneko variant to: " + arr[1]);
+
     variant = arr[0];
     localStorage.setItem("oneko:variant", `${variant}`);
     nekoEl.style.backgroundImage = `url('static/images/oneko/oneko-${variant}.png')`;
   }
-  
 })();

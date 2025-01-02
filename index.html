@@ -1,474 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="apple-touch-icon" sizes="128x128" href="/static/images/apple-touch-icon.png">
-    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
-    <link rel="stylesheet" href="static/css/error.css">
-    <title>Slopify</title>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
-    <script>
-      const THE_OPPENHEIMER_INDEX = 69;
-      function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
-      }
 
-      function showFullScreenImage(
-        imageUrl,
-        displayDuration = 2000,
-        fadeDuration = 1500
-      ) {
-        const overlay = document.createElement("div");
-        overlay.style.position = "fixed";
-        overlay.style.top = "0";
-        overlay.style.left = "0";
-        overlay.style.width = "100%";
-        overlay.style.height = "100%";
-        overlay.style.display = "flex";
-        overlay.style.alignItems = "center";
-        overlay.style.justifyContent = "center";
-        overlay.style.backgroundColor = "rgba(0,0,0,0.8)";
-        overlay.style.zIndex = "999999";
+<head>
+  <title>Slopify UwU</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="apple-touch-icon" sizes="128x128" href="/static/images/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+  <link rel="stylesheet" href="static/css/page-nav.css">
+  <link rel="stylesheet" href="static/css/error.css">
+  <!-- TODO: don't pull this from CDN -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+  <!-- TODO: don't pull this from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <meta property="og:image" content="https://sleepie.dev/rock.gif">
+  <meta property="og:type" content="video.other">
+  <meta property="og:video:url" content="https://sleepie.dev/looking.mp4"><!--https://sleepie.dev/therock.gif-->
+  <meta property="og:video:width" content="640">
+  <meta property="og:video:height" content="360">
 
-        overlay.style.opacity = "1";
-        overlay.style.transition = `opacity ${fadeDuration}ms ease`;
+  <!-- TODO: figure out which PRs this was actually part of -->
+  <link rel="stylesheet" href="static/css/style.css" />
 
-        const image = document.createElement("img");
-        image.src = imageUrl;
-        image.style.position = "absolute";
-        image.style.top = "0";
-        image.style.left = "0";
-        image.style.width = "100%";
-        image.style.height = "100%";
-        image.style.objectFit = "contain";
+  <!-- slopbot styles -->
+  <link rel="stylesheet" href="static/css/slopbot.css" />
 
-        overlay.appendChild(image);
+  <!-- chatbot styles -->
+  <link rel="stylesheet" href="static/css/chatbot.css" />
 
-        document.body.appendChild(overlay);
+  <!-- security overlay styles -->
+  <link rel="stylesheet" href="static/css/security.css" />
 
-        setTimeout(() => {
-          overlay.style.opacity = "0";
-        }, displayDuration);
+  <!-- flappy musk styles -->
+  <link rel="stylesheet" href="static/css/flappyMusk.css" />
 
-        setTimeout(() => {
-          if (overlay.parentNode) {
-            overlay.parentNode.removeChild(overlay);
-          }
-        }, displayDuration + fadeDuration);
-      }
+  <!-- news styles -->
+  <link rel="stylesheet" href="static/css/news.css" />
 
-      var audio = new Audio("static/audio/protocol.mp3");
-      document.addEventListener("click", function (event) {
-        // Check if the clicked element is a button
+  <!-- comic sans button styles -->
+  <link rel="stylesheet" href="static/css/comicButton.css" />
+  
+  <!-- scoped bootstrap -->
+  <!-- Add the .use-bootstrap class to apply Bootstrap styles -->
+  <link rel="stylesheet" href="static/css/scoped-bootstrap.css" />
+  
+  <!-- half life 2 cl_showpos -->
+  <link rel="stylesheet" href="static/css/cl-showpos.css" />
+  <script src="static/js/cl-showpos.js" defer></script>
 
-        var LUCKY_NUMBER = getRandomInt(THE_OPPENHEIMER_INDEX);
-        if (LUCKY_NUMBER === 0) {
-          audio.volume = 1;
-          audio.play();
-          showFullScreenImage("static/images/handsome.jpg", 1500, 1500);
-        }
-      });
-    </script>
-    <style>
-      * {
-        border: 0;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        cursor: url(static/images/win95_cursor_regular.png) 0 0, default;
-      }
+  <!-- world map styles -->
+  <link rel="stylesheet" href="static/css/world_map/styles.css" />
 
-      body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 0;
-        color: #ebdbb2;
-        display: grid;
-        height: 100vh;
-      }
+  <link rel="stylesheet" href="static/css/luxembourg.css" />
 
-      .skipnav {
-        text-decoration: none;
-        padding: 4px 8px;
-        position: absolute;
-        left: -1000em;
-        top: 0;
-        font-weight: bold;
-      }
-      
-      .skipnav:focus,
-      .skipnav:active {
-        z-index: 99;
-        top: 1rem;
-        left: 1rem;
-        color: #ebdbb2;
-        outline: 4px dotted #ebdbb2;
-        background: #282828;
-        width: fit-content;
-        outline-offset: 2px;
-      }
-
-      header {
-        color: #ebdbb2;
-        padding: 20px 0;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-
-      header h1 {
-        margin: 0;
-        font-size: 2.5rem;
-      }
-
-      main {
-        padding: 20px;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      footer {
-        text-align: center;
-        padding: 10px 0;
-        color: #ebdbb2;
-        margin-top: 20px;
-      }
-
-      a {
-        color: #b8bb26;
-        text-decoration: underline;
-      }
-
-      a:hover {
-        color: #83a598;
-      }
-
-      .importante {
-        display: inline-flex;
-      }
-
-      .fishtank-container {
-        position: relative;
-        width: 100%;
-        height: 400px;
-        margin: 20px 0;
-        overflow: hidden;
-        background: rgba(40, 40, 40, 0.5);
-        border-radius: 8px;
-      }
-
-      .fishtank-canvas {
-        width: 100%;
-        height: 100%;
-        cursor: crosshair;
-      }
-
-      @media (max-width: 768px) {
-        .fishtank-container {
-          height: 300px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .fishtank-container {
-          height: 250px;
-        }
-      }
-
-      /* Optional loading placeholder */
-      .fishtank-placeholder {
-        position: absolute;
-        inset: 0;
-        background: #3c3836;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.3s ease-out;
-      }
-
-      #frog {
-        width: 400px;
-        margin: 10px;
-      }
-
-      @keyframes frogPulse {
-        0% {
-          transform: scale(1);
-        }
-
-        50% {
-          transform: scale(1.5);
-        }
-
-        100% {
-          transform: scale(1);
-        }
-      }
-
-      #dancing-frog {
-        width: 400px;
-        margin: 10px;
-        animation: frogPulse 5s infinite;
-      }
+  <!-- Q: Do we need this? -->
+  <script>
+    !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.crossOrigin = "anonymous", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
+    posthog.init('phc_tMS2IpaHh8OfPPuSqH4feNvaEP8ht6wrZMQHYfL2fX9', {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only' // or 'always' to create profiles for anonymous users as well
+    })
+  </script>
+</head>
 
 
-      #stock_img {
-        width: 400px;
-        height: 400px;
-      }
+<body>
+  <div data-bs-theme="dark" class="use-bootstrap" style="position: absolute; top: 0; z-index: 69; width: 100%; background: transparent;">
+    <nav class="navbar navbar-expand-lg" style="--bs-navbar-padding-y: 0; background: transparent; backdrop-filter: blur(1rem);">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="/static/images/apple-touch-icon.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/astolfo.html">Astolfo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/chat.html">Chat</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/god.html">God</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/health-check.html">Health Check</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/katamari.html">Katamari</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/leaderboard.html">Leaderboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/mizdiary.html">miz's weekly diary</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/second.html">Second</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/thebible.html">The Bible</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/touhouproject.html">Touhou Project</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/uwu.html">UwU</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="cl-showpos">
+    <div class="map"><span class="fps">60</span> fps on <span class="url"><span></div>
+    <div class="pos">pos:  0.00 0.00 0.00</div>
+    <div class="vel">vel:  0.00</div>
+  </div>
+  <button id="comicButton" type="button">comic sans-inator 5000</button>
+  <iframe src="https://sleepie.dev/testpopup.html" id="testpopup" title="Hot Singles Near You!">
+  </iframe>
+  <audio id="pageLoadUwUSound" autoplay>
+    <source src="sound.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <a href="https://youareanidiot.cc/">YOU ARE AN IDIOT</a>
+  <!-- Map Section -->
+  <div id="map-container">
+    <div id="world-map"></div>
+  <!-- slopbot AD -->
+  <div class="slop-teaser" onclick="window.location.href='/ai.html'">
+    <span>🤖</span>
+    <span>CLICK FOR AI SLOP</span>
+    <div class="close" onclick="event.stopPropagation(); this.parentElement.style.display='none'">×</div>
+  </div>
 
-      .donut-container {
-        background-color: #000;
-        width: 400px;
-        height: 400px;
-      }
-
-      #d {
-        font-size: 0.75em;
-      }
-       
-      .fourier-container {
-        text-align: center;
-      }
-
-      #l8rgt {
-        display: block;
-        margin: 10px 0;
-        padding: 15px 30px;
-        font-size: 20px;
-        font-family: var(--font);
-        background: radial-gradient(circle, #b00b69, rgb(145, 69, 221));
-        color: white;
-      }
-      
-      #foxy {
-        height: 600px;
-        width: auto;
-        background: url('static/images/cute.jpg');
-        background-repeat: no-repeat;
-      }
-
-      #foxy:hover {
-        background: url('static/images/snarl.jpg');
-        background-repeat: no-repeat;
-      }
-      
-      @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-      }
-
-      @keyframes shake {
-        0%, 100% { transform: translate(0, 0); }
-        10%, 30%, 50%, 70%, 90% { transform: translate(-5px, 5px); }
-        20%, 40%, 60%, 80% { transform: translate(5px, -5px); }
-      }
-
-      @keyframes flash {
-        0% { background-color: black; }
-        50% { background-color: white; }
-        100% { background-color: black; }
-      }
-
-      .worst-theme {
-        font-family: 'Comic Sans MS', cursive, sans-serif;
-        animation: spin 10s linear infinite, flash 1s step-start infinite;
-      }
-
-      .worst-theme * {
-        animation: rainbow 1s linear infinite, shake 0.5s ease-in-out infinite;
-        text-shadow: 2px 2px 0px #FF00FF;
-        background-color: yellow;
-      }
-
-      .creationButton {
-          font-family: sans-serif;
-          font-size: 5em;
-          padding: 1em;
-          border-radius: 2em;
-          transition-duration: 200ms;
-          transition-delay: 100ms;
-          background-color: rgb(69, 69, 69);
-      }
-
-      .creationButton:hover {
-          background-color: rgb(42, 42, 42);
-          border-radius: 1em;
-      }
-
-      .creationButton:active {
-          background-color: rgb(7, 7, 7);
-          border-radius: 3em;
-      }
-    </style>
+  <!-- seizuring rotating SKIBIDI GOAT -->
+  <img src="static/images/RotatingGoat.png" class="bouncing-rotating-image"
+    onclick="window.location.href='https://n0rule.is-a.dev'" alt="Rotating Goat" />
+  <div id="randomDiv">
+    <button id="comicButton" type="button">comic sans-inator 5000</button>
+    <iframe src="https://sleepie.dev/testpopup.html" id="testpopup" title="Hot Singles Near You!">
+    </iframe>
+    <audio id="pageLoadUwUSound" autoplay>
+      <source src="sound.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <a href="https://youareanidiot.cc/">YOU ARE AN IDIOT</a>
+    <!-- Map Section -->
+    <div id="map-container">
+      <div id="world-map"></div>
+    </div>
     <audio id="vibeAudio" loop>
       <source
         src="https://cdn.pixabay.com/download/audio/2024/10/22/audio_5b87be5f9b.mp3?filename=smooth-jazz-saxophone-solo-with-a-lofi-vibe-253950.mp3"
-        type="audio/mp3"
-      />
+        type="audio/mp3" />
       Your browser does not support the audio element.
     </audio>
     <audio id="moreVibeAudio" loop>
       <source src="/static/audio/rick.m4a" type="audio/mp3" />
       Your browser does not support the audio element.
     </audio>
-    <script type="module">
-          import { rainbowCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
-
-          const FLAGS = [
-            ["#FE0000", "#FD8C00", "#FFE500", "#119F0B", "#0644B3", "#C22EDC"],
-            ["#59C8F3","#F2A6B5","#fff","#F2A6B5","#59C8F3"]
-          ]
-          let chosenFlag = FLAGS[Math.floor(Math.random() * FLAGS.length)];
-          
-          new rainbowCursor({ colors: chosenFlag });
-    </script>
-    <script type="module" src="static/js/index.js"></script>
-    <script>
-      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-      posthog.init('phc_tMS2IpaHh8OfPPuSqH4feNvaEP8ht6wrZMQHYfL2fX9', {
-          api_host:'https://us.i.posthog.com',
-          person_profiles: 'identified_only' // or 'always' to create profiles for anonymous users as well
-      })
-  </script>
-  </head>
-  <body>
-	<script src="static/js/oneko.js"></script>
-    <a href="#maincontent" class="skipnav">Skip to Content (Press Enter)</a>
-    <div
-      id="security-overlay"
-      style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        z-index: 1000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      "
-    >
-      <div
-        style="
-          background: #3c3836;
-          padding: 20px;
-          border-radius: 8px;
-          max-width: 400px;
-          width: 100%;
-        "
-      >
-        <h2 style="color: #ebdbb2; text-align: center">
-          🔒 Welcome to Slopify 🔒
-        </h2>
-
-        <div
-          id="captcha-container"
-          style="margin-bottom: 20px; text-align: center"
-        >
-          <div
-            id="captcha-prompt"
-            style="margin-bottom: 10px; color: #ebdbb2"
-          ></div>
-          <div id="captcha-content"></div>
-          <input
-            type="text"
-            id="captcha-input"
-            placeholder="Enter your answer"
-            style="
-              padding: 8px;
-              margin: 10px 0;
-              background: #282828;
-              color: #ebdbb2;
-              border: 1px solid #b8bb26;
-              width: 100%;
-            "
-          />
-          <button
-            id="submit-captcha"
-            style="
-              background: #b8bb26;
-              color: #282828;
-              padding: 10px;
-              border: none;
-              cursor: pointer;
-              width: 100%;
-            "
-          >
-            Submit CAPTCHA
-          </button>
+    <div id="chatbot">
+      <div class="chat-header">
+        <span>Chat Support</span>
+        <button id="chatToggleButton" onclick="toggleChat()">×</button>
+      </div>
+      <div id="chatMessages">
+        <div class="bot-message">
+          <div class="clippy-container">
+            <img
+              src="https://static.wikia.nocookie.net/the-scrappy/images/c/cb/Clippy.png/revision/latest?cb=20231027172058"
+              class="clippy-image" alt="Clippy">
+            <span>how can i help you today?</span>
+          </div>
         </div>
-
-        <!-- Skip Security Button -->
-        <button
-          id="skip-security"
-          style="
-            background: #d9534f;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
-          "
-        >
-          Skip Security :(
-        </button>
-
-        <form
-          id="registration-form"
-          style="display: none; flex-direction: column; gap: 10px"
-        >
-          <input
-            type="text"
-            id="username"
-            placeholder="Username"
-            style="
-              padding: 8px;
-              margin: 5px 0;
-              background: #282828;
-              color: #ebdbb2;
-              border: 1px solid #b8bb26;
-            "
-          />
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            style="
-              padding: 8px;
-              margin: 5px 0;
-              background: #282828;
-              color: #ebdbb2;
-              border: 1px solid #b8bb26;
-            "
-          />
-          <div
-            id="requirements-list"
-            style="color: #ebdbb2; font-size: 0.9em; margin: 10px 0"
-          ></div>
-          <button
-            type="submit"
-            style="
-              background: #b8bb26;
-              color: #282828;
-              padding: 10px;
-              border: none;
-              cursor: pointer;
-            "
-          >
-            Register
-          </button>
-        </form>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
       </div>
     </div>
 
+    <div id="chatContainer">
+      <a href="/chat.html">
+        <img src="/static/images/slopchat.jpg" width="400px" height="200px" alt="Go to SlopChat">
+      </a>
+    </div>
+
+
+    <div id="slopTVContainer">
+      <marquee style="background-color:white;color:black;font-family:serif;transform:scaleY(1.5);">
+        <h1>SlopTV ! Watch free tv online below</h1>
+      </marquee>
+      <a href="/tv.html">
+        <iframe src="/tv.html" frameborder="0"></iframe>
+      </a>
+    </div>
+
+    <div id="chatContainer">
+      <a href="/chat.html">
+        <img src="/static/images/slopchat.jpg" width="400px" height="200px">
+      </a>
+    </div>
+    <!-- Epileptic Mode Button -->
+    <button class="top-right-button" id="epicButton">Bustin Mode</button>
+    <button class="bottom-left-button" onclick="owoify()">What?</button>
+    <a href="astolfo.html" style="text-align: center;">ASTOLFOOOO (,,>﹏<,,)< /a>
+        <button class="bottom-right-button"
+          id="addMoreWokeToTheWebpageSimplyBecauseICanAndUhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh">waiter
+          waiter! more woke please</button>
+        <a href="#maincontent" class="skipnav">Skip to Content (Press Enter)</a>
+
+        <div id="security-overlay">
+          <div id="security-overlay-inner">
+            <h2 id="security-overlay-title">
+              🔒 Welcome to Slopify 🔒
+            </h2>
+
+            <div id="captcha-container">
+              <div id="captcha-prompt"></div>
+              <div id="captcha-content"></div>
+              <input type="text" id="captcha-input" placeholder="Enter your answer" />
+              <button id="submit-captcha">
+                Submit CAPTCHA
+              </button>
+            </div>
+
+
+
+            <!-- Skip Security Button -->
+            <button id="skip-security">
+              Skip Security :(
+            </button>
+
+            <form id="registration-form">
+              <input type="text" id="username" class="registration-input" placeholder="Username" />
+              <input type="password" id="password" class="registration-input" placeholder="Password" />
+              <div id="requirements-list"></div>
+              <button type="submit" id="register-button">
+                Register
+              </button>
+            </form>
+          </div>
+        </div>
+
     <header id="schisse">
+     <div id="megaheader">
+         <button class="creationButton" id="creation">Creation!</button>
+      </div>
       <marquee><img src="static/images/epic-logo.gif" /></marquee>
       <img src="SlopifyLogo.png" width="400px" />
       <p>
@@ -485,1029 +270,540 @@
 
       <a href="/second.html">
         <button style="position: fixed;left:1%;top:2%;"><p>alan becker</p> <img src="static/images/alanbecker/alan.png" width="50" height="50"/></button>
-      </a>
+          <marquee><img src="static/images/epic-logo.gif" alt="Slopify animated logo" /></marquee>
+          <img src="SlopifyLogo.png" width="400px" alt="Slopify logo" />
+          <h1><a href="https://discord.gg/sPbES34ZsA">Join the Discord</a> or your mom's a hoe</h1>
+          <p>
+            <em>"The
+              <a href="https://www.newmanmentalism.com/blog/a-mentalist-explains-how-ouija-boards-work-and-the-ideomotor-effect"
+                target="_blank">ideomotor effect</a>
+              of software"</em>
+          </p>
+          <div id="page-nav">
+            <label class="hamburger-menu">
+              <input type="checkbox" aria-label="Menu" />
+            </label>
+            <aside class="sidebar">
+              <nav>
+                <a href="/index.html">Home</a>
+                <a href="/second.html">Second</a>
+                <a href="/uwu.html">UwU</a>
+                <a href="/chat.html">Chat</a>
+                <a href="/thebible.html">The Bible</a>
+                <a href="/god.html">God</a>
+                <a href="/touhouproject.html">Touhou Project</a>
+                <a href="/mizdiary.html">miz's weekly diary</a>
+          </div>
+          </nav>
+          </aside>
+  </div>
 
-      <div>
-        <h1>MAXIMIZE YOUR WIN</h1>
-        <div class="w-full flex gap-2">
-          <div class="bg-black rounded-2xl w-16 as"></div>
-        </div>
-      </div>
-<div id="news-container" style="
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    pointer-events: none;
-    z-index: 1;
-">
-    <div id="news-grid" style="
-        display: flex;
-        justify-content: space-between;
-        padding: 0 20px;
-        max-width: 100%;
-        margin: 0 auto;
-    ">
-        <div class="left-column" style="
-            width: 300px;
-            position: fixed;
-            left: 20px;
-            pointer-events: auto;
-        "></div>
-        <div class="right-column" style="
-            width: 300px;
-            position: fixed;
-            right: 20px;
-            pointer-events: auto;
-        "></div>
+  <a href="/second.html">
+    <button id="secondButton">
+      <p>alan becker</p> <img src="static/images/alanbecker/alan.png" width="50" height="50"
+        alt="Image of Alan Becker" />
+    </button>
+  </a>
+
+  <div>
+    <h1>MAXIMIZE YOUR WIN</h1>
+    <div class="w-full flex gap-2">
+      <div class="bg-black rounded-2xl w-16 as"></div>
     </div>
-</div>
+  </div>
 
-<script>
-const onionArticles = {
-    "articles": [
-        {
-            "title": "Pope Francis Decries Legal Head Shops Overrunning Vatican City",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Pope_Francis_Decries-NIB_IHA_GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "Surgeon General: ‘You Are Supposed To Be Able To Button Your Pants’",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Surgeon_General_NIB_IHA_GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "Santa Confirms Everyone Getting Bag Of Glitter Labeled ‘Fairy Dust’ His Sister-In-Law Sells On Etsy",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Untitled-2Santa_Confirms_NIB_IHA_GR_copy.jpg?w=1024"
-        },
-        {
-            "title": "Timeline Of Trendy Christmas Toys",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Trendy_Toys_INFO-G-PH.jpg?w=1024"
-        },
-        {
-            "title": "Experts Recommend Putting Injured Person In Some Sort Of Cylindrical Tank Filled With Fluid",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Experts_Recommend_NIB_IHA_GR.jpg?w=1024"
-        },
-        {
-            "title": "God Locks Heavenly Gates After Spotting Mormon Missionaries Milling Around Outside",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/God_Locks_NIB_IHA-GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "FEMA Administrator Resigns After Accidentally Playing Porn On Emergency Alert System",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/FEMA_Administrator_NIB_S_PH.webp?w=1024"
-        },
-        {
-            "title": "‘No Way To Prevent This,’ Says Only Nation Where This Regularly Happens",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/No_Way_To_Prevent-Madison_NIB_G-PH.jpg?w=1024"
-        },
-        {
-            "title": "KitchenAid Unveils New Culinary Mech Suit",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/KitchenAid_Unveils_NIB_IHA-GR_23524d.webp?w=1024"
-        },
-        {
-            "title": "Large, Playful Sheepdog Knocks Over Houston Skyline",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Large_Playful_NIB_IHA-GR-C.jpg?w=1024"
-        },
-        {
-            "title": "Pete Hegseth Clarifies Women Allowed In Combat Roles But It’s A Huge Turnoff",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Pete_Hegseth_Clarifies_NIB_PH.jpg?w=1024"
-        },
-        {
-            "title": "Secretary Of Interior Asks Nation’s Help Identifying Leaf",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Secretary_Of_Interior_NIB-IHA-GR-C.jpg?w=1024"
-        },
-        {
-            "title": "Emotional Nation Gathers Outside Main Street TV Store To Watch Monster Truck Land On Smaller Truck",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Emotional_NAtion_NIB-IHA-GR.jpg?w=1024"
-        },
-        {
-            "title": "Canine Breeding-Activists Firebomb Spay-And-Neuter Clinic",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Canine_Breeding_Activists_SB_IHA-GR.webp?w=1024"
-        },
-        {
-            "title": "How To Perform A Breast Self-Exam",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/INFO_Breast_Self_Exam_S_PH.webp?w=1024"
-        },
-        {
-            "title": "MrBeast Offers To Give $1 Million To First Person Who Can Teach Him To Blink",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/MrBeast_Offers_NIB_G_PH.webp?w=1024"
-        },
-        {
-            "title": "Assad Returns To Ophthalmology At Moscow LensCrafters",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Assad_Returns_NIB_IHA_GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "Nation Tires Of Deals, Bargains",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Nation_Tires_Of_Deals_NIB_PH.webp?w=1024"
-        },
-        {
-            "title": "Judge Delays Decision After Learning One Menendez Brother Always Lies, One Always Tells The Truth",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Judge_Delays_NIB_NC_PH.webp?w=1024"
-        },
-        {
-            "title": "Nation’s Mumblers March On Washington Demanding Something Or Other",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Nations_Mumblers_March_NIB_PH.webp?w=1024"
-        },
-        {
-            "title": "Pros And Cons Of Eliminating The Department Of Education",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/12/Eliminating_Education_INFO-G-PH.jpg?w=1024"
-        },
-        {
-            "title": "American Express Launches Small Sweatshop Saturday",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/American_Express_Launches_NIB_IHA_GR.webp?w=1024"
-        },
-        {
-            "title": "Study: Overuse Of Hair Detangler Giving Rise To Product-Resistant Supertangles",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Study_Overuse_Of_Hair_NIB_IHA_GR.webp?w=1024"
-        },
-        {
-            "title": "Macy’s Thanksgiving Day Balloon Floats Away After Handlers Let Go To Check Their Phones",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Macys_Thanksgiving_SB_IHA_GR.webp?w=1024"
-        },
-        {
-            "title": "FDA Bans Captain Morgan Rum After Having Way Too Much Of That Shit In College",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/FDA_Bans_NIB_IHA_GR.webp?w=1024"
-        },
-        {
-            "title": "Report: Most Americans Have Enough Saved For Absolutely Incredible Single Day Of Retirement",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Report_Most_Americans_NIB_PH.webp?w=1024"
-        },
-        {
-            "title": "Barron Trump Returns Home To Find Melania Converted Room To Unending Labyrinth Of Darkness",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Baron_Trump_NIB_IHA_GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "God Looks 400 Millennia Younger After Infusing Self With Son’s Blood",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/God_Looks_NIB_IHA-GR.jpg?w=1024"
-        },
-        {
-            "title": "NASA: Potential Link Between Extraterrestrials, Giant Metal Claw Picking Up Earth",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/NASA_Potential_NIB_IHA-GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "Study: Anxiety Natural Response To Suited Men Wearing Shades Closing In From All Angles",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Anxiety_Natural_Response_NIB_IHA_GR.jpg?w=1024"
-        },
-        {
-            "title": "Kenji López-Alt Returns From Beef Dimension With New Sear Method Beyond Human Comprehension",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Kenji_Lopez_Alt_NIB-IHA_GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "What To Know About Zyn",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/What_-Zyn_INFO-G-PH.png?w=1024"
-        },
-        {
-            "title": "Today’s Historic Front Page: November 6, 2024",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/ELECTION_Front_Page_Site.jpg?w=1024"
-        },
-        {
-            "title": "Mentally Broken Nation Starts Dressing, Speaking Like Frank Sinatra",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Mentally_Broken_NIB_IHA_GR.jpg?w=1024"
-        },
-        {
-            "title": "Piss-Soaked Tucker Carlson Claims Demon Urinated On Him While He Slept",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/11/Piss-Soaked_Tucker_NIB_PH.jpg?w=1024"
-        },
-        {
-            "title": "Historians Unearth Final Fundraising Telegraph Hitler Sent From Bunker",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Historians_Unearth_Final_NIB_GR.webp?w=1024"
-        },
-        {
-            "title": "Pros And Cons Of Prosecuting School Shooters’ Parents",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Prosecuting_Parents_INFO-G-PH.png?w=1024"
-        },
-        {
-            "title": "Revised Citizenship Test Requires Immigrants To Name Every U.S. State Where They Not Welcome",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Revised_Citizenship_Test_NIB_G_PH.jpg?w=1024"
-        },
-        {
-            "title": "Report Finds You Should Get To Retire After, Like, 6 Years Working Full-Time Job",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Report_Finds_You_Should_NIB_IHA_GR.jpg?w=1024"
-        },
-        {
-            "title": "America’s Loneliness Epidemic By The Numbers",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Loneliness_Epidemic_INFO-G-PH.png?w=1024"
-        },
-        {
-            "title": "All The Ways Elon Musk Is Supporting Trump’s Campaign",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Musk_Trump_INFO-G-PH.png?w=1024"
-        },
-        {
-            "title": "Pope Francis Excommunicates All Of World’s Catholics So He Can Have Quiet Weekend Alone",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Pope_Francis_NIB-IHA-GR-copy.jpg?w=1024"
-        },
-        {
-            "title": "Tips For Organizing A Trunk-Or-Treat",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Trunk_Treat_INFO-G-PH.png?w=1024"
-        },
-        {
-            "title": "Indecisive Hostage-Taker Asks What People Usually Demand",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Indecisive_Hostage_Taker_NIB_IHA-GR.jpg?w=1024"
-        },
-        {
-            "title": "‘New York Times’ To Cease Publication",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/New_York_Times_SS_S-PH.jpg?w=1024"
-        },
-        {
-            "title": "Supreme Court Rules 6-3 To Open Evil Tomb Of Batibat",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Supreme_Court_Rules_SS_IHA-GR.jpg?w=1024"
-        },
-        {
-            "title": "Neither Ex Keeps Friends After Breakup",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/08/Niether_Ex_NIB-PH-S.jpg?w=1024"
-        },
-        {
-            "title": "Tourist Impressed By Size Of Chicago Residents",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Tourist_Impressed_NIB-IHA-GR.jpg?w=1024"
-        },
-        {
-            "title": "Tips For Saving Money On Groceries",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Money_Groceries_INFO-G-PH.png?w=1024"
-        },
-        {
-            "title": "Taco Bell Announces It’s Plumb Out Of Ideas For New Places To Put Beef",
-            "image_url": "https://theonion.com/wp-content/uploads/2024/10/Taco_Bell_Announces_NIB_G-PH.jpg?w=1024"
-        }
-    ]
-};
+  <a href="leaderboard.html" class="rainbow-text">Leaderboard</a>
 
-function loadAndDisplayNews() {
-    try {
-        const randomArticles = getRandomArticles(onionArticles.articles, 6);
-        const leftArticles = randomArticles.slice(0, 3);
-        const rightArticles = randomArticles.slice(3, 6);
-        
-        displayArticles(leftArticles, 'left-column');
-        displayArticles(rightArticles, 'right-column');
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+  <!-- Randyifier button -->
+  <button id="randyifier">
+    Call in Randy Pitchford
+  </button>
 
-function getRandomArticles(articles, count) {
-    const shuffled = [...articles].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
-}
+  <video src="https://sleepie.dev/dwl-youtube.com__E_videodlyoutubegQzWr8MoJXA.mp4" controls id="videoPixels">
+    Your potato browser does not support the video tag. Please stop using your grandma's computer.
+  </video>
 
-function displayArticles(articles, columnClass) {
-    const column = document.querySelector(`.${columnClass}`);
-    column.innerHTML = articles.map(article => `
-        <div style="
-            background: rgba(40, 40, 40, 0.8);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            margin-bottom: 20px;
-        "
-        onmouseover="this.style.transform='translateY(-5px)'"
-        onmouseout="this.style.transform='translateY(0)'">
-            <img 
-                src="${article.image_url}" 
-                alt="${article.title}"
-                style="
-                    width: 100%;
-                    height: 200px;
-                    object-fit: cover;
-                "
-                onerror="this.src='https://via.placeholder.com/300x200?text=Image+Not+Available'"
-            >
-            <div style="padding: 20px;">
-                <h3 style="
-                    font-size: 1.1rem;
-                    color: #ebdbb2;
-                    margin: 0;
-                    line-height: 1.4;
-                    font-family: Arial, sans-serif;
-                ">${article.title}</h3>
-                <div style="
-                    font-size: 0.8rem;
-                    color: #b8bb26;
-                    margin-top: 10px;
-                ">${new Date().toLocaleDateString()}</div>
-            </div>
-        </div>
-    `).join('');
-}
+  <div id="news-container">
+    <div id="news-grid">
+      <div class="news-column news-column-left"></div>
+      <div class="news-column news-column-right"></div>
+    </div>
+  </div>
+  <div>
+    <h1>Support A Creator</h1>
+    <img src="static/images/sac.png" alt="Support A Creator">
+  </div>
+  <div>
+    <p>
+      Try out the new coding language that is 100% better than anything:
+      <a href="/embr" id="embrLink">Embr</a>
+    </p>
+  </div>
+  <div id="gallery">
+    <img src="static/images/bobi.jpg" alt="Bobi" class="gallery-item gallery-item-custom">
+    <img src="static/images/kofte.jpg" alt="Kofte" class="gallery-item gallery-item-custom">
+    <img src="static/images/frog.webp" alt="Frog" class="gallery-item">
+  </div>
 
-function handleResponsiveLayout() {
-    const container = document.getElementById('news-container');
-    
-    if (window.innerWidth < 1600) {
-        container.style.display = 'none';
-    } else {
-        container.style.display = 'block';
-    }
-}
+  <canvas id="caleb-canvas"></canvas>
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadAndDisplayNews();
-    handleResponsiveLayout();
-});
+  <button id="vibeButton">Improve the Mood</button>
+  <button id="wisdomButton">ENABLE FROG WISDOM</button>
+  <p>Vist SlopChat™ to chat with other slop enthusiasts. <a href="chat.html">Click here!/a></p>
+  <button id="clickme">Click me!</button>
+  <a href="https://www.hitwebcounter.com" target="_blank">
+    <img src="https://hitwebcounter.com/counter/counter.php?page=18132009&style=0010&nbdigits=9&type=page&initCount=0"
+      title="Counter Widget" alt="Visit counter For Websites" border="0" /></a>
+  <button id="worseThemeButton">This can't get any worse, right?</button>
+  </header>
+  <main id="maincontent">
+    <section>
+      <h2>About Slopify</h2>
+      <img src="#" alt="catgirl" id="catgirl" height="1000px">
+      <br>
+      <button onclick="anotherCatgirl()">get another neko</button>
+      <button onclick="downloadCatgirl()">cute!!</button>
+      <p>
+        Slopify is a 100% community-built open-source website and product. Its
+        unique premise invites contributors to:
+      </p>
+      <ul>
+        <li>Commit whatever code they want</li>
+        <li>Add whatever features they desire</li>
+        <li>Write in whatever language they prefer</li>
+      </ul>
+      <p>The only rules? Everything must work together and remain legal. Im gonna cry.</p>
+    </section>
+    <div id="twittermoanials">
+      <h2>Twittermoanials</h2>
+      <p>They're like testimonials, but for twitter moaning</p>
 
-window.addEventListener('resize', handleResponsiveLayout);
-</script>
+      <div id="twitter-tweet-container">
+        <blockquote class="twitter-tweet" data-theme="dark">
+          <p lang="en" dir="ltr">hahahaha this is fire</p>&mdash; ily⚡️ (@0xIlyy) <a
+            href="https://twitter.com/0xIlyy/status/1873179308153553050?ref_src=twsrc%5Etfw">December 29, 2024</a>
+        </blockquote>
+        <blockquote class="twitter-tweet" data-conversation="none" data-theme="dark">
+          <p lang="en" dir="ltr">WHO THE FUCK ADDED PASSWORD GAME TO THE REGISTRATION PAGE <a
+              href="https://t.co/FYpWT5dycz">pic.twitter.com/FYpWT5dycz</a></p>&mdash; Aterron (@_aterron_) <a
+            href="https://twitter.com/_aterron_/status/1873444464255254743?ref_src=twsrc%5Etfw">December 29,
+            2024</a>
+        </blockquote>
+        <blockquote class="twitter-tweet" data-theme="dark">
+          <p lang="en" dir="ltr">help i played the sexy frog music and now it keeps playing even after i close the
+            browser</p>&mdash; colin ricardo (@_colinricardo) <a
+            href="https://twitter.com/_colinricardo/status/1873429683368505464?ref_src=twsrc%5Etfw">December 29,
+            2024</a>
+        </blockquote>
+        <blockquote class="twitter-tweet" data-theme="dark">
+          <p lang="en" dir="ltr">This project is awesome the amount of random slop added in the last 24 hours alone
+            is
+            crazy. Check it out <a href="https://t.co/GDD8ut9A4S">https://t.co/GDD8ut9A4S</a></p>&mdash; Gil
+          (@TylerGilman01) <a
+            href="https://twitter.com/TylerGilman01/status/1873429461410234849?ref_src=twsrc%5Etfw">December 29,
+            2024</a>
+        </blockquote>
+      </div>
+    </div>
+    <div class="center">
+      <h2 id="penguins">do you like penguins?</h2>
+      <img src="static/images/penguin.webp" alt="An image of a Club Penguin character" />
+      <img src="https://secret.kgncengiz.com/F.jpg" alt="An image of Yaoi artwork" />
+      <img src="static/images/Jesus.png" alt="Three images of Jesus Christ next to each other" />
+      <img src="static/images/raccoon.jpg" alt="An image of a raccoon" />
+    </div>
+    <section>
+      <div align="center">
+        <button id="l8rgt" onclick="location.href='https:\/\/www.youtube.com/watch?v=dQw4w9WgXcQ'">click me</button>
+      </div>
+    </section>
+    <img src="https://secret.kgncengiz.com/F.jpg" alt="An image of Yaoi artwork" />
 
-
-
+    <section class="importante" id="mandelbrot-wrapper">
+      <section id="mandelbrot-section">
+        <canvas id="fractalCanvas" width="400" height="400"></canvas>
+      </section>
+    </section>
+    <div id="ripPoeskat-container">
+      <a href="https://poeskatprinter.zepje.space/" id="poeskatLink">
+        <img src="static/images/rip_poeskat.png" alt="RIP Poeskat" id="ripPoeskat-image"
+          onanimationend="handleAnimationEnd(event)" />
+      </a>
+    </div>
+    <div id="sac-container">
+      <img src="static/images/sac.png" alt="SAC" id="sac-image" />
+    </div>
+    <div class="katamari-container">
+      <iframe id="katamariFrame" src="katamari.html" title="A game where you roll a ball around on a field."></iframe>
+    </div>
+    <script src="katamari-loader.js"></script>
+    <section class="importante">
+      <section>
+        <canvas id="glCanvas" width="400" height="400"></canvas>
+      </section>
+      <section class="donut-container">
+        <pre id="d"></pre>
+      </section>
+    </section>
+    <section class="fourier-container">
+      <a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B"
+        aria-label="フーリエ変換">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Fourier_series_and_transform.gif"
+          alt="Function s(t) (in red) is an approximation of a square wave formed from just 6 sine functions of different amplitudes and harmonically-related frequencies. Their summation is called a Fourier series. The Fourier transform, F(w) (in blue), which depicts amplitude vs frequency, reveals the 6 frequencies and their amplitudes." />
+      </a>
+    </section>
+    <section class="fishtank-container">
+      <div class="fishtank-placeholder">
+        <div class="loading-spinner">Loading...</div>
+      </div>
+      <canvas id="main-fishtank" class="fishtank-canvas"></canvas>
+    </section>
+    <section>
+      <h2>Stockify</h2>
+      <p>
+        Throw your money to the wind with random stock decisions! Outperform
+        the hedge funds with our incredible algorithm!
+      </p>
+      <p>
+        <span id="stock_ticker"></span><span id="stock_msg"></span>
+      </p>
+      <img src="" id="stock_img" role="none" />
+    </section>
+    <section>
+      <input type="button" value="SHADERZ" onclick="setShaderToy()" />
+      <br />
+      <iframe id="ifrm_shadertoy" width="640" height="360" frameborder="0"
+        src="https://www.shadertoy.com/embed/ld3Gz2?gui=false&paused=false&muted=false" allowfullscreen
+        title="An image showing a snail staring at a leaf with water droplets on it."></iframe>
+    </section>
+    <section>
+      <h1>The Fennec Fox in dis bish</h1>
+      <div id="foxy"></div>
+    </section>
+    <section>
+      <h2>Enjoy some Slopify tunes 🎺</h2>
       <div>
-        <p>
-          Try out the new coding language that is 100% better than anything:
-          <a href="/embr" style="color: #b8bb26">Embr</a>
-        </p>
+        <iframe id="spotifyFrame"
+          src="https://open.spotify.com/embed/playlist/43g9WYiJsP8cyeNhU4ry89?utm_source=generator&theme=0" width="100%"
+          height="352" frameBorder="0" allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          title="Spotify playlist 'BRAIN ROT🤮' by 'taylor624'" loading="lazy"></iframe>
       </div>
-      <div id="gallery">
-        <img src="static/images/bobi.jpg" alt="Bobi" class="gallery-item" style="width: 480px; height: 640px;">
-        <img src="static/images/kofte.jpg" alt="Kofte" class="gallery-item" style="width: 400px; height: 400px;">
-        <img src="static/images/frog.webp" alt="Frog" class="gallery-item">
-      </div>
-    
-      <button id="vibeButton">Improve the Mood</button>
-      <button id="wisdomButton">ENABLE FROG WISDOM</button>
-      <p>Vist SlopChat™ to chat with other slop enthusiasts. <a href="chat.html">Click here!/a></p>
-      <button id="clickme">Click me!</button>
-      <a href="https://www.hitwebcounter.com" target="_blank">
-        <img
-          src="https://hitwebcounter.com/counter/counter.php?page=18132009&style=0010&nbdigits=9&type=page&initCount=0"
-          title="Counter Widget"
-          alt="Visit counter For Websites"
-          border="0"
-      /></a>
-      <button id="worseThemeButton">This can't get any worse, right?</button>
-    </header>
-    <main id="maincontent">
-      <section>
-        <h2>About Slopify</h2>
-        <p>
-          Slopify is a 100% community-built open-source website and product. Its
-          unique premise invites contributors to:
-        </p>
-        <ul>
-          <li>Commit whatever code they want</li>
-          <li>Add whatever features they desire</li>
-          <li>Write in whatever language they prefer</li>
-        </ul>
-        <p>The only rules? Everything must work together and remain legal.</p>
-      </section>
-      <div id="twittermoanials">
-        <h2>Twittermoanials</h2>
-        <p>They're like testimonials, but for twitter moaning</p>
 
-        <div style="display: flex; flex-direction: row;">
-
-          <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">hahahaha this is fire</p>&mdash; ily⚡️ (@0xIlyy) <a href="https://twitter.com/0xIlyy/status/1873179308153553050?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
-          
-          <blockquote class="twitter-tweet" data-conversation="none" data-theme="dark"><p lang="en" dir="ltr">WHO THE FUCK ADDED PASSWORD GAME TO THE REGISTRATION PAGE <a href="https://t.co/FYpWT5dycz">pic.twitter.com/FYpWT5dycz</a></p>&mdash; Aterron (@_aterron_) <a href="https://twitter.com/_aterron_/status/1873444464255254743?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
-
-          <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">help i played the sexy frog music and now it keeps playing even after i close the browser</p>&mdash; colin ricardo (@_colinricardo) <a href="https://twitter.com/_colinricardo/status/1873429683368505464?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
-
-          <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">This project is awesome the amount of random slop added in the last 24 hours alone is crazy. Check it out <a href="https://t.co/GDD8ut9A4S">https://t.co/GDD8ut9A4S</a></p>&mdash; Gil (@TylerGilman01) <a href="https://twitter.com/TylerGilman01/status/1873429461410234849?ref_src=twsrc%5Etfw">December 29, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
-
-        </div>
-      </div>
-      <div class="center" style="display:flex; flex-direction: column; justify-content: center;">
-        <h2 style="font-family: Comic Sans MS, Comic Sans, cursive; color:snow; font-size: 50px; text-align: center;">do you like penguins?</h2>
-        <img src="static/images/penguin.webp" />
-        <img src="https://secret.kgncengiz.com/F.jpg" />
-      </div>
-      <section>
-        <div align="center">
-          <button id="l8rgt" onclick="location.href='O3O.mp4'">click me</button>
-        </div>
-      </section>
-      <img src="https://secret.kgncengiz.com/F.jpg" />
-      <section class="importante">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>NON ILLEGAL NES GAME HUUUUGE</title>
+		
+		<script type="text/javascript" src="https://unpkg.com/jsnes/dist/jsnes.min.js"></script>
+		<script type="text/javascript" src="nes-embed.js"></script>
+		<script>window.onload = function(){nes_load_url("nes-canvas", "InterglacticTransmissing.nes");}</script>
+	</head>
+	<body>
+		<div style="margin: auto; width: 75%;">
+			<canvas id="nes-canvas" width="256" height="240" style="width: 100%"/>
+		</div>
+		<p>DPad: Arrow keys<br/>Start: Return, Select: Tab<br/>A Button: A, B Button: S</p>
+	</body>
+	
+    </section>
+    <section>
+      <h2>Things people should know</h2>
+      <p>
+        The sooner you meet them the better.
+      </p>
+      <ul>
+        <li><a href="https://motherfuckingwebsite.com/" target="_blank">This is a motherfucking website. And it's
+            fucking perfect.</a></li>
+        <li><a href="http://bettermotherfuckingwebsite.com/" target="_blank">This is still a motherfucking website.
+            And it's more fucking perfect than the last guy's.</a>
+        <li><a href="https://nohello.net/" target="_blank">no hello - please don't say just hello in chat</a></li>
+        <li><a href="https://dontasktoask.com/" target="_blank">Don't ask to ask, just ask</a></li>
+      </ul>
+    </section>
+    <section>
+      <div id="huzzbutton">
+        <p2>
+          Press To Huzz
+        </p2>
         <section>
-          <canvas id="glCanvas" width="400" height="400"></canvas>
-          <script>
-            const canvas = document.getElementById("glCanvas");
-            const gl = canvas.getContext("webgl2");
-
-            if (!gl) {
-              console.error("WebGL2 not supported");
-              throw new Error("WebGL2 not supported");
-            }
-
-            const vertexShader = gl.createShader(gl.VERTEX_SHADER);
-            gl.shaderSource(
-              vertexShader,
-              `#version 300 es
-                    in vec4 position;
-                    in vec4 color;
-                    out vec4 vColor;
-                    uniform mat4 mvp;
-
-                    void main() {
-                        vColor = color;
-                        gl_Position = mvp * position;
-                    }`
-            );
-            gl.compileShader(vertexShader);
-
-            const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-            gl.shaderSource(
-              fragmentShader,
-              `#version 300 es
-                    precision mediump float;
-                    in vec4 vColor;
-                    out vec4 fragColor;
-
-                    void main() {
-                        fragColor = vColor;
-                    }`
-            );
-            gl.compileShader(fragmentShader);
-
-            const program = gl.createProgram();
-            gl.attachShader(program, vertexShader);
-            gl.attachShader(program, fragmentShader);
-            gl.linkProgram(program);
-            gl.useProgram(program);
-
-            const positions = new Float32Array([
-              // Front
-              -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5,
-              // Back
-              -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5,
-              -0.5,
-            ]);
-
-            const colors = new Float32Array([
-              // Front - red
-              1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0,
-              0.0, 0.0, 1.0,
-              // Back - green
-              0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0,
-              1.0, 0.0, 1.0,
-            ]);
-
-            const indices = new Uint16Array([
-              // Front
-              0, 1, 2, 0, 2, 3,
-              // Back
-              4, 5, 6, 4, 6, 7,
-              // Top
-              3, 2, 6, 3, 6, 7,
-              // Bottom
-              0, 1, 5, 0, 5, 4,
-              // Right
-              1, 2, 6, 1, 6, 5,
-              // Left
-              0, 3, 7, 0, 7, 4,
-            ]);
-
-            const positionBuffer = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-            gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
-
-            const colorBuffer = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
-            gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW);
-
-            const indexBuffer = gl.createBuffer();
-            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-            gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
-
-            const vao = gl.createVertexArray();
-            gl.bindVertexArray(vao);
-
-            const positionLoc = gl.getAttribLocation(program, "position");
-            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-            gl.enableVertexAttribArray(positionLoc);
-            gl.vertexAttribPointer(positionLoc, 3, gl.FLOAT, false, 0, 0);
-
-            const colorLoc = gl.getAttribLocation(program, "color");
-            gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
-            gl.enableVertexAttribArray(colorLoc);
-            gl.vertexAttribPointer(colorLoc, 4, gl.FLOAT, false, 0, 0);
-
-            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-
-            gl.enable(gl.DEPTH_TEST);
-            gl.viewport(0, 0, canvas.width, canvas.height);
-
-            const mvpLoc = gl.getUniformLocation(program, "mvp");
-            let rotation = 0;
-
-            function render() {
-              rotation += 0.01;
-
-              const aspect = canvas.width / canvas.height;
-              const projectionMatrix = mat4.create();
-              mat4.perspective(
-                projectionMatrix,
-                Math.PI / 4,
-                aspect,
-                0.1,
-                100.0
-              );
-
-              const modelViewMatrix = mat4.create();
-              mat4.translate(modelViewMatrix, modelViewMatrix, [0, 0, -4]);
-              mat4.rotateY(modelViewMatrix, modelViewMatrix, rotation);
-              mat4.rotateX(modelViewMatrix, modelViewMatrix, rotation * 0.5);
-
-              const mvpMatrix = mat4.create();
-              mat4.multiply(mvpMatrix, projectionMatrix, modelViewMatrix);
-
-              gl.uniformMatrix4fv(mvpLoc, false, mvpMatrix);
-
-              gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-              gl.drawElements(
-                gl.TRIANGLES,
-                indices.length,
-                gl.UNSIGNED_SHORT,
-                0
-              );
-
-              requestAnimationFrame(render);
-            }
-
-            // Include gl-matrix library for matrix operations
-            const script = document.createElement("script");
-            script.src =
-              "https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js";
-            script.onload = () => {
-              gl.clearColor(0.0, 0.0, 0.0, 1.0);
-              render();
-            };
-            document.head.appendChild(script);
-          </script>
+          <button id="huzzButton">Huzz</button>
         </section>
-        <section class="donut-container">
-          <pre id="d"></pre>
-          <script src="donut.js"></script>
-        </section>
-      </section>
-      <section class="fourier-container">
-        <a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Fourier_series_and_transform.gif" />
+    </section>
+    <section>
+      <button id="widenButton">Toggle Widening</button>
+    </section>
+    <section>
+      <button id="lengthenButton">Toggle Lengthening</button>
+    </section>
+    <section id="sun">
+      <button type="button" id="sunBtn">hey, can we go on land?</button>
+    </section>
+    <section>
+      <div>
+        <button onClick=killEverything()>Clear up some space</button>
+      </div>
+      <center>
+        <a href="static/images/monster_zero_ultra.jpg"
+          aria-label="An image of an anime girl holding a can of Monster Energy Zero Ultra">
+          <img src="static/images/come_here_marisa_kirisame.gif" alt="Marisa Kirisame from Touhou Project" />
         </a>
-      </section>
-      <section class="fishtank-container">
-        <div class="fishtank-placeholder">
-          <div class="loading-spinner">Loading...</div>
-        </div>
-        <canvas id="main-fishtank" class="fishtank-canvas"></canvas>
-      </section>
-      <section>
-        <h2>Stockify</h2>
-        <p>
-          Throw your money to the wind with random stock decisions! Outperform
-          the hedge funds with our incredible algorithm!
-        </p>
-        <p>
-          <span id="stock_ticker" style="color: yellow"></span
-          ><span id="stock_msg"></span>
-        </p>
-        <img src="" id="stock_img" />
-      </section>
-      <section>
-        <script>
-          function setShaderToy() {
-            const ids = [
-              "ld3Gz2",
-              "4ttSWf",
-              "XslGRr",
-              "MdX3Rr",
-              "XsX3RB",
-              "WsSBzh",
-            ];
-            let id = ids[parseInt(Math.random() * ids.length)];
-            ifrm_shadertoy.src = `https://www.shadertoy.com/embed/${id}?gui=true&paused=false&muted=false`;
-          }
-        </script>
+      </center>
+    </section>
 
-        <input type="button" value="SHADERZ" onclick="setShaderToy()" />
-        <br />
-        <iframe
-          id="ifrm_shadertoy"
-          width="640"
-          height="360"
-          frameborder="0"
-          src="https://www.shadertoy.com/embed/ld3Gz2?gui=false&paused=false&muted=false"
-          allowfullscreen
-        ></iframe>
-      </section>
-      <section>
-        <h1>The Fennec Fox in dis bish</h1>
-        <div id="foxy"></div>
-      </section>
-      <section>
-        <h2>Things people should know</h2>
-        <p>
-          The sooner you meet them the better.
-        </p>
-        <ul>
-          <li><a href="https://motherfuckingwebsite.com/" target="_blank">This is a motherfucking website. And it's fucking perfect.</a></li>
-          <li><a href="http://bettermotherfuckingwebsite.com/" target="_blank">This is still a motherfucking website.
-          And it's more fucking perfect than the last guy's.</a>
-          <li><a href="https://nohello.net/" target="_blank">no hello - please don't say just hello in chat</a></li>
-          <li><a href="https://dontasktoask.com/" target="_blank">Don't ask to ask, just ask</a></li>
-        </ul>
-      </section>
-      <section>
-        <button id="widenButton">Toggle Widening</button>
-      
-        <script>
-          const widenButton = document.getElementById("widenButton");
-          let widening = false;
-          let interval;
-      
-          widenButton.addEventListener("click", () => {
-            if (!widening) {
-              widening = true;
-              interval = setInterval(() => {
-                let currentWidth = parseInt(window.getComputedStyle(widenButton).width);
-                widenButton.style.width = (currentWidth + 1) + "px";
-              }, 10);
-            } else {
-              widening = false;
-              clearInterval(interval);
-            }
-          });
-        </script>
-      </section>
-      <section>
-        <button id="lengthenButton">Toggle Lengthening</button>
+    <section>
+      <h2>Slopify can now play Doom</h2>
+      <embed src="https://wadcmd.com/" id="doom">
+    </section>
 
-        <script>
-        const lengthenButton = document.getElementById("lengthenButton");
-          let lengthening = false;
-          let lengthenInterval;
-
-          lengthenButton.addEventListener("click", () => {
-            if (!lengthening) {
-              lengthening = true;
-              lengthenInterval = setInterval(() => {
-                let currentHeight = parseInt(window.getComputedStyle(lengthenButton).height);
-                lengthenButton.style.height = (currentHeight + 1) + "px";
-              }, 10);
-            } else {
-              lengthening = false;
-              clearInterval(lengthenInterval);
-            }
-          });
-        </script>
-      </section>
-	  <section>
-		<center>
-		<a href="static/images/monster_zero_ultra.jpg">
-          <img src="static/images/come_here_marisa_kirisame.gif" />
-        </a>
-		</center>
-	  </section>
-      <div id="cookiebanner" style="background: black; position:fixed; bottom:0px; height:auto !important;">
+    <div id="cookiebanner">
       <p>This site may or may not use cookies. I actually don't know.</p>
       <button id="hmmm yummy cookies" onclick="cookieclick()">Uh ok i guess</button>
       <button id="ewww cookies no yummy" onclick="cookieclick()">Get out of my face</button>
-      <script type="text/javascript">
-        function cookieclick() {
-            let gfg_down =
-                document.getElementById("cookiebanner");
-            gfg_down.parentNode.removeChild(cookiebanner);
-        }
-      </script>
-      </div>
-      <section>
-        <iframe width="5%" height="1" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1633786749&auto_play=true"></iframe>
-      </section>
-      <section>
-        <h2>Flappy Musk</h2>
-        <canvas id="flappyMuskCanvas" width="400" height="600" style="border: 1px solid #000;"></canvas>
-        <p>Click to make Elon Musk fly! Avoid the obstacles!</p>
-      </section>
-      <script src="flappyMusk.js"></script>
-			<section id="slopcursion">
-			<h2>So you can Slopify while you Slopify</h2>
-			<iframe src="index.html?slopcursion=true" width="100%" height="500px" frameborder="0">
-      </iframe>
-			</section>
-      <section>
-        <h2>oh hewwo thewe, you gwot twhis fwar uwu~! wouwd you wike to wead somethin’ awesome~? >w<</h2>
-        <button type="button">
-          <a href='/uwu.html'>wets seee~ >w<<a/>
-        </button>
-      </section>
-    </main>
-    <footer>
-      <div style="text-align: center; margin-top: 20px">
-        <img
-          src="static/images/aol-sucks.gif"
-          alt="Banner 1"
-          width="88"
-          height="31"
-        />
-        <img
-          src="static/images/bestview.gif"
-          alt="Banner 2"
-          width="88"
-          height="31"
-        />
-        <img
-          src="static/images/w95link.gif"
-          alt="Banner 3"
-          width="88"
-          height="31"
-        />
-        <img
-          src="static/images/800x600.gif"
-          alt="Banner 3"
-          width="88"
-          height="31"
-        />
-        <img
-          src="static/images/lowtiergod.gif"
-          alt="Banner 4"
-          width="88"
-          height="31"
-        />
-      </div>
-      <div id="error-0" class="window window--active" role="alertdialog" aria-modal="true" aria-labelledby="error-label-0" aria-describedby="error-desc-0" data-window hidden>
-        <div class="window__header" data-header>
-          <div id="error-label-0" class="window__title" data-label>Error</div>
-          <button class="window__button" type="button" disabled>
-            <span class="window__sprite window__sprite--close-disabled"></span>
-            <span class="window__sr">Close</span>
-          </button>
-        </div>
-        <div class="window__body">
-          <img class="window__body-icon" alt="White X on a red circle with dark red outline and drop shadow" src="https://assets.codepen.io/416221/win95_error_icon.png" width="32" height="32">
-          <p id="error-desc-0" class="window__body-text" data-desc></p>
-        </div>
-        <div class="window__footer">
-          <button class="window__button window__button--lg" type="button" data-ok>OK</button>
-        </div>
-      </div>
-      <div>
-        <iframe src="https://poeskatprinter.zepje.space/" width="600" height="400" style="border:none;"></iframe>
-      </div>
-      <p>
-        &copy; 2024 DishpitDev.
-        <a href="https://github.com/dishpitdev/slopify">Built by the community</a>, against the community.
-      </p>
-    </footer>
-    <script src="static/js/error.js"></script>
-    <script src="security.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const security = new AnnoyingSecurity();
-        const form = document.getElementById("registration-form");
-        const captchaContainer = document.getElementById("captcha-container");
-        const captchaPrompt = document.getElementById("captcha-prompt");
-        const captchaContent = document.getElementById("captcha-content");
-        const captchaInput = document.getElementById("captcha-input");
-        const submitCaptchaButton = document.getElementById("submit-captcha");
-        const skipSecurityButton = document.getElementById("skip-security"); // Add this line
-
-        let currentCaptcha = security.generateMathCaptcha();
-        captchaPrompt.textContent = currentCaptcha.question;
-        captchaInput.style.display = "block";
-
-        submitCaptchaButton.addEventListener("click", async () => {
-          let isValid = false;
-
-          switch (security.captchaCount) {
-            case 0:
-              isValid = Number(captchaInput.value) == currentCaptcha.answer;
-              break;
-            case 1:
-              isValid =
-                currentCaptcha.correctAnswers.every((answer) =>
-                  currentCaptcha.selectedShapes.has(answer)
-                ) &&
-                currentCaptcha.selectedShapes.size ===
-                  currentCaptcha.correctAnswers.length;
-              break;
-            case 2:
-              isValid = captchaInput.value.trim().length > 0;
-              break;
-          }
-
-          if (isValid) {
-            security.showNotification("CAPTCHA passed!", "info");
-            security.captchaCount++;
-
-            if (security.captchaCount >= 3) {
-              captchaContainer.style.display = "none";
-              form.style.display = "flex";
-              security.revealNextRequirement();
-            } else {
-              switch (security.captchaCount) {
-                case 1:
-                  currentCaptcha = security.generateImageCaptcha();
-                  captchaPrompt.textContent = currentCaptcha.instructions;
-                  captchaContent.innerHTML = currentCaptcha.svg;
-                  captchaInput.style.display = "none";
-
-                  const selectedShapes = new Set();
-                  currentCaptcha.selectedShapes = selectedShapes;
-
-                  document
-                    .querySelectorAll(".captcha-shape")
-                    .forEach((shape) => {
-                      shape.onclick = (e) => {
-                        const index = Number(
-                          e.target.getAttribute("data-index")
-                        );
-                        if (selectedShapes.has(index)) {
-                          selectedShapes.delete(index);
-                          e.target.style.stroke = "";
-                          e.target.style.strokeWidth = "";
-                        } else {
-                          selectedShapes.add(index);
-                          e.target.style.stroke = "#fff";
-                          e.target.style.strokeWidth = "2";
-                        }
-                      };
-                    });
-                  break;
-
-                case 2:
-                  currentCaptcha = security.generatePhilosophicalCaptcha();
-                  captchaPrompt.textContent = currentCaptcha.question;
-                  captchaContent.innerHTML = "";
-                  captchaInput.style.display = "block";
-                  break;
-              }
-              captchaInput.value = "";
-            }
-          } else {
-            security.showNotification("Wrong answer! Try again.", "error");
-            if (security.captchaCount === 1) {
-              currentCaptcha.selectedShapes.clear();
-              document.querySelectorAll(".captcha-shape").forEach((shape) => {
-                shape.style.stroke = "";
-                shape.style.strokeWidth = "";
-              });
-            }
-          }
-        });
-
-        form.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const username = document.getElementById("username").value;
-          const password = document.getElementById("password").value;
-
-          const success = await security.register(username, password);
-          if (success) {
-            document.getElementById("security-overlay").style.display = "none";
-          }
-        });
-
-        // Handle "Skip Security" button
-        skipSecurityButton.addEventListener("click", () => {
-          // Skip the security process by hiding the overlay and showing the registration form
-          document.getElementById("security-overlay").style.display = "none";
-          form.style.display = "flex";
-        });
-      });
-    </script>
-
-    <script src="fishtank.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const container = document.querySelector(".fishtank-container");
-
-        function initFishtank() {
-          const projectTank = new FishTank("main-fishtank", {
-            fishCount: 8,
-            minSpeed: 0.3,
-            maxSpeed: 1.5,
-            buffer: 50,
-          });
-          projectTank.initialize();
-
-          // Remove placeholder after initialization
-          const placeholder = container.querySelector(".fishtank-placeholder");
-          if (placeholder) {
-            placeholder.style.opacity = "0";
-            setTimeout(() => placeholder.remove(), 300);
-          }
-        }
-
-        initFishtank();
-
-        // Handle window resize
-        window.addEventListener("resize", () => {
-          const width = container.clientWidth;
-          const canvas = document.getElementById("main-fishtank");
-          canvas.width = width;
-          canvas.height = width < 480 ? 250 : width < 768 ? 300 : 400;
-        });
-      });
-    </script>
-
-    <script type="text/javascript">
-      var stock_url =
-        "https://raw.githubusercontent.com/rreichel3/US-Stock-Symbols/main/all/all_tickers.txt";
-      var stock_list;
-      var ticker;
-      var buy = Math.random() < 0.5;
-
-      fetch(stock_url).then(function (resp) {
-        resp.text().then(function (text) {
-          stock_list = text.split("\n");
-          stock_list.pop();
-          ticker = stock_list[Math.floor(Math.random() * stock_list.length)];
-          done();
-        });
-      });
-
-      function done() {
-        var msg = "";
-        if (buy) {
-          msg = " to the moon! BUY BUY BUY";
-          document.getElementById("stock_img").src =
-            "static/images/wojak_stock_up.webp";
-        } else {
-          msg = " down the toilet! SELL SELL SELL";
-          document.getElementById("stock_img").src =
-            "static/images/wojak_stock_down.gif";
-        }
-        document.getElementById("stock_ticker").textContent = ticker;
-        document.getElementById("stock_msg").textContent = msg;
-      }
-    </script>
-    <script>
-        function rainbowPulse() {
-            const hue0 = (Date.now() /10) % 360;
-            const hue2 = (hue0+ 250) % 360;
-            document.body.style.background = `linear-gradient(90deg, hsl(${hue0}, 70%, 20%), hsl(${hue2}, 70%, 30%))`;
-            requestAnimationFrame(rainbowPulse);
-        }
-        rainbowPulse();
-    </script>
-    <script type="text/javascript">
-      "use strict"
-
-      const coolVideo = ()=>{
-        window.location = "https://youtu.be/dQw4w9WgXcQ"
-      }
-
-      // Konami Code Detection
-      const runOnKonami = (run)=>{
-        const KONAMI_KEYS = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","KeyB","KeyA","Enter"];
-        let currLevel = -1;
-        document.addEventListener("keydown",(event)=>{
-          if(event.code===KONAMI_KEYS[currLevel+1]){
-            currLevel++;
-            if(currLevel === KONAMI_KEYS.length-1) {
-              run();
-              currLevel = -1;
-            }
-          }
-          else currLevel = -1;
-        })
-      }
-
-      runOnKonami(coolVideo)
-    </script>
-    <script>
-        const clickMeBtn = document.getElementById("clickme");
-        const clickMeBtnRect = clickMeBtn.getBoundingClientRect();
-        const clickMeBtnWidth = clickMeBtnRect.width;
-        const clickMeBtnHeight = clickMeBtnRect.height;
-
-        clickMeBtn.addEventListener("mouseover", function() {
-          let newTop = Math.random() * (window.innerHeight - clickMeBtnHeight);
-          let newRight = Math.random() * (window.innerWidth - clickMeBtnWidth);
-
-          clickMeBtn.style.position = "fixed";
-          clickMeBtn.style.top = `${newTop}px`;
-          clickMeBtn.style.right = `${newRight}px`;
-        });
-
-        window.addEventListener("scroll", function() {
-          clickMeBtn.style.position = "static";
-        });
-    </script>
-    <script>
-      const worseThemeButton = document.getElementById("worseThemeButton");
-      document.addEventListener("DOMContentLoaded", () => {
-        const worseThemeButton = document.getElementById("worseThemeButton");
-        worseThemeButton.addEventListener("click", () => {
-          document.body.classList.toggle("worst-theme");
-          worseThemeButton.textContent = document.body.classList.contains("worst-theme") 
-            ? "Fix The Page Please!!" 
-            : "This can't get any worse, right?";
-        });
-      });
-    </script>
-
-    <style>
-        #megaheader {
-            max-width: auto;
-            position: absolute;
-            text-align: center;
-            background-color: white;
-            z-index: 4;
-            opacity: 0.5;
-        }
-        </style>
-    <div id="megaheader">
-        <button class="creationButton" id="creation">Creation!</button>
     </div>
+
+    <section>
+      <iframe width="5%" height="1" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1633786749&auto_play=true"
+        title="The song 'Rich Baby Daddy (feat. Sexyy Red & SZA)' on a SoundCloud widget"></iframe>
+    </section>
+
+    <section>
+      <h2>Flappy Musk</h2>
+      <canvas id="flappyMuskCanvas" width="400" height="600"></canvas>
+      <br />
+      <Button id="flappyMuskButton">Make it gayer?</Button>
+      <p>Click to make Elon Musk fly! Avoid the obstacles!</p>
+    </section>
+
+    <section id="slopcursion">
+      <h2>So you can Slopify while you Slopify</h2>
+      <iframe src="index.html?slopcursion=true" width="100%" height="500px" frameborder="0"
+        title="The same page you are currently viewing, but in a frame."></iframe>
+    </section>
+
+    <section>
+      <h2>oh hewwo thewe, you gwot twhis fwar uwu~! wouwd you wike to wead somethin' awesome~? >w<< /h2>
+          <button type="button" onclick="location.href='/uwu.html'">wets seee~ >w<< /button>
+    </section>
+  </main>
+  <footer>
+    <div id="banner-container">
+      <img src="static/images/aol-sucks.gif" alt="Banner 1" width="88" height="31" />
+      <img src="static/images/heimdal.png" alt="Banner 2" width="88" height="31" />
+      <img src="static/images/bestview.gif" alt="Banner 3" width="88" height="31" />
+      <img src="static/images/w95link.gif" alt="Banner 4" width="88" height="31" />
+      <img src="static/images/800x600.gif" alt="Banner 5" width="88" height="31" />
+      <img src="static/images/lowtiergod.gif" alt="Banner 6" width="88" height="31" />
+      <!-- this was originally a gif thats ~500 bytes, but i wanted to slow down page load even more by serving a 3 kb png file :3 -->
+      <img src="static/images/catgirl_yuri.png" alt="Banner 7" width="88" height="31" />
+    </div>
+
+    <div id="error-0" class="window window--active" role="alertdialog" aria-modal="true" aria-labelledby="error-label-0"
+      aria-describedby="error-desc-0" data-window hidden>
+      <div class="window__header" data-header>
+        <div id="error-label-0" class="window__title" data-label>Error</div>
+        <button class="window__button" type="button" disabled>
+          <span class="window__sprite window__sprite--close-disabled"></span>
+          <span class="window__sr">Close</span>
+        </button>
+      </div>
+      <div class="window__body">
+        <img class="window__body-icon" alt="White X on a red circle with dark red outline and drop shadow"
+          src="static/images/win95error.png" width="32" height="32">
+        <p id="error-desc-0" class="window__body-text" data-desc></p>
+      </div>
+      <div class="window__footer">
+        <button class="window__button window__button--lg" type="button" data-ok>OK</button>
+      </div>
+    </div>
+
+    <div>
+      <a href="https://sleepie.dev/femboy-not-gay" target="_blank">Why its not gay to like femboys</a>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/mFfYORTqzog?si=i3uW4a8OnDXaAKEI"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <section>
+      <img src="./static/images/touhouproject/baka.png" alt="ᗜˬᗜ" class="cirno-img" width="200" height="200">
+      <audio id="baka-sound" src="./static/audio/baka.mp3" preload="auto"></audio>
+    </section>
+
+    <p>
+      &copy; 2024 DishpitDev.
+      <a href="https://github.com/dishpitdev/slopify">Built by the community</a>, against the community.
+    </p>
+  </footer>
+  <div id="dvd-bounce">
+    <img src="static/images/DVD_logo.png" width="500" height="250" alt="Bouncing DVD Logo">
+  </div>
+
+  <div id="cookie-banner1">
+    <span>We use cookies to improve your experience.</span>
+    <button class="agree-button" onclick="dismissBanner('cookie-banner1')">Agree</button>
+  </div>
+
+  <div id="cookie-banner2">
+    <span>This website uses cookies for better functionality.</span>
+    <button class="agree-button" onclick="dismissBanner('cookie-banner2')">Agree</button>
+  </div>
+
+  <div id="cookie-banner3">
+    <span>We use cookies to ensure you get the best experience.</span>
+    <button class="agree-button" onclick="dismissBanner('cookie-banner3')">Agree</button>
+  </div>
+
+  <img src="https://sleepie.dev/i/dumbass.gif"
+    title="A screenshot showing a Google search for 'free money downloader', the result is a Softonic page for 'Download Money Free - Best Software & Apps'">
+  <a href="https://www.microsoft.com/en-us/download/details.aspx?id=40784">Download this random executable from
+    microsoft</a>
+  <a href="https://twitter.com/eepyfemboi?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large"
+    data-lang="en" data-show-count="false">Follow @eepyfemboi</a>
+  <script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
+
+  <!-- error script -->
+  <script src="static/js/error.js"></script>
+
+  <!-- security script and loader -->
+  <script src="static/js/security.js"></script>
+  <script src="static/js/securityLoader.js"></script>
+
+  <!-- shake target script -->
+  <script src="static/js/shakeTarget.js"></script>
+
+  <!-- fishtank script and loader -->
+  <script src="static/js/fishtank.js"></script>
+  <script src="static/js/fishtank_loader.js"></script>
+
+  <!-- stocks script -->
+  <script src="static/js/stocks.js"></script>
+
+  <!-- rainbow pulse script -->
+  <script src="static/js/rainbowPulse.js"></script>
+
+  <!-- konami script  -->
+  <script src="static/js/konami.js"></script>
+
+  <!-- click me button script -->
+  <script src="static/js/clickMeBtn.js"></script>
+
+  <!-- worse theme script -->
+  <script src="static/js/worseTheme.js"></script>
+
+  <!-- owoify page script -->
+  <script src="static/js/owoifyPage.js"></script>
+
+  <!-- dvd bounce script -->
+  <script src="static/js/dvdBounce.js"></script>
+
+  <!-- 8ball gpt script -->
+  <script src="static/js/8ball.js"></script>
+
+  <!-- chatbot script -->
+  <script src="static/js/chatbot.js"></script>
+
+  <!-- onion articles script -->
+  <script src="static/js/onion.js"></script>
+
+  <!-- gl script -->
+  <script src="static/js/gl.js"></script>
+
+  <!-- donut script -->
+  <script src="static/js/donut.js"></script>
+
+  <!-- button scripts -->
+  <script src="static/js/buttons.js"></script>
+
     <script src="luxembourg.js"></script>
+  <!-- sun script -->
+  <script src="static/js/sun.js"></script>
+
+  <!-- cursor trails -->
+  <script type="module" src="static/js/cursorTrails.js"></script>
+
+  <!-- TODO: split this? -->
+  <script type="module" src="static/js/index.js"></script>
+
+  <!--bad apple-->
+  <script src="static/js/badApple.js"></script>
+
+  <!--surprise-->
+  <script src="static/js/surprise.js"></script>
+
+  <!-- epilleptic mode script -->
+  <script src="static/js/epic.js"></script>
+
+  <!-- oneko scripts -->
+  <script src="static/js/oneko.js"></script>
+  <script src="static/js/icey-oneko.js"></script>
+  <script async src="https://sleepie.uk/oneko.js"></script>
+
+  <!-- slopify vids loader -->
+  <script async src="https://sleepie.dev/slopifyvids/loader.js"></script>
+
+  <!-- emoji playground script -->
+  <script src="static/js/emoji-background.js"></script>
+
+  <!-- bouncy caleb script -->
+  <script src="static/js/bouncy-caleb.js"></script>
+
+  <!-- Twitter widgets -->
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+  <!-- Flappy Musk script -->
+  <script src="static/js/flappyMusk.js"></script>
+
+  <!-- mandelbrot script -->
+  <script src="static/js/mandelbrot_uwu.js"></script>
+
+  <!-- Shadertoy loader -->
+  <script src="static/js/shadertoyLoader.js"></script>
+
+  <!-- cookie popup -->
+  <script src="static/js/cookieClick.js"></script>
+
+  <!-- Randyifier script -->
+  <script src="static/js/randyifier.js"></script>
+
+  <!-- more woke content script -->
+  <script src="static/js/makeWoke.js"></script>
+
+  <!-- cirno script -->
+  <script src="static/js/cirno.js"></script>
+
+  <!-- huzz script -->
+  <script src="static/js/huzz.js"></script>
+
+  <!-- kill everything script -->
+  <script src="static/js/killEverything.js"></script>
+
+  <!-- page load uwu sound script -->
+  <script src="static/js/pageLoadUwUSound.js"></script>
+
+  <!-- comic sans button script -->
+  <script src="static/js/comicButton.js"></script>
+
+  <!-- catgirl downloader script -->
+  <script src="static/js/catgirl.js"></script>
+
+  <!-- world map script -->
+  <script src="static/js/world_map.js"></script>
+
+  <!-- s*x word is forbidden script -->
+  <script src="static/js/hellProtection.js"></script>
+
+  <!-- poeskat animation fix script -->
+  <script src="static/js/poeskatAnimation.js"></script>
+
+  <!-- anti adblock script loader -->
+  <script src="static/js/aabLoader.js"></script>
+
+  <!-- cookie banners script -->
+  <script src="static/js/cookieBanners.js"></script>
+
+  <!-- web3 script -->
+  <script src="static/js/web3.js"></script>
 </body>
+
 </html>

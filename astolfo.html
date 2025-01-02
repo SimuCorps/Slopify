@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <style>
+            body, html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                background-image: url('static/images/astolfo/hq720.jpg'); 
+                background-size: cover;  
+                background-position: center;  
+                background-repeat: no-repeat;        
+            }
+
+            /* Pink overlay */
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(255, 105, 180, 0.5); 
+                z-index: 1; 
+            }
+
+            .container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center; 
+                align-items: center;     
+                height: 100vh;           
+                text-align: center;
+                z-index: 2; /* Ensure it's above the overlay */
+            }
+
+            #astolfoImg {
+                width: 20vw; 
+                object-fit: cover; 
+                border: 10px solid #800080; 
+                border-radius: 20px; 
+                padding: 5px; 
+                z-index: 1000;
+            }
+
+            #astolfoBtn {
+                width: 100px;
+                height: 50px;
+                text-align: center;
+                margin-top: 20px; 
+                z-index: 1000;
+            }
+
+            .go-home-link {
+                position: relative; 
+                z-index: 2; 
+                font-size: 30px;                      
+            }
+        </style>
+    </head>
+    <body>
+        <div class="overlay"></div>
+        <a href="index.html" class="go-home-link">GO HOME</a>
+        <div class="container">
+            <img 
+                id="astolfoImg" 
+                src="static/images/astolfo/astolfo1.jpg" 
+                alt="Nyo image sadge OwO..."> 
+            </img>
+            <button 
+                id="astolfoBtn"
+                type="btn">
+                Change Astolfo!
+            </button>
+        </div>
+        <script src="astolfo.js"></script>
+    </body>
+</html>
+

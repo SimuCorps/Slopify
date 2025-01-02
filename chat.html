@@ -1,343 +1,759 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>chat</title>
     <script src="static/js/tunnel_lib.js" defer></script>
     <style>
+      :root {
+        --bg-primary: #1a1a1a;
+        --bg-secondary: #252525;
+        --border-color: #333;
+        --text-primary: #e0e0e0;
+        --text-secondary: #b0b0b0;
+      }
+
       body {
-          margin: 0;
-          padding: 0;
-          height: 100vh;
-          overflow: hidden;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: monospace;
       }
 
       #chatContainer {
-          height: 100vh;
-          display: flex;
-          flex-direction: column;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
       }
 
       #mainContent {
-          flex: 1;
-          overflow: hidden;
-          position: relative;
+        flex: 1;
+        overflow: hidden;
+        position: relative;
       }
 
       #roomInfo {
-          padding: 15px;
-          background-color: #f8f9fa;
-          border-bottom: 1px solid #dee2e6;
+        padding: 15px;
+        font-size: large;
+      }
+
+      #roomInfo > p {
+        display: inline-block;
+        transform: translateX(100px) scale(0.5, 1);
+        background-color: var(--bg-secondary);
+        border-bottom: 1px solid var(--border-color);
+        font-size: large;
       }
 
       #messages {
-          height: calc(100% - 80px); /* Subtract room info height */
-          overflow-y: auto;
-          padding: 20px;
+        height: calc(100% - 100px);
+        /* Subtract room info height */
+        overflow-y: auto;
+        padding: 20px;
+        background-color: var(--bg-secondary);
+        color: white;
+        font-weight: 300;
       }
 
       #bottomPanel {
-          background-color: #f8f9fa;
-          border-top: 1px solid #dee2e6;
-          padding: 15px;
+        background-color: var(--bg-secondary);
+        border-top: 1px solid var(--border-color);
+
+        padding: 15px;
+      }
+
+      .bot {
+        font-weight: 600;
+        font-size: smaller;
+        background-color: #555;
+        padding: 2px 3px 2px 4px;
+        margin-right: 5px;
+        border-radius: 3px;
       }
 
       .message {
-          margin-bottom: 6px;
-          display: flex;
-          align-items: center;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: flex-end;
       }
 
       .username {
-          font-weight: bold;
-          position: relative;
+        font-weight: bold;
+        position: relative;
       }
 
       .username:after {
-          content: ": "; 
-          margin-right: 6px; /* forgot that the space wouldn't render lol */
+        content: ": ";
+        margin-right: 6px;
+        /* forgot that the space wouldn't render lol */
+      }
+
+      .username:after {
+        content: ": ";
+        color: var(--text-primary);
       }
 
       #inputContainer {
-          display: flex;
-          gap: 10px;
-          margin-bottom: 10px;
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .ceo {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 5pt;
+      }
+
+      .ceo img {
+        max-width: 115px;
+        max-height: 115px;
       }
 
       #messageInput {
-          flex: 1;
-          padding: 8px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
+        flex: 1;
+        padding: 8px;
+        border: 2px inset var(--border-color);
+        border-right: 2px var(--border-color);
+        border-bottom: 2px var(--border-color);
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: monospace;
+        appearance: none;
+        -moz-appearance: none;
       }
 
-      #controls {
-          display: flex;
-          gap: 10px;
+      #messageInput:focus {
+        outline: 1px solid var(--border-color);
       }
 
       button {
-          padding: 8px 16px;
-          background-color: #007bff;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
+        color: var(--text-primary);
+        background-color: var(--border-color);
+        border: 2px outset var(--border-color);
+        font-family: monospace;
+        appearance: none;
+        -moz-appearance: none;
       }
 
       button:hover {
-          background-color: #0056b3;
+        border: 2px outset var(--text-secondary);
       }
 
       #usernameError {
-          color: red;
-          margin-top: 5px;
-          display: none;
+        color: red;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .hi {
+        position: absolute;
+        top: 35px;
+        left: 700px;
+        transform: rotate3d(0, 1, 1, 0deg);
+        animation-name: gay;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes gay {
+        0% {
+          transform: rotate3d(0, 1, 1, 0deg);
+        }
+
+        100% {
+          transform: rotate3d(0, 1, 1, 360deg);
+        }
+      }
+
+      body.hide-images .chat-image {
+        display: none;
+      }
+
+      body.blur-images .chat-image {
+        filter: blur(1rem);
+      }
+
+      body.blur-images .chat-image:hover {
+        filter: none;
+        transition: 0.25s filter linear;
+        -webkit-transition: 0.25s -webkit-filter linear;
+        -moz-transition: 0.25s -moz-filter linear;
+        -ms-transition: 0.25s -ms-filter linear;
+        -o-transition: 0.25s -o-filter linear;
+      }
+
+      .chat-image {
+        max-width: 50vw;
+        max-height: 50vh;
+      }
+
+      .message-text {
+        display: flex;
+        align-items: flex-end;
+      }
+
+      .message-text span {
+        white-space: pre-wrap;
+        padding-right: 5px;
+      }
+
+      .message-text img {
+        max-width: 50vw;
+        max-height: 50vh;
+        margin-right: 5px;
+      }
+
+      .message-text img.emoji {
+        max-width: 1.5em;
+        max-height: 1.5em;
+        margin-right: 5px;
       }
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
     <div id="chatContainer">
-        <div id="mainContent">
-            <div id="roomInfo">Connected to room: <strong>global</strong></div>
-            <div id="messages"></div>
+      <div id="mainContent">
+        <div class="ceo">
+          <img src="static/images/CEO.jpeg" alt="CEO of the chat" />
+          <p>The CEO is watching you</p>
         </div>
-        <div id="bottomPanel">
-            <div id="inputContainer">
-                <input type="text" id="messageInput" placeholder="Type a message..." maxlength="200">
-                <button id="sendButton" onclick="sendMessage()">Send</button>
-            </div>
-            <div id="controls">
-                <button id="createButton" onclick="createOrJoinRoom()">Create or Join a Room</button>
-                <button id="setUsernameButton" onclick="setUserName()">Set Username</button>
-            </div>
-            <div id="usernameError"></div>
+        <div id="roomInfo">
+          <p>Connected to room: <strong>global</strong></p>
         </div>
+        <div id="messages"></div>
+      </div>
+      <div class="hi">
+        <a href="/index.html">
+          <img
+            src="/static/images/4db62b6a70d285b0efb299ee6816504e.jpg"
+            width="100"
+            height="100"
+          />
+          <p style="color: magenta">Go BACK</p>
+        </a>
+      </div>
+      <div id="bottomPanel">
+        <div id="inputContainer">
+          <input
+            type="text"
+            id="messageInput"
+            placeholder="Type a message..."
+            maxlength="200"
+          />
+          <button
+            id="sendButton"
+            style="font-weight: bold"
+            onclick="sendMessage()"
+          >
+            Send
+          </button>
+        </div>
+        <div id="controls">
+          <button id="createButton" onclick="createOrJoinRoom()">
+            Create or Join a Room
+          </button>
+          <button id="setUsernameButton" onclick="setUserName()">
+            Set Username
+          </button>
+          <button id="toggleImagesButton" onclick="toggleImages()">
+            Hide Images
+          </button>
+        </div>
+
+        <div id="usernameError"></div>
+      </div>
     </div>
     <script>
-          // Track usernames in the current room
-          window.usernames = new Set();
-        window.usernameConnection = null;
+      // Track usernames in the current room
+      window.usernames = new Set();
+      window.mutedUsernames = new Set();
+      window.usernameConnection = null;
+      window.chatState = 0; // 0 show 1 hide 2 blur
+      let notificationSound = new Audio("/static/audio/youvegotmail.mp3");
 
-        async function initUsernameTracking(room) {
-            // Create a separate subchannel for username management
-            window.usernameConnection = new TunnelConnection(
-                'https://slopify_chat.infernity.dev/',
-                room,
-                "usernames",
-                handleUsernameMessage,
-                { encryption: false, compression: false }
-            );
-            await window.usernameConnection.init();
-            await window.usernameConnection.create();
-            await window.usernameConnection.connect();
+      let emojis = {
+        ayaya: "/static/images/emojis/ayaya.png",
+        clueless: "/static/images/emojis/clueless.png",
+        dopepe: "/static/images/emojis/dopepe.png",
+        dread: "/static/images/emojis/dread.png",
+        endme: "/static/images/emojis/endMe.png",
+        feelsbadman: "/static/images/emojis/feelsBadMan.png",
+        kekw: "/static/images/emojis/kekw.png",
+        laughingpepe: "/static/images/emojis/laughingPepe.png",
+        lfg: "/static/images/emojis/lfg.png",
+        minipog: "/static/images/emojis/minipog.png",
+        monkagiga: "/static/images/emojis/monkaGiga.png",
+        monkas: "/static/images/emojis/monkaS.png",
+        monkasnake: "/static/images/emojis/monkaSnake.png",
+        pogu: "/static/images/emojis/pogU.png",
+        pooga: "/static/images/emojis/pooga.png",
+        superkek: "/static/images/emojis/superkek.png",
+        thonk: "/static/images/emojis/thonk.png",
+        weirdga: "/static/images/emojis/weirdga.png",
+      };
+
+      function getRandomSoftColor() {
+        const hue = Math.floor(Math.random() * 360);
+        return `hsl(${hue}, 65%, 75%)`; // fairly soft
+      }
+
+      async function initUsernameTracking(room) {
+        // Create a separate subchannel for username management
+        window.usernameConnection = new TunnelConnection(
+          "https://slopify_chat.infernity.dev/",
+          room,
+          "usernames",
+          handleUsernameMessage,
+          { encryption: false, compression: false },
+        );
+        await window.usernameConnection.init();
+        await window.usernameConnection.create();
+        await window.usernameConnection.connect();
+      }
+
+      function handleUsernameMessage(message) {
+        try {
+          let data = JSON.parse(message);
+          if (data.type === "username_taken") {
+            window.usernames.add(data.username);
+          } else if (data.type === "username_released") {
+            window.usernames.delete(data.username);
+          } else if (data.type === "username_request") {
+            // If we have this username, respond that it's taken
+            if (data.username === window.userName) {
+              window.usernameConnection.send(
+                JSON.stringify({
+                  type: "username_taken",
+                  username: data.username,
+                }),
+              );
+            }
+          }
+        } catch (e) {
+          console.error("Error handling username message:", e);
+        }
+      }
+
+      async function createOrJoinRoom() {
+        let room = prompt(
+          "Enter the name of the room you want to join or create, leave it blank to randomize:",
+        );
+        window.chatConnection.close();
+        if (window.usernameConnection) {
+          // Release old username from previous room
+          window.usernameConnection.send(
+            JSON.stringify({
+              type: "username_released",
+              username: window.userName,
+            }),
+          );
+          window.usernameConnection.close();
         }
 
-        function handleUsernameMessage(message) {
-            try {
-                let data = JSON.parse(message);
-                if (data.type === 'username_taken') {
-                    window.usernames.add(data.username);
-                } else if (data.type === 'username_released') {
-                    window.usernames.delete(data.username);
-                } else if (data.type === 'username_request') {
-                    // If we have this username, respond that it's taken
-                    if (data.username === window.userName) {
-                        window.usernameConnection.send(JSON.stringify({
-                            type: 'username_taken',
-                            username: data.username
-                        }));
-                    }
-                }
-            } catch (e) {
-                console.error('Error handling username message:', e);
-            }
+        if (room) {
+          window.chatConnection = getTunnelConnection(room);
+        } else {
+          window.chatConnection = getTunnelConnection("");
+          room = window.chatConnection.tunnelId;
         }
 
-        async function createOrJoinRoom() {
-            let room = prompt("Enter the name of the room you want to join or create, leave it blank to randomize:");
-            window.chatConnection.close();
-            if (window.usernameConnection) {
-                // Release old username from previous room
-                window.usernameConnection.send(JSON.stringify({
-                    type: 'username_released',
-                    username: window.userName
-                }));
-                window.usernameConnection.close();
-            }
-            
-            if (room) {
-                window.chatConnection = getTunnelConnection(room);
-            } else {
-                window.chatConnection = getTunnelConnection('');
-                room = window.chatConnection.tunnelId;
-            }
-            
-            await window.chatConnection.init();
-            await window.chatConnection.create();
-            await window.chatConnection.connect();
-            
-            // Initialize username tracking for new room
-            window.usernames.clear();
-            await initUsernameTracking(room);
-            
-            document.getElementById('roomInfo').textContent = `Connected to room: ${room}`;
-            localMessage('System:', `${window.userName} connected to room ${room}. ---`, true);
-            
-            // Announce username in new room
-            window.usernameConnection.send(JSON.stringify({
-                type: 'username_taken',
-                username: window.userName
-            }));
-        }
+        await window.chatConnection.init();
+        await window.chatConnection.create();
+        await window.chatConnection.connect();
 
-        async function isUsernameAvailable(username) {
-            return new Promise((resolve) => {
-                if (window.usernames.has(username)) {
-                    resolve(false);
-                    return;
-                }
+        // Initialize username tracking for new room
+        window.usernames.clear();
+        await initUsernameTracking(room);
 
-                // Request if username is taken
-                window.usernameConnection.send(JSON.stringify({
-                    type: 'username_request',
-                    username: username
-                }));
+        document.getElementById("roomInfo").textContent =
+          `Connected to room: ${room}`;
+        localMessage(
+          "System:",
+          `${window.userName} connected to room ${room}. ---`,
+          true,
+        );
 
-                // Wait a short time for responses
-                setTimeout(() => {
-                    resolve(!window.usernames.has(username));
-                }, 500);
-            });
-        }
+        // Announce username in new room
+        window.usernameConnection.send(
+          JSON.stringify({
+            type: "username_taken",
+            username: window.userName,
+          }),
+        );
 
-        async function setUserName() {
-            let username = prompt('Enter your username:');
-            if (!username) {
-                setUserName();
-                return;
-            }
+        localMessage(localStorage["userName"], "i connected", false, false);
+      }
 
-            // Username validation
-            if (username.length < 3 || username.length > 15) {
-                alert('Username must be between 3 and 15 characters');
-                setUserName();
-                return;
-            }
+      async function isUsernameAvailable(username) {
+        return new Promise((resolve) => {
+          if (window.usernames.has(username)) {
+            resolve(false);
+            return;
+          }
 
-            if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
-                alert('Username can only contain letters, numbers, underscores, and hyphens');
-                setUserName();
-                return;
-            }
+          // Request if username is taken
+          window.usernameConnection.send(
+            JSON.stringify({
+              type: "username_request",
+              username: username,
+            }),
+          );
 
-            const available = await isUsernameAvailable(username);
-            if (!available) {
-                alert('Username is already taken in this room. Please choose another.');
-                setUserName();
-                return;
-            }
-
-            // Release old username if exists
-            if (window.userName) {
-                window.usernameConnection.send(JSON.stringify({
-                    type: 'username_released',
-                    username: window.userName
-                }));
-            }
-
-            // Set new username
-            window.userName = username;
-            localStorage['userName'] = username;
-            
-            // Announce new username
-            window.usernameConnection.send(JSON.stringify({
-                type: 'username_taken',
-                username: username
-            }));
-        }
-
-        function getTunnelConnection(id) {
-            return new TunnelConnection(
-                'https://slopify_chat.infernity.dev/',
-                id,
-                "main",
-                processMessage,
-                { encryption: false, compression: false }
-            )
-        }
-
-        function localMessage(username, message, isSystem) {
-            if (!isSystem) isSystem = false;
-            let messagesContainer = document.getElementById('messages');
-            let messageContainer = document.createElement('div');
-            messageContainer.classList.add('message');
-            let usernameElement = document.createElement('div');
-            usernameElement.textContent = username;
-            usernameElement.classList.add('username');
-            let messageTextElement = document.createElement('div');
-            messageTextElement.textContent = message;
-            messageTextElement.classList.add('message-text');
-            if (isSystem) {
-                usernameElement.style.color = '#f00';
-                messageTextElement.style.color = '#f00';
-            }
-            messageContainer.appendChild(usernameElement);
-            messageContainer.appendChild(messageTextElement);
-            messagesContainer.appendChild(messageContainer);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function processMessage(message) {
-            try {
-                let messageData = JSON.parse(message);
-                if (!messageData.username || !messageData.message) throw new Error('Invalid message data: ' + message);
-                localMessage(messageData.username, messageData.message);
-            } catch (e) {
-                console.error(e);
-            }
-        }
-
-        function sendMessage() {
-            let userMessage = document.getElementById('messageInput').value;
-            if (!userMessage.trim()) return;
-            
-            let messageData = {
-                username: window.userName,
-                message: userMessage
-            };
-            window.chatConnection.send(JSON.stringify(messageData));
-            document.getElementById('messageInput').value = '';
-        }
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            window.userName = localStorage['userName'] || null;
-            
-            // Initialize connections
-            window.chatConnection = getTunnelConnection('global');
-            await window.chatConnection.init();
-            await window.chatConnection.create();
-            await window.chatConnection.connect();
-            
-            await initUsernameTracking('global');
-            
-            if (!window.userName) {
-                setUserName();
-            } else {
-                // Announce existing username
-                window.usernameConnection.send(JSON.stringify({
-                    type: 'username_taken',
-                    username: window.userName
-                }));
-            }
-
-            document.addEventListener("keydown", function(event) {
-                if (event.key === "Enter") {
-                    sendMessage();
-                }
-            });
+          // Wait a short time for responses
+          setTimeout(() => {
+            resolve(!window.usernames.has(username));
+          }, 500);
         });
+      }
+
+      async function setUserName() {
+        let username = prompt("Enter your username:");
+        if (!username) {
+          setUserName();
+          return;
+        }
+
+        // Username validation
+        if (username.length < 3 || username.length > 15) {
+          alert("Username must be between 3 and 15 characters");
+          setUserName();
+          return;
+        }
+
+        if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
+          alert(
+            "Username can only contain letters, numbers, underscores, and hyphens",
+          );
+          setUserName();
+          return;
+        }
+
+        const available = await isUsernameAvailable(username);
+        if (!available) {
+          alert(
+            "Username is already taken in this room. Please choose another.",
+          );
+          setUserName();
+          return;
+        }
+
+        // Release old username if exists
+        if (window.userName) {
+          window.usernameConnection.send(
+            JSON.stringify({
+              type: "username_released",
+              username: window.userName,
+            }),
+          );
+        }
+
+        // Set new username
+        window.userName = username;
+        localStorage["userName"] = username;
+
+        // Announce new username
+        window.usernameConnection.send(
+          JSON.stringify({
+            type: "username_taken",
+            username: username,
+          }),
+        );
+
+        localMessage(localStorage["userName"], "i connected", false, false);
+      }
+
+      function getTunnelConnection(id) {
+        return new TunnelConnection(
+          "https://slopify_chat.infernity.dev/",
+          id,
+          "main",
+          processMessage,
+          {
+            encryption: false,
+            compression: false,
+          },
+        );
+      }
+
+      function textContainsEmoji(text) {
+        return text.match(/:[a-z_]+:/g) && emojis[text.slice(1, -1)];
+      }
+
+      function createImageElement(src) {
+        let imageElement = document.createElement("img");
+        imageElement.classList.add("chat-image");
+        imageElement.src = src;
+        return imageElement;
+      }
+
+      function createEmojiElement(emoji) {
+        let emojiElement = document.createElement("img");
+        emojiElement.classList.add("emoji");
+        emojiElement.src = emojis[emoji.slice(1, -1)];
+        return emojiElement;
+      }
+
+      function createChatTextElement(text) {
+        let textElement = document.createElement("span");
+        textElement.textContent = text.trim();
+        return textElement;
+      }
+
+      function splitImageFromText(messageText) {
+        let messageTextElement = document.createElement("div");
+        messageTextElement.classList.add("message-text");
+
+        const textSegments = messageText.split(" ");
+
+        let str = "";
+        for (let i = 0; i < textSegments.length; i++) {
+          const word = textSegments[i];
+          if (
+            (!word.endsWith(".pic") || window.chatState === 1) &&
+            !textContainsEmoji(word)
+          ) {
+            str += " " + word;
+            continue;
+          }
+
+          if (str.length > 0) {
+            messageTextElement.appendChild(createChatTextElement(str));
+            str = "";
+          }
+
+          if (
+            word.endsWith(".pic") &&
+            window.chatState !== 1 /* Hide images */
+          ) {
+            messageTextElement.appendChild(
+              createImageElement(word.slice(0, -4)),
+            );
+          } else if (textContainsEmoji(word)) {
+            messageTextElement.appendChild(createEmojiElement(word));
+          }
+        }
+
+        if (str.length > 0) {
+          messageTextElement.appendChild(createChatTextElement(str));
+        }
+
+        return messageTextElement;
+      }
+
+      function toggleImages(state) {
+        if (typeof state !== "undefined") {
+          window.chatState = state;
+        } else {
+          window.chatState++;
+          if (window.chatState > 2) {
+            window.chatState = 0;
+          }
+        }
+        console.log(window.chatState);
+        let btn = document.getElementById("toggleImagesButton");
+        document.body.classList.remove("hide-images");
+        document.body.classList.remove("blur-images");
+
+        switch (window.chatState) {
+          case 0:
+            btn.innerText = "Hide Images";
+            break;
+          case 1:
+            btn.innerText = "Blur Images";
+            document.body.classList.add("hide-images");
+            break;
+          case 2:
+            btn.innerText = "Show Images";
+            document.body.classList.add("blur-images");
+            break;
+        }
+
+        localStorage.setItem("imageState", String(window.chatState));
+      }
+
+      function localMessage(username, message, isBot, isSystem) {
+        if (!isSystem) isSystem = false;
+        if (window.mutedUsernames.has(username)) {
+          return;
+        }
+        let messagesContainer = document.getElementById("messages");
+        let messageContainer = document.createElement("div");
+        messageContainer.classList.add("message");
+        let usernameElement = document.createElement("div");
+        usernameElement.textContent = username;
+        usernameElement.classList.add("username");
+        let messageTextElement = splitImageFromText(message);
+        if (isSystem) {
+          usernameElement.style.color = "#ff6b6b";
+          messageTextElement.style.color = "#ff6b6b";
+        } else {
+          if (!window.userColors) window.userColors = {};
+          if (!window.userColors[username]) {
+            window.userColors[username] = getRandomSoftColor();
+          }
+          usernameElement.style.color = window.userColors[username];
+        }
+        if (isBot) {
+          let botElement = document.createElement("div");
+          botElement.textContent = "bot";
+          botElement.classList.add("bot");
+          messageContainer.appendChild(botElement);
+        }
+
+        if (message.includes(localStorage["userName"])) {
+          notificationSound.play();
+          messageTextElement.style.backgroundColor = "rgba(233, 211, 150, 0.5)";
+          usernameElement.style.backgroundColor = "rrgba(233, 211, 150, 0.5)";
+        }
+
+        messageContainer.appendChild(usernameElement);
+        messageContainer.appendChild(messageTextElement);
+        messagesContainer.appendChild(messageContainer);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+
+      function processMessage(message) {
+        try {
+          let messageData = JSON.parse(message);
+          if (!messageData.bot) {
+            messageData.bot = false;
+          } else {
+            messageData.bot = true;
+          }
+          if (!messageData.username || !messageData.message)
+            throw new Error("Invalid message data: " + message);
+          localMessage(
+            messageData.username,
+            messageData.message,
+            messageData.bot,
+          );
+          if (messageData.flash) {
+            flashGreen();
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      function sendMessage() {
+        let userMessage = document.getElementById("messageInput").value;
+        handleLocalCommands(userMessage);
+
+        if (!userMessage.trim()) return;
+
+        if (userMessage.includes("blink")) {
+          flashGreen();
+        }
+
+        let messageData = {
+          username: window.userName,
+          message: userMessage,
+        };
+        window.chatConnection.send(JSON.stringify(messageData));
+        document.getElementById("messageInput").value = "";
+      }
+
+      function handleLocalCommands(message) {
+        if (message[0] == "~") {
+          let s = message.split(" ");
+          let command = s[0];
+
+          switch (command) {
+            case "~mute":
+              let userToMute = s[1];
+              window.mutedUsernames.add(userToMute);
+              alert("User " + userToMute + " muted succesfully.");
+              break;
+            case "~unmute":
+              let userToUnmute = s[1];
+              window.mutedUsernames.delete(userToUnmute);
+              alert("User " + userToMute + " unmuted succesfully.");
+              break;
+          }
+          return true;
+        }
+        return false;
+      }
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        window.userName = localStorage["userName"] || null;
+
+        // Initialize connections
+        window.chatConnection = getTunnelConnection("global");
+        await window.chatConnection.init();
+        await window.chatConnection.create();
+        await window.chatConnection.connect();
+        await fetch("https://api.github.com/emojis")
+          .then((response) => response.json())
+          .catch(() => ({}))
+          .then((data) => {
+            for (let emoji in data) {
+              emojis[emoji] = data[emoji];
+            }
+          });
+
+        await initUsernameTracking("global");
+
+        if (!window.userName) {
+          setUserName();
+        } else {
+          // Announce existing username
+          window.usernameConnection.send(
+            JSON.stringify({
+              type: "username_taken",
+              username: window.userName,
+            }),
+          );
+        }
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            sendMessage();
+          }
+        });
+
+        window.chatState = localStorage.getItem("imageState");
+        if (null === window.chatState) {
+          window.chatState = 1;
+        }
+
+        if (localStorage.getItem("hideImages") === "true") {
+          window.chatState = 1;
+          localStorage.removeItem("hideImages");
+        }
+
+        toggleImages(window.chatState);
+      });
+
+      function flashGreen() {
+        document.body.style.backgroundColor = "green";
+        setTimeout(() => {
+          document.body.style.backgroundColor = "";
+        }, 100);
+      }
     </script>
-</body>
+    <script>
+      const ceo = document.querySelector(".ceo");
+      const ceoRect = ceo.getBoundingClientRect();
+
+      document.addEventListener("mousemove", (event) => {
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+        const boxCenterX = ceoRect.left + ceoRect.width / 2;
+        const boxCenterY = ceoRect.top + ceoRect.height / 2;
+        const deltaX = mouseX - boxCenterX;
+        const deltaY = mouseY - boxCenterY;
+        const angleZ = -(deltaY / ceoRect.height) * 1.2;
+        const angleY = (deltaX / ceoRect.width) * 2;
+        ceo.style.transform = `rotateZ(${angleZ}deg) rotateY(${angleY}deg)`;
+      });
+    </script>
+  </body>
 </html>

@@ -1,0 +1,101 @@
+/* Basic reset/structure */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #282828;
+  color: #ebdbb2;
+  /* margin: 20px; */
+}
+
+header,
+footer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label,
+select,
+button {
+  font-size: 1rem;
+}
+
+/* Map container with a background image */
+.map-container {
+  position: relative;
+  width: 800px;
+  height: 403px;
+  margin: 20px auto;
+  background: url("../../static/images/world_map.png") no-repeat center center;
+  background-size: cover;
+  border: 2px solid #3c3836;
+  border-radius: 8px;
+}
+
+/* The overlay div where we’ll place the markers */
+#mapOverlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Style for each city marker (red dot) */
+.city-marker {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: red;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+#cityInput {
+  width: 300px;
+  padding: 8px;
+  margin-bottom: 6px;
+  border: 1px solid #3c3836;
+  border-radius: 4px;
+  background-color: #3c3836;
+  color: #ebdbb2;
+}
+
+/* Suggestions list */
+#suggestions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 300px;
+  background-color: #3c3836;
+  border: 1px solid #3c3836;
+  border-radius: 4px;
+}
+
+/* Each suggestion item */
+#suggestions li {
+  padding: 6px 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #282828;
+}
+
+/* Hover effect */
+#suggestions li:hover {
+  background-color: #504945;
+}
+
+#map-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  margin-top: 20px;
+}
+
+#world-map {
+  width: 100%;
+  height: 100%;
+}

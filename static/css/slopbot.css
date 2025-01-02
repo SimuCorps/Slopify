@@ -1,0 +1,52 @@
+.slop-teaser {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #000000;
+  border: 2px solid #00ff00;
+  padding: 15px;
+  color: #00ff00;
+  font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue",
+    monospace;
+  z-index: 9999;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #008000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+.slop-teaser:hover {
+  transform: translateY(-50%) translateX(5px);
+  box-shadow: 6px 6px 0 #008000;
+}
+
+.slop-teaser .close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #ff0000;
+  color: white;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px #00ff00;
+  }
+  to {
+    box-shadow: 0 0 15px #00ff00;
+  }
+}

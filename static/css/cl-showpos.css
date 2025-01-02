@@ -1,0 +1,36 @@
+.cl-showpos {
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: white;
+  font-size: 22px;
+  font-family: Consolas, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  text-rendering: optimizeSpeed;
+  line-height: initial;
+  user-select: none;
+  pointer-events: none;
+  z-index: 70;
+  /* opacity: 0.3; */
+  transition: opacity 0.2s;
+  /* transition-delay: 2s; */
+}
+
+.cl-showpos .map {
+  color: #0f0;
+}
+
+/* .cl-showpos:hover {
+    opacity: 0.15;
+    
+    transition-delay: 0s;
+} */
+
+/* .cl-showpos:active {
+	pointer-events: none;
+} */

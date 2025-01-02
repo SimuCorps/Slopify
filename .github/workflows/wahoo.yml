@@ -1,0 +1,14 @@
+name: 🐟 🐠 🐡
+on: [push, workflow_dispatch]
+
+jobs:
+  print-wahoo:
+    runs-on: macos-latest
+    steps:
+      - name: Print wahoo fish
+        run: |
+          for i in {1..100}; do
+            echo "wahoo fish"
+            echo "-------------------------"
+            sleep 0.007
+          done

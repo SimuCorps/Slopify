@@ -1,0 +1,34 @@
+name: 🎨🎯 Emoji Check 💡💡
+
+on: [pull_request, pull_request_target, push, workflow_dispatch]
+
+jobs:
+  check-emoji:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install emoji-regex
+
+      - name: Check PR title for Emojis 🔍
+        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const emojiRegex = require('emoji-regex');
+            const regex = emojiRegex();
+
+            try {
+              const title = context.payload.pull_request.title;
+              if (!regex.test(title)) {
+                core.setFailed('PR title must include an emoji! Examples: "✨ New feature", "🐛 Fix bug", "🎨 Update styles"');
+              } else {
+                console.log(`✅ PR title "${title}" contains an emoji - good job! 🎉`);
+              }
+            } catch (error) {
+              core.setFailed(`Error checking emoji: ${error.message}`);
+            }

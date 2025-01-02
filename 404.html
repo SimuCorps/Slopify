@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error 404: Page Not Found</title>
+    <link rel="stylesheet" href="static/css/mediaPlayer.css" />
+    <style type="text/css">
+      @font-face {
+        font-family: "MS Sans Serif";
+        src: url(../fonts/ms_sans_serif.ttf) format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        color: #ebdbb2;
+      }
+
+      a {
+        color: #b8bb26;
+        text-decoration: underline;
+      }
+
+      a:hover {
+        color: #83a598;
+      }
+
+      h1,
+      h2,
+      p {
+        text-align: center;
+      }
+
+      #sensored {
+        filter: blur(5px);
+      }
+
+      .btn {
+        cursor: pointer;
+        color: black;
+        font-family: "MS Sans Serif", Helvetica, sans-serif;
+        outline: none;
+        margin: 15px;
+        padding: 0 20px;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 7px;
+        vertical-align: middle;
+        background-color: #bfbfbf;
+        border-top: 3px solid #fff;
+        border-left: 3px solid #fff;
+        border-right: 3px solid #707070;
+        border-bottom: 3px solid #707070;
+      }
+
+      .btn:hover {
+        background-color: #bbb;
+        border-right: 3px solid #333;
+        border-bottom: 3px solid #333;
+      }
+
+      .btn:active {
+        background-color: #bfbfbf;
+        border-top: 3px solid #707070;
+        border-left: 3px solid #707070;
+        border-right: 3px solid #ccc;
+        border-bottom: 3px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Error 404: Page Not Found</h1>
+    <a href="/"
+      ><button class="btn"><p>Return Home</p></button></a
+    >
+    <div class="player" data-status="unstarted">
+      <div class="title">
+        <b>Locked In Alien Meme - Full Compilation</b>
+        <button class="button"><span>Close</span></button>
+      </div>
+      <div class="video-container">
+        <div class="cover"></div>
+        <div class="noise">
+          <img class="dynamic" src="https://i.ibb.co/WpJb50k/noise.gif" />
+          <img class="static" src="https://i.ibb.co/j8Ms90m/noise-static.gif" />
+        </div>
+        <iframe
+          id="video"
+          width="572"
+          height="374"
+          src="https://www.youtube.com/embed/ONn1C28L1gM?&controls=0&enablejsapi=1"
+          frameborder="0"
+        ></iframe>
+      </div>
+      <div class="progress-bar">
+        <input type="range" min="0" max="100" value="0" />
+      </div>
+      <div class="controls">
+        <div class="buttons">
+          <button class="play"><span>Play</span></button>
+          <button class="pause"><span>Pause</span></button>
+          <button class="stop"><span>Stop</span></button>
+        </div>
+        <div class="sound">
+          <button class="sound-button"><span>Sound</span></button>
+          <div class="sound-bar">
+            <input type="range" min="0" max="100" value="100" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>Here are your random 6 digits and a link.</p>
+    <h2>
+      <a href="https://youtu.be/dQw4w9WgXcQ?si=i8JJP79dvl_80YgK" target="_blank"
+        >https://<span id="sensored">nhonnom.net</span>/g/<span id="id"
+          >398452</span
+        ></a
+      >
+    </h2>
+    <script src="static/js/mediaPlayer.js"></script>
+  </body>
+  <script>
+    function rainbowPulse() {
+      const hue0 = (Date.now() / 10) % 360;
+      const hue2 = (hue0 + 250) % 360;
+      document.body.style.background = `linear-gradient(90deg, hsl(${hue0}, 70%, 20%), hsl(${hue2}, 70%, 30%))`;
+      requestAnimationFrame(rainbowPulse);
+    }
+    function randomSixDigit() {
+      const randomSixDigit = Math.floor(Math.random() * 600000);
+      document.querySelector("#id").innerHTML = `${randomSixDigit}`;
+    }
+    randomSixDigit();
+    rainbowPulse();
+  </script>
+</html>

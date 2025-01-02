@@ -1,0 +1,19 @@
+.creationButton {
+    font-family: sans-serif;
+    font-size: 5em;
+    padding: 1em;
+    border-radius: 2em;
+    transition-duration: 200ms;
+    transition-delay: 100ms;
+    background-color: rgb(69, 69, 69);
+}
+
+.creationButton:hover {
+    background-color: rgb(42, 42, 42);
+    border-radius: 1em;
+}
+
+.creationButton:active {
+    background-color: rgb(7, 7, 7);
+    border-radius: 3em;
+}

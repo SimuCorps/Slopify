@@ -2,14 +2,23 @@
   "name": "slopify",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "start": "live-server --open=index.html",
+    "prepare": "husky install"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "^1.1.14",
+    "emoji-regex": "^10.4.0",
+    "husky": "^9.1.7",
+    "live-server": "^1.2.2"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "@stripe/stripe-js": "^5.4.0",
-    "stripe": "^17.5.0"
-  }
+    "stripe": "^17.5.0",
+    "three": "^0.172.0"
+  },
+  "packageManager": "bun@1.1.42"
 }

@@ -156,8 +156,9 @@ dist
 
 .tern-port
 
-# Stores VSCode versions used for testing VSCode extensions
+# Visual Studio Code
 
+.vscode
 .vscode-test
 
 # yarn v2
@@ -173,3 +174,11 @@ dist
 
 # Finder (MacOS) folder config
 .DS_Store
+
+# Rust target
+/target
+
+# lock-files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

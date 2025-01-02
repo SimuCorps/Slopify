@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Health Check</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const healthCheck = {
+          status: "success",
+          message: "Service is UP",
+          timestamp: new Date().toISOString(),
+        };
+
+        document.getElementById("health-response").textContent = JSON.stringify(
+          healthCheck,
+          null,
+          2,
+        );
+      });
+    </script>
+  </head>
+  <body>
+    <pre id="health-response"></pre>
+  </body>
+</html>
