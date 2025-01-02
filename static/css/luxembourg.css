@@ -6,6 +6,8 @@
     transition-duration: 200ms;
     transition-delay: 100ms;
     background-color: rgb(69, 69, 69);
+    z-index: 100000;
+    position: fixed;
 }
 
 .creationButton:hover {

@@ -23,7 +23,6 @@ function getStuff(name) {
 
 function main() {
     const creation = getStuff("creation")
-    const maincontent = getStuff("maincontent")
     const schisse = getStuff("schisse")
 
     let mainHeader = document.createElement("h1")
@@ -35,30 +34,45 @@ function main() {
     anthem.loop = true
 
     creation.onclick = () => {
-        console.log("hello")
-        maincontent.innerHTML = "Click anywhere to spawn Luxembourg"
-        maincontent.style.minHeight = "1024px"
-        schisse.innerHTML = ""
+        alert("Hello?")
+        setInterval(() => {
+            body.innerHTML = "Click anywhere to spawn Luxembourg"
+            schisse.innerHTML = ""
+        }, 100)
 
         creation.parentElement.removeChild(creation)
 
         schisse.appendChild(mainHeader)
 
-        window.addEventListener("mousedown", (event) => {
+        let container = document.createElement("div")
+        container.style.position = "fixed"
+        container.style.width = "3840px"
+        container.style.height = "2160px"
+        container.style.zIndex = "9999999999"
+        container.style.backgroundColor = "red"
+
+        body.prepend(container)
+
+        setInterval(() => {
             let luxembourg = document.createElement("img")
             luxembourg.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/d/da/Flag_of_Luxembourg.svg")
             luxembourg.setAttribute("alt", "Can't load, bozo!")
             luxembourg.setAttribute("width", "128")
             // let style = `transform: translate(${event.x}, ${event.y}); position: absolute;`
-            luxembourg.style.transform = `translateX(${event.x}px) translateY(${event.y}px)`
+            const x = Math.random() * 3840 - 1920;
+            const y = Math.random() * 2160 - 1080;
+            luxembourg.style.transform = `translateX(${x}px) translateY(${y}px)`
             luxembourg.style.position = "fixed"
+            luxembourg.style.zIndex = "9999999999999999999999999999999999"
 
             body.appendChild(luxembourg)
             if (!anthemPlaying) {
                 anthem.play()
                 anthemPlaying = true
             }
-        })
+
+            alert("something")
+        }, 10)
     }
 }
 
