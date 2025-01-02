@@ -40,6 +40,8 @@ function main() {
         maincontent.style.minHeight = "1024px"
         schisse.innerHTML = ""
 
+        creation.parentElement.removeChild(creation)
+
         schisse.appendChild(mainHeader)
 
         window.addEventListener("mousedown", (event) => {
