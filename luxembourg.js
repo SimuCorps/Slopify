@@ -30,10 +30,13 @@ function main() {
     mainHeader.innerText = "Luxembourg"
 
     let body = document.getElementsByTagName("body")[0]
+    let anthem = new Audio("https://upload.wikimedia.org/wikipedia/commons/f/f6/Ons_Heemecht.ogg")
+    let anthemPlaying = false;
+    anthem.loop = true
 
     creation.onclick = () => {
         console.log("hello")
-        maincontent.innerHTML = ""
+        maincontent.innerHTML = "Click anywhere to spawn Luxembourg"
         maincontent.style.minHeight = "1024px"
         schisse.innerHTML = ""
 
@@ -49,7 +52,10 @@ function main() {
             luxembourg.style.position = "fixed"
 
             body.appendChild(luxembourg)
-            console.log("Hello?")
+            if (!anthemPlaying) {
+                anthem.play()
+                anthemPlaying = true
+            }
         })
     }
 }
