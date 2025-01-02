@@ -29,24 +29,26 @@ function main() {
     let mainHeader = document.createElement("h1")
     mainHeader.innerText = "Luxembourg"
 
+    let body = document.getElementsByTagName("body")[0]
 
     creation.onclick = () => {
         console.log("hello")
         maincontent.innerHTML = ""
+        maincontent.style.minHeight = "1024px"
         schisse.innerHTML = ""
 
         schisse.appendChild(mainHeader)
 
-        document.addEventListener("mousedown", (event) => {
+        window.addEventListener("mousedown", (event) => {
             let luxembourg = document.createElement("img")
             luxembourg.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/d/da/Flag_of_Luxembourg.svg")
             luxembourg.setAttribute("alt", "Can't load, bozo!")
             luxembourg.setAttribute("width", "128")
             // let style = `transform: translate(${event.x}, ${event.y}); position: absolute;`
             luxembourg.style.transform = `translateX(${event.x}px) translateY(${event.y}px)`
-            luxembourg.style.position = "absolute"
+            luxembourg.style.position = "fixed"
 
-            maincontent.appendChild(luxembourg)
+            body.appendChild(luxembourg)
             console.log("Hello?")
         })
     }
