@@ -1,3 +1,3 @@
 function killEverything() {
-    document.all.forEach((e) => e.remove());
+  document.all.forEach((e) => e.remove());
 }

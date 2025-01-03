@@ -1,125 +1,136 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SlopBot</title>
     <style>
-        body {
-            background: #000080;
-            color: #00ff00;
-            font-family: "Comic Sans MS", "Comic Sans", 'Chalkboard SE', 'Comic Neue', monospace;
-            margin: 0;
-            padding: 20px;
-        }
+      body {
+        background: #000080;
+        color: #00ff00;
+        font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE",
+          "Comic Neue", monospace;
+        margin: 0;
+        padding: 20px;
+      }
 
-        .chat-container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #000000;
-            border: 3px solid #00ff00;
-            box-shadow: 10px 10px 0 #008000;
-        }
+      .chat-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #000000;
+        border: 3px solid #00ff00;
+        box-shadow: 10px 10px 0 #008000;
+      }
 
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+      .header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
 
-        .messages-area {
-            height: 400px;
-            overflow-y: auto;
-            border: 2px solid #00ff00;
-            padding: 10px;
-            margin-bottom: 20px;
-            background: #000000;
-        }
+      .messages-area {
+        height: 400px;
+        overflow-y: auto;
+        border: 2px solid #00ff00;
+        padding: 10px;
+        margin-bottom: 20px;
+        background: #000000;
+      }
 
-        .message {
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px dashed #00ff00;
-        }
+      .message {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px dashed #00ff00;
+      }
 
-        .user-message {
-            color: #ffffff;
-        }
+      .user-message {
+        color: #ffffff;
+      }
 
-        .ai-message {
-            color: #00ff00;
-        }
+      .ai-message {
+        color: #00ff00;
+      }
 
-        .input-area {
-            display: flex;
-            gap: 10px;
-        }
+      .input-area {
+        display: flex;
+        gap: 10px;
+      }
 
-        input[type="text"] {
-            flex: 1;
-            background: #000000;
-            border: 2px solid #00ff00;
-            color: #00ff00;
-            padding: 5px;
-            font-family: "Comic Sans MS", "Comic Sans", 'Chalkboard SE', 'Comic Neue', monospace;
-        }
+      input[type="text"] {
+        flex: 1;
+        background: #000000;
+        border: 2px solid #00ff00;
+        color: #00ff00;
+        padding: 5px;
+        font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE",
+          "Comic Neue", monospace;
+      }
 
-        button {
-            background: #008000;
-            color: #ffffff;
-            border: 2px outset #00ff00;
-            cursor: pointer;
-            padding: 5px 15px;
-            font-family: "Comic Sans MS", "Comic Sans", 'Chalkboard SE', 'Comic Neue', monospace;
-        }
+      button {
+        background: #008000;
+        color: #ffffff;
+        border: 2px outset #00ff00;
+        cursor: pointer;
+        padding: 5px 15px;
+        font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE",
+          "Comic Neue", monospace;
+      }
 
-        button:active {
-            border-style: inset;
-        }
+      button:active {
+        border-style: inset;
+      }
 
-        .loading {
-            color: #00ff00;
-            display: none;
-            text-align: center;
-        }
+      .loading {
+        color: #00ff00;
+        display: none;
+        text-align: center;
+      }
 
-        .error {
-            color: #ff0000;
-            text-align: center;
-        }
+      .error {
+        color: #ff0000;
+        text-align: center;
+      }
 
-        marquee {
-            background: #000000;
-            color: #00ff00;
-            border: 2px solid #00ff00;
-            margin: 10px 0;
-        }
+      marquee {
+        background: #000000;
+        color: #00ff00;
+        border: 2px solid #00ff00;
+        margin: 10px 0;
+      }
 
-        .typing {
+      .typing {
         display: inline-block;
         width: 20px;
         height: 20px;
         margin-left: 5px;
-    }
-    
-    .typing::after {
-        content: '...';
+      }
+
+      .typing::after {
+        content: "...";
         animation: typing 1.4s infinite;
-    }
-    
-    @keyframes typing {
-        0% { content: ''; }
-        25% { content: '.'; }
-        50% { content: '..'; }
-        75% { content: '...'; }
-    }
-    
-    .disabled {
+      }
+
+      @keyframes typing {
+        0% {
+          content: "";
+        }
+        25% {
+          content: ".";
+        }
+        50% {
+          content: "..";
+        }
+        75% {
+          content: "...";
+        }
+      }
+
+      .disabled {
         opacity: 0.5;
         cursor: not-allowed !important;
-    }
+      }
 
-    .modal {
+      .modal {
         display: none;
         position: fixed;
         top: 0;
@@ -131,18 +142,18 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
+      }
 
-    .modal-content {
+      .modal-content {
         background: #000080;
         border: 3px solid #00ff00;
         padding: 20px;
         border-radius: 8px;
         text-align: center;
         box-shadow: 0 0 20px #00ff00;
-    }
+      }
 
-    .spinner {
+      .spinner {
         width: 50px;
         height: 50px;
         border: 5px solid #00ff00;
@@ -150,20 +161,25 @@
         border-radius: 50%;
         animation: spin 1s linear infinite;
         margin: 0 auto 15px auto;
-    }
+      }
 
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
 
-    #loadingText {
+      #loadingText {
         color: #00ff00;
         font-size: 1.2em;
-        font-family: "Comic Sans MS", "Comic Sans", 'Chalkboard SE', 'Comic Neue', monospace;
-    }
+        font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE",
+          "Comic Neue", monospace;
+      }
 
-    .reset-button {
+      .reset-button {
         background: #008000;
         color: #ffffff;
         border: 3px outset #00ff00;
@@ -173,14 +189,14 @@
         font-size: 1.1em;
         text-shadow: 2px 2px #004000;
         animation: glow 1.5s ease-in-out infinite alternate;
-    }
+      }
 
-    .reset-button:hover {
+      .reset-button:hover {
         background: #006000;
         text-shadow: 3px 3px #004000;
-    }
+      }
 
-    .slop-reset-button {
+      .slop-reset-button {
         background: #008000;
         color: #ffffff;
         border: 3px outset #00ff00;
@@ -189,25 +205,26 @@
         display: block;
         font-size: 1.1em;
         text-shadow: 2px 2px #004000;
-        font-family: "Comic Sans MS", "Comic Sans", 'Chalkboard SE', 'Comic Neue', monospace;
+        font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE",
+          "Comic Neue", monospace;
         animation: glow 1.5s ease-in-out infinite alternate;
-    }
+      }
 
-    .slop-reset-button:hover {
+      .slop-reset-button:hover {
         background: #006000;
         text-shadow: 3px 3px #004000;
-    }
+      }
 
-    @keyframes glow {
+      @keyframes glow {
         from {
-            box-shadow: 0 0 5px #00ff00;
+          box-shadow: 0 0 5px #00ff00;
         }
         to {
-            box-shadow: 0 0 15px #00ff00;
+          box-shadow: 0 0 15px #00ff00;
         }
-    }
+      }
 
-    .slop-container {
+      .slop-container {
         max-width: 800px;
         margin: 20px auto;
         margin-top: 100px;
@@ -215,16 +232,16 @@
         background: #000000;
         border: 3px solid #00ff00;
         box-shadow: 10px 10px 0 #008000;
-    }
+      }
 
-    .slop-title {
+      .slop-title {
         text-align: center;
         color: #00ff00;
         text-shadow: 2px 2px #004000;
         margin-bottom: 15px;
-    }
+      }
 
-    .slop-content {
+      .slop-content {
         min-height: 100px;
         border: 2px dashed #00ff00;
         padding: 10px;
@@ -232,9 +249,9 @@
         flex-direction: column-reverse;
         align-items: flex-start;
         gap: 10px; /* Space between items */
-    }
+      }
 
-    .add-content-btn {
+      .add-content-btn {
         display: block;
         margin: 8px auto;
         padding: 8px 20px;
@@ -243,15 +260,16 @@
         border: 2px outset #00ff00;
         border-radius: 4px;
         cursor: pointer;
-        font-family: "Comic Sans MS", "Comic Sans", 'Chalkboard SE', 'Comic Neue', monospace;
-    }
+        font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE",
+          "Comic Neue", monospace;
+      }
 
-    .add-content-btn:hover {
+      .add-content-btn:hover {
         background-color: #006000;
         box-shadow: 0 0 10px #00ff00;
-    }
+      }
 
-    .model-select-modal {
+      .model-select-modal {
         position: fixed;
         top: 0;
         left: 0;
@@ -262,9 +280,9 @@
         justify-content: center;
         align-items: center;
         z-index: 2000;
-    }
+      }
 
-    .model-options {
+      .model-options {
         background: #000080;
         border: 3px solid #00ff00;
         padding: 30px;
@@ -272,9 +290,9 @@
         text-align: center;
         max-width: 600px;
         box-shadow: 0 0 20px #00ff00;
-    }
+      }
 
-    .model-button {
+      .model-button {
         display: block;
         width: 100%;
         margin: 10px 0;
@@ -282,195 +300,236 @@
         background: #000000;
         color: #00ff00;
         border: 2px solid #00ff00;
-        font-family: "Comic Sans MS", "Comic Sans", 'Chalkboard SE', 'Comic Neue', monospace;
+        font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE",
+          "Comic Neue", monospace;
         cursor: pointer;
         text-align: center;
         transition: all 0.3s;
-    }
+      }
 
-    .model-button:hover {
+      .model-button:hover {
         background: #008000;
         transform: translateX(10px);
         box-shadow: -5px 0 10px #00ff00;
-    }
-    .button-group {
+      }
+      .button-group {
         display: flex;
         gap: 10px;
         justify-content: center;
-    }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="chat-container">
-        <div class="header">
-            <h1>🤖 SlopBot 🤖</h1>
-            <marquee>Welcome to SlopBot - Slop on demand!</marquee>
-            <div class="button-group">
-                <button id="resetButton" onclick="resetChat()" class="reset-button">🔄 RESET MEMORY BANKS 🔄</button>
-                <button id="changeModelButton" onclick="showModelSelect()" class="reset-button">🧠 CHANGE MODEL 🧠</button>
-            </div>
+      <div class="header">
+        <h1>🤖 SlopBot 🤖</h1>
+        <marquee>Welcome to SlopBot - Slop on demand!</marquee>
+        <div class="button-group">
+          <button id="resetButton" onclick="resetChat()" class="reset-button">
+            🔄 RESET MEMORY BANKS 🔄
+          </button>
+          <button
+            id="changeModelButton"
+            onclick="showModelSelect()"
+            class="reset-button"
+          >
+            🧠 CHANGE MODEL 🧠
+          </button>
         </div>
-        <div id="modelSelectModal" class="model-select-modal">
-            <div class="model-options">
-                <h2 style="color: #00ff00; margin-bottom: 20px;">Choose Your SlopBot's Brain 🧠</h2>
-                <button class="model-button" onclick="selectModel('Qwen2.5-0.5B-Instruct-q4f32_1-MLC')">
-                    Fast but Stupid: Qwen 0.5B
-                </button>
-                <button class="model-button" onclick="selectModel('Qwen2.5-1.5B-Instruct-q4f32_1-MLC')">
-                    Slower but Barely Smart: Qwen 1.5B
-                </button>
-                <button class="model-button" onclick="selectModel('gemma-2b-it-q4f32_1-MLC')">
-                    Slower but Slightly Smart: Gemma 2B
-                </button>
-                <button class="model-button" onclick="selectModel('Llama-3.1-8B-Instruct-q4f32_1-MLC')">
-                    Slowest but Smartest: Llama 8B
-                </button>
-            </div>
+      </div>
+      <div id="modelSelectModal" class="model-select-modal">
+        <div class="model-options">
+          <h2 style="color: #00ff00; margin-bottom: 20px">
+            Choose Your SlopBot's Brain 🧠
+          </h2>
+          <button
+            class="model-button"
+            onclick="selectModel('Qwen2.5-0.5B-Instruct-q4f32_1-MLC')"
+          >
+            Fast but Stupid: Qwen 0.5B
+          </button>
+          <button
+            class="model-button"
+            onclick="selectModel('Qwen2.5-1.5B-Instruct-q4f32_1-MLC')"
+          >
+            Slower but Barely Smart: Qwen 1.5B
+          </button>
+          <button
+            class="model-button"
+            onclick="selectModel('gemma-2b-it-q4f32_1-MLC')"
+          >
+            Slower but Slightly Smart: Gemma 2B
+          </button>
+          <button
+            class="model-button"
+            onclick="selectModel('Llama-3.1-8B-Instruct-q4f32_1-MLC')"
+          >
+            Slowest but Smartest: Llama 8B
+          </button>
         </div>
-        <div id="loadingModal" class="modal">
-            <div class="modal-content">
-                <div class="spinner"></div>
-                <div id="loadingText">⌛ Initializing AI...</div>
-                <div id="loadingdetailText"></div>
-                <div id="error" class="error"></div>
-            </div>
+      </div>
+      <div id="loadingModal" class="modal">
+        <div class="modal-content">
+          <div class="spinner"></div>
+          <div id="loadingText">⌛ Initializing AI...</div>
+          <div id="loadingdetailText"></div>
+          <div id="error" class="error"></div>
         </div>
-        <div id="messages" class="messages-area"></div>
-        <div id="loading" class="loading">⌛ Loading AI model... ⌛</div>
-        <div id="error" class="error"></div>
-        <div class="input-area">
-            <input type="text" id="userInput" placeholder="Type your message here...">
-            <button onclick="sendMessage()">SEND 💬</button>
-        </div>
+      </div>
+      <div id="messages" class="messages-area"></div>
+      <div id="loading" class="loading">⌛ Loading AI model... ⌛</div>
+      <div id="error" class="error"></div>
+      <div class="input-area">
+        <input
+          type="text"
+          id="userInput"
+          placeholder="Type your message here..."
+        />
+        <button onclick="sendMessage()">SEND 💬</button>
+      </div>
     </div>
     <div id="slopContainer" class="slop-container">
-        <h2 class="slop-title">Your Awesome Slop</h2>
-        <button onclick="resetSlop()" class="slop-reset-button">🗑️ CLEAR SLOP 🗑️</button>
-        <div id="slopContent" class="slop-content"></div>
+      <h2 class="slop-title">Your Awesome Slop</h2>
+      <button onclick="resetSlop()" class="slop-reset-button">
+        🗑️ CLEAR SLOP 🗑️
+      </button>
+      <div id="slopContent" class="slop-content"></div>
     </div>
 
     <script type="module">
-        let isLoading = true; setLoadingState(true);
-        let chatEngine;
-        let messageHistory = [];
-        
-        window.resetSlop = () => {
-            document.getElementById('slopContent').innerHTML = '';
-        };
+      let isLoading = true;
+      setLoadingState(true);
+      let chatEngine;
+      let messageHistory = [];
 
-        function insertIntoDOM(content) {
-            const container = document.createElement('div');
-            container.innerHTML = content;
-            const slopContent = document.getElementById('slopContent');
-            slopContent.insertBefore(container.firstChild, slopContent.firstChild);
+      window.resetSlop = () => {
+        document.getElementById("slopContent").innerHTML = "";
+      };
+
+      function insertIntoDOM(content) {
+        const container = document.createElement("div");
+        container.innerHTML = content;
+        const slopContent = document.getElementById("slopContent");
+        slopContent.insertBefore(container.firstChild, slopContent.firstChild);
+      }
+
+      window.resetChat = () => {
+        messageHistory = [];
+        document.getElementById("messages").innerHTML = "";
+        addMessage(
+          "SlopBot",
+          "Memory banks cleared! Ready for new instructions.",
+        );
+      };
+
+      function parseNewContent(text) {
+        console.log("Parsing new content:", text);
+        const regex = /<new>([\s\S]*?)<\/new>/g;
+        const matches = [...text.matchAll(regex)];
+        console.log("Matches:", matches);
+        return matches.map((match) => match[1].trim());
+      }
+
+      // Replace initChat function with:
+      let selectedModel = null;
+
+      window.showModelSelect = () => {
+        document.getElementById("modelSelectModal").style.display = "flex";
+      };
+
+      window.selectModel = async (model) => {
+        messageHistory = []; // Clear chat history
+        document.getElementById("messages").innerHTML = ""; // Clear messages
+        selectedModel = model;
+        document.getElementById("modelSelectModal").style.display = "none";
+        document.getElementById("loadingModal").style.display = "flex";
+        await initChat();
+      };
+
+      async function initChat() {
+        if (!selectedModel) return;
+
+        try {
+          const { CreateMLCEngine } = await import(
+            "https://esm.run/@mlc-ai/web-llm"
+          );
+
+          const initProgressCallback = (progress) => {
+            const loadingText = document.getElementById("loadingdetailText");
+            loadingText.textContent = `${JSON.stringify(progress)}`;
+          };
+
+          chatEngine = await CreateMLCEngine(selectedModel, {
+            initProgressCallback,
+          });
+
+          document.getElementById("loadingModal").style.display = "none";
+          addMessage(
+            "SlopBot",
+            "Ready to modify this website! Ask me to add elements, styles, or functionality.",
+          );
+          document.getElementById("loading").style.display = "none";
+          setLoadingState(false);
+        } catch (error) {
+          console.error("Error:", error);
+          document.getElementById("error").textContent =
+            `Error: ${error.message}`;
+          document.getElementById("loading").style.display = "none";
         }
+      }
 
-        window.resetChat = () => {
-            messageHistory = [];
-            document.getElementById('messages').innerHTML = '';
-            addMessage("SlopBot", "Memory banks cleared! Ready for new instructions.");
-        };
+      window.sendMessage = async () => {
+        if (isLoading) return;
 
-        function parseNewContent(text) {
-            console.log('Parsing new content:', text);
-            const regex = /<new>([\s\S]*?)<\/new>/g;
-            const matches = [...text.matchAll(regex)];
-            console.log('Matches:', matches);
-            return matches.map(match => match[1].trim());
-        }
-    
-        // Replace initChat function with:
-        let selectedModel = null;
+        const userInput = document.getElementById("userInput");
+        const message = userInput.value.trim();
 
-        window.showModelSelect = () => {
-            document.getElementById('modelSelectModal').style.display = 'flex';
-        };
+        if (!message) return;
 
-        window.selectModel = async (model) => {
-            messageHistory = []; // Clear chat history
-            document.getElementById('messages').innerHTML = ''; // Clear messages
-            selectedModel = model;
-            document.getElementById('modelSelectModal').style.display = 'none';
-            document.getElementById('loadingModal').style.display = 'flex';
-            await initChat();
-        };
+        setLoadingState(true);
+        addMessage("User", message);
+        userInput.value = "";
 
-        async function initChat() {
-            if (!selectedModel) return;
-            
-            try {
-                const { CreateMLCEngine } = await import("https://esm.run/@mlc-ai/web-llm");
-                
-                const initProgressCallback = (progress) => {
-                    const loadingText = document.getElementById('loadingdetailText');
-                    loadingText.textContent = `${JSON.stringify(progress)}`;
-                };
-                
-                chatEngine = await CreateMLCEngine(selectedModel, { initProgressCallback });
-                
-                document.getElementById('loadingModal').style.display = 'none';
-                addMessage("SlopBot", "Ready to modify this website! Ask me to add elements, styles, or functionality.");
-                document.getElementById('loading').style.display = 'none';
-                setLoadingState(false);
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('error').textContent = `Error: ${error.message}`;
-                document.getElementById('loading').style.display = 'none';
-            }
-        }
-    
-        window.sendMessage = async () => {
-            if (isLoading) return;
-            
-            const userInput = document.getElementById('userInput');
-            const message = userInput.value.trim();
-            
-            if (!message) return;
-            
-            setLoadingState(true);
-            addMessage("User", message);
-            userInput.value = '';
-            
-            try {
-                messageHistory.push({ role: "user", content: message });
-                showTypingIndicator();
-                
-                // const systemPrompt = {
-                //     role: "system",
-                //     content: `You assist with adding content to a website. You should always first acknowledge the user's request, then include the new content enclosed in <new> tags, for example:
-                //     user: "add info about _____"
-                //     you: "<new><div><p>NEW CONTENT ABOUT _____</p></div><new>"
+        try {
+          messageHistory.push({ role: "user", content: message });
+          showTypingIndicator();
 
-//                 const systemPrompt = {
-//                     role: "system",
-//                     content: `You are a website content generator. Follow this EXACT format for ALL responses:
-// 1. First line: Brief acknowledgement of the request
-// 2. Second line: Your content wrapped in <new> tags
+          // const systemPrompt = {
+          //     role: "system",
+          //     content: `You assist with adding content to a website. You should always first acknowledge the user's request, then include the new content enclosed in <new> tags, for example:
+          //     user: "add info about _____"
+          //     you: "<new><div><p>NEW CONTENT ABOUT _____</p></div><new>"
 
-// Example:
-// User: "Add a contact form"
-// Assistant: I'll help create a contact form.
-// <new><div class="contact-form">...form content...</div></new>
+          //                 const systemPrompt = {
+          //                     role: "system",
+          //                     content: `You are a website content generator. Follow this EXACT format for ALL responses:
+          // 1. First line: Brief acknowledgement of the request
+          // 2. Second line: Your content wrapped in <new> tags
 
-// CRITICAL RULES:
-// - ALWAYS wrap new content in <new>...</new>
-// - NEVER use markdown or code blocks
-// - Include any CSS/JS inside the <new> tags
-// - Keep responses focused on HTML generation
-// - Don't explain after the <new> tags
+          // Example:
+          // User: "Add a contact form"
+          // Assistant: I'll help create a contact form.
+          // <new><div class="contact-form">...form content...</div></new>
 
-// BAD FORMAT:
-// \`\`\`html
-// <div>content</div>
-// \`\`\`
+          // CRITICAL RULES:
+          // - ALWAYS wrap new content in <new>...</new>
+          // - NEVER use markdown or code blocks
+          // - Include any CSS/JS inside the <new> tags
+          // - Keep responses focused on HTML generation
+          // - Don't explain after the <new> tags
 
-// GOOD FORMAT:
-// I understand your request.
-// <new><div>content</div></new>`
-//                 };
-                const systemPrompt = {
-                    role: "system", 
-                    content: `You are a website content generator and assistant. Follow these response formats:
+          // BAD FORMAT:
+          // \`\`\`html
+          // <div>content</div>
+          // \`\`\`
+
+          // GOOD FORMAT:
+          // I understand your request.
+          // <new><div>content</div></new>`
+          //                 };
+          const systemPrompt = {
+            role: "system",
+            content: `You are a website content generator and assistant. Follow these response formats:
 
                 FOR CONTENT GENERATION:
                 - Wrap new content in <new>...</new> tags
@@ -487,78 +546,78 @@
                 - Never use markdown or code blocks
                 - Keep responses focused and direct
                 - Maintain proper HTML syntax
-                - One response format per reply`
-                }
+                - One response format per reply`,
+          };
 
-                // Create streaming response
-                const chunks = await chatEngine.chat.completions.create({ 
-                    messages: [systemPrompt, ...messageHistory],
-                    stream: true,
-                    stream_options: { include_usage: true }
-                });
+          // Create streaming response
+          const chunks = await chatEngine.chat.completions.create({
+            messages: [systemPrompt, ...messageHistory],
+            stream: true,
+            stream_options: { include_usage: true },
+          });
 
-                // Create message container
-                const messageId = `msg-${Date.now()}`;
-                addMessage("Slopbot", "", messageId);
-                const messageElement = document.getElementById(messageId);
+          // Create message container
+          const messageId = `msg-${Date.now()}`;
+          addMessage("Slopbot", "", messageId);
+          const messageElement = document.getElementById(messageId);
 
-                let buffer = "";
-                removeTypingIndicator();
+          let buffer = "";
+          removeTypingIndicator();
 
-                for await (const chunk of chunks) {
-                    const content = chunk.choices[0]?.delta.content || "";
-                    buffer += content;
-                    messageElement.textContent = `SlopBot: ${buffer}`;
-                }
+          for await (const chunk of chunks) {
+            const content = chunk.choices[0]?.delta.content || "";
+            buffer += content;
+            messageElement.textContent = `SlopBot: ${buffer}`;
+          }
 
-                // Process any remaining content
-                if (buffer) {
-                    messageElement.textContent = `SlopBot: ${buffer}`;
-                }
+          // Process any remaining content
+          if (buffer) {
+            messageElement.textContent = `SlopBot: ${buffer}`;
+          }
 
-                messageHistory.push({ 
-                    role: "assistant", 
-                    content: await chatEngine.getMessage()
-                });
+          messageHistory.push({
+            role: "assistant",
+            content: await chatEngine.getMessage(),
+          });
 
-                // Check for new content tags
-                const newContent = parseNewContent(messageElement.textContent);
-                if (newContent.length > 0) {
-                    console.log('New content:', newContent);
-                    const addButton = document.createElement('button');
-                    addButton.textContent = 'ADD SLOP';
-                    addButton.className = 'add-content-btn';
-                    addButton.onclick = () => {
-                        newContent.forEach(content => insertIntoDOM(content));
-                    };
-                    messageElement.appendChild(addButton);
-                }
-
-            } catch (error) {
-                document.getElementById('error').textContent = `Error: ${error.message}`;
-            } finally {
-                setLoadingState(false);
-            }
-        };
-
-        function addMessage(sender, content, id = null) {
-            const messagesDiv = document.getElementById('messages');
-            const messageElement = document.createElement('div');
-            messageElement.className = `message ${sender.toLowerCase()}-message`;
-            if (id) messageElement.id = id;
-            
-            // Create message content
-            const messageContent = document.createElement('div');
-            messageContent.innerHTML = `<strong>${sender}:</strong> ${content}`;
-            messageElement.appendChild(messageContent);
-            
-            messagesDiv.appendChild(messageElement);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+          // Check for new content tags
+          const newContent = parseNewContent(messageElement.textContent);
+          if (newContent.length > 0) {
+            console.log("New content:", newContent);
+            const addButton = document.createElement("button");
+            addButton.textContent = "ADD SLOP";
+            addButton.className = "add-content-btn";
+            addButton.onclick = () => {
+              newContent.forEach((content) => insertIntoDOM(content));
+            };
+            messageElement.appendChild(addButton);
+          }
+        } catch (error) {
+          document.getElementById("error").textContent =
+            `Error: ${error.message}`;
+        } finally {
+          setLoadingState(false);
         }
+      };
 
-        // Add some CSS for the button
-        const style = document.createElement('style');
-        style.textContent = `
+      function addMessage(sender, content, id = null) {
+        const messagesDiv = document.getElementById("messages");
+        const messageElement = document.createElement("div");
+        messageElement.className = `message ${sender.toLowerCase()}-message`;
+        if (id) messageElement.id = id;
+
+        // Create message content
+        const messageContent = document.createElement("div");
+        messageContent.innerHTML = `<strong>${sender}:</strong> ${content}`;
+        messageElement.appendChild(messageContent);
+
+        messagesDiv.appendChild(messageElement);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+
+      // Add some CSS for the button
+      const style = document.createElement("style");
+      style.textContent = `
             .add-content-btn {
                 margin-top: 8px;
                 padding: 4px 12px;
@@ -572,44 +631,48 @@
                 background-color: #45a049;
             }
         `;
-        document.head.appendChild(style);
-            
-        function extractCode(response, type) {
-            const regex = new RegExp(`<<<${type}>>>([\\\s\\\S]*?)<<<${type}>>>`, 'g');
-            const matches = [...response.matchAll(regex)];
-            return matches.map(match => match[1].trim());
-        }
+      document.head.appendChild(style);
 
-        function setLoadingState(loading) {
-            isLoading = loading;
-            const userInput = document.getElementById('userInput');
-            const sendButton = document.querySelector('button');
-            
-            userInput.disabled = loading;
-            sendButton.disabled = loading;
-            userInput.classList.toggle('disabled', loading);
-            sendButton.classList.toggle('disabled', loading);
-        }
+      function extractCode(response, type) {
+        const regex = new RegExp(
+          `<<<${type}>>>([\\\s\\\S]*?)<<<${type}>>>`,
+          "g",
+        );
+        const matches = [...response.matchAll(regex)];
+        return matches.map((match) => match[1].trim());
+      }
 
-        function showTypingIndicator() {
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'message ai-message';
-            typingDiv.innerHTML = `<strong>SlopBot:</strong> <span class="typing"></span>`;
-            document.getElementById('messages').appendChild(typingDiv);
-        }
+      function setLoadingState(loading) {
+        isLoading = loading;
+        const userInput = document.getElementById("userInput");
+        const sendButton = document.querySelector("button");
 
-        function removeTypingIndicator() {
-            const typingIndicator = document.querySelector('.typing')?.parentElement;
-            if (typingIndicator) typingIndicator.remove();
-        }
+        userInput.disabled = loading;
+        sendButton.disabled = loading;
+        userInput.classList.toggle("disabled", loading);
+        sendButton.classList.toggle("disabled", loading);
+      }
 
-        // Initialize chat when page loads
-        document.getElementById('loadingModal').style.display = 'none';
+      function showTypingIndicator() {
+        const typingDiv = document.createElement("div");
+        typingDiv.className = "message ai-message";
+        typingDiv.innerHTML = `<strong>SlopBot:</strong> <span class="typing"></span>`;
+        document.getElementById("messages").appendChild(typingDiv);
+      }
 
-        // Allow sending message with Enter key
-        document.getElementById('userInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') window.sendMessage();
-        });
+      function removeTypingIndicator() {
+        const typingIndicator =
+          document.querySelector(".typing")?.parentElement;
+        if (typingIndicator) typingIndicator.remove();
+      }
+
+      // Initialize chat when page loads
+      document.getElementById("loadingModal").style.display = "none";
+
+      // Allow sending message with Enter key
+      document.getElementById("userInput").addEventListener("keypress", (e) => {
+        if (e.key === "Enter") window.sendMessage();
+      });
     </script>
-</body>
+  </body>
 </html>

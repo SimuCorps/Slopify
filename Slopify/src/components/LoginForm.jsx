@@ -11,7 +11,10 @@ export default function LoginForm() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
     if (error) {
       setError(error.message);
     } else {
@@ -23,7 +26,13 @@ export default function LoginForm() {
     <form onSubmit={handleLogin}>
       <h2>Login</h2>
       {error && <p className="error">{error}</p>}
-      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
       <input
         type="password"
         placeholder="Password"
@@ -35,4 +44,3 @@ export default function LoginForm() {
     </form>
   );
 }
-

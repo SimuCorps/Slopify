@@ -79,8 +79,11 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
       case 1:
         isValid =
-          currentCaptcha.correctAnswers.every((answer) => currentCaptcha.selectedShapes.has(answer)) &&
-          currentCaptcha.selectedShapes.size === currentCaptcha.correctAnswers.length;
+          currentCaptcha.correctAnswers.every((answer) =>
+            currentCaptcha.selectedShapes.has(answer),
+          ) &&
+          currentCaptcha.selectedShapes.size ===
+            currentCaptcha.correctAnswers.length;
         break;
       case 2:
         isValid = captchaInput.value.trim().length > 0;
@@ -160,4 +163,3 @@ document.addEventListener("DOMContentLoaded", () => {
     playPrettyGoodVideo();
   });
 });
-

@@ -13,12 +13,16 @@ export default function MessageList() {
     fetchMessages();
     const subscription = supabase
       .channel("realtime:messages")
-      .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages" }, (payload) => {
-        const newMessage = payload.new;
-        attachDisplayName(newMessage).then((msgWithDisplayName) => {
-          setMessages((prev) => [msgWithDisplayName, ...prev]);
-        });
-      })
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "messages" },
+        (payload) => {
+          const newMessage = payload.new;
+          attachDisplayName(newMessage).then((msgWithDisplayName) => {
+            setMessages((prev) => [msgWithDisplayName, ...prev]);
+          });
+        },
+      )
       .subscribe();
 
     return () => {
@@ -61,7 +65,9 @@ export default function MessageList() {
       console.error("Error fetching messages:", error.message);
     } else {
       try {
-        const messagesWithDisplayNames = await Promise.all(data.map(attachDisplayName));
+        const messagesWithDisplayNames = await Promise.all(
+          data.map(attachDisplayName),
+        );
         setMessages((prev) => [...prev, ...messagesWithDisplayNames]);
         if (data.length < PAGE_SIZE) {
           setHasMore(false);
@@ -100,7 +106,13 @@ export default function MessageList() {
       ) : (
         messages.map((msg) => (
           <div key={msg.id} style={{ marginBottom: "1rem" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               <strong>{msg.display_name}</strong>
               <small>{new Date(msg.created_at).toLocaleString()}</small>
             </div>
@@ -112,4 +124,3 @@ export default function MessageList() {
     </div>
   );
 }
-

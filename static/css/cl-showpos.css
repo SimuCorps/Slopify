@@ -4,7 +4,7 @@
     left: 0;
     color: white;
     font-size: 22px;
-    font-family: Consolas, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: Consolas, ui-monospace, SFMono-Regular, Menlo, Monaco, "Liberation Mono", "Courier New", monospace;
     text-shadow:
         -1px -1px 0 #000,
         1px -1px 0 #000,
@@ -21,7 +21,7 @@
 }
 
 .cl-showpos .map {
-    color: #0f0;
+  color: #0f0;
 }
 
 /* .cl-showpos:hover {

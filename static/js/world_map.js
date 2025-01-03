@@ -89,7 +89,7 @@ function showSuggestions(query) {
 
   // Filter by city.name that starts with the typed query
   const matches = citiesData.filter((city) =>
-    city.name.toLowerCase().startsWith(query)
+    city.name.toLowerCase().startsWith(query),
   );
 
   // Limit to top 10
@@ -106,7 +106,7 @@ function showSuggestions(query) {
     const display = [
       cityName,
       admin1 && admin1 !== cityName ? admin1 : null,
-      country && country !== cityName ? country : null
+      country && country !== cityName ? country : null,
     ]
       .filter(Boolean) // remove null/empty
       .join(", ");

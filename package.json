@@ -7,10 +7,10 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "live-server": "^1.2.2",
     "@types/bun": "^1.1.14",
     "emoji-regex": "^10.4.0",
-    "husky": "^9.1.7"
+    "husky": "^9.1.7",
+    "live-server": "^1.2.2"
   },
   "peerDependencies": {
     "typescript": "^5.7.2"

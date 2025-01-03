@@ -30,7 +30,7 @@ button {
   width: 800px;
   height: 403px;
   margin: 20px auto;
-  background: url("../../static/images/world_map.png") no-repeat center center;
+  background: url("/static/images/world_map.png") no-repeat center center;
   background-size: cover;
   border: 2px solid #3c3836;
   border-radius: 8px;

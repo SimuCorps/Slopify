@@ -1,386 +1,543 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Commit Leaderboard</title>
     <style>
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-            z-index: 999;
-        }
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.15),
+          rgba(0, 0, 0, 0.15) 1px,
+          transparent 1px,
+          transparent 2px
+        );
+        pointer-events: none;
+        z-index: 999;
+      }
 
-        .container {
-            /* ... existing styles ... */
-            animation: borderPulse 2s infinite;
-        }
+      .container {
+        /* ... existing styles ... */
+        animation: borderPulse 2s infinite;
+      }
 
-        @keyframes borderPulse {
-            0% { box-shadow: 0 0 15px var(--accent); }
-            50% { box-shadow: 0 0 25px var(--accent); }
-            100% { box-shadow: 0 0 15px var(--accent); }
+      @keyframes borderPulse {
+        0% {
+          box-shadow: 0 0 15px var(--accent);
         }
-
-        :root {
-            --bg-primary: #000000;
-            --bg-secondary: #220033;
-            --text-primary: #00ff00;
-            --text-secondary: #ff00ff;
-            --accent: #00ffff;
-            --border: #ff00ff;
+        50% {
+          box-shadow: 0 0 25px var(--accent);
         }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Press Start 2P', cursive;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            background-image: 
-                linear-gradient(0deg, transparent 24%, 
-                rgba(32, 255, 255, .05) 25%, 
-                rgba(32, 255, 255, .05) 26%, transparent 27%, transparent 74%, 
-                rgba(32, 255, 255, .05) 75%, 
-                rgba(32, 255, 255, .05) 76%, transparent 77%, transparent),
-                linear-gradient(90deg, transparent 24%, 
-                rgba(32, 255, 255, .05) 25%, 
-                rgba(32, 255, 255, .05) 26%, transparent 27%, transparent 74%, 
-                rgba(32, 255, 255, .05) 75%, 
-                rgba(32, 255, 255, .05) 76%, transparent 77%, transparent);
-            background-size: 50px 50px;
-            text-shadow: 2px 2px #ff00ff;
+        100% {
+          box-shadow: 0 0 15px var(--accent);
         }
+      }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 2px solid var(--accent);
-            box-shadow: 0 0 20px var(--accent);
-            margin-top: 20px;
-        }
+      :root {
+        --bg-primary: #000000;
+        --bg-secondary: #220033;
+        --text-primary: #00ff00;
+        --text-secondary: #ff00ff;
+        --accent: #00ffff;
+        --border: #ff00ff;
+      }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 20px;
-        }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Press Start 2P", cursive;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        background-image: linear-gradient(
+            0deg,
+            transparent 24%,
+            rgba(32, 255, 255, 0.05) 25%,
+            rgba(32, 255, 255, 0.05) 26%,
+            transparent 27%,
+            transparent 74%,
+            rgba(32, 255, 255, 0.05) 75%,
+            rgba(32, 255, 255, 0.05) 76%,
+            transparent 77%,
+            transparent
+          ),
+          linear-gradient(
+            90deg,
+            transparent 24%,
+            rgba(32, 255, 255, 0.05) 25%,
+            rgba(32, 255, 255, 0.05) 26%,
+            transparent 27%,
+            transparent 74%,
+            rgba(32, 255, 255, 0.05) 75%,
+            rgba(32, 255, 255, 0.05) 76%,
+            transparent 77%,
+            transparent
+          );
+        background-size: 50px 50px;
+        text-shadow: 2px 2px #ff00ff;
+      }
 
-        .header h1 {
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 2px solid var(--accent);
+        box-shadow: 0 0 20px var(--accent);
+        margin-top: 20px;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 20px;
+      }
+
+      .header h1 {
+        font-size: 24px;
+        color: var(--accent);
+        text-transform: uppercase;
+      }
+
+      .search-box {
+        width: 96.5%;
+        padding: 12px;
+        margin-bottom: 20px;
+        background: var(--bg-secondary);
+        border: 2px solid var(--accent);
+        color: var(--accent);
+        font-family: "Press Start 2P", cursive;
+        font-size: 12px;
+      }
+
+      .commit-card {
+        background: var(--bg-secondary);
+        border: 2px solid var(--accent);
+        padding: 16px;
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s;
+        box-shadow: 4px 4px 0 var(--border);
+      }
+
+      .commit-card:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 var(--border);
+      }
+
+      .commit-info h3 {
+        font-size: 14px;
+        margin: 0 0 12px 0;
+        color: var(--accent);
+      }
+
+      .commit-info p {
+        font-size: 10px;
+        color: var(--text-secondary);
+      }
+
+      .upvote-btn {
+        background: linear-gradient(
+          45deg,
+          var(--bg-primary) 0%,
+          #330066 50%,
+          var(--bg-primary) 100%
+        );
+        border: 2px solid var(--accent);
+        color: var(--accent);
+        padding: 8px 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: "Press Start 2P", cursive;
+        min-width: 80px;
+        height: 36px;
+        box-shadow: 3px 3px 0 var(--border);
+      }
+
+      .upvote-btn:hover {
+        background: var(--accent);
+        color: var(--bg-primary);
+        transform: translate(-2px, -2px);
+        box-shadow: 5px 5px 0 var(--border);
+      }
+
+      .upvote-btn.voted {
+        background: var(--accent);
+        color: var(--bg-primary);
+      }
+
+      .auth-button {
+        background: linear-gradient(
+          45deg,
+          var(--bg-primary) 0%,
+          #330066 50%,
+          var(--bg-primary) 100%
+        );
+        color: var(--accent);
+        border: 2px solid var(--accent);
+        padding: 10px 20px;
+        cursor: pointer;
+        font-family: "Press Start 2P", cursive;
+        font-size: 12px;
+        box-shadow: 3px 3px 0 var(--border);
+        transition: all 0.2s;
+      }
+
+      .auth-button:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 5px 5px 0 var(--border);
+      }
+
+      .user-info {
+        color: var(--text-secondary);
+        font-size: 12px;
+      }
+
+      #error-message {
+        background: #ff0000;
+        color: white;
+        padding: 10px;
+        margin-bottom: 20px;
+        display: none;
+        border: 2px solid white;
+        text-align: center;
+        font-size: 12px;
+      }
+
+      .commit-card .commit-link {
+        text-decoration: none;
+        color: inherit;
+        display: block; /* Makes the entire content area clickable */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- This is the header div -->
+      <div
+        class="header"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 30px;
+          border-bottom: 2px solid #00ffff;
+          padding-bottom: 20px;
+        "
+      >
+        <h1
+          style="
             font-size: 24px;
-            color: var(--accent);
+            color: #00ffff;
             text-transform: uppercase;
-        }
+            margin: 0;
+          "
+        >
+          Commit Leaderboard
+        </h1>
+        <div id="auth-section">
+          <button
+            id="login-button"
+            style="
+              background: #000000;
+              color: #00ffff;
+              border: 2px solid #00ffff;
+              padding: 10px 20px;
+              cursor: pointer;
+              font-family: &quot;Press Start 2P&quot;, cursive;
+              font-size: 12px;
+              box-shadow: 3px 3px 0 #ff00ff;
+              transition: all 0.2s;
+            "
+          >
+            Login with GitHub
+          </button>
+          <span
+            id="user-info"
+            style="color: #ff00ff; font-size: 12px; display: none"
+          ></span>
+        </div>
+      </div>
 
-        .search-box {
-            width: 96.5%;
-            padding: 12px;
-            margin-bottom: 20px;
-            background: var(--bg-secondary);
-            border: 2px solid var(--accent);
-            color: var(--accent);
-            font-family: 'Press Start 2P', cursive;
-            font-size: 12px;
-        }
-
-        .commit-card {
-            background: var(--bg-secondary);
-            border: 2px solid var(--accent);
-            padding: 16px;
-            margin-bottom: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s;
-            box-shadow: 4px 4px 0 var(--border);
-        }
-
-        .commit-card:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0 var(--border);
-        }
-
-        .commit-info h3 {
-            font-size: 14px;
-            margin: 0 0 12px 0;
-            color: var(--accent);
-        }
-
-        .commit-info p {
-            font-size: 10px;
-            color: var(--text-secondary);
-        }
-
-        .upvote-btn {
-            background: linear-gradient(
-                45deg,
-                var(--bg-primary) 0%,
-                #330066 50%,
-                var(--bg-primary) 100%
-            );
-            border: 2px solid var(--accent);
-            color: var(--accent);
+      <!-- Add the style switcher buttons here, right after the header -->
+      <div
+        style="
+          margin-bottom: 20px;
+          text-align: center;
+          padding: 10px;
+          border: 2px solid #00ffff;
+          background: #220033;
+        "
+      >
+        <p
+          class="style_text"
+          style="color: #00ffff; margin-bottom: 10px; font-size: 12px"
+        >
+          SELECT YOUR STYLE
+        </p>
+        <button
+          onclick="setStyle('synthwave')"
+          style="
+            margin: 0 10px;
+            background: #000000;
+            color: #00ffff;
+            border: 2px solid #00ffff;
             padding: 8px 16px;
             cursor: pointer;
-            transition: all 0.2s;
-            font-family: 'Press Start 2P', cursive;
-            min-width: 80px;
-            height: 36px;
-            box-shadow: 3px 3px 0 var(--border);
-
-        }
-
-        .upvote-btn:hover {
-            background: var(--accent);
-            color: var(--bg-primary);
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0 var(--border);
-        }
-
-        .upvote-btn.voted {
-            background: var(--accent);
-            color: var(--bg-primary);
-        }
-
-        .auth-button {
-            background: linear-gradient(
-                45deg,
-                var(--bg-primary) 0%,
-                #330066 50%,
-                var(--bg-primary) 100%
-            );
-            color: var(--accent);
-            border: 2px solid var(--accent);
-            padding: 10px 20px;
+            font-family: &quot;Press Start 2P&quot;, cursive;
+            font-size: 10px;
+            box-shadow: 3px 3px 0 #ff00ff;
+          "
+        >
+          SYNTHWAVE
+        </button>
+        <button
+          onclick="setStyle('retroblog')"
+          style="
+            margin: 0 10px;
+            background: #000000;
+            color: #00ffff;
+            border: 2px solid #00ffff;
+            padding: 8px 16px;
             cursor: pointer;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 12px;
-            box-shadow: 3px 3px 0 var(--border);
-            transition: all 0.2s;
-        }
+            font-family: &quot;Press Start 2P&quot;, cursive;
+            font-size: 10px;
+            box-shadow: 3px 3px 0 #ff00ff;
+          "
+        >
+          RETRO BLOG
+        </button>
+        <button
+          onclick="setStyle('cyberpunk')"
+          style="
+            margin: 0 10px;
+            background: #000000;
+            color: #00ffff;
+            border: 2px solid #00ffff;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: &quot;Press Start 2P&quot;, cursive;
+            font-size: 10px;
+            box-shadow: 3px 3px 0 #ff00ff;
+          "
+        >
+          BASIC
+        </button>
+      </div>
 
-        .auth-button:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0 var(--border);
-        }
-
-        .user-info {
-            color: var(--text-secondary);
-            font-size: 12px;
-        }
-
-        #error-message {
-            background: #ff0000;
-            color: white;
-            padding: 10px;
-            margin-bottom: 20px;
-            display: none;
-            border: 2px solid white;
-            text-align: center;
-            font-size: 12px;
-        }
-
-        .commit-card .commit-link {
-            text-decoration: none;
-            color: inherit;
-            display: block; /* Makes the entire content area clickable */
-        }
-
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- This is the header div -->
-        <div class="header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid #00ffff; padding-bottom: 20px;">
-            <h1 style="font-size: 24px; color: #00ffff; text-transform: uppercase; margin: 0;">Commit Leaderboard</h1>
-            <div id="auth-section">
-                <button id="login-button" style="background: #000000; color: #00ffff; border: 2px solid #00ffff; padding: 10px 20px; cursor: pointer; font-family: 'Press Start 2P', cursive; font-size: 12px; box-shadow: 3px 3px 0 #ff00ff; transition: all 0.2s;">Login with GitHub</button>
-                <span id="user-info" style="color: #ff00ff; font-size: 12px; display: none;"></span>
-            </div>
-        </div>
-    
-        <!-- Add the style switcher buttons here, right after the header -->
-        <div style="margin-bottom: 20px; text-align: center; padding: 10px; border: 2px solid #00ffff; background: #220033;">
-            <p class="style_text" style="color: #00ffff; margin-bottom: 10px; font-size: 12px;">SELECT YOUR STYLE</p>
-            <button onclick="setStyle('synthwave')" style="margin: 0 10px; background: #000000; color: #00ffff; border: 2px solid #00ffff; padding: 8px 16px; cursor: pointer; font-family: 'Press Start 2P', cursive; font-size: 10px; box-shadow:3px 3px 0 #ff00ff;">SYNTHWAVE</button>
-            <button onclick="setStyle('retroblog')" style="margin: 0 10px; background: #000000; color: #00ffff; border: 2px solid #00ffff; padding: 8px 16px; cursor: pointer; font-family: 'Press Start 2P', cursive; font-size: 10px; box-shadow:3px 3px 0 #ff00ff">RETRO BLOG</button>
-            <button onclick="setStyle('cyberpunk')" style="margin: 0 10px; background: #000000; color: #00ffff; border: 2px solid #00ffff; padding: 8px 16px; cursor: pointer; font-family: 'Press Start 2P', cursive; font-size: 10px; box-shadow:3px 3px 0 #ff00ff">BASIC</button>
-        </div>
-    
-        <div id="error-message" style="background: #ff0000; color: white; padding: 10px; margin-bottom: 20px; display: none; border: 2px solid white; text-align: center; font-size: 12px;"></div>
-        <input type="text" id="search-input" style="width: 100%; padding: 12px; margin-bottom: 20px; background: #220033; border: 2px solid #00ffff; color: #00ffff; font-family: 'Press Start 2P', cursive; font-size: 12px; box-sizing: border-box;" placeholder="Search commits...">
-        <div id="leaderboard"></div>
+      <div
+        id="error-message"
+        style="
+          background: #ff0000;
+          color: white;
+          padding: 10px;
+          margin-bottom: 20px;
+          display: none;
+          border: 2px solid white;
+          text-align: center;
+          font-size: 12px;
+        "
+      ></div>
+      <input
+        type="text"
+        id="search-input"
+        style="
+          width: 100%;
+          padding: 12px;
+          margin-bottom: 20px;
+          background: #220033;
+          border: 2px solid #00ffff;
+          color: #00ffff;
+          font-family: &quot;Press Start 2P&quot;, cursive;
+          font-size: 12px;
+          box-sizing: border-box;
+        "
+        placeholder="Search commits..."
+      />
+      <div id="leaderboard"></div>
     </div>
 
-<script src="lbtunnel.js"></script>
-<script>
-        const CLIENT_ID = 'Ov23ligs3nFJsyC12uPP';
-        const TUNNEL_URL = 'https://climbing-dane-hip.ngrok-free.app';
-        let currentTheme = 'synthwave';
+    <script src="lbtunnel.js"></script>
+    <script>
+      const CLIENT_ID = "Ov23ligs3nFJsyC12uPP";
+      const TUNNEL_URL = "https://climbing-dane-hip.ngrok-free.app";
+      let currentTheme = "synthwave";
 
-        let accessToken = localStorage.getItem('github_token');
-        let votedCommits = new Set(JSON.parse(localStorage.getItem('voted_commits') || '[]'));
+      let accessToken = localStorage.getItem("github_token");
+      let votedCommits = new Set(
+        JSON.parse(localStorage.getItem("voted_commits") || "[]"),
+      );
 
-        // Configure tunnel
-        tunnel.setBaseUrl(TUNNEL_URL);
+      // Configure tunnel
+      tunnel.setBaseUrl(TUNNEL_URL);
 
-        // GitHub OAuth login
-        document.getElementById('login-button').addEventListener('click', () => {
+      // GitHub OAuth login
+      document.getElementById("login-button").addEventListener("click", () => {
         const redirectUri = `${window.location.origin}/leaderboard.html`;
         window.location.href = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=read:user`;
-    });
+      });
 
-        // Handle OAuth callback
-        const code = new URLSearchParams(window.location.search).get('code');
-        if (code) {
-        tunnel.get(`/auth/github?code=${code}`)
-            .then(response => {
-                accessToken = response.access_token;
-                localStorage.setItem('github_token', accessToken);
-                // Remove code from URL
-                window.history.replaceState({}, document.title, '/leaderboard.html');
-                updateAuthUI();
-                syncCommits();
-            })
-            .catch(error => {
-                showError(error.message);
-                console.log(error);
-            });
-    }
+      // Handle OAuth callback
+      const code = new URLSearchParams(window.location.search).get("code");
+      if (code) {
+        tunnel
+          .get(`/auth/github?code=${code}`)
+          .then((response) => {
+            accessToken = response.access_token;
+            localStorage.setItem("github_token", accessToken);
+            // Remove code from URL
+            window.history.replaceState(
+              {},
+              document.title,
+              "/leaderboard.html",
+            );
+            updateAuthUI();
+            syncCommits();
+          })
+          .catch((error) => {
+            showError(error.message);
+            console.log(error);
+          });
+      }
 
-        function updateAuthUI() {
+      function updateAuthUI() {
         if (accessToken) {
-        document.getElementById('login-button').style.display = 'none';
-        document.getElementById('user-info').style.display = 'inline';
-        // Get user info from GitHub
-        fetch('https://api.github.com/user', {
-        headers: { 'Authorization': `token ${accessToken}` }
-    })
-        .then(res => res.json())
-        .then(user => {
-        document.getElementById('user-info').textContent = `Logged in as ${user.login}`;
-    });
-    }
-    }
-
-        function syncCommits() {
-        tunnel.post('/api/sync', { token: accessToken })
-            .then(() => loadCommits())
-            .catch(() => showError('WELCOME TO THE LEADERBOARD'));
-    }
-
-        function showError(message) {
-            const errorDiv = document.getElementById('error-message');
-            errorDiv.textContent = message;
-            if (message === 'WELCOME TO THE LEADERBOARD') {
-                errorDiv.style.backgroundColor = 'green';
-            } else {
-                errorDiv.style.backgroundColor = 'red';
-            }
-            errorDiv.style.display = 'block';
-            setTimeout(() => {
-                errorDiv.style.display = 'none';
-            }, 5000);
+          document.getElementById("login-button").style.display = "none";
+          document.getElementById("user-info").style.display = "inline";
+          // Get user info from GitHub
+          fetch("https://api.github.com/user", {
+            headers: { Authorization: `token ${accessToken}` },
+          })
+            .then((res) => res.json())
+            .then((user) => {
+              document.getElementById("user-info").textContent =
+                `Logged in as ${user.login}`;
+            });
         }
+      }
 
-        function createCommitCard(commit) {
-            const card = document.createElement('div');
-            card.className = 'commit-card';
-            card.innerHTML = `
+      function syncCommits() {
+        tunnel
+          .post("/api/sync", { token: accessToken })
+          .then(() => loadCommits())
+          .catch(() => showError("WELCOME TO THE LEADERBOARD"));
+      }
+
+      function showError(message) {
+        const errorDiv = document.getElementById("error-message");
+        errorDiv.textContent = message;
+        if (message === "WELCOME TO THE LEADERBOARD") {
+          errorDiv.style.backgroundColor = "green";
+        } else {
+          errorDiv.style.backgroundColor = "red";
+        }
+        errorDiv.style.display = "block";
+        setTimeout(() => {
+          errorDiv.style.display = "none";
+        }, 5000);
+      }
+
+      function createCommitCard(commit) {
+        const card = document.createElement("div");
+        card.className = "commit-card";
+        card.innerHTML = `
                 <a href="${commit.link}" target="_blank" class="commit-link">
                     <div class="commit-info">
                         <h3>${commit.message}</h3>
                         <p>by ${commit.author} • ${new Date(commit.date).toLocaleDateString()}</p>
                     </div>
                 </a>
-                <button class="upvote-btn ${votedCommits.has(commit.id) ? 'voted' : ''}"
+                <button class="upvote-btn ${votedCommits.has(commit.id) ? "voted" : ""}"
                         data-commit-id="${commit.id}">
                     ▲ ${commit.upvotes || 0}
                 </button>`;
 
-            //setStyle(currentTheme);
+        //setStyle(currentTheme);
 
-            return card;
-        }
-        async function loadCommits(searchTerm = '') {
-            try {
-            const commits = await tunnel.get('/api/commits', { search: searchTerm });
-            const leaderboard = document.getElementById('leaderboard');
-            leaderboard.innerHTML = '';
-            commits.forEach(commit => {
-            leaderboard.appendChild(createCommitCard(commit));
-            });
-    } catch (error) {
-        showError('Failed to load commits');
-    }
-    finally {
-        setStyle(currentTheme);
-            }
-    }
-
-        // Handle voting
-        document.getElementById('leaderboard').addEventListener('click', async (e) => {
-        if (!e.target.classList.contains('upvote-btn')) return;
-        if (!accessToken) {
-        showError('Please login to vote');
-        return;
-    }
-
-        const commitId = e.target.dataset.commitId;
-        if (votedCommits.has(commitId)) return;
-
+        return card;
+      }
+      async function loadCommits(searchTerm = "") {
         try {
-        await tunnel.post('/api/votes', {
-        commitId,
-        userId: accessToken // Using token as userId
-    });
-        votedCommits.add(commitId);
-        localStorage.setItem('voted_commits', JSON.stringify([...votedCommits]));
-        e.target.classList.add('voted');
-        const currentVotes = parseInt(e.target.innerText.split('▲')[1]);
-        e.target.innerText = `▲ ${currentVotes + 1}`;
-    } catch (error) {
-        showError('Failed to vote');
-    }
-    });
+          const commits = await tunnel.get("/api/commits", {
+            search: searchTerm,
+          });
+          const leaderboard = document.getElementById("leaderboard");
+          leaderboard.innerHTML = "";
+          commits.forEach((commit) => {
+            leaderboard.appendChild(createCommitCard(commit));
+          });
+        } catch (error) {
+          showError("Failed to load commits");
+        } finally {
+          setStyle(currentTheme);
+        }
+      }
 
-        // Handle search
-        let searchTimeout;
-        document.getElementById('search-input').addEventListener('input', (e) => {
+      // Handle voting
+      document
+        .getElementById("leaderboard")
+        .addEventListener("click", async (e) => {
+          if (!e.target.classList.contains("upvote-btn")) return;
+          if (!accessToken) {
+            showError("Please login to vote");
+            return;
+          }
+
+          const commitId = e.target.dataset.commitId;
+          if (votedCommits.has(commitId)) return;
+
+          try {
+            await tunnel.post("/api/votes", {
+              commitId,
+              userId: accessToken, // Using token as userId
+            });
+            votedCommits.add(commitId);
+            localStorage.setItem(
+              "voted_commits",
+              JSON.stringify([...votedCommits]),
+            );
+            e.target.classList.add("voted");
+            const currentVotes = parseInt(e.target.innerText.split("▲")[1]);
+            e.target.innerText = `▲ ${currentVotes + 1}`;
+          } catch (error) {
+            showError("Failed to vote");
+          }
+        });
+
+      // Handle search
+      let searchTimeout;
+      document.getElementById("search-input").addEventListener("input", (e) => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
-        loadCommits(e.target.value.trim());
-    }, 300);
-    });
+          loadCommits(e.target.value.trim());
+        }, 300);
+      });
 
-        // Initial load
-        updateAuthUI();
-        loadCommits();
-</script>
-<script>
-    const styles = {
+      // Initial load
+      updateAuthUI();
+      loadCommits();
+    </script>
+    <script>
+      const styles = {
         synthwave: {
-            body: {
-                background: '#000000',
-                color: '#00ff00',
-                backgroundImage: `linear-gradient(0deg, transparent 24%, 
+          body: {
+            background: "#000000",
+            color: "#00ff00",
+            backgroundImage: `linear-gradient(0deg, transparent 24%, 
                     rgba(32, 255, 255, .05) 25%, 
                     rgba(32, 255, 255, .05) 26%, transparent 27%, transparent 74%, 
                     rgba(32, 255, 255, .05) 75%, 
@@ -390,243 +547,269 @@
                     rgba(32, 255, 255, .05) 26%, transparent 27%, transparent 74%, 
                     rgba(32, 255, 255, .05) 75%, 
                     rgba(32, 255, 255, .05) 76%, transparent 77%, transparent)`,
-                backgroundSize: '50px 50px',
-                textShadow: '2px 2px #ff00ff'
-            },
-            headerBorder: '#00ffff', 
-            container: {
-                border: '2px solid #00ffff',
-                boxShadow: '0 0 20px #00ffff'
-            },
-            card: {
-                background: '#220033',
-                border: '2px solid #00ffff',
-                boxShadow: '4px 4px 0 #ff00ff'
-            },
-            button: {
-                background: 'linear-gradient(45deg, #000000 0%, #330066 50%, #000000 100%)',
-                color: '#00ffff',
-                border: '2px solid #00ffff',
-                boxShadow: '3px 3px 0 #ff00ff'
-            },
-            buttonHover: {
-                background: 'linear-gradient(45deg, #00ffff 0%, #0099ff 50%, #00ffff 100%)',
-                color: '#000000'
-            },
-            heading: {
-                color: '#00ffff'
-            },
-            searchBox: {
-                background: '#220033',
-                border: '2px solid #00ffff',
-                color: '#00ffff'
-            },
-            styleSwitch: {
-                background: '#220033',
-                border: '2px solid #00ffff'
-            },
-            commitinfo: {
-                color: '#ff00ff'
-            },
-            userinfo: {
-                color: '#ff00ff'
-            },
-            votedButton: {
-                background: 'linear-gradient(45deg, #00ffff 0%, #00ccff 50%, #00ffff 100%)',
-                color: '#000000'
-            }
+            backgroundSize: "50px 50px",
+            textShadow: "2px 2px #ff00ff",
+          },
+          headerBorder: "#00ffff",
+          container: {
+            border: "2px solid #00ffff",
+            boxShadow: "0 0 20px #00ffff",
+          },
+          card: {
+            background: "#220033",
+            border: "2px solid #00ffff",
+            boxShadow: "4px 4px 0 #ff00ff",
+          },
+          button: {
+            background:
+              "linear-gradient(45deg, #000000 0%, #330066 50%, #000000 100%)",
+            color: "#00ffff",
+            border: "2px solid #00ffff",
+            boxShadow: "3px 3px 0 #ff00ff",
+          },
+          buttonHover: {
+            background:
+              "linear-gradient(45deg, #00ffff 0%, #0099ff 50%, #00ffff 100%)",
+            color: "#000000",
+          },
+          heading: {
+            color: "#00ffff",
+          },
+          searchBox: {
+            background: "#220033",
+            border: "2px solid #00ffff",
+            color: "#00ffff",
+          },
+          styleSwitch: {
+            background: "#220033",
+            border: "2px solid #00ffff",
+          },
+          commitinfo: {
+            color: "#ff00ff",
+          },
+          userinfo: {
+            color: "#ff00ff",
+          },
+          votedButton: {
+            background:
+              "linear-gradient(45deg, #00ffff 0%, #00ccff 50%, #00ffff 100%)",
+            color: "#000000",
+          },
         },
         retroblog: {
-            body: {
-                background: '#ffffe0',
-                color: '#000000',
-                backgroundImage: `linear-gradient(#ffffe0 2px, transparent 2px),
+          body: {
+            background: "#ffffe0",
+            color: "#000000",
+            backgroundImage: `linear-gradient(#ffffe0 2px, transparent 2px),
                     linear-gradient(90deg, #ffffe0 2px, transparent 2px),
                     linear-gradient(#d4d4c7 1px, transparent 1px),
                     linear-gradient(90deg, #d4d4c7 1px, transparent 1px)`,
-                backgroundSize: '100px 100px, 100px 100px, 20px 20px, 20px 20px',
-                textShadow: 'none'
-            },
-            headerBorder: '#8b4513',
-            container: {
-                border: '2px solid #8b4513',
-                boxShadow: '5px 5px 0 #d2691e'
-            },
-            card: {
-                background: '#ffffff',
-                border: '1px solid #8b4513',
-                boxShadow: '3px 3px 0 #d2691e'
-            },
-            button: {
-                background: 'linear-gradient(45deg, #f4a460 0%, #d2691e 50%, #f4a460 100%)',
-                color: '#000000',
-                border: '2px solid #8b4513',
-                boxShadow: '2px 2px 0 #8b4513'
-            },
-            buttonHover: {
-                background: 'linear-gradient(45deg, #d2691e 0%, #8b4513 50%, #d2691e 100%)',
-                color: '#ffffff'
-            },
-            votedButton: {
-                background: 'linear-gradient(45deg, #8b4513 0%, #654321 50%, #8b4513 100%)',
-                color: '#ffffff'
-            },
-            heading: {
-                color: '#8b4513'
-            },
-            searchBox: {
-                background: '#ffffff',
-                border: '2px solid #8b4513',
-                color: '#000000'
-            },
-            styleSwitch: {
-                background: '#f4a460',
-                border: '2px solid #8b4513'
-            },
-            commitinfo: {
-                color: '#000000'
-            },
-            userinfo: {
-                color: '#8b4513'
-            },
+            backgroundSize: "100px 100px, 100px 100px, 20px 20px, 20px 20px",
+            textShadow: "none",
+          },
+          headerBorder: "#8b4513",
+          container: {
+            border: "2px solid #8b4513",
+            boxShadow: "5px 5px 0 #d2691e",
+          },
+          card: {
+            background: "#ffffff",
+            border: "1px solid #8b4513",
+            boxShadow: "3px 3px 0 #d2691e",
+          },
+          button: {
+            background:
+              "linear-gradient(45deg, #f4a460 0%, #d2691e 50%, #f4a460 100%)",
+            color: "#000000",
+            border: "2px solid #8b4513",
+            boxShadow: "2px 2px 0 #8b4513",
+          },
+          buttonHover: {
+            background:
+              "linear-gradient(45deg, #d2691e 0%, #8b4513 50%, #d2691e 100%)",
+            color: "#ffffff",
+          },
+          votedButton: {
+            background:
+              "linear-gradient(45deg, #8b4513 0%, #654321 50%, #8b4513 100%)",
+            color: "#ffffff",
+          },
+          heading: {
+            color: "#8b4513",
+          },
+          searchBox: {
+            background: "#ffffff",
+            border: "2px solid #8b4513",
+            color: "#000000",
+          },
+          styleSwitch: {
+            background: "#f4a460",
+            border: "2px solid #8b4513",
+          },
+          commitinfo: {
+            color: "#000000",
+          },
+          userinfo: {
+            color: "#8b4513",
+          },
         },
         cyberpunk: {
-            body: {
-                background: '#000000',
-                color: '#33ff33',
-                backgroundImage: `linear-gradient(
+          body: {
+            background: "#000000",
+            color: "#33ff33",
+            backgroundImage: `linear-gradient(
                     0deg,
                     rgba(51, 255, 51, 0.03) 50%,
                     transparent 50%
                 )`,
-                backgroundSize: '4px 4px',
-                textShadow: 'none'
-            },
-            headerBorder: '#33ff33',
-            container: {
-                border: '1px solid #33ff33',
-                boxShadow: 'none'
-            },
-            card: {
-                background: '#000000',
-                border: '1px solid #33ff33',
-                boxShadow: 'none'
-            },
-            button: {
-                background: 'linear-gradient(45deg, #000000 0%, #001100 50%, #000000 100%)',
-                color: '#33ff33',
-                border: '1px solid #33ff33',
-                boxShadow: 'none'
-            },
-            buttonHover: {
-                background: 'linear-gradient(45deg, #33ff33 0%, #00ff00 50%, #33ff33 100%)',
-                color: '#000000'
-            },
-            votedButton: {
-                background: 'linear-gradient(45deg, #33ff33 0%, #00cc00 50%, #33ff33 100%)',
-                color: '#000000'
-            },
-            heading: {
-                color: '#33ff33'
-            },
-            searchBox: {
-                background: '#000000',
-                border: '1px solid #33ff33',
-                color: '#33ff33',
-                boxShadow: 'none'
-            },
-            styleSwitch: {
-                background: '#000000',
-                border: '1px solid #33ff33',
-                boxShadow: 'none'
-            },
-            commitinfo: {
-                color: '#ffffff'
-            },
-            userinfo: {
-                color: '#33ff33'
-            },
-        }
-    };
+            backgroundSize: "4px 4px",
+            textShadow: "none",
+          },
+          headerBorder: "#33ff33",
+          container: {
+            border: "1px solid #33ff33",
+            boxShadow: "none",
+          },
+          card: {
+            background: "#000000",
+            border: "1px solid #33ff33",
+            boxShadow: "none",
+          },
+          button: {
+            background:
+              "linear-gradient(45deg, #000000 0%, #001100 50%, #000000 100%)",
+            color: "#33ff33",
+            border: "1px solid #33ff33",
+            boxShadow: "none",
+          },
+          buttonHover: {
+            background:
+              "linear-gradient(45deg, #33ff33 0%, #00ff00 50%, #33ff33 100%)",
+            color: "#000000",
+          },
+          votedButton: {
+            background:
+              "linear-gradient(45deg, #33ff33 0%, #00cc00 50%, #33ff33 100%)",
+            color: "#000000",
+          },
+          heading: {
+            color: "#33ff33",
+          },
+          searchBox: {
+            background: "#000000",
+            border: "1px solid #33ff33",
+            color: "#33ff33",
+            boxShadow: "none",
+          },
+          styleSwitch: {
+            background: "#000000",
+            border: "1px solid #33ff33",
+            boxShadow: "none",
+          },
+          commitinfo: {
+            color: "#ffffff",
+          },
+          userinfo: {
+            color: "#33ff33",
+          },
+        },
+      };
 
-    function setStyle(theme) {
+      function setStyle(theme) {
         currentTheme = theme;
 
         const style = styles[theme];
-        const userinfo = document.querySelector('#user-info');
+        const userinfo = document.querySelector("#user-info");
         Object.assign(userinfo.style, style.userinfo);
 
-        document.documentElement.style.setProperty('--button-gradient', style.button.background);
-        document.documentElement.style.setProperty('--button-hover-gradient', style.buttonHover.background);
-        document.documentElement.style.setProperty('--button-hover-color', style.buttonHover.color);
-        document.documentElement.style.setProperty('--voted-gradient', style.votedButton.background);
-        document.documentElement.style.setProperty('--voted-color', style.votedButton.color);
-        document.documentElement.style.setProperty('--border', style.button.boxShadow.split(' ')[3]);
+        document.documentElement.style.setProperty(
+          "--button-gradient",
+          style.button.background,
+        );
+        document.documentElement.style.setProperty(
+          "--button-hover-gradient",
+          style.buttonHover.background,
+        );
+        document.documentElement.style.setProperty(
+          "--button-hover-color",
+          style.buttonHover.color,
+        );
+        document.documentElement.style.setProperty(
+          "--voted-gradient",
+          style.votedButton.background,
+        );
+        document.documentElement.style.setProperty(
+          "--voted-color",
+          style.votedButton.color,
+        );
+        document.documentElement.style.setProperty(
+          "--border",
+          style.button.boxShadow.split(" ")[3],
+        );
         // Apply body styles
         Object.assign(document.body.style, style.body);
-        
+
         // Apply container styles
-        const container = document.querySelector('.container');
+        const container = document.querySelector(".container");
         Object.assign(container.style, style.container);
 
-        const header = document.querySelector('.header');
-        header.style.borderBottom = `2px solid ${style.headerBorder}`
-        
+        const header = document.querySelector(".header");
+        header.style.borderBottom = `2px solid ${style.headerBorder}`;
+
         // Apply styles to all cards
-        document.querySelectorAll('.commit-card').forEach(card => {
-            Object.assign(card.style, style.card);
+        document.querySelectorAll(".commit-card").forEach((card) => {
+          Object.assign(card.style, style.card);
         });
-        
+
         // Apply styles to all buttons
-        document.querySelectorAll('button').forEach(button => {
-            Object.assign(button.style, style.button);
+        document.querySelectorAll("button").forEach((button) => {
+          Object.assign(button.style, style.button);
         });
 
-        document.querySelectorAll('.upvote-btn.voted').forEach(button => {
-            Object.assign(button.style, style.votedButton);
+        document.querySelectorAll(".upvote-btn.voted").forEach((button) => {
+          Object.assign(button.style, style.votedButton);
         });
 
-        document.querySelectorAll('.upvote-btn').forEach(button => {
-            if (!button.classList.contains('voted')) {
-            button.addEventListener('mouseover', () => {
-                Object.assign(button.style, style.buttonHover);
+        document.querySelectorAll(".upvote-btn").forEach((button) => {
+          if (!button.classList.contains("voted")) {
+            button.addEventListener("mouseover", () => {
+              Object.assign(button.style, style.buttonHover);
             });
-            button.addEventListener('mouseout', () => {
-
-                    Object.assign(button.style, style.button);
-
+            button.addEventListener("mouseout", () => {
+              Object.assign(button.style, style.button);
             });
-            }
+          }
         });
-
 
         // Apply styles to headings
-        document.querySelectorAll('h1, h3').forEach(heading => {
-            Object.assign(heading.style, style.heading);
+        document.querySelectorAll("h1, h3").forEach((heading) => {
+          Object.assign(heading.style, style.heading);
         });
 
         // Apply styles to search box
-        const searchBox = document.querySelector('#search-input');
+        const searchBox = document.querySelector("#search-input");
         Object.assign(searchBox.style, style.searchBox);
 
         // Apply styles to style switcher container
-        const styleSwitch = document.querySelector('[style*="text-align: center"]');
+        const styleSwitch = document.querySelector(
+          '[style*="text-align: center"]',
+        );
         Object.assign(styleSwitch.style, style.styleSwitch);
 
-        const styletext = document.querySelector('.style_text');
+        const styletext = document.querySelector(".style_text");
         Object.assign(styletext.style, style.heading);
 
-        const commitinfo = document.querySelectorAll('.commit-info p');
-        commitinfo.forEach(info => {
-            Object.assign(info.style, style.commitinfo);
+        const commitinfo = document.querySelectorAll(".commit-info p");
+        commitinfo.forEach((info) => {
+          Object.assign(info.style, style.commitinfo);
         });
-        
-        e.target.classList.add('voted');
+
+        e.target.classList.add("voted");
         Object.assign(e.target.style, styles[currentTheme].votedButton);
 
         // Update createCommitCard function to use current theme
         window.currentTheme = theme;
-    }
+      }
     </script>
-</body>
+  </body>
 </html>

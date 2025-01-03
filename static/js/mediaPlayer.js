@@ -4,49 +4,49 @@ var firstScriptTag = document.getElementsByTagName("script")[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var player,
-    container = document.querySelector('.player'),
-    progress_bar = document.querySelector('.progress-bar input'),
-    sound_button = document.querySelector('.sound-button'),
-    sound_bar = document.querySelector('.sound-bar input'),
-    noise = document.querySelector('.noise'),
-    progress_timer,
-    progressDrag = false,
-    soundDrag = false,
-    isClicking = false,
-    click_timer;
+  container = document.querySelector(".player"),
+  progress_bar = document.querySelector(".progress-bar input"),
+  sound_button = document.querySelector(".sound-button"),
+  sound_bar = document.querySelector(".sound-bar input"),
+  noise = document.querySelector(".noise"),
+  progress_timer,
+  progressDrag = false,
+  soundDrag = false,
+  isClicking = false,
+  click_timer;
 
 function onYouTubePlayerAPIReady() {
   player = new YT.Player("video", {
     events: {
       onReady: onPlayerReady,
-      onStateChange: onPlayerStateChange
-    }
+      onStateChange: onPlayerStateChange,
+    },
   });
 }
 
 function onPlayerReady(event) {
-  var playButton = document.querySelector('.player .buttons .play');
+  var playButton = document.querySelector(".player .buttons .play");
   playButton.addEventListener("click", function () {
     player.playVideo();
   });
-  var pauseButton = document.querySelector('.player .buttons .pause');
+  var pauseButton = document.querySelector(".player .buttons .pause");
   pauseButton.addEventListener("click", function () {
     player.pauseVideo();
   });
-  var stopButton = document.querySelector('.player .buttons .stop');
+  var stopButton = document.querySelector(".player .buttons .stop");
   stopButton.addEventListener("click", function () {
     player.stopVideo();
   });
 
   player.setVolume(100);
   sound_bar.value = 100;
-  progress_bar.addEventListener('mousedown', function(e) {
+  progress_bar.addEventListener("mousedown", function (e) {
     progressDrag = true;
   });
-  progress_bar.addEventListener('mousedown', function(e) {
+  progress_bar.addEventListener("mousedown", function (e) {
     progressDrag = true;
   });
-  document.addEventListener('mouseup', function(e) {
+  document.addEventListener("mouseup", function (e) {
     if (progressDrag) {
       setProgress(e);
       progressDrag = false;
@@ -56,7 +56,7 @@ function onPlayerReady(event) {
       setVolume(e);
     }
   });
-  document.addEventListener('mousemove', function(e) {
+  document.addEventListener("mousemove", function (e) {
     if (progressDrag) {
       setProgress(e);
     }
@@ -64,32 +64,32 @@ function onPlayerReady(event) {
       setVolume(e);
     }
   });
-  progress_bar.addEventListener('click', updateProgress);
+  progress_bar.addEventListener("click", updateProgress);
 
-  sound_button.addEventListener('click', toggleMute);
+  sound_button.addEventListener("click", toggleMute);
 
-  sound_bar.addEventListener('mousedown', function(e) {
+  sound_bar.addEventListener("mousedown", function (e) {
     soundDrag = true;
   });
-  sound_bar.addEventListener('click', setVolume);
+  sound_bar.addEventListener("click", setVolume);
 
   launch_progress_timer();
 }
 
 function statusWatch(playerStatus) {
   if (playerStatus == -1) {
-    container.dataset.status = 'unstarted';
+    container.dataset.status = "unstarted";
   } else if (playerStatus == 0) {
     player.stopVideo();
-    container.dataset.status = 'unstarted';
+    container.dataset.status = "unstarted";
   } else if (playerStatus == 1) {
-    container.dataset.status = 'playing';
+    container.dataset.status = "playing";
   } else if (playerStatus == 2) {
-    container.dataset.status = 'paused';
+    container.dataset.status = "paused";
   } else if (playerStatus == 3) {
-    container.dataset.status = 'buffering';
+    container.dataset.status = "buffering";
   } else if (playerStatus == 5) {
-    container.dataset.status = 'cued';
+    container.dataset.status = "cued";
   }
 }
 function onPlayerStateChange(event) {
@@ -104,7 +104,9 @@ function updateProgress() {
   var notZero = player.getDuration();
   var percentage = 0;
   if (notZero != 0) {
-    percentage = Math.floor((100 / player.getDuration()) * player.getCurrentTime());
+    percentage = Math.floor(
+      (100 / player.getDuration()) * player.getCurrentTime(),
+    );
   }
   progress_bar.value = percentage;
 }
@@ -112,7 +114,7 @@ function updateProgress() {
 function setProgress(e) {
   var offsetLeft = progress_bar.getBoundingClientRect().left;
   var position = e.pageX - offsetLeft;
-  var percentage = 100 * position / progress_bar.clientWidth;
+  var percentage = (100 * position) / progress_bar.clientWidth;
 
   if (percentage > 100) {
     percentage = 100;
@@ -121,14 +123,14 @@ function setProgress(e) {
     percentage = 0;
   }
 
-  var newTime = player.getDuration() * percentage / 100;
+  var newTime = (player.getDuration() * percentage) / 100;
   player.seekTo(newTime);
 }
 
 function launch_click_timer() {
   isClicking = true;
   clearTimeout(click_timer);
-  click_timer = setTimeout(function() {
+  click_timer = setTimeout(function () {
     isClicking = false;
   }, 50);
 }
@@ -149,7 +151,7 @@ function toggleMute(e) {
 function setVolume(e) {
   var offsetLeft = sound_bar.getBoundingClientRect().left;
   var position = e.pageX - offsetLeft;
-  var volume = position / sound_bar.clientWidth * 100;
+  var volume = (position / sound_bar.clientWidth) * 100;
 
   if (volume < 10) {
     volume = 0;

@@ -9,7 +9,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Rizz Check 👀
         if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
@@ -88,7 +88,7 @@ jobs:
               'goat',
               'its giving'
             ];
-            
+
             try {
               const title = context.payload.pull_request.title.toLowerCase();
               const hasSlangWord = slangWords.some(word => title.includes(word.toLowerCase()));
@@ -100,4 +100,4 @@ jobs:
               }
             } catch (error) {
               core.setFailed(`Error checking slang words: ${error.message}`);
-            } 
+            }

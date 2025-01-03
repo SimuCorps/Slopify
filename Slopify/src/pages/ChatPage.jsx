@@ -20,7 +20,11 @@ export default function ChatPage() {
 
       const userId = session.session.user.id;
 
-      const { data: profile, error } = await supabase.from("profiles").select("display_name").eq("id", userId).single();
+      const { data: profile, error } = await supabase
+        .from("profiles")
+        .select("display_name")
+        .eq("id", userId)
+        .single();
 
       if (profile) {
         setDisplayName(profile.display_name);
@@ -46,4 +50,3 @@ export default function ChatPage() {
     </div>
   );
 }
-

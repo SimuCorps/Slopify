@@ -1,125 +1,255 @@
 @font-face {
-    font-family: "MS Sans Serif";
-    src: url(../fonts/ms_sans_serif.ttf) format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap; }
-  
-  @font-face {
-    font-family: "MS Sans Serif";
-    src: url(../fonts/ms_sans_serif_b.ttf) format("truetype");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap; }
-    
-    * {
-      border: 0;
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      cursor: url(../images/win95_cursor_regular.png) 0 0, default;
-    }
+  font-family: "MS Sans Serif";
+  src: url(../fonts/ms_sans_serif.ttf) format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
-  .window button, .window {
-    color: #000000;
-    font: 12px/18px "MS Sans Serif", Helvetica, sans-serif; }
+@font-face {
+  font-family: "MS Sans Serif";
+  src: url(../fonts/ms_sans_serif_b.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
-  .window {
-    color: black;
-    background-color: #c0c0c0;
-    box-shadow: -1px -1px 0 #000000 inset, 1px 1px 0 #dfdfdf inset, -2px -2px 0 #808080 inset, 2px 2px 0 #ffffff inset;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: calc(50% - 60px);
-    left: calc(50% - 148px);
-    padding: 3px;
-    min-width: 296px;
-    min-height: 119px;
-    white-space: nowrap;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none; }
-    .window[hidden] {
-      display: none; }
-    .window__sprite {
-      display: block;
-      position: absolute;
-      top: -1px;
-      left: -1px;
-      width: 1px;
-      height: 1px; }
-      .window__sprite--close {
-        box-shadow: 5px 4px #000000, 6px 4px #000000, 6px 5px #000000, 7px 5px #000000, 7px 6px #000000, 8px 6px #000000, 9px 6px #000000, 10px 6px #000000, 10px 5px #000000, 11px 5px #000000, 11px 4px #000000, 12px 4px #000000, 8px 7px #000000, 9px 7px #000000, 7px 8px #000000, 8px 8px #000000, 9px 8px #000000, 10px 8px #000000, 6px 9px #000000, 7px 9px #000000, 11px 9px #000000, 10px 9px #000000, 5px 10px #000000, 6px 10px #000000, 12px 10px #000000, 11px 10px #000000; }
-      .window__sprite--close-disabled {
-        box-shadow: 5px 4px #808080, 6px 4px #808080, 6px 5px #808080, 7px 5px #808080, 7px 6px #808080, 8px 6px #808080, 9px 6px #808080, 10px 6px #808080, 10px 5px #808080, 11px 5px #808080, 11px 4px #808080, 12px 4px #808080, 8px 7px #808080, 9px 7px #808080, 7px 8px #808080, 8px 8px #808080, 9px 8px #808080, 10px 8px #808080, 6px 9px #808080, 7px 9px #808080, 11px 9px #808080, 10px 9px #808080, 5px 10px #808080, 6px 10px #808080, 12px 10px #808080, 11px 10px #808080, 12px 5px #ffffff, 13px 5px #ffffff, 11px 6px #ffffff, 12px 6px #ffffff, 10px 7px #ffffff, 11px 7px #ffffff, 8px 9px #ffffff, 9px 9px #ffffff, 7px 10px #ffffff, 8px 10px #ffffff, 6px 11px #ffffff, 7px 11px #ffffff, 12px 11px #ffffff, 13px 11px #ffffff; }
-    .window__button {
-      background-color: #c0c0c0;
-      border-radius: 0;
-      box-shadow: 1px 1px 0 #ffffff inset, -1px -1px 0 #808080 inset, 2px 2px 0 #dfdfdf inset, 1px 0 0 #000000, 0 1px 0 #000000, 1px 1px 0 #000000;
-      letter-spacing: 1px;
-      outline: 0;
-      position: relative;
-      min-width: 15px;
-      height: 13px;
-      -webkit-appearance: none;
-      appearance: none;
-      -webkit-tap-highlight-color: transparent; }
-      .window__button:not(:disabled):active {
-        box-shadow: 1px 1px 0 #000000 inset, -1px -1px 0 #c0c0c0 inset, 2px 2px 0 #808080 inset, 1px 0 0 #ffffff, 0 1px 0 #ffffff, 1px 1px 0 #ffffff;
-        padding: 1px 0 0 1px; }
-      .window__button--lg {
-        box-shadow: -1px -1px 0 #000000 inset, 1px 1px 0 #ffffff inset, -2px -2px 0 #808080 inset;
-        padding: 1px 0 0 1px;
-        min-width: 75px;
-        height: 23px; }
-        .window__button--lg:not(:disabled):active {
-          box-shadow: 0 0 0 1px #000000 inset, 0 0 0 2px #808080 inset;
-          padding: 3px 0 0 3px; }
-    .window__button:not(:disabled):active .window__sprite {
-      transform: translate(1px, 1px); }
-    .window__header, .window__body, .window__footer {
-      display: flex; }
-    .window__header {
-      background-color: #808080;
-      color: #c0c0c0;
-      justify-content: space-between;
-      padding: 2px 3px;
-      width: 100%;
-      height: 18px; }
-    .window--active .window__header {
-      background-color: #120180;
-      color: #ffffff; }
-    .window--active .window__button--lg {
-      box-shadow: 0 0 0 1px #000000 inset, -2px -2px 0 #000000 inset, 2px 2px 0 #ffffff inset, -3px -3px 0 #808080 inset, 3px 3px 0 #dfdfdf inset; }
-      .window--active .window__button--lg:before {
-        background: linear-gradient(90deg, transparent 50%, #000000 50%) 0 0/"2px 1px" repeat-x, linear-gradient(90deg, transparent 50%, #000000 50%) 0 100%/"2px 1px" repeat-x, linear-gradient(transparent 50%, #000000 50%) 0 0/"1px 2px" repeat-y, linear-gradient(transparent 50%, #000000 50%) 100% 0/"1px 2px" repeat-y;
-        content: "";
-        display: block;
-        position: absolute;
-        inset: 4px; }
-    .window__header .window__button {
-      margin-left: 10px; }
-    .window__body {
-      flex: 1;
-      padding: 12px 11px 11px 11px; }
-      .window__body-icon {
-        display: block;
-        flex-shrink: 0;
-        margin-right: 16px;
-        width: 32px;
-        height: 32px; }
-      .window__body-text {
-        padding: 8px 0; }
-    .window__footer {
-      justify-content: center;
-      padding: 0 11px 12px 11px; }
-    .window__title {
-      font-weight: bold;
-      line-height: 1;
-      transform: translate(0, -1px); }
-    .window__sr {
-      overflow: hidden;
-      position: absolute;
-      width: 1px;
-      height: 1px; }  
+* {
+  border: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor:
+    url(../images/win95_cursor_regular.png) 0 0,
+    default;
+}
+
+.window button,
+.window {
+  color: #000000;
+  font:
+    12px/18px "MS Sans Serif",
+    Helvetica,
+    sans-serif;
+}
+
+.window {
+  color: black;
+  background-color: #c0c0c0;
+  box-shadow:
+    -1px -1px 0 #000000 inset,
+    1px 1px 0 #dfdfdf inset,
+    -2px -2px 0 #808080 inset,
+    2px 2px 0 #ffffff inset;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: calc(50% - 60px);
+  left: calc(50% - 148px);
+  padding: 3px;
+  min-width: 296px;
+  min-height: 119px;
+  white-space: nowrap;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+.window[hidden] {
+  display: none;
+}
+.window__sprite {
+  display: block;
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 1px;
+  height: 1px;
+}
+.window__sprite--close {
+  box-shadow:
+    5px 4px #000000,
+    6px 4px #000000,
+    6px 5px #000000,
+    7px 5px #000000,
+    7px 6px #000000,
+    8px 6px #000000,
+    9px 6px #000000,
+    10px 6px #000000,
+    10px 5px #000000,
+    11px 5px #000000,
+    11px 4px #000000,
+    12px 4px #000000,
+    8px 7px #000000,
+    9px 7px #000000,
+    7px 8px #000000,
+    8px 8px #000000,
+    9px 8px #000000,
+    10px 8px #000000,
+    6px 9px #000000,
+    7px 9px #000000,
+    11px 9px #000000,
+    10px 9px #000000,
+    5px 10px #000000,
+    6px 10px #000000,
+    12px 10px #000000,
+    11px 10px #000000;
+}
+.window__sprite--close-disabled {
+  box-shadow:
+    5px 4px #808080,
+    6px 4px #808080,
+    6px 5px #808080,
+    7px 5px #808080,
+    7px 6px #808080,
+    8px 6px #808080,
+    9px 6px #808080,
+    10px 6px #808080,
+    10px 5px #808080,
+    11px 5px #808080,
+    11px 4px #808080,
+    12px 4px #808080,
+    8px 7px #808080,
+    9px 7px #808080,
+    7px 8px #808080,
+    8px 8px #808080,
+    9px 8px #808080,
+    10px 8px #808080,
+    6px 9px #808080,
+    7px 9px #808080,
+    11px 9px #808080,
+    10px 9px #808080,
+    5px 10px #808080,
+    6px 10px #808080,
+    12px 10px #808080,
+    11px 10px #808080,
+    12px 5px #ffffff,
+    13px 5px #ffffff,
+    11px 6px #ffffff,
+    12px 6px #ffffff,
+    10px 7px #ffffff,
+    11px 7px #ffffff,
+    8px 9px #ffffff,
+    9px 9px #ffffff,
+    7px 10px #ffffff,
+    8px 10px #ffffff,
+    6px 11px #ffffff,
+    7px 11px #ffffff,
+    12px 11px #ffffff,
+    13px 11px #ffffff;
+}
+.window__button {
+  background-color: #c0c0c0;
+  border-radius: 0;
+  box-shadow:
+    1px 1px 0 #ffffff inset,
+    -1px -1px 0 #808080 inset,
+    2px 2px 0 #dfdfdf inset,
+    1px 0 0 #000000,
+    0 1px 0 #000000,
+    1px 1px 0 #000000;
+  letter-spacing: 1px;
+  outline: 0;
+  position: relative;
+  min-width: 15px;
+  height: 13px;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.window__button:not(:disabled):active {
+  box-shadow:
+    1px 1px 0 #000000 inset,
+    -1px -1px 0 #c0c0c0 inset,
+    2px 2px 0 #808080 inset,
+    1px 0 0 #ffffff,
+    0 1px 0 #ffffff,
+    1px 1px 0 #ffffff;
+  padding: 1px 0 0 1px;
+}
+.window__button--lg {
+  box-shadow:
+    -1px -1px 0 #000000 inset,
+    1px 1px 0 #ffffff inset,
+    -2px -2px 0 #808080 inset;
+  padding: 1px 0 0 1px;
+  min-width: 75px;
+  height: 23px;
+}
+.window__button--lg:not(:disabled):active {
+  box-shadow:
+    0 0 0 1px #000000 inset,
+    0 0 0 2px #808080 inset;
+  padding: 3px 0 0 3px;
+}
+.window__button:not(:disabled):active .window__sprite {
+  transform: translate(1px, 1px);
+}
+.window__header,
+.window__body,
+.window__footer {
+  display: flex;
+}
+.window__header {
+  background-color: #808080;
+  color: #c0c0c0;
+  justify-content: space-between;
+  padding: 2px 3px;
+  width: 100%;
+  height: 18px;
+}
+.window--active .window__header {
+  background-color: #120180;
+  color: #ffffff;
+}
+.window--active .window__button--lg {
+  box-shadow:
+    0 0 0 1px #000000 inset,
+    -2px -2px 0 #000000 inset,
+    2px 2px 0 #ffffff inset,
+    -3px -3px 0 #808080 inset,
+    3px 3px 0 #dfdfdf inset;
+}
+.window--active .window__button--lg:before {
+  background:
+    linear-gradient(90deg, transparent 50%, #000000 50%) 0 0/"2px 1px" repeat-x,
+    linear-gradient(90deg, transparent 50%, #000000 50%) 0 100%/"2px 1px"
+      repeat-x,
+    linear-gradient(transparent 50%, #000000 50%) 0 0/"1px 2px" repeat-y,
+    linear-gradient(transparent 50%, #000000 50%) 100% 0/"1px 2px" repeat-y;
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 4px;
+}
+.window__header .window__button {
+  margin-left: 10px;
+}
+.window__body {
+  flex: 1;
+  padding: 12px 11px 11px 11px;
+}
+.window__body-icon {
+  display: block;
+  flex-shrink: 0;
+  margin-right: 16px;
+  width: 32px;
+  height: 32px;
+}
+.window__body-text {
+  padding: 8px 0;
+}
+.window__footer {
+  justify-content: center;
+  padding: 0 11px 12px 11px;
+}
+.window__title {
+  font-weight: bold;
+  line-height: 1;
+  transform: translate(0, -1px);
+}
+.window__sr {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+}

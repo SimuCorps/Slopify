@@ -9,7 +9,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install emoji-regex
@@ -21,7 +21,7 @@ jobs:
           script: |
             const emojiRegex = require('emoji-regex');
             const regex = emojiRegex();
-            
+
             try {
               const title = context.payload.pull_request.title;
               if (!regex.test(title)) {
@@ -31,4 +31,4 @@ jobs:
               }
             } catch (error) {
               core.setFailed(`Error checking emoji: ${error.message}`);
-            } 
+            }

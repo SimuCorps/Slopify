@@ -31,19 +31,16 @@
   <!-- security overlay styles -->
   <link rel="stylesheet" href="static/css/security.css" />
 
-  <!-- flappy musk styles -->
-  <link rel="stylesheet" href="static/css/flappyMusk.css" />
-
   <!-- news styles -->
   <link rel="stylesheet" href="static/css/news.css" />
 
   <!-- comic sans button styles -->
   <link rel="stylesheet" href="static/css/comicButton.css" />
-  
+
   <!-- scoped bootstrap -->
   <!-- Add the .use-bootstrap class to apply Bootstrap styles -->
   <link rel="stylesheet" href="static/css/scoped-bootstrap.css" />
-  
+
   <!-- half life 2 cl_showpos -->
   <link rel="stylesheet" href="static/css/cl-showpos.css" />
   <script src="static/js/cl-showpos.js" defer></script>
@@ -90,9 +87,6 @@
               <a class="nav-link" href="/health-check.html">Health Check</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/katamari.html">Katamari</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="/leaderboard.html">Leaderboard</a>
             </li>
             <li class="nav-item">
@@ -109,6 +103,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/uwu.html">UwU</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/games">Games</a>
             </li>
           </ul>
         </div>
@@ -131,6 +128,7 @@
   <!-- Map Section -->
   <div id="map-container">
     <div id="world-map"></div>
+  </div>
   <!-- slopbot AD -->
   <div class="slop-teaser" onclick="window.location.href='/ai.html'">
     <span>🤖</span>
@@ -142,18 +140,6 @@
   <img src="static/images/RotatingGoat.png" class="bouncing-rotating-image"
     onclick="window.location.href='https://n0rule.is-a.dev'" alt="Rotating Goat" />
   <div id="randomDiv">
-    <button id="comicButton" type="button">comic sans-inator 5000</button>
-    <iframe src="https://sleepie.dev/testpopup.html" id="testpopup" title="Hot Singles Near You!">
-    </iframe>
-    <audio id="pageLoadUwUSound" autoplay>
-      <source src="sound.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-    <a href="https://youareanidiot.cc/">YOU ARE AN IDIOT</a>
-    <!-- Map Section -->
-    <div id="map-container">
-      <div id="world-map"></div>
-    </div>
     <audio id="vibeAudio" loop>
       <source
         src="https://cdn.pixabay.com/download/audio/2024/10/22/audio_5b87be5f9b.mp3?filename=smooth-jazz-saxophone-solo-with-a-lofi-vibe-253950.mp3"
@@ -201,80 +187,77 @@
       </a>
     </div>
 
-    <div id="chatContainer">
-      <a href="/chat.html">
-        <img src="/static/images/slopchat.jpg" width="400px" height="200px">
-      </a>
-    </div>
     <!-- Epileptic Mode Button -->
     <button class="top-right-button" id="epicButton">Bustin Mode</button>
     <button class="bottom-left-button" onclick="owoify()">What?</button>
-    <a href="astolfo.html" style="text-align: center;">ASTOLFOOOO (,,>﹏<,,)< /a>
-        <button class="bottom-right-button"
-          id="addMoreWokeToTheWebpageSimplyBecauseICanAndUhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh">waiter
-          waiter! more woke please</button>
-        <a href="#maincontent" class="skipnav">Skip to Content (Press Enter)</a>
+    <a href="astolfo.html" style="text-align: center;">ASTOLFOOOO (,,&gt﹏&lt,,)</a>
+    <button class="bottom-right-button"
+      id="addMoreWokeToTheWebpageSimplyBecauseICanAndUhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh">waiter
+      waiter! more woke please
+    </button>
+    <a href="#maincontent" class="skipnav">Skip to Content (Press Enter)</a>
 
-        <div id="security-overlay">
-          <div id="security-overlay-inner">
-            <h2 id="security-overlay-title">
-              🔒 Welcome to Slopify 🔒
-            </h2>
+    <div id="security-overlay">
+      <div id="security-overlay-inner">
+        <h2 id="security-overlay-title">
+          🔒 Welcome to Slopify 🔒
+        </h2>
 
-            <div id="captcha-container">
-              <div id="captcha-prompt"></div>
-              <div id="captcha-content"></div>
-              <input type="text" id="captcha-input" placeholder="Enter your answer" />
-              <button id="submit-captcha">
-                Submit CAPTCHA
-              </button>
-            </div>
-
-
-
-            <!-- Skip Security Button -->
-            <button id="skip-security">
-              Skip Security :(
-            </button>
-
-            <form id="registration-form">
-              <input type="text" id="username" class="registration-input" placeholder="Username" />
-              <input type="password" id="password" class="registration-input" placeholder="Password" />
-              <div id="requirements-list"></div>
-              <button type="submit" id="register-button">
-                Register
-              </button>
-            </form>
-          </div>
+        <div id="captcha-container">
+          <div id="captcha-prompt"></div>
+          <div id="captcha-content"></div>
+          <input type="text" id="captcha-input" placeholder="Enter your answer" />
+          <button id="submit-captcha">
+            Submit CAPTCHA
+          </button>
         </div>
 
-        <header>
-          <marquee><img src="static/images/epic-logo.gif" alt="Slopify animated logo" /></marquee>
-          <img src="SlopifyLogo.png" width="400px" alt="Slopify logo" />
-          <h1><a href="https://discord.gg/sPbES34ZsA">Join the Discord</a> or your mom's a hoe</h1>
-          <p>
-            <em>"The
-              <a href="https://www.newmanmentalism.com/blog/a-mentalist-explains-how-ouija-boards-work-and-the-ideomotor-effect"
-                target="_blank">ideomotor effect</a>
-              of software"</em>
-          </p>
-          <div id="page-nav">
-            <label class="hamburger-menu">
-              <input type="checkbox" aria-label="Menu" />
-            </label>
-            <aside class="sidebar">
-              <nav>
-                <a href="/index.html">Home</a>
-                <a href="/second.html">Second</a>
-                <a href="/uwu.html">UwU</a>
-                <a href="/chat.html">Chat</a>
-                <a href="/thebible.html">The Bible</a>
-                <a href="/god.html">God</a>
-                <a href="/touhouproject.html">Touhou Project</a>
-                <a href="/mizdiary.html">miz's weekly diary</a>
-          </div>
+
+
+        <!-- Skip Security Button -->
+        <button id="skip-security">
+          Skip Security :(
+        </button>
+
+        <form id="registration-form">
+          <input type="text" id="username" class="registration-input" placeholder="Username" />
+          <input type="password" id="password" class="registration-input" placeholder="Password" />
+          <div id="requirements-list"></div>
+          <button type="submit" id="register-button">
+            Register
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <header>
+      <marquee><img src="static/images/epic-logo.gif" alt="Slopify animated logo" /></marquee>
+      <img src="SlopifyLogo.png" width="400px" alt="Slopify logo" />
+      <h1><a href="https://discord.gg/sPbES34ZsA">Join the Discord</a> or your mom's a hoe</h1>
+      <p>
+        <em>"The
+          <a href="https://www.newmanmentalism.com/blog/a-mentalist-explains-how-ouija-boards-work-and-the-ideomotor-effect"
+            target="_blank">ideomotor effect</a>
+          of software"</em>
+      </p>
+      <div id="page-nav">
+        <label class="hamburger-menu">
+          <input type="checkbox" aria-label="Menu" />
+        </label>
+        <aside class="sidebar">
+          <nav>
+            <a href="/index.html">Home</a>
+            <a href="/second.html">Second</a>
+            <a href="/uwu.html">UwU</a>
+            <a href="/chat.html">Chat</a>
+            <a href="/thebible.html">The Bible</a>
+            <a href="/god.html">God</a>
+            <a href="/touhouproject.html">Touhou Project</a>
+            <a href="/mizdiary.html">miz's weekly diary</a>
           </nav>
-          </aside>
+        </aside>
+      </div>
+    </header>
   </div>
 
   <a href="/second.html">
@@ -328,13 +311,12 @@
 
   <button id="vibeButton">Improve the Mood</button>
   <button id="wisdomButton">ENABLE FROG WISDOM</button>
-  <p>Vist SlopChat™ to chat with other slop enthusiasts. <a href="chat.html">Click here!/a></p>
+  <p>Vist SlopChat™ to chat with other slop enthusiasts. <a href="chat.html">Click here!</a></p>
   <button id="clickme">Click me!</button>
   <a href="https://www.hitwebcounter.com" target="_blank">
     <img src="https://hitwebcounter.com/counter/counter.php?page=18132009&style=0010&nbdigits=9&type=page&initCount=0"
       title="Counter Widget" alt="Visit counter For Websites" border="0" /></a>
   <button id="worseThemeButton">This can't get any worse, right?</button>
-  </header>
   <main id="maincontent">
     <section>
       <h2>About Slopify</h2>
@@ -412,10 +394,6 @@
     <div id="sac-container">
       <img src="static/images/sac.png" alt="SAC" id="sac-image" />
     </div>
-    <div class="katamari-container">
-      <iframe id="katamariFrame" src="katamari.html" title="A game where you roll a ball around on a field."></iframe>
-    </div>
-    <script src="katamari-loader.js"></script>
     <section class="importante">
       <section>
         <canvas id="glCanvas" width="400" height="400"></canvas>
@@ -468,22 +446,6 @@
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           title="Spotify playlist 'BRAIN ROT🤮' by 'taylor624'" loading="lazy"></iframe>
       </div>
-
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>NON ILLEGAL NES GAME HUUUUGE</title>
-		
-		<script type="text/javascript" src="https://unpkg.com/jsnes/dist/jsnes.min.js"></script>
-		<script type="text/javascript" src="nes-embed.js"></script>
-		<script>window.onload = function(){nes_load_url("nes-canvas", "InterglacticTransmissing.nes");}</script>
-	</head>
-	<body>
-		<div style="margin: auto; width: 75%;">
-			<canvas id="nes-canvas" width="256" height="240" style="width: 100%"/>
-		</div>
-		<p>DPad: Arrow keys<br/>Start: Return, Select: Tab<br/>A Button: A, B Button: S</p>
-	</body>
-	
     </section>
     <section>
       <h2>Things people should know</h2>
@@ -507,6 +469,7 @@
         <section>
           <button id="huzzButton">Huzz</button>
         </section>
+      </div>
     </section>
     <section>
       <button id="widenButton">Toggle Widening</button>
@@ -529,11 +492,6 @@
       </center>
     </section>
 
-    <section>
-      <h2>Slopify can now play Doom</h2>
-      <embed src="https://wadcmd.com/" id="doom">
-    </section>
-
     <div id="cookiebanner">
       <p>This site may or may not use cookies. I actually don't know.</p>
       <button id="hmmm yummy cookies" onclick="cookieclick()">Uh ok i guess</button>
@@ -546,14 +504,6 @@
         title="The song 'Rich Baby Daddy (feat. Sexyy Red & SZA)' on a SoundCloud widget"></iframe>
     </section>
 
-    <section>
-      <h2>Flappy Musk</h2>
-      <canvas id="flappyMuskCanvas" width="400" height="600"></canvas>
-      <br />
-      <Button id="flappyMuskButton">Make it gayer?</Button>
-      <p>Click to make Elon Musk fly! Avoid the obstacles!</p>
-    </section>
-
     <section id="slopcursion">
       <h2>So you can Slopify while you Slopify</h2>
       <iframe src="index.html?slopcursion=true" width="100%" height="500px" frameborder="0"
@@ -561,8 +511,8 @@
     </section>
 
     <section>
-      <h2>oh hewwo thewe, you gwot twhis fwar uwu~! wouwd you wike to wead somethin' awesome~? >w<< /h2>
-          <button type="button" onclick="location.href='/uwu.html'">wets seee~ >w<< /button>
+      <h2>oh hewwo thewe, you gwot twhis fwar uwu~! wouwd you wike to wead somethin' awesome~? &gtw&lt </h2>
+      <button type="button" onclick="location.href='/uwu.html'">wets seee~ >w< </button>
     </section>
   </main>
   <footer>
@@ -573,7 +523,7 @@
       <img src="static/images/w95link.gif" alt="Banner 4" width="88" height="31" />
       <img src="static/images/800x600.gif" alt="Banner 5" width="88" height="31" />
       <img src="static/images/lowtiergod.gif" alt="Banner 6" width="88" height="31" />
-      <!-- this was originally a gif thats ~500 bytes, but i wanted to slow down page load even more by serving a 3 kb png file :3 -->
+      <!-- this was originally a gif that's ~500 bytes, but I wanted to slow down page load even more by serving a 3 kb png file :3 -->
       <img src="static/images/catgirl_yuri.png" alt="Banner 7" width="88" height="31" />
     </div>
 
@@ -723,9 +673,6 @@
 
   <!-- Twitter widgets -->
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-  <!-- Flappy Musk script -->
-  <script src="static/js/flappyMusk.js"></script>
 
   <!-- mandelbrot script -->
   <script src="static/js/mandelbrot_uwu.js"></script>

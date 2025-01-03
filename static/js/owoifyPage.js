@@ -1,23 +1,24 @@
-let owoified = false, clicked = 0;
+let owoified = false,
+  clicked = 0;
 const faces = [
-  '(o´∀`o)',
-  '(#｀ε´)',
-  '(๑•̀ㅁ•́๑)✧',
-  '(*≧m≦*)',
-  '(・`ω´・)',
-  'UwU',
-  'OwO',
-  '>w<',
-  '｡ﾟ( ﾟ^∀^ﾟ)ﾟ｡',
-  'ヾ(｀ε´)ﾉ',
-  '(´• ω •`)',
-  'o(>ω<)o',
-  '(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧',
-  '(⁀ᗢ⁀)',
-  '(￣ε￣＠)',
-  '( 〃▽〃)',
-  '(o^ ^o)',
-  "ヾ(*'▽'*)"
+  "(o´∀`o)",
+  "(#｀ε´)",
+  "(๑•̀ㅁ•́๑)✧",
+  "(*≧m≦*)",
+  "(・`ω´・)",
+  "UwU",
+  "OwO",
+  ">w<",
+  "｡ﾟ( ﾟ^∀^ﾟ)ﾟ｡",
+  "ヾ(｀ε´)ﾉ",
+  "(´• ω •`)",
+  "o(>ω<)o",
+  "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧",
+  "(⁀ᗢ⁀)",
+  "(￣ε￣＠)",
+  "( 〃▽〃)",
+  "(o^ ^o)",
+  "ヾ(*'▽'*)",
 ];
 
 function owoify() {
@@ -26,14 +27,14 @@ function owoify() {
 }
 
 function transform(str) {
-  let out = '';
+  let out = "";
   let level = 0;
-  const chars = str.split('');
+  const chars = str.split("");
   for (let i = 0; i < chars.length; i++) {
     switch (chars[i]) {
       default: {
         if (level == 0) {
-          out += chars[i].replace(/[rl]/g, 'w').replace(/[RL]/g, 'W');
+          out += chars[i].replace(/[rl]/g, "w").replace(/[RL]/g, "W");
         } else {
           out += chars[i];
         }
@@ -43,7 +44,7 @@ function transform(str) {
     if (i === chars.length - 1) {
       if (Math.floor(Math.random() * 100) < 50) {
         const face = faces[Math.floor(Math.random() * faces.length)];
-        out += ' ' + face;
+        out += " " + face;
       }
     }
   }
@@ -71,8 +72,15 @@ function traverse(node, undo) {
         }
       } else {
         node.originalValue = node.nodeValue;
-        if (typeof node.nodeValue === 'string' && node.nodeValue.trim() != "" && node.nodeValue.trim().length != 1 && !parseInt(node.nodeValue.trim())) {
-          node.nodeValue = transform(clicked >= 69 ? node.nodeValue.toUpperCase() : node.nodeValue);
+        if (
+          typeof node.nodeValue === "string" &&
+          node.nodeValue.trim() != "" &&
+          node.nodeValue.trim().length != 1 &&
+          !parseInt(node.nodeValue.trim())
+        ) {
+          node.nodeValue = transform(
+            clicked >= 69 ? node.nodeValue.toUpperCase() : node.nodeValue,
+          );
         }
       }
       break;

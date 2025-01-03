@@ -18,7 +18,9 @@ export default function MessageForm() {
 
     const { id: user_id } = userData.user;
 
-    const { error } = await supabase.from("messages").insert([{ content: message, user_id }]);
+    const { error } = await supabase
+      .from("messages")
+      .insert([{ content: message, user_id }]);
 
     if (error) {
       console.error("Error sending message:", error.message);
@@ -42,4 +44,3 @@ export default function MessageForm() {
     </form>
   );
 }
-

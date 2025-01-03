@@ -11,8 +11,8 @@ function playVideo(videoName) {
     process.platform === "darwin"
       ? `afplay "${videoPath}"` // macOS built-in audio player
       : process.platform === "win32"
-      ? `start /min wmplayer "${videoPath}"` // Windows Media Player minimized
-      : `paplay "${videoPath}"`; // PulseAudio on Linux
+        ? `start /min wmplayer "${videoPath}"` // Windows Media Player minimized
+        : `paplay "${videoPath}"`; // PulseAudio on Linux
 
   return new Promise((resolve) => {
     exec(command, (error) => {
@@ -22,8 +22,8 @@ function playVideo(videoName) {
           process.platform === "darwin"
             ? `open "${videoPath}"`
             : process.platform === "win32"
-            ? `start "${videoPath}"`
-            : `xdg-open "${videoPath}"`;
+              ? `start "${videoPath}"`
+              : `xdg-open "${videoPath}"`;
 
         exec(fallbackCommand, (fallbackError) => {
           if (fallbackError) {
@@ -348,7 +348,11 @@ function generateRizzExamples() {
   const shuffled = [...slangWords].sort(() => 0.5 - Math.random());
   const randomSlang = shuffled.slice(0, 5);
 
-  return examples.join("\n") + "\n\nSome rizzy terms you can use:\n" + randomSlang.join(", ");
+  return (
+    examples.join("\n") +
+    "\n\nSome rizzy terms you can use:\n" +
+    randomSlang.join(", ")
+  );
 }
 
 async function checkCommit() {
@@ -359,7 +363,9 @@ async function checkCommit() {
 
   // Check both conditions
   const hasEmoji = emojiRegex().test(commitMsg);
-  const hasRizz = slangWords.some((word) => commitMsgLower.includes(word.toLowerCase()));
+  const hasRizz = slangWords.some((word) =>
+    commitMsgLower.includes(word.toLowerCase()),
+  );
 
   let failed = false;
 
@@ -375,7 +381,9 @@ async function checkCommit() {
 
   // Then check emoji
   if (!hasEmoji) {
-    console.error("\x1b[31mError: Commit message must include at least one emoji! 🚫\x1b[0m");
+    console.error(
+      "\x1b[31mError: Commit message must include at least one emoji! 🚫\x1b[0m",
+    );
     console.error(generateEmojiSquare());
     console.error("Example commit messages:");
     console.error(`❌ Fail: 'Add new feature'`);
@@ -400,4 +408,3 @@ checkCommit().catch((error) => {
   console.error("Error:", error);
   process.exit(1);
 });
-
