@@ -1,6 +1,6 @@
 ![Slopify](SlopifyLogo.png)
 
-[![](https://dcbadge.limes.pink/api/server/sPbES34ZsA)](https://discord.gg/sPbES34ZsA)
+[![](https://dcbadge.limes.pink/api/server/sPbES34ZsA)](https://discord.gg/WYmXc7Y8sF)
 
 _"The [ideomotor effect](https://www.newmanmentalism.com/blog/a-mentalist-explains-how-ouija-boards-work-and-the-ideomotor-effect) of software"_
 

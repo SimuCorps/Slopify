@@ -57,6 +57,7 @@
         background-color: var(--bg-secondary);
         color: white;
         font-weight: 300;
+        flex-grow: 1;
       }
 
       #bottomPanel {
@@ -214,10 +215,50 @@
         max-height: 1.5em;
         margin-right: 5px;
       }
+
+      .flex {
+        display: flex;
+        height: 100%;
+      }
+
+      #sideSection {
+        width: 170px;
+        flex-shrink: 0;
+      }
+
+      .girlLink {
+        display: block;
+        position: relative;
+      }
+
+      .girlLink img {
+        width: 100%;
+      }
+
+      .girlLink p {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        text-align: center;
+        animation: glow 1s ease-in-out infinite alternate;
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 5px #fff, 0 0 15px #fff, 0 0 25px #e6a900,
+            0 0 35px #e6a900, 0 0 45px #e6a900;
+        }
+        to {
+          text-shadow: 0 0 15px #fff, 0 0 20px #ffd336, 0 0 30px #ffd336,
+            0 0 40px #ffd336, 0 0 50px #ffd336;
+        }
+      }
     </style>
   </head>
 
   <body>
+    <a href="/chatroom.html">CLICK HERE FOR NEW EXPERIMENTAL CHAT!!</a>
     <div id="chatContainer">
       <div id="mainContent">
         <div class="ceo">
@@ -227,12 +268,24 @@
         <div id="roomInfo">
           <p>Connected to room: <strong>global</strong></p>
         </div>
+        <div class="flex">
         <div id="messages"></div>
+          <aside id="sideSection">
+            <a class="girlLink" href="goodstuff.html">
+              <img
+                src="static/images/girl-blurred.png"
+                alt="Blurred image of a nude girl"
+              />
+              <p>Click here to see some good stuff</p>
+            </a>
+          </aside>
+        </div>
       </div>
       <div class="hi">
         <a href="/index.html">
           <img
             src="/static/images/4db62b6a70d285b0efb299ee6816504e.jpg"
+            alt="Ka Chow!"
             width="100"
             height="100"
           />
@@ -421,7 +474,7 @@
         }
 
         // Username validation
-        if (username.length < 3 || username.length > 15) {
+        if (isValidUsernameLength(username)) {
           alert("Username must be between 3 and 15 characters");
           setUserName();
           return;
@@ -556,7 +609,7 @@
             window.chatState = 0;
           }
         }
-        console.log(window.chatState);
+
         let btn = document.getElementById("toggleImagesButton");
         document.body.classList.remove("hide-images");
         document.body.classList.remove("blur-images");
@@ -580,9 +633,11 @@
 
       function localMessage(username, message, isBot, isSystem) {
         if (!isSystem) isSystem = false;
+
         if (window.mutedUsernames.has(username)) {
           return;
         }
+
         let messagesContainer = document.getElementById("messages");
         let messageContainer = document.createElement("div");
         messageContainer.classList.add("message");
@@ -590,6 +645,7 @@
         usernameElement.textContent = username;
         usernameElement.classList.add("username");
         let messageTextElement = splitImageFromText(message);
+
         if (isSystem) {
           usernameElement.style.color = "#ff6b6b";
           messageTextElement.style.color = "#ff6b6b";
@@ -600,6 +656,7 @@
           }
           usernameElement.style.color = window.userColors[username];
         }
+
         if (isBot) {
           let botElement = document.createElement("div");
           botElement.textContent = "bot";
@@ -610,7 +667,7 @@
         if (message.includes(localStorage["userName"])) {
           notificationSound.play();
           messageTextElement.style.backgroundColor = "rgba(233, 211, 150, 0.5)";
-          usernameElement.style.backgroundColor = "rrgba(233, 211, 150, 0.5)";
+          usernameElement.style.backgroundColor = "rgb(233, 211, 150, 0.5)";
         }
 
         messageContainer.appendChild(usernameElement);
@@ -622,18 +679,22 @@
       function processMessage(message) {
         try {
           let messageData = JSON.parse(message);
+
           if (!messageData.bot) {
             messageData.bot = false;
           } else {
             messageData.bot = true;
           }
+
           if (!messageData.username || !messageData.message)
             throw new Error("Invalid message data: " + message);
+
           localMessage(
             messageData.username,
             messageData.message,
             messageData.bot,
           );
+
           if (messageData.flash) {
             flashGreen();
           }
@@ -660,26 +721,36 @@
         document.getElementById("messageInput").value = "";
       }
 
-      function handleLocalCommands(message) {
-        if (message[0] == "~") {
-          let s = message.split(" ");
-          let command = s[0];
+      function isValidUsernameLength(username) {
+        return username.length >= 3 && username.length <= 15;
+      }
 
-          switch (command) {
-            case "~mute":
-              let userToMute = s[1];
-              window.mutedUsernames.add(userToMute);
-              alert("User " + userToMute + " muted succesfully.");
-              break;
-            case "~unmute":
-              let userToUnmute = s[1];
-              window.mutedUsernames.delete(userToUnmute);
-              alert("User " + userToMute + " unmuted succesfully.");
-              break;
-          }
-          return true;
+      function handleLocalCommands(message) {
+        if (message[0] !== "~") {
+          return false;
         }
-        return false;
+
+        let segments = message.split(" ");
+        let command = segments[0];
+
+        // TODO: move this to a separate function once we have more commands
+        if (segments.length !== 2 || !isValidUsernameLength(segments[1])) {
+          alert("Invalid command. Usage:\n~mute <username> or ~unmute <username>.\nUsername must also be between 3 and 15 characters.");
+          return false;
+        }
+
+        let user = segments[1];
+        switch (command) {
+          case "~mute":
+            window.mutedUsernames.add(user);
+            alert("User " + user + " has been muted successfully.");
+            break;
+          case "~unmute":
+            window.mutedUsernames.delete(user);
+            alert("User " + user + " has been unmuted successfully.");
+            break;
+        }
+        return true;
       }
 
       document.addEventListener("DOMContentLoaded", async () => {

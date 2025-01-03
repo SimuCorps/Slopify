@@ -145,3 +145,7 @@ document.addEventListener("keydown", (event) => {
 document.addEventListener("keyup", (event) => {
   keyboard(nes.buttonUp, event);
 });
+
+window.onload = function () {
+  console.log("removed because smelly license nerds are complaining")
+};

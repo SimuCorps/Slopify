@@ -7,3 +7,12 @@ function handleAnimationEnd(event) {
     }, 100); // Small delay to ensure the animation is complete
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const img = document.getElementById("ripPoeskat-image");
+  if (img) {
+      img.addEventListener("animationend", (event) => {
+          handleAnimationEnd(event);
+      });
+  }
+});

@@ -89,11 +89,11 @@ a:hover {
   color: #83a598;
 }
 
-section {
+.section {
   margin-bottom: 20px;
 }
 
-section:last-of-type {
+.section:last-of-type {
   margin-bottom: 0;
 }
 
@@ -341,15 +341,17 @@ canvas {
 }
 
 #slopTVContainer {
-  position: absolute;
+  position: relative;
   top: 800px;
-  left: 100px;
+  left: 20vw;
   transform: scale(0.5);
   z-index: 2;
   box-shadow:
     inset 0.2em 0.2em 0.2em 0 rgba(255, 255, 255, 0.5),
     inset -0.2em -0.2em 0.2em 0 rgba(0, 0, 0, 0.5);
   cursor: pointer;
+  display: inline-block;
+  width: 100%;
 }
 
 #slopTVContainer > a > iframe {
@@ -711,4 +713,58 @@ body.wokeMode {
   border: none;
   color: white;
   cursor: pointer;
+}
+
+#ifrm_shadertoy,
+#slopcursionFrame,
+#ytplayer,
+#counterWidget,
+#soundcloudPlayer {
+  border: none;
+}
+
+#soundcloudPlayer {
+  overflow: hidden;
+}
+
+.marquee {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  animation: marquee 10s linear infinite;
+}
+
+#slopTVInnerFrame {
+  display: inline-flex;
+  white-space: nowrap;
+  background-color: white;
+  color: black;
+  font-family: serif;
+  transform: scaleY(1.5);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+#sloptv-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  text-decoration: none;
+}
+
+#SlopTVFrame {
+  display: block;
+  z-index: 0;
+  border: none;
 }

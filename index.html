@@ -1,729 +1,1086 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <title>Slopify UwU</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="128x128"
+      href="/static/images/apple-touch-icon.png"
+    />
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico" />
+    <link rel="stylesheet" href="static/css/page-nav.css" />
+    <link rel="stylesheet" href="static/css/error.css" />
+    <!-- TODO: don't pull this from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <!-- TODO: don't pull this from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <meta property="og:image" content="https://sleepie.dev/rock.gif" />
+    <meta property="og:type" content="video.other" />
+    <meta property="og:video:url" content="https://sleepie.dev/looking.mp4" />
+    <!--https://sleepie.dev/therock.gif-->
+    <meta property="og:video:width" content="640" />
+    <meta property="og:video:height" content="360" />
 
-<head>
-  <title>Slopify UwU</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="apple-touch-icon" sizes="128x128" href="/static/images/apple-touch-icon.png">
-  <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
-  <link rel="stylesheet" href="static/css/page-nav.css">
-  <link rel="stylesheet" href="static/css/error.css">
-  <!-- TODO: don't pull this from CDN -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
-  <!-- TODO: don't pull this from CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-  <meta property="og:image" content="https://sleepie.dev/rock.gif">
-  <meta property="og:type" content="video.other">
-  <meta property="og:video:url" content="https://sleepie.dev/looking.mp4"><!--https://sleepie.dev/therock.gif-->
-  <meta property="og:video:width" content="640">
-  <meta property="og:video:height" content="360">
+    <!-- TODO: figure out which PRs this was actually part of -->
+    <link rel="stylesheet" href="static/css/style.css" />
 
-  <!-- TODO: figure out which PRs this was actually part of -->
-  <link rel="stylesheet" href="static/css/style.css" />
+    <!-- slopbot styles -->
+    <link rel="stylesheet" href="static/css/slopbot.css" />
 
-  <!-- slopbot styles -->
-  <link rel="stylesheet" href="static/css/slopbot.css" />
+    <!-- chatbot styles -->
+    <link rel="stylesheet" href="static/css/chatbot.css" />
 
-  <!-- chatbot styles -->
-  <link rel="stylesheet" href="static/css/chatbot.css" />
+    <!-- security overlay styles -->
+    <link rel="stylesheet" href="static/css/security.css" />
 
-  <!-- security overlay styles -->
-  <link rel="stylesheet" href="static/css/security.css" />
+    <!-- flappy musk styles -->
+    <link rel="stylesheet" href="static/css/flappyMusk.css" />
 
-  <!-- news styles -->
-  <link rel="stylesheet" href="static/css/news.css" />
+    <!-- news styles -->
+    <link rel="stylesheet" href="static/css/news.css" />
 
-  <!-- comic sans button styles -->
-  <link rel="stylesheet" href="static/css/comicButton.css" />
+    <!-- comic sans button styles -->
+    <link rel="stylesheet" href="static/css/comicButton.css" />
 
-  <!-- scoped bootstrap -->
-  <!-- Add the .use-bootstrap class to apply Bootstrap styles -->
-  <link rel="stylesheet" href="static/css/scoped-bootstrap.css" />
+    <!-- scoped bootstrap -->
+    <!-- Add the .use-bootstrap class to apply Bootstrap styles -->
+    <link rel="stylesheet" href="static/css/scoped-bootstrap.css" />
 
-  <!-- half life 2 cl_showpos -->
-  <link rel="stylesheet" href="static/css/cl-showpos.css" />
-  <script src="static/js/cl-showpos.js" defer></script>
+    <!-- half life 2 cl_showpos -->
+    <link rel="stylesheet" href="static/css/cl-showpos.css" />
+    <script src="static/js/cl-showpos.js" defer></script>
 
-  <!-- world map styles -->
-  <link rel="stylesheet" href="static/css/world_map/styles.css" />
+    <!-- world map styles -->
+    <link rel="stylesheet" href="static/css/world_map/styles.css" />
 
-  <!-- Q: Do we need this? -->
-  <script>
-    !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.crossOrigin = "anonymous", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
-    posthog.init('phc_tMS2IpaHh8OfPPuSqH4feNvaEP8ht6wrZMQHYfL2fX9', {
-      api_host: 'https://us.i.posthog.com',
-      person_profiles: 'identified_only' // or 'always' to create profiles for anonymous users as well
-    })
-  </script>
-</head>
+    <!-- Q: Do we need this? -->
+    <script>
+      !(function (t, e) {
+        var o, n, p, r;
+        e.__SV ||
+          ((window.posthog = e),
+          (e._i = []),
+          (e.init = function (i, s, a) {
+            function g(t, e) {
+              var o = e.split(".");
+              2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                (t[e] = function () {
+                  t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+                });
+            }
+            ((p = t.createElement("script")).type = "text/javascript"),
+              (p.crossOrigin = "anonymous"),
+              (p.async = !0),
+              (p.src =
+                s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") +
+                "/static/array.js"),
+              (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(
+                p,
+                r,
+              );
+            var u = e;
+            for (
+              void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
+                u.people = u.people || [],
+                u.toString = function (t) {
+                  var e = "posthog";
+                  return (
+                    "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e
+                  );
+                },
+                u.people.toString = function () {
+                  return u.toString(1) + ".people (stub)";
+                },
+                o =
+                  "init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(
+                    " ",
+                  ),
+                n = 0;
+              n < o.length;
+              n++
+            )
+              g(u, o[n]);
+            e._i.push([i, s, a]);
+          }),
+          (e.__SV = 1));
+      })(document, window.posthog || []);
+      posthog.init("phc_tMS2IpaHh8OfPPuSqH4feNvaEP8ht6wrZMQHYfL2fX9", {
+        api_host: "https://us.i.posthog.com",
+        person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
+      });
+    </script>
+  </head>
 
 
-<body>
-  <div data-bs-theme="dark" class="use-bootstrap" style="position: absolute; top: 0; z-index: 69; width: 100%; background: rgba(0, 0, 0, 0.5);">
-    <nav class="navbar navbar-expand-lg" style="--bs-navbar-padding-y: 0; background: transparent; backdrop-filter: blur(1rem);">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img src="/static/images/apple-touch-icon.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/astolfo.html">Astolfo</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/chat.html">Chat</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/god.html">God</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/health-check.html">Health Check</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/leaderboard.html">Leaderboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/mizdiary.html">miz's weekly diary</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/second.html">Second</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/thebible.html">The Bible</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/touhouproject.html">Touhou Project</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/uwu.html">UwU</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/games">Games</a>
-            </li>
-          </ul>
+  <body>
+    <a href="/chatroom.html">CLICK HERE FOR NEW EXPERIMENTAL CHAT!!!</a>
+    <div
+      data-bs-theme="dark"
+      class="use-bootstrap"
+      style="
+        position: absolute;
+        top: 0;
+        z-index: 69;
+        width: 100%;
+        background: transparent;
+      "
+    >
+      <nav
+        class="navbar navbar-expand-lg"
+        style="
+          --bs-navbar-padding-y: 0;
+          background: transparent;
+          backdrop-filter: blur(1rem);
+        "
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img
+              src="/static/images/apple-touch-icon.png"
+              alt="Logo"
+              width="30"
+              height="24"
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/astolfo.html">Astolfo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/chat.html">Chat</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/god.html">God</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/health-check.html">Health Check</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/leaderboard.html">Leaderboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/mizdiary.html">miz's weekly diary</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/second.html">Second</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/thebible.html">The Bible</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/touhouproject.html"
+                  >Touhou Project</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/uwu.html">UwU</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/games">Games</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="cl-showpos">
+      <div class="map">
+        <span class="fps">60</span> fps on <span class="url"></span>
+      </div>
+      <div class="pos">pos: 0.00 0.00 0.00</div>
+      <div class="vel">vel: 0.00</div>
+    </div>
+    <button id="comicButton" type="button">comic sans-inator 5000</button>
+    <iframe
+      src="https://sleepie.dev/testpopup.html"
+      id="testpopup"
+      title="Hot Singles Near You!"
+    >
+    </iframe>
+    <audio id="pageLoadUwUSound" autoplay>
+      <source src="sound.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+    <a href="https://youareanidiot.cc/">YOU ARE AN IDIOT</a>
+    <!-- Map Section -->
+    <div id="map-container">
+      <div id="world-map"></div>
+    </div>
+    <!-- slopbot AD -->
+    <div class="slop-teaser" onclick="window.location.href='/ai.html'">
+      <span>🤖</span>
+      <span>CLICK FOR AI SLOP</span>
+      <div
+        class="close"
+        onclick="event.stopPropagation(); this.parentElement.style.display='none'"
+      >
+        ×
+      </div>
+    </div>
+    <!-- seizuring rotating SKIBIDI GOAT -->
+    <img
+      src="static/images/RotatingGoat.png"
+      class="bouncing-rotating-image"
+      onclick="window.location.href='https://n0rule.is-a.dev'"
+      alt="Rotating Goat"
+    />
+    <div id="randomDiv">
+      <audio id="vibeAudio" loop>
+        <source
+          src="https://cdn.pixabay.com/download/audio/2024/10/22/audio_5b87be5f9b.mp3?filename=smooth-jazz-saxophone-solo-with-a-lofi-vibe-253950.mp3"
+          type="audio/mp3"
+        />
+        Your browser does not support the audio element.
+      </audio>
+      <audio id="moreVibeAudio" loop>
+        <source src="/static/audio/rick.m4a" type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
+      <div id="chatbot">
+        <div class="chat-header">
+          <span>Chat Support</span>
+          <button id="chatToggleButton" onclick="toggleChat()">×</button>
+        </div>
+        <div id="chatMessages">
+          <div class="bot-message">
+            <div class="clippy-container">
+              <img
+                src="https://static.wikia.nocookie.net/the-scrappy/images/c/cb/Clippy.png/revision/latest?cb=20231027172058"
+                class="clippy-image"
+                alt="Clippy"
+              />
+              <span>how can i help you today?</span>
+            </div>
+          </div>
+        </div>
+        <div class="chat-input">
+          <input type="text" id="userInput" placeholder="Type a message..." />
+          <button onclick="sendMessage()">Send</button>
         </div>
       </div>
-    </nav>
-  </div>
-  <div class="cl-showpos">
-    <div class="map"><span class="fps">60</span> fps on <span class="url"><span></div>
-    <div class="pos">pos:  0.00 0.00 0.00</div>
-    <div class="vel">vel:  0.00</div>
-  </div>
-  <button id="comicButton" type="button">comic sans-inator 5000</button>
-  <iframe src="https://sleepie.dev/testpopup.html" id="testpopup" title="Hot Singles Near You!">
-  </iframe>
-  <audio id="pageLoadUwUSound" autoplay>
-    <source src="sound.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  <a href="https://youareanidiot.cc/">YOU ARE AN IDIOT</a>
-  <!-- Map Section -->
-  <div id="map-container">
-    <div id="world-map"></div>
-  </div>
-  <!-- slopbot AD -->
-  <div class="slop-teaser" onclick="window.location.href='/ai.html'">
-    <span>🤖</span>
-    <span>CLICK FOR AI SLOP</span>
-    <div class="close" onclick="event.stopPropagation(); this.parentElement.style.display='none'">×</div>
-  </div>
 
-  <!-- seizuring rotating SKIBIDI GOAT -->
-  <img src="static/images/RotatingGoat.png" class="bouncing-rotating-image"
-    onclick="window.location.href='https://n0rule.is-a.dev'" alt="Rotating Goat" />
-  <div id="randomDiv">
-    <audio id="vibeAudio" loop>
-      <source
-        src="https://cdn.pixabay.com/download/audio/2024/10/22/audio_5b87be5f9b.mp3?filename=smooth-jazz-saxophone-solo-with-a-lofi-vibe-253950.mp3"
-        type="audio/mp3" />
-      Your browser does not support the audio element.
-    </audio>
-    <audio id="moreVibeAudio" loop>
-      <source src="/static/audio/rick.m4a" type="audio/mp3" />
-      Your browser does not support the audio element.
-    </audio>
-    <div id="chatbot">
-      <div class="chat-header">
-        <span>Chat Support</span>
-        <button id="chatToggleButton" onclick="toggleChat()">×</button>
-      </div>
-      <div id="chatMessages">
-        <div class="bot-message">
-          <div class="clippy-container">
-            <img
-              src="https://static.wikia.nocookie.net/the-scrappy/images/c/cb/Clippy.png/revision/latest?cb=20231027172058"
-              class="clippy-image" alt="Clippy">
-            <span>how can i help you today?</span>
+      <div class="marquee" id="slopTVContainer">
+        <div id="slopTVInnerFrame">
+          SlopTV! Watch free TV online below
+          <div id="sloptv-iframe-container">
+            <a href="/tv.html" title="Go to SlopTV" id="sloptv-overlay"></a>
+            <iframe
+              src="/tv.html"
+              id="SlopTVFrame"
+              title="SlopTV Preview"
+            ></iframe>
           </div>
         </div>
       </div>
-      <div class="chat-input">
-        <input type="text" id="userInput" placeholder="Type a message...">
-        <button onclick="sendMessage()">Send</button>
+
+      <div id="chatContainer">
+        <a href="/chat.html" title="Go to SlopChat">
+          <img
+            src="/static/images/slopchat.jpg"
+            width="400"
+            height="200"
+            alt="Go to SlopChat"
+          />
+        </a>
       </div>
-    </div>
+      <!-- Epileptic Mode Button -->
+      <button class="top-right-button" id="epicButton">Bustin Mode</button>
+      <button class="bottom-left-button" onclick="owoify()">What?</button>
+      <button
+        class="bottom-right-button"
+        id="addMoreWokeToTheWebpageSimplyBecauseICanAndUhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+      >
+        waiter waiter! more woke please
+      </button>
+      <a href="astolfo.html" style="text-align: center"
+        >ASTOLFOOOO (,,&gt;﹏&lt;,,)</a
+      >
+      <a href="#maincontent" class="skipnav">Skip to Content (Press Enter)</a>
 
-    <div id="chatContainer">
-      <a href="/chat.html">
-        <img src="/static/images/slopchat.jpg" width="400px" height="200px" alt="Go to SlopChat">
-      </a>
-    </div>
+      <div id="security-overlay">
+        <div id="security-overlay-inner">
+          <h2 id="security-overlay-title">🔒 Welcome to Slopify 🔒</h2>
 
+          <div id="captcha-container">
+            <div id="captcha-prompt"></div>
+            <div id="captcha-content"></div>
+            <input
+              type="text"
+              id="captcha-input"
+              placeholder="Enter your answer"
+            />
+            <button id="submit-captcha">Submit CAPTCHA</button>
+          </div>
 
-    <div id="slopTVContainer">
-      <marquee style="background-color:white;color:black;font-family:serif;transform:scaleY(1.5);">
-        <h1>SlopTV ! Watch free tv online below</h1>
-      </marquee>
-      <a href="/tv.html">
-        <iframe src="/tv.html" frameborder="0"></iframe>
-      </a>
-    </div>
+          <!-- Skip Security Button -->
+          <button id="skip-security">Skip Security :(</button>
 
-    <!-- Epileptic Mode Button -->
-    <button class="top-right-button" id="epicButton">Bustin Mode</button>
-    <button class="bottom-left-button" onclick="owoify()">What?</button>
-    <a href="astolfo.html" style="text-align: center;">ASTOLFOOOO (,,&gt﹏&lt,,)</a>
-    <button class="bottom-right-button"
-      id="addMoreWokeToTheWebpageSimplyBecauseICanAndUhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh">waiter
-      waiter! more woke please
-    </button>
-    <a href="#maincontent" class="skipnav">Skip to Content (Press Enter)</a>
+          <form id="registration-form">
+            <input
+              type="text"
+              id="username"
+              class="registration-input"
+              placeholder="Username"
+            />
+            <input
+              type="password"
+              id="password"
+              class="registration-input"
+              placeholder="Password"
+            />
+            <div id="requirements-list"></div>
+            <button type="submit" id="register-button">Register</button>
+          </form>
+        </div>
+      </div>
 
-    <div id="security-overlay">
-      <div id="security-overlay-inner">
-        <h2 id="security-overlay-title">
-          🔒 Welcome to Slopify 🔒
-        </h2>
+      <header>
+        <div class="marquee">
+          <img src="static/images/epic-logo.gif" alt="Slopify animated logo" />
+        </div>
+        <img src="SlopifyLogo.png" width="400" alt="Slopify logo" />
+        <h1>
+          <a href="https://discord.gg/WYmXc7Y8sF">Join the Discord</a> or your
+          mom's a hoe
+        </h1>
+        <p>
+          <em
+            >"The
+            <a
+              href="https://www.newmanmentalism.com/blog/a-mentalist-explains-how-ouija-boards-work-and-the-ideomotor-effect"
+              target="_blank"
+              >ideomotor effect</a
+            >
+            of software"</em
+          >
+        </p>
+        <div id="page-nav">
+          <label class="hamburger-menu">
+            <input type="checkbox" aria-label="Menu" />
+          </label>
+          <aside class="sidebar">
+            <nav>
+              <a href="/index.html">Home</a>
+              <a href="/second.html">Second</a>
+              <a href="/uwu.html">UwU</a>
+              <a href="/chat.html">Chat</a>
+              <a href="/thebible.html">The Bible</a>
+              <a href="/god.html">God</a>
+              <a href="/touhouproject.html">Touhou Project</a>
+              <a href="/mizdiary.html">miz's weekly diary</a>
+              <a href="/games.html">Games</a>
+            </nav>
+          </aside>
+        </div>
 
-        <div id="captcha-container">
-          <div id="captcha-prompt"></div>
-          <div id="captcha-content"></div>
-          <input type="text" id="captcha-input" placeholder="Enter your answer" />
-          <button id="submit-captcha">
-            Submit CAPTCHA
+        <button id="secondButton" onclick="window.location.href='/second.html'">
+          <span>Alan Becker</span>
+          <img
+            src="static/images/alanbecker/alan.png"
+            width="50"
+            height="50"
+            alt="Alan Becker"
+          />
+        </button>
+
+        <div>
+          <h1>MAXIMIZE YOUR WIN</h1>
+          <div class="w-full flex gap-2">
+            <div class="bg-black rounded-2xl w-16 as"></div>
+          </div>
+        </div>
+
+        <a href="leaderboard.html" class="rainbow-text">Leaderboard</a>
+
+        <!-- Randyifier button -->
+        <button id="randyifier">Call in Randy Pitchford</button>
+
+        <video
+          src="https://sleepie.dev/dwl-youtube.com__E_videodlyoutubegQzWr8MoJXA.mp4"
+          controls
+          id="videoPixels"
+        >
+          Your potato browser does not support the video tag. Please stop using
+          your grandma's computer.
+        </video>
+
+        <div id="news-container">
+          <div id="news-grid">
+            <div class="news-column news-column-left"></div>
+            <div class="news-column news-column-right"></div>
+          </div>
+        </div>
+        <div>
+          <h1>Support A Creator</h1>
+          <img src="static/images/sac.png" alt="Support A Creator" />
+        </div>
+        <div>
+          <p>
+            Try out the new coding language that is 100% better than anything:
+            <a href="/embr" id="embrLink">Embr</a>
+          </p>
+        </div>
+        <div id="gallery">
+          <img
+            src="static/images/bobi.jpg"
+            alt="Bobi"
+            class="gallery-item gallery-item-custom"
+          />
+          <img
+            src="static/images/kofte.jpg"
+            alt="Kofte"
+            class="gallery-item gallery-item-custom"
+          />
+          <img src="static/images/frog.webp" alt="Frog" class="gallery-item" />
+        </div>
+
+        <canvas id="caleb-canvas"></canvas>
+
+        <button id="vibeButton">Improve the Mood</button>
+        <button id="wisdomButton">ENABLE FROG WISDOM</button>
+        <p>
+          Vist SlopChat™ to chat with other slop enthusiasts.
+          <a href="chat.html">Click here!</a>
+        </p>
+        <button id="clickme">Click me!</button>
+        <a href="https://www.hitwebcounter.com" target="_blank">
+          <img
+            src="https://hitwebcounter.com/counter/counter.php?page=18132009&style=0010&nbdigits=9&type=page&initCount=0"
+            title="Counter Widget"
+            alt="Visit counter For Websites"
+            id="counterWidget"
+        /></a>
+        <button id="worseThemeButton">This can't get any worse, right?</button>
+      </header>
+      <main id="maincontent">
+        <div class="section">
+          <h2>About Slopify</h2>
+          <img src="#" alt="catgirl" id="catgirl" height="1000" />
+          <br />
+          <button onclick="anotherCatgirl()">get another neko</button>
+          <button onclick="downloadCatgirl()">cute!!</button>
+          <p>
+            Slopify is a 100% community-built open-source website and product.
+            Its unique premise invites contributors to:
+          </p>
+          <ul>
+            <li>Commit whatever code they want</li>
+            <li>Add whatever features they desire</li>
+            <li>Write in whatever language they prefer</li>
+          </ul>
+          <p>
+            The only rules? Everything must work together and remain legal. Im
+            gonna cry.
+          </p>
+        </div>
+        <div id="twittermoanials">
+          <h2>Twittermoanials</h2>
+          <p>They're like testimonials, but for twitter moaning</p>
+
+          <div id="twitter-tweet-container">
+            <blockquote class="twitter-tweet" data-theme="dark">
+              <p lang="en" dir="ltr">hahahaha this is fire</p>
+              &mdash; ily⚡️ (@0xIlyy)
+              <a
+                href="https://twitter.com/0xIlyy/status/1873179308153553050?ref_src=twsrc%5Etfw"
+                >December 29, 2024</a
+              >
+            </blockquote>
+            <blockquote
+              class="twitter-tweet"
+              data-conversation="none"
+              data-theme="dark"
+            >
+              <p lang="en" dir="ltr">
+                WHO THE FUCK ADDED PASSWORD GAME TO THE REGISTRATION PAGE
+                <a href="https://t.co/FYpWT5dycz">pic.twitter.com/FYpWT5dycz</a>
+              </p>
+              &mdash; Aterron (@_aterron_)
+              <a
+                href="https://twitter.com/_aterron_/status/1873444464255254743?ref_src=twsrc%5Etfw"
+                >December 29, 2024</a
+              >
+            </blockquote>
+            <blockquote class="twitter-tweet" data-theme="dark">
+              <p lang="en" dir="ltr">
+                help i played the sexy frog music and now it keeps playing even
+                after i close the browser
+              </p>
+              &mdash; colin ricardo (@_colinricardo)
+              <a
+                href="https://twitter.com/_colinricardo/status/1873429683368505464?ref_src=twsrc%5Etfw"
+                >December 29, 2024</a
+              >
+            </blockquote>
+            <blockquote class="twitter-tweet" data-theme="dark">
+              <p lang="en" dir="ltr">
+                This project is awesome the amount of random slop added in the
+                last 24 hours alone is crazy. Check it out
+                <a href="https://t.co/GDD8ut9A4S">https://t.co/GDD8ut9A4S</a>
+              </p>
+              &mdash; Gil (@TylerGilman01)
+              <a
+                href="https://twitter.com/TylerGilman01/status/1873429461410234849?ref_src=twsrc%5Etfw"
+                >December 29, 2024</a
+              >
+            </blockquote>
+          </div>
+        </div>
+        <div class="center">
+          <h2 id="penguins">do you like penguins?</h2>
+          <img
+            src="static/images/penguin.webp"
+            alt="An image of a Club Penguin character"
+          />
+          <img
+            src="https://secret.kgncengiz.com/F.jpg"
+            alt="An image of Yaoi artwork"
+          />
+          <img
+            src="static/images/Jesus.png"
+            alt="Three images of Jesus Christ next to each other"
+          />
+          <img src="static/images/raccoon.jpg" alt="An image of a raccoon" />
+        </div>
+        <div class="section">
+          <div class="center">
+            <button
+              id="l8rgt"
+              onclick="location.href='https:\/\/www.youtube.com/watch?v=dQw4w9WgXcQ'"
+            >
+              click me
+            </button>
+          </div>
+        </div>
+        <img
+          src="https://secret.kgncengiz.com/F.jpg"
+          alt="An image of Yaoi artwork"
+        />
+
+        <div class="importante" id="mandelbrot-wrapper">
+          <div id="mandelbrot-section">
+            <canvas id="fractalCanvas" width="400" height="400"></canvas>
+          </div>
+        </div>
+        <div id="ripPoeskat-container">
+          <a href="https://poeskatprinter.zepje.space/" id="poeskatLink">
+            <img
+              src="static/images/rip_poeskat.png"
+              alt="RIP Poeskat"
+              id="ripPoeskat-image"
+            />
+          </a>
+        </div>
+        <div id="sac-container">
+          <img src="static/images/sac.png" alt="SAC" id="sac-image" />
+        </div>
+        <div class="importante">
+          <div class="section">
+            <canvas id="glCanvas" width="400" height="400"></canvas>
+          </div>
+          <div class="donut-container">
+            <pre id="d"></pre>
+          </div>
+        </div>
+        <div class="fourier-container">
+          <a
+            href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B"
+            aria-label="フーリエ変換"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Fourier_series_and_transform.gif"
+              alt="Function s(t) (in red) is an approximation of a square wave formed from just 6 sine functions of different amplitudes and harmonically-related frequencies. Their summation is called a Fourier series. The Fourier transform, F(w) (in blue), which depicts amplitude vs frequency, reveals the 6 frequencies and their amplitudes."
+            />
+          </a>
+        </div>
+        <div class="fishtank-container">
+          <div class="fishtank-placeholder">
+            <div class="loading-spinner">Loading...</div>
+          </div>
+          <canvas id="main-fishtank" class="fishtank-canvas"></canvas>
+        </div>
+        <div class="section">
+          <h2>Stockify</h2>
+          <p>
+            Throw your money to the wind with random stock decisions! Outperform
+            the hedge funds with our incredible algorithm!
+          </p>
+          <p><span id="stock_ticker"></span><span id="stock_msg"></span></p>
+          <img
+            src="data:,"
+            id="stock_img"
+            alt="Stock buy or sell indicator image"
+          />
+        </div>
+        <div class="section">
+          <input type="button" value="SHADERZ" onclick="setShaderToy()" />
+          <br />
+          <iframe
+            id="ifrm_shadertoy"
+            width="640"
+            height="360"
+            src="https://www.shadertoy.com/embed/ld3Gz2?gui=false&paused=false&muted=false"
+            allowfullscreen
+            title="An image showing a snail staring at a leaf with water droplets on it."
+          ></iframe>
+        </div>
+        <div class="section">
+          <h1>The Fennec Fox in dis bish</h1>
+          <div id="foxy"></div>
+        </div>
+        <div class="section">
+          <h2>Enjoy some Slopify tunes 🎺</h2>
+          <div>
+            <iframe
+              id="spotifyFrame"
+              src="https://open.spotify.com/embed/playlist/43g9WYiJsP8cyeNhU4ry89?utm_source=generator&theme=0"
+              width="100"
+              height="352"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              title="Spotify playlist 'BRAIN ROT🤮' by 'taylor624'"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+        <div class="section">
+          <h2>Things people should know</h2>
+          <p>The sooner you meet them the better.</p>
+          <ul>
+            <li>
+              <a href="https://motherfuckingwebsite.com/" target="_blank"
+                >This is a motherfucking website. And it's fucking perfect.</a
+              >
+            </li>
+            <li>
+              <a href="http://bettermotherfuckingwebsite.com/" target="_blank"
+                >This is still a motherfucking website. And it's more fucking
+                perfect than the last guy's.</a
+              >
+            </li>
+
+            <li>
+              <a href="https://nohello.net/" target="_blank"
+                >no hello - please don't say just hello in chat</a
+              >
+            </li>
+            <li>
+              <a href="https://dontasktoask.com/" target="_blank"
+                >Don't ask to ask, just ask</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="section">
+          <div id="huzzbutton">
+            <h2>Press To Huzz</h2>
+            <div class="section">
+              <button id="huzzButton">Huzz</button>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <button id="widenButton">Toggle Widening</button>
+        </div>
+        <div class="section">
+          <button id="lengthenButton">Toggle Lengthening</button>
+        </div>
+        <div id="sun">
+          <button type="button" id="sunBtn">hey, can we go on land?</button>
+        </div>
+        <div class="section">
+          <div>
+            <button onClick="killEverything()">Clear up some space</button>
+          </div>
+          <div class="center">
+            <a
+              href="static/images/monster_zero_ultra.jpg"
+              aria-label="An image of an anime girl holding a can of Monster Energy Zero Ultra"
+            >
+              <img
+                src="static/images/come_here_marisa_kirisame.gif"
+                alt="Marisa Kirisame from Touhou Project"
+              />
+            </a>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Slopify can now play Doom</h2>
+          <embed src="https://wadcmd.com/" id="doom" />
+        </div>
+
+        <div id="cookiebanner">
+          <p>This site may or may not use cookies. I actually don't know.</p>
+          <button id="hmmm_yummy_cookies" onclick="cookieclick()">
+            Uh ok i guess
+          </button>
+          <button id="ewww_cookies_no_yummy" onclick="cookieclick()">
+            Get out of my face
           </button>
         </div>
 
+        <div class="section">
+          <iframe
+            width="5"
+            height="1"
+            id="soundcloudPlayer"
+            allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1633786749&auto_play=true"
+            title="The song 'Rich Baby Daddy (feat. Sexyy Red & SZA)' on a SoundCloud widget"
+          ></iframe>
+        </div>
 
+        <div id="slopcursion">
+          <h2>So you can Slopify while you Slopify</h2>
+          <iframe
+            src="index.html?slopcursion=true"
+            width="100"
+            height="500"
+            id="slopcursionFrame"
+            title="The same page you are currently viewing, but in a frame."
+          ></iframe>
+        </div>
 
-        <!-- Skip Security Button -->
-        <button id="skip-security">
-          Skip Security :(
-        </button>
-
-        <form id="registration-form">
-          <input type="text" id="username" class="registration-input" placeholder="Username" />
-          <input type="password" id="password" class="registration-input" placeholder="Password" />
-          <div id="requirements-list"></div>
-          <button type="submit" id="register-button">
-            Register
+        <div class="section">
+          <h2>
+            oh hewwo thewe, you gwot twhis fwar uwu~! wouwd you wike to wead
+            somethin' awesome~? &gt;w&lt;
+          </h2>
+          <button type="button" onclick="location.href='/uwu.html'">
+            wets seee~ &gt;w&lt;
           </button>
-        </form>
+        </div>
+      </main>
+      <footer>
+        <div id="banner-container">
+          <img
+            src="static/images/aol-sucks.gif"
+            alt="Banner 1"
+            width="88"
+            height="31"
+          />
+          <img
+            src="static/images/heimdal.png"
+            alt="Banner 2"
+            width="88"
+            height="31"
+          />
+          <img
+            src="static/images/bestview.gif"
+            alt="Banner 3"
+            width="88"
+            height="31"
+          />
+          <img
+            src="static/images/w95link.gif"
+            alt="Banner 4"
+            width="88"
+            height="31"
+          />
+          <img
+            src="static/images/800x600.gif"
+            alt="Banner 5"
+            width="88"
+            height="31"
+          />
+          <img
+            src="static/images/lowtiergod.gif"
+            alt="Banner 6"
+            width="88"
+            height="31"
+          />
+          <!-- this was originally a gif that's ~500 bytes, but I wanted to slow down page load even more by serving a 3 kb png file :3 -->
+          <img
+            src="static/images/catgirl_yuri.png"
+            alt="Banner 7"
+            width="88"
+            height="31"
+          />
+        </div>
+
+        <div
+          id="error-0"
+          class="window window--active"
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby="error-label-0"
+          aria-describedby="error-desc-0"
+          data-window
+          hidden
+        >
+          <div class="window__header" data-header>
+            <div id="error-label-0" class="window__title" data-label>Error</div>
+            <button class="window__button" type="button" disabled>
+              <span
+                class="window__sprite window__sprite--close-disabled"
+              ></span>
+              <span class="window__sr">Close</span>
+            </button>
+          </div>
+          <div class="window__body">
+            <img
+              class="window__body-icon"
+              alt="White X on a red circle with dark red outline and drop shadow"
+              src="static/images/win95error.png"
+              width="32"
+              height="32"
+            />
+            <p id="error-desc-0" class="window__body-text" data-desc></p>
+          </div>
+          <div class="window__footer">
+            <button
+              class="window__button window__button--lg"
+              type="button"
+              data-ok
+            >
+              OK
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <a href="https://sleepie.dev/femboy-not-gay" target="_blank"
+            >Why its not gay to like femboys</a
+          >
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/mFfYORTqzog?si=i3uW4a8OnDXaAKEI"
+            title="YouTube video player"
+            id="ytplayer"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <div class="section">
+          <img
+            src="./static/images/touhouproject/baka.png"
+            alt="ᗜˬᗜ"
+            class="cirno-img"
+            width="200"
+            height="200"
+          />
+          <audio
+            id="baka-sound"
+            src="./static/audio/baka.mp3"
+            preload="auto"
+          ></audio>
+        </div>
+
+        <p>
+          &copy; 2024 DishpitDev.
+          <a href="https://github.com/dishpitdev/slopify"
+            >Built by the community</a
+          >, against the community.
+        </p>
+      </footer>
+      <div id="dvd-bounce">
+        <img
+          src="static/images/DVD_logo.png"
+          width="500"
+          height="250"
+          alt="Bouncing DVD Logo"
+        />
       </div>
-    </div>
-
-    <header>
-      <marquee><img src="static/images/epic-logo.gif" alt="Slopify animated logo" /></marquee>
-      <img src="SlopifyLogo.png" width="400px" alt="Slopify logo" />
-      <h1><a href="https://discord.gg/sPbES34ZsA">Join the Discord</a> or your mom's a hoe</h1>
-      <p>
-        <em>"The
-          <a href="https://www.newmanmentalism.com/blog/a-mentalist-explains-how-ouija-boards-work-and-the-ideomotor-effect"
-            target="_blank">ideomotor effect</a>
-          of software"</em>
-      </p>
-      <div id="page-nav">
-        <label class="hamburger-menu">
-          <input type="checkbox" aria-label="Menu" />
-        </label>
-        <aside class="sidebar">
-          <nav>
-            <a href="/index.html">Home</a>
-            <a href="/second.html">Second</a>
-            <a href="/uwu.html">UwU</a>
-            <a href="/chat.html">Chat</a>
-            <a href="/thebible.html">The Bible</a>
-            <a href="/god.html">God</a>
-            <a href="/touhouproject.html">Touhou Project</a>
-            <a href="/mizdiary.html">miz's weekly diary</a>
-          </nav>
-        </aside>
-      </div>
-    </header>
-  </div>
-
-  <a href="/second.html">
-    <button id="secondButton">
-      <p>alan becker</p> <img src="static/images/alanbecker/alan.png" width="50" height="50"
-        alt="Image of Alan Becker" />
-    </button>
-  </a>
-
-  <div>
-    <h1>MAXIMIZE YOUR WIN</h1>
-    <div class="w-full flex gap-2">
-      <div class="bg-black rounded-2xl w-16 as"></div>
-    </div>
-  </div>
-
-  <a href="leaderboard.html" class="rainbow-text">Leaderboard</a>
-
-  <!-- Randyifier button -->
-  <button id="randyifier">
-    Call in Randy Pitchford
-  </button>
-
-  <video src="https://sleepie.dev/dwl-youtube.com__E_videodlyoutubegQzWr8MoJXA.mp4" controls id="videoPixels">
-    Your potato browser does not support the video tag. Please stop using your grandma's computer.
-  </video>
-
-  <div id="news-container">
-    <div id="news-grid">
-      <div class="news-column news-column-left"></div>
-      <div class="news-column news-column-right"></div>
-    </div>
-  </div>
-  <div>
-    <h1>Support A Creator</h1>
-    <img src="static/images/sac.png" alt="Support A Creator">
-  </div>
-  <div>
-    <p>
-      Try out the new coding language that is 100% better than anything:
-      <a href="/embr" id="embrLink">Embr</a>
-    </p>
-  </div>
-  <div id="gallery">
-    <img src="static/images/bobi.jpg" alt="Bobi" class="gallery-item gallery-item-custom">
-    <img src="static/images/kofte.jpg" alt="Kofte" class="gallery-item gallery-item-custom">
-    <img src="static/images/frog.webp" alt="Frog" class="gallery-item">
-  </div>
-
-  <canvas id="caleb-canvas"></canvas>
-
-  <button id="vibeButton">Improve the Mood</button>
-  <button id="wisdomButton">ENABLE FROG WISDOM</button>
-  <p>Vist SlopChat™ to chat with other slop enthusiasts. <a href="chat.html">Click here!</a></p>
-  <button id="clickme">Click me!</button>
-  <a href="https://www.hitwebcounter.com" target="_blank">
-    <img src="https://hitwebcounter.com/counter/counter.php?page=18132009&style=0010&nbdigits=9&type=page&initCount=0"
-      title="Counter Widget" alt="Visit counter For Websites" border="0" /></a>
-  <button id="worseThemeButton">This can't get any worse, right?</button>
-  <main id="maincontent">
-    <section>
-      <h2>About Slopify</h2>
-      <img src="#" alt="catgirl" id="catgirl" height="1000px">
-      <br>
-      <button onclick="anotherCatgirl()">get another neko</button>
-      <button onclick="downloadCatgirl()">cute!!</button>
-      <p>
-        Slopify is a 100% community-built open-source website and product. Its
-        unique premise invites contributors to:
-      </p>
-      <ul>
-        <li>Commit whatever code they want</li>
-        <li>Add whatever features they desire</li>
-        <li>Write in whatever language they prefer</li>
-      </ul>
-      <p>The only rules? Everything must work together and remain legal. Im gonna cry.</p>
-    </section>
-    <div id="twittermoanials">
-      <h2>Twittermoanials</h2>
-      <p>They're like testimonials, but for twitter moaning</p>
-
-      <div id="twitter-tweet-container">
-        <blockquote class="twitter-tweet" data-theme="dark">
-          <p lang="en" dir="ltr">hahahaha this is fire</p>&mdash; ily⚡️ (@0xIlyy) <a
-            href="https://twitter.com/0xIlyy/status/1873179308153553050?ref_src=twsrc%5Etfw">December 29, 2024</a>
-        </blockquote>
-        <blockquote class="twitter-tweet" data-conversation="none" data-theme="dark">
-          <p lang="en" dir="ltr">WHO THE FUCK ADDED PASSWORD GAME TO THE REGISTRATION PAGE <a
-              href="https://t.co/FYpWT5dycz">pic.twitter.com/FYpWT5dycz</a></p>&mdash; Aterron (@_aterron_) <a
-            href="https://twitter.com/_aterron_/status/1873444464255254743?ref_src=twsrc%5Etfw">December 29,
-            2024</a>
-        </blockquote>
-        <blockquote class="twitter-tweet" data-theme="dark">
-          <p lang="en" dir="ltr">help i played the sexy frog music and now it keeps playing even after i close the
-            browser</p>&mdash; colin ricardo (@_colinricardo) <a
-            href="https://twitter.com/_colinricardo/status/1873429683368505464?ref_src=twsrc%5Etfw">December 29,
-            2024</a>
-        </blockquote>
-        <blockquote class="twitter-tweet" data-theme="dark">
-          <p lang="en" dir="ltr">This project is awesome the amount of random slop added in the last 24 hours alone
-            is
-            crazy. Check it out <a href="https://t.co/GDD8ut9A4S">https://t.co/GDD8ut9A4S</a></p>&mdash; Gil
-          (@TylerGilman01) <a
-            href="https://twitter.com/TylerGilman01/status/1873429461410234849?ref_src=twsrc%5Etfw">December 29,
-            2024</a>
-        </blockquote>
-      </div>
-    </div>
-    <div class="center">
-      <h2 id="penguins">do you like penguins?</h2>
-      <img src="static/images/penguin.webp" alt="An image of a Club Penguin character" />
-      <img src="https://secret.kgncengiz.com/F.jpg" alt="An image of Yaoi artwork" />
-      <img src="static/images/Jesus.png" alt="Three images of Jesus Christ next to each other" />
-      <img src="static/images/raccoon.jpg" alt="An image of a raccoon" />
-    </div>
-    <section>
-      <div align="center">
-        <button id="l8rgt" onclick="location.href='https:\/\/www.youtube.com/watch?v=dQw4w9WgXcQ'">click me</button>
-      </div>
-    </section>
-    <img src="https://secret.kgncengiz.com/F.jpg" alt="An image of Yaoi artwork" />
-
-    <section class="importante" id="mandelbrot-wrapper">
-      <section id="mandelbrot-section">
-        <canvas id="fractalCanvas" width="400" height="400"></canvas>
-      </section>
-    </section>
-    <div id="ripPoeskat-container">
-      <a href="https://poeskatprinter.zepje.space/" id="poeskatLink">
-        <img src="static/images/rip_poeskat.png" alt="RIP Poeskat" id="ripPoeskat-image"
-          onanimationend="handleAnimationEnd(event)" />
-      </a>
-    </div>
-    <div id="sac-container">
-      <img src="static/images/sac.png" alt="SAC" id="sac-image" />
-    </div>
-    <section class="importante">
-      <section>
-        <canvas id="glCanvas" width="400" height="400"></canvas>
-      </section>
-      <section class="donut-container">
-        <pre id="d"></pre>
-      </section>
-    </section>
-    <section class="fourier-container">
-      <a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B"
-        aria-label="フーリエ変換">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Fourier_series_and_transform.gif"
-          alt="Function s(t) (in red) is an approximation of a square wave formed from just 6 sine functions of different amplitudes and harmonically-related frequencies. Their summation is called a Fourier series. The Fourier transform, F(w) (in blue), which depicts amplitude vs frequency, reveals the 6 frequencies and their amplitudes." />
-      </a>
-    </section>
-    <section class="fishtank-container">
-      <div class="fishtank-placeholder">
-        <div class="loading-spinner">Loading...</div>
-      </div>
-      <canvas id="main-fishtank" class="fishtank-canvas"></canvas>
-    </section>
-    <section>
-      <h2>Stockify</h2>
-      <p>
-        Throw your money to the wind with random stock decisions! Outperform
-        the hedge funds with our incredible algorithm!
-      </p>
-      <p>
-        <span id="stock_ticker"></span><span id="stock_msg"></span>
-      </p>
-      <img src="" id="stock_img" role="none" />
-    </section>
-    <section>
-      <input type="button" value="SHADERZ" onclick="setShaderToy()" />
-      <br />
-      <iframe id="ifrm_shadertoy" width="640" height="360" frameborder="0"
-        src="https://www.shadertoy.com/embed/ld3Gz2?gui=false&paused=false&muted=false" allowfullscreen
-        title="An image showing a snail staring at a leaf with water droplets on it."></iframe>
-    </section>
-    <section>
-      <h1>The Fennec Fox in dis bish</h1>
-      <div id="foxy"></div>
-    </section>
-    <section>
-      <h2>Enjoy some Slopify tunes 🎺</h2>
-      <div>
-        <iframe id="spotifyFrame"
-          src="https://open.spotify.com/embed/playlist/43g9WYiJsP8cyeNhU4ry89?utm_source=generator&theme=0" width="100%"
-          height="352" frameBorder="0" allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          title="Spotify playlist 'BRAIN ROT🤮' by 'taylor624'" loading="lazy"></iframe>
-      </div>
-    </section>
-    <section>
-      <h2>Things people should know</h2>
-      <p>
-        The sooner you meet them the better.
-      </p>
-      <ul>
-        <li><a href="https://motherfuckingwebsite.com/" target="_blank">This is a motherfucking website. And it's
-            fucking perfect.</a></li>
-        <li><a href="http://bettermotherfuckingwebsite.com/" target="_blank">This is still a motherfucking website.
-            And it's more fucking perfect than the last guy's.</a>
-        <li><a href="https://nohello.net/" target="_blank">no hello - please don't say just hello in chat</a></li>
-        <li><a href="https://dontasktoask.com/" target="_blank">Don't ask to ask, just ask</a></li>
-      </ul>
-    </section>
-    <section>
-      <div id="huzzbutton">
-        <p2>
-          Press To Huzz
-        </p2>
-        <section>
-          <button id="huzzButton">Huzz</button>
-        </section>
-      </div>
-    </section>
-    <section>
-      <button id="widenButton">Toggle Widening</button>
-    </section>
-    <section>
-      <button id="lengthenButton">Toggle Lengthening</button>
-    </section>
-    <section id="sun">
-      <button type="button" id="sunBtn">hey, can we go on land?</button>
-    </section>
-    <section>
-      <div>
-        <button onClick=killEverything()>Clear up some space</button>
-      </div>
-      <center>
-        <a href="static/images/monster_zero_ultra.jpg"
-          aria-label="An image of an anime girl holding a can of Monster Energy Zero Ultra">
-          <img src="static/images/come_here_marisa_kirisame.gif" alt="Marisa Kirisame from Touhou Project" />
-        </a>
-      </center>
-    </section>
-
-    <div id="cookiebanner">
-      <p>This site may or may not use cookies. I actually don't know.</p>
-      <button id="hmmm yummy cookies" onclick="cookieclick()">Uh ok i guess</button>
-      <button id="ewww cookies no yummy" onclick="cookieclick()">Get out of my face</button>
-    </div>
-
-    <section>
-      <iframe width="5%" height="1" scrolling="no" frameborder="no" allow="autoplay"
-        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1633786749&auto_play=true"
-        title="The song 'Rich Baby Daddy (feat. Sexyy Red & SZA)' on a SoundCloud widget"></iframe>
-    </section>
-
-    <section id="slopcursion">
-      <h2>So you can Slopify while you Slopify</h2>
-      <iframe src="index.html?slopcursion=true" width="100%" height="500px" frameborder="0"
-        title="The same page you are currently viewing, but in a frame."></iframe>
-    </section>
-
-    <section>
-      <h2>oh hewwo thewe, you gwot twhis fwar uwu~! wouwd you wike to wead somethin' awesome~? &gtw&lt </h2>
-      <button type="button" onclick="location.href='/uwu.html'">wets seee~ >w< </button>
-    </section>
-  </main>
-  <footer>
-    <div id="banner-container">
-      <img src="static/images/aol-sucks.gif" alt="Banner 1" width="88" height="31" />
-      <img src="static/images/heimdal.png" alt="Banner 2" width="88" height="31" />
-      <img src="static/images/bestview.gif" alt="Banner 3" width="88" height="31" />
-      <img src="static/images/w95link.gif" alt="Banner 4" width="88" height="31" />
-      <img src="static/images/800x600.gif" alt="Banner 5" width="88" height="31" />
-      <img src="static/images/lowtiergod.gif" alt="Banner 6" width="88" height="31" />
-      <!-- this was originally a gif that's ~500 bytes, but I wanted to slow down page load even more by serving a 3 kb png file :3 -->
-      <img src="static/images/catgirl_yuri.png" alt="Banner 7" width="88" height="31" />
-    </div>
-
-    <div id="error-0" class="window window--active" role="alertdialog" aria-modal="true" aria-labelledby="error-label-0"
-      aria-describedby="error-desc-0" data-window hidden>
-      <div class="window__header" data-header>
-        <div id="error-label-0" class="window__title" data-label>Error</div>
-        <button class="window__button" type="button" disabled>
-          <span class="window__sprite window__sprite--close-disabled"></span>
-          <span class="window__sr">Close</span>
-        </button>
-      </div>
-      <div class="window__body">
-        <img class="window__body-icon" alt="White X on a red circle with dark red outline and drop shadow"
-          src="static/images/win95error.png" width="32" height="32">
-        <p id="error-desc-0" class="window__body-text" data-desc></p>
-      </div>
-      <div class="window__footer">
-        <button class="window__button window__button--lg" type="button" data-ok>OK</button>
-      </div>
-    </div>
-
-    <div>
-      <a href="https://sleepie.dev/femboy-not-gay" target="_blank">Why its not gay to like femboys</a>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/mFfYORTqzog?si=i3uW4a8OnDXaAKEI"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
-
-    <section>
-      <img src="./static/images/touhouproject/baka.png" alt="ᗜˬᗜ" class="cirno-img" width="200" height="200">
-      <audio id="baka-sound" src="./static/audio/baka.mp3" preload="auto"></audio>
-    </section>
-
-    <p>
-      &copy; 2024 DishpitDev.
-      <a href="https://github.com/dishpitdev/slopify">Built by the community</a>, against the community.
-    </p>
-  </footer>
-  <div id="dvd-bounce">
-    <img src="static/images/DVD_logo.png" width="500" height="250" alt="Bouncing DVD Logo">
-  </div>
 
   <div id="cookie-banner1">
     <span>We use cookies to improve your experience.</span>
     <button class="agree-button" onclick="dismissBanner('cookie-banner1')">Agree</button>
   </div>
 
-  <div id="cookie-banner3">
-    <span>We use cookies to ensure you get the best experience.</span>
-    <button class="agree-button" onclick="dismissBanner('cookie-banner3')">Agree</button>
+  <div id="cookie-banner2">
+    <span>This website uses cookies for better functionality.</span>
+    <button class="agree-button" onclick="dismissBanner('cookie-banner2')">Agree</button>
   </div>
 
-  <img src="https://sleepie.dev/i/dumbass.gif"
-    title="A screenshot showing a Google search for 'free money downloader', the result is a Softonic page for 'Download Money Free - Best Software & Apps'">
-  <a href="https://www.microsoft.com/en-us/download/details.aspx?id=40784">Download this random executable from
-    microsoft</a>
-  <a href="https://twitter.com/eepyfemboi?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large"
-    data-lang="en" data-show-count="false">Follow @eepyfemboi</a>
-  <script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
+      <div id="cookie-banner3">
+        <span>We use cookies to ensure you get the best experience.</span>
+        <button class="agree-button" onclick="dismissBanner('cookie-banner3')">
+          Agree
+        </button>
+      </div>
 
-  <!-- error script -->
-  <script src="static/js/error.js"></script>
+      <img
+        src="https://sleepie.dev/i/dumbass.gif"
+        title="A screenshot showing a Google search for 'free money downloader', the result is a Softonic page for 'Download Money Free - Best Software & Apps'"
+      />
+      <a href="https://www.microsoft.com/en-us/download/details.aspx?id=40784"
+        >Download this random executable from microsoft</a
+      >
+      <a
+        href="https://twitter.com/eepyfemboi?ref_src=twsrc%5Etfw"
+        class="twitter-follow-button"
+        data-size="large"
+        data-lang="en"
+        data-show-count="false"
+        >Follow @eepyfemboi</a
+      >
+    </div>
 
-  <!-- security script and loader -->
-  <script src="static/js/security.js"></script>
-  <script src="static/js/securityLoader.js"></script>
+    <!-- error script -->
+    <script src="static/js/error.js"></script>
 
-  <!-- shake target script -->
-  <script src="static/js/shakeTarget.js"></script>
+    <!-- security script and loader -->
+    <script src="static/js/security.js"></script>
+    <script src="static/js/securityLoader.js"></script>
 
-  <!-- fishtank script and loader -->
-  <script src="static/js/fishtank.js"></script>
-  <script src="static/js/fishtank_loader.js"></script>
+    <!-- shake target script -->
+    <script src="static/js/shakeTarget.js"></script>
 
-  <!-- stocks script -->
-  <script src="static/js/stocks.js"></script>
+    <!-- fishtank script and loader -->
+    <script src="static/js/fishtank.js"></script>
+    <script src="static/js/fishtank_loader.js"></script>
 
-  <!-- rainbow pulse script -->
-  <script src="static/js/rainbowPulse.js"></script>
+    <!-- stocks script -->
+    <script src="static/js/stocks.js"></script>
 
-  <!-- konami script  -->
-  <script src="static/js/konami.js"></script>
+    <!-- rainbow pulse script -->
+    <script src="static/js/rainbowPulse.js"></script>
 
-  <!-- click me button script -->
-  <script src="static/js/clickMeBtn.js"></script>
+    <!-- konami script  -->
+    <script src="static/js/konami.js"></script>
 
-  <!-- worse theme script -->
-  <script src="static/js/worseTheme.js"></script>
+    <!-- click me button script -->
+    <script src="static/js/clickMeBtn.js"></script>
 
-  <!-- owoify page script -->
-  <script src="static/js/owoifyPage.js"></script>
+    <!-- worse theme script -->
+    <script src="static/js/worseTheme.js"></script>
 
-  <!-- dvd bounce script -->
-  <script src="static/js/dvdBounce.js"></script>
+    <!-- owoify page script -->
+    <script src="static/js/owoifyPage.js"></script>
 
-  <!-- 8ball gpt script -->
-  <script src="static/js/8ball.js"></script>
+    <!-- dvd bounce script -->
+    <script src="static/js/dvdBounce.js"></script>
 
-  <!-- chatbot script -->
-  <script src="static/js/chatbot.js"></script>
+    <!-- 8ball gpt script -->
+    <script src="static/js/8ball.js"></script>
 
-  <!-- onion articles script -->
-  <script src="static/js/onion.js"></script>
+    <!-- chatbot script -->
+    <script src="static/js/chatbot.js"></script>
 
-  <!-- gl script -->
-  <script src="static/js/gl.js"></script>
+    <!-- onion articles script -->
+    <script src="static/js/onion.js"></script>
 
-  <!-- donut script -->
-  <script src="static/js/donut.js"></script>
+    <!-- gl script -->
+    <script src="static/js/gl.js"></script>
 
-  <!-- button scripts -->
-  <script src="static/js/buttons.js"></script>
+    <!-- donut script -->
+    <script src="static/js/donut.js"></script>
 
-  <!-- sun script -->
-  <script src="static/js/sun.js"></script>
+    <!-- button scripts -->
+    <script src="static/js/buttons.js"></script>
 
-  <!-- cursor trails -->
-  <script type="module" src="static/js/cursorTrails.js"></script>
+    <!-- sun script -->
+    <script src="static/js/sun.js"></script>
 
-  <!-- TODO: split this? -->
-  <script type="module" src="static/js/index.js"></script>
+    <!-- cursor trails -->
+    <script type="module" src="static/js/cursorTrails.js"></script>
 
-  <!--bad apple-->
-  <script src="static/js/badApple.js"></script>
+    <!-- TODO: split this? -->
+    <script type="module" src="static/js/index.js"></script>
 
-  <!--surprise-->
-  <script src="static/js/surprise.js"></script>
+    <!--bad apple-->
+    <script src="static/js/badApple.js"></script>
 
-  <!-- epilleptic mode script -->
-  <script src="static/js/epic.js"></script>
+    <!--surprise-->
+    <script src="static/js/surprise.js"></script>
 
-  <!-- oneko scripts -->
-  <script src="static/js/oneko.js"></script>
-  <script src="static/js/icey-oneko.js"></script>
-  <script async src="https://sleepie.uk/oneko.js"></script>
+    <!-- epilleptic mode script -->
+    <script src="static/js/epic.js"></script>
 
-  <!-- slopify vids loader -->
-  <script async src="https://sleepie.dev/slopifyvids/loader.js"></script>
+    <!-- oneko scripts -->
+    <script src="static/js/oneko.js"></script>
+    <script src="static/js/icey-oneko.js"></script>
+    <script async src="https://sleepie.uk/oneko.js"></script>
 
-  <!-- emoji playground script -->
-  <script src="static/js/emoji-background.js"></script>
+    <!-- slopify vids loader -->
+    <script async src="https://sleepie.dev/slopifyvids/loader.js"></script>
 
-  <!-- bouncy caleb script -->
-  <script src="static/js/bouncy-caleb.js"></script>
+    <!-- emoji playground script -->
+    <script src="static/js/emoji-background.js"></script>
 
-  <!-- Twitter widgets -->
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <!-- bouncy caleb script -->
+    <script src="static/js/bouncy-caleb.js"></script>
 
-  <!-- mandelbrot script -->
-  <script src="static/js/mandelbrot_uwu.js"></script>
+    <!-- Twitter widgets -->
+    <script async src="https://platform.twitter.com/widgets.js"></script>
 
-  <!-- Shadertoy loader -->
-  <script src="static/js/shadertoyLoader.js"></script>
+    <!-- mandelbrot script -->
+    <script src="static/js/mandelbrot_uwu.js"></script>
 
-  <!-- cookie popup -->
-  <script src="static/js/cookieClick.js"></script>
+    <!-- Shadertoy loader -->
+    <script src="static/js/shadertoyLoader.js"></script>
 
-  <!-- Randyifier script -->
-  <script src="static/js/randyifier.js"></script>
+    <!-- cookie popup -->
+    <script src="static/js/cookieClick.js"></script>
 
-  <!-- more woke content script -->
-  <script src="static/js/makeWoke.js"></script>
+    <!-- Randyifier script -->
+    <script src="static/js/randyifier.js"></script>
 
-  <!-- cirno script -->
-  <script src="static/js/cirno.js"></script>
+    <!-- more woke content script -->
+    <script src="static/js/makeWoke.js"></script>
 
-  <!-- huzz script -->
-  <script src="static/js/huzz.js"></script>
+    <!-- cirno script -->
+    <script src="static/js/cirno.js"></script>
 
-  <!-- kill everything script -->
-  <script src="static/js/killEverything.js"></script>
+    <!-- huzz script -->
+    <script src="static/js/huzz.js"></script>
 
-  <!-- page load uwu sound script -->
-  <script src="static/js/pageLoadUwUSound.js"></script>
+    <!-- kill everything script -->
+    <script src="static/js/killEverything.js"></script>
 
-  <!-- comic sans button script -->
-  <script src="static/js/comicButton.js"></script>
+    <!-- page load uwu sound script -->
+    <script src="static/js/pageLoadUwUSound.js"></script>
 
-  <!-- catgirl downloader script -->
-  <script src="static/js/catgirl.js"></script>
+    <!-- comic sans button script -->
+    <script src="static/js/comicButton.js"></script>
 
-  <!-- world map script -->
-  <script src="static/js/world_map.js"></script>
+    <!-- catgirl downloader script -->
+    <script src="static/js/catgirl.js"></script>
 
-  <!-- s*x word is forbidden script -->
-  <script src="static/js/hellProtection.js"></script>
+    <!-- world map script -->
+    <script src="static/js/world_map.js"></script>
 
-  <!-- poeskat animation fix script -->
-  <script src="static/js/poeskatAnimation.js"></script>
+    <!-- s*x word is forbidden script -->
+    <script src="static/js/hellProtection.js"></script>
 
-  <!-- anti adblock script loader -->
-  <script src="static/js/aabLoader.js"></script>
+    <!-- poeskat animation fix script -->
+    <script src="static/js/poeskatAnimation.js"></script>
 
-  <!-- cookie banners script -->
-  <script src="static/js/cookieBanners.js"></script>
+    <!-- anti adblock script loader -->
+    <script src="static/js/aabLoader.js"></script>
 
-  <!-- web3 script -->
-  <script src="static/js/web3.js"></script>
-</body>
+    <!-- cookie banners script -->
+    <script src="static/js/cookieBanners.js"></script>
 
+    <!-- web3 script -->
+    <script src="static/js/web3.js"></script>
+
+    <!-- dyslexifying script -->
+    <script src="static/js/dyslexia.js"></script>
+
+    <!-- crypto wallet script -->
+    <script src="static/js/crypto_wallet.js"></script>
+  </body>
 </html>

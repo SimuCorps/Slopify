@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatroom</title>
+
+    <!-- <link href="https://sleepie.uk/slopify/chat_style.css" rel="stylesheet"> -->
+
+    <style>
+        body {
+            background-color: #1e2124;
+        }
+
+        #chat_container {
+            border-color: red;
+            border-width: 1px;
+            border-style: solid;
+            display: grid;
+        }
+
+        #chatroom_info {
+            display: flex;
+            border-radius: 20px;
+            margin: 10px;
+            padding: 5px;
+            padding-left: 20px;
+            border: 1px solid #ccc;
+            color: aqua;
+        }
+
+        #messages {
+            background-color: #424549;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 10px;
+        }
+
+        #chat_input_bar {
+            display: flex;
+            margin: 10px;
+            background-color: dimgrey;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-color: #ccc;
+        }
+
+        #message_input {
+            background-color: dimgrey;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            padding: 15px;
+            width: 90%;
+        }
+
+        #message_send {
+            border-width: 0px;
+            background-color: rgb(95, 94, 94);
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .message {
+            display: flex;
+        }
+
+        .recieved_message {
+            align-self: left;
+            justify-self: left;
+        }
+
+        .sent_message {
+            align-self: right;
+            justify-self: right;
+            /*background-color: rgba(0, 238, 255, 0.336);*/
+        }
+
+        .mentions {
+            background-color: rgba(255, 251, 0, 0.336);
+        }
+
+        .role {
+            font-size: 16px;
+            margin-right: 6px;
+            font-weight: 750;
+            padding-right: 6px;
+            padding-left: 6px;
+            padding-top: 2px;
+            padding-bottom: 3px;
+            background-color: #7289da;
+            border-radius: 10px;
+        }
+
+        .username {
+            font-size: 16px;
+            margin-right: 5px;
+            font-weight: 800;
+        }
+
+        .message_content {
+            font-size: 16px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat_container">
+        <div id="chatroom_info">
+            <div style="display:grid;margin:10px">
+                <label for="username_input" name="username" style="font-size:16px">Username:</label>
+                <input type="text" maxlength="16" id="username_input" style="background-color:#7289da;border-radius:9px;padding:4px">
+            </div>
+            <div style="display:grid;margin:10px">
+                <label for="user_color_input" style="font-size:16px">Change your user color:</label>
+                <input type="color" id="user_color_input" style="background-color:#7289da;border-radius:8px;">
+            </div>
+            <div style="display:grid;margin:10px;text-align:center">
+                <p style="font-size:14px">Online Users:<br><strong><span style="font-size:20px" id="online_count">0</span></strong></p>
+            </div>
+        </div>
+
+        <div id="messages">
+            <!-- <div class="recieved_message message">
+                <p class="role">USER</p>
+                <p class="username">&lt;test1&gt;</p>
+                <p class="message_content">test2</p>
+            </div> -->
+        </div>
+
+        <div id="chat_input_bar">
+            <input type="text" maxlength="256" id="message_input">
+            <button id="message_send" onclick="send_chat()">
+                <img src="https://sleepie.uk/slopify/send-button.svg" width="38px" height="38px">
+            </button>
+        </div>
+    </div>
+
+    <script>
+        async function send_chat() {
+            const chat_input_element = document.getElementById("message_input");
+            const content = chat_input_element.value.replace("<", "&lt;").replace(">", "&gt;");
+            chat_input_element.value = "";
+
+            if (content === "") {
+                alert("please type something before sending!");
+            }
+
+            const username = document.getElementById("username_input").value;
+            const user_color = document.getElementById("user_color_input").value;
+
+            const message_data = {
+                event_type: "message_send",
+                username: username,
+                color: user_color,
+                content: content
+            };
+
+            websocket.send(JSON.stringify(message_data));
+
+            await push_chat_to_chatbox(username, user_color, local_user_role, content, true);
+        }
+
+        async function push_chat_to_chatbox(
+                username, 
+                user_color, 
+                user_role, 
+                content, 
+                is_self
+            ) {
+            const new_chat_element = document.createElement('div');
+            const role_element = document.createElement('p');
+            const username_element = document.createElement('p');
+            const content_element = document.createElement('p');
+
+            new_chat_element.classList.add(["message"]);
+
+            if (is_self) {
+                new_chat_element.classList.add(["sent_message"]);
+            } else {
+                new_chat_element.classList.add(["recieved_message"]);
+            };
+
+            role_element.classList.add(["role"]);
+            username_element.classList.add(["username"]);
+            content_element.classList.add(["message_content"]);
+
+            role_element.innerText = user_role;
+
+            username_element.innerHTML = `&lt;<span style="color:${user_color}">${username}</span>&gt;`;
+            //username_element.style.color = user_color;
+
+            content_element.innerHTML = content;
+
+            new_chat_element.appendChild(role_element);
+            new_chat_element.appendChild(username_element);
+            new_chat_element.appendChild(content_element);
+
+            document.getElementById("messages").appendChild(new_chat_element);
+        }
+
+        async function handle_recv_chat(message) {
+            const username = message.username;
+            const user_color = message.color;
+            const user_role = message.role;
+            const message_content = message.content;
+
+            await push_chat_to_chatbox(username, user_color, user_role, message_content, false);
+
+            return {
+                event_type: "response",
+                status: "ok"
+            }
+        };
+
+        async function handle_ping(event) {
+            return {
+                event_type: "response",
+                status: "ok",
+                data: "pong"
+            }
+        }
+
+        async function handle_online_user_count_update(data) {
+            const online_count = data.online_count;
+            document.getElementById("online_count").innerText = online_count;
+
+            return {
+                event_type: "response",
+                status: "ok"
+            }
+        }
+
+        async function handle_unknown_ws_event(event) {
+            return {
+                event_type: "response",
+                status: "error"
+            }
+        }
+
+        async function update_user_role(event) {
+            local_user_role = event.role_name;
+            
+            return {
+                event_type: "response",
+                status: "ok"
+            }
+        }
+
+        const msgDiv = document.getElementById('messages');
+
+        let websocket = null;
+
+        let local_user_role = "USER";
+
+        async function setup() {
+            websocket = new WebSocket('wss://slopifychat.sleepie.dev/connect');
+
+            websocket.onopen = function(event) {
+                console.log('WebSocket connection established.');
+                
+                const data = {
+                    event_type: "connect"
+                };
+
+                websocket.send(JSON.stringify(data));
+            };
+
+            websocket.onmessage = async function(event) {
+                const msg_data = JSON.parse(event.data);
+                
+                if (msg_data.event_type === "ping") {
+                    const response = await handle_ping(msg_data.data);
+                } else if (msg_data.event_type === "message") {
+                    const response = await handle_recv_chat(msg_data.data);
+                } else if (msg_data.event_type === "user_count_update") {
+                    const response = await handle_online_user_count_update(msg_data.data);
+                } else if (msg_data.event_type === "user_update") {
+                    const response = await handle_local_user_update(msg_data.data);
+                } else {
+                    const response = await handle_unknown_ws_event(msg_data.data);
+                };
+
+                websocket.send(JSON.stringify(response));
+            };
+
+            websocket.onerror = function(event) {
+                console.error('WebSocket error:', event);
+            };
+
+            websocket.onclose = function(event) {
+                console.log('WebSocket connection closed.');
+                setup();
+            };
+        };
+        setup();
+    </script>
+</body>
+</html>

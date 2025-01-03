@@ -14,7 +14,7 @@ The software may NOT be used by:
 
 - Military, police forces, government agencies, paramilitary organizations, or private military companies.
 - Companies or organizations engaged in the production or sale of weapons, surveillance tools, or related services.
-- Specific prohibited entities, including but not limited to: Palantir Technologies, Northrop Grumman, Lockheed Martin, Raytheon, and OpenAI.
+- These specific prohibited entities: Palantir Technologies, Northrop Grumman, Lockheed Martin, Raytheon, and OpenAI.
 - Any entity or individual engaging in activities deemed harmful, unethical, or exploitative, defined as:
   - Actions that directly or indirectly cause physical, psychological, social, or environmental harm.
   - Practices that violate widely accepted principles of human rights, equity, or sustainability, including but not limited to exploitation of vulnerable populations or destruction of natural habitats.
@@ -45,7 +45,7 @@ By contributing to this software, contributors agree that their contributions ar
 
 ## 9. License Compatibility
 
-This license is compatible with GPLv2 and may coexist with other open-source licenses unless such compatibility violates the terms outlined in this document.
+This license is compatible with and may coexist with other open-source licenses unless such compatibility violates the terms outlined in this document or the other open-source license.
 
 ## 10. Enforcement
 
