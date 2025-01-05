@@ -68,8 +68,8 @@
           };
 
           newImage.onerror = function (e) {
-            console.log("Error loading image, will try again next interval");
-            console.log(e);
+            //console.log("Error loading image, will try again next interval");
+            //console.log(e);
             if (errcount % 10 == 0) {
               feedImage.src = "/static/images/sloptv/error.webp";
             }
@@ -101,6 +101,5 @@
         alt=""
       />
     </div>
-    <iframe width="640" height="550" style="z-index: 2147483647;" src="https://sleepie.uk/undertale/index.html"></iframe>
   </body>
 </html>
