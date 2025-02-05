@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,6 +9,7 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private Color _clearColor = Color.GreenYellow;
 
     public Game1()
     {
@@ -18,8 +20,6 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
-
         base.Initialize();
     }
 
@@ -43,10 +43,17 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
-
-        // TODO: Add your drawing code here
+        GraphicsDevice.Clear(_clearColor);
+        MutateColor(gameTime);
 
         base.Draw(gameTime);
+    }
+    
+    private void MutateColor(GameTime gameTime)
+    {
+        var r = (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds);
+        var g = (float)Math.Cos(gameTime.TotalGameTime.TotalSeconds);
+        var b = (float)Math.Tan(gameTime.TotalGameTime.TotalSeconds);
+        _clearColor = new Color(r, g, b);
     }
 }
