@@ -11,7 +11,8 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private Color _clearColor = Color.GreenYellow;
-    private MouseInput _mouseInput = new();
+    private readonly MouseInputHandler _mouseInputHandler = new();
+    private readonly KeyboardInputHandler _keyboardInputHandler = new();
 
     public Game1()
     {
@@ -34,16 +35,19 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
+        _mouseInputHandler.Update();
+        _keyboardInputHandler.Update();
+
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-            Keyboard.GetState().IsKeyDown(Keys.Escape))
+            _keyboardInputHandler.IsKeyJustPressed(Keys.Escape))
             Exit();
 
-        _mouseInput.Update();
-        
-        var r = (float)Math.Sin(_mouseInput.Position.X * 0.001F);
-        var g = (float)Math.Cos(_mouseInput.Position.Y * 0.001F);
-        var b = (float)Math.Tan(_mouseInput.GetTravelDistance() * 0.001F);
-        _clearColor = new Color(r, g, b);
+        if (_keyboardInputHandler.IsKeyJustPressed(Keys.R))
+        {
+            _clearColor.R = (byte)Random.Shared.Next(256);
+            _clearColor.G = (byte)Random.Shared.Next(256);
+            _clearColor.B = (byte)Random.Shared.Next(256);
+        }
 
         base.Update(gameTime);
     }
@@ -54,4 +58,6 @@ public class Game1 : Game
 
         base.Draw(gameTime);
     }
+    
+    private Vector2 ScreenSize => new(_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
 }
