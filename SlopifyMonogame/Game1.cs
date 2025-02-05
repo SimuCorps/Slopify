@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SloppyMonogame.Sloppies.Input;
 
 namespace SloppyMonogame;
 
@@ -10,6 +11,7 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private Color _clearColor = Color.GreenYellow;
+    private MouseInput _mouseInput = new();
 
     public Game1()
     {
@@ -36,7 +38,12 @@ public class Game1 : Game
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        // TODO: Add your update logic here
+        _mouseInput.Update();
+        
+        var r = (float)Math.Sin(_mouseInput.Position.X * 0.001F);
+        var g = (float)Math.Cos(_mouseInput.Position.Y * 0.001F);
+        var b = (float)Math.Tan(_mouseInput.GetTravelDistance() * 0.001F);
+        _clearColor = new Color(r, g, b);
 
         base.Update(gameTime);
     }
@@ -44,16 +51,7 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(_clearColor);
-        MutateColor(gameTime);
 
         base.Draw(gameTime);
-    }
-    
-    private void MutateColor(GameTime gameTime)
-    {
-        var r = (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds);
-        var g = (float)Math.Cos(gameTime.TotalGameTime.TotalSeconds);
-        var b = (float)Math.Tan(gameTime.TotalGameTime.TotalSeconds);
-        _clearColor = new Color(r, g, b);
     }
 }
