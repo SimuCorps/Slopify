@@ -6,7 +6,7 @@
 
     <groupId>org.simucorps.slopify.client</groupId>
     <artifactId>client</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>24</maven.compiler.source>
