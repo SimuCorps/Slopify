@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Slopify — SimuCorps</title>
+  <meta name="description"
+    content="Slopify Enterprise Suite — clean‑slate, enterprise‑style software under active development by SimuCorps." />
+  <style>
+    /* --- modern corporate / gov / military aesthetic --- */
+    :root {
+      /* Ink & Surfaces */
+      --ink: #0b132b;
+      /* deep navy */
+      --ink-2: #1c2541;
+      /* navy */
+      --ink-dim: #5b6785;
+      /* muted slate */
+      --bg: #0a0f1e;
+      /* canvas dark */
+      --bg-soft: #0d1426;
+      /* soft dark */
+      --panel: #0f1a33;
+      /* card */
+      --panel-2: #101b36;
+      /* alt card */
+      --line: #1e2b4c;
+      /* border */
+      --line-2: #23345a;
+      /* Brand */
+      --brand: #2d6df6;
+      /* modern blue */
+      --brand-2: #1d4fd7;
+      /* darker brand */
+      --accent: #d7b253;
+      /* ceremonial gold */
+      --accent-2: #b48a2d;
+      /* deep gold */
+      --ok: #2fbf71;
+      --warn: #f2b84b;
+      --bad: #e35d5b;
+      /* Effects */
+      --radius: 14px;
+      --radius-sm: 10px;
+      --shadow: 0 30px 60px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .02);
+      --grid: radial-gradient(circle at 1px 1px, rgba(59, 91, 177, .18) 1px, transparent 0) 0 0/22px 22px;
+      --noise: linear-gradient(0deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .03)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="120" height="120" filter="url(%23n)" opacity="0.05"/></svg>');
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      font: 14px/1.65 Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: #dfe7ff;
+      background:
+        radial-gradient(800px 300px at 50% -50px, rgba(45, 109, 246, .18), transparent 60%),
+        var(--bg);
+    }
+
+    a {
+      color: #aecdff;
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px
+    }
+
+    /* Service band */
+    .band {
+      height: 6px;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent), var(--brand));
+      border-bottom: 1px solid rgba(0, 0, 0, .35)
+    }
+
+    /* Top Nav */
+    header.nav {
+      position: sticky;
+      top: 0;
+      background: rgba(12, 19, 43, .75);
+      backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--line);
+      z-index: 40
+    }
+
+    .nav-row {
+      height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .2px
+    }
+
+    .mark {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--brand-2), var(--brand));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 12px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25)
+    }
+
+    .tagline {
+      font-weight: 600;
+      color: #9fb0d9;
+      font-size: 12px
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 26px
+    }
+
+    nav a {
+      color: #dfe7ff
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line-2);
+      color: #eaf1ff;
+      background: linear-gradient(180deg, #1b2b59, #142247);
+      text-decoration: none
+    }
+
+    .cta:hover {
+      filter: brightness(1.04)
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 96px 0 72px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(31, 48, 97, .65) 0%, rgba(14, 22, 45, .8) 65%, rgba(14, 22, 45, 1) 100%), var(--bg-soft)
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      mask: linear-gradient(#000, transparent 70%);
+      background: var(--grid), var(--noise);
+      opacity: .6;
+      pointer-events: none
+    }
+
+    .eyebrow {
+      color: #9fb0d9;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      font-size: 12px
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      line-height: 1.12;
+      margin: 12px 0 12px
+    }
+
+    .sub {
+      color: #b7c4ea;
+      max-width: 920px;
+      margin: 0 0 16px
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 12px;
+      background: rgba(16, 26, 51, .6)
+    }
+
+    .badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent)
+    }
+
+    /* Sections */
+    .section {
+      padding: 60px 0
+    }
+
+    .section h2 {
+      font-size: 24px;
+      margin: 0 0 12px;
+      letter-spacing: .2px
+    }
+
+    .lead {
+      color: #a6b4de
+    }
+
+    /* Grid & Cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(28, 44, 90, .55), rgba(19, 31, 64, .85));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow)
+    }
+
+    .panel h3 {
+      margin: 0 0 6px;
+      font-size: 16px
+    }
+
+    .panel p {
+      margin: 0;
+      color: #c8d4ff
+    }
+
+    /* Table */
+    .table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 13px;
+      color: #e8efff
+    }
+
+    .table thead th {
+      background: #13224a;
+      color: #e6edff
+    }
+
+    .table th,
+    .table td {
+      border-bottom: 1px solid var(--line);
+      padding: 12px 10px;
+      text-align: left
+    }
+
+    .table tr:first-child th:first-child {
+      border-top-left-radius: 10px
+    }
+
+    .table tr:first-child th:last-child {
+      border-top-right-radius: 10px
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--line);
+      background: #0d152b;
+      color: #9fb0d9;
+      padding: 40px 0 64px
+    }
+
+    .footgrid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 22px
+    }
+
+    footer h4 {
+      color: #e6edff;
+      margin: 0 0 8px
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0
+    }
+
+    footer li {
+      margin: 6px 0
+    }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+      .grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .footgrid {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav ul {
+        display: none
+      }
+
+      .grid {
+        grid-template-columns: 1fr
+      }
+
+      .footgrid {
+        grid-template-columns: 1fr
+      }
+
+      .hero h1 {
+        font-size: 34px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="band" aria-hidden="true"></div>
+  <header class="nav">
+    <div class="wrap nav-row">
+      <div class="brand">
+        <div class="mark">◆</div> Slopify <span class="tagline">Enterprise Suite</span>
+      </div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#principles">Principles</a></li>
+          <li><a href="#status">Status</a></li>
+          <li><a href="https://discord.gg/WYmXc7Y8sF" target="_blank" rel="noopener">Community</a></li>
+          <li><a class="cta" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="overview">
+      <div class="wrap">
+        <span class="eyebrow">SimuCorps</span>
+        <h1>Enterprise‑grade vibes. Clean‑slate reality.</h1>
+        <p class="sub">Slopify Enterprise Suite is being built from the ground up by <a href="https://simucorps.org"
+            target="_blank" rel="noopener">SimuCorps</a>. Formal standards. Predictable controls. JVM core. No feature
+          is claimed until it ships.</p>
+        <div class="badges">
+          <span class="badge"><span class="dot"></span> Pre‑Alpha</span>
+          <a class="badge" href="https://github.com/SimuCorps/Slopify" target="_blank" rel="noopener">GitHub:
+            SimuCorps/Slopify</a>
+          <a class="badge" href="https://discord.gg/WYmXc7Y8sF" target="_blank" rel="noopener">Join the SimuCorps
+            Discord</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="principles">
+      <div class="wrap">
+        <h2>Design principles</h2>
+        <p class="lead">Formal, modern, and intentionally boring where it counts.</p>
+        <div class="grid">
+          <div class="panel">
+            <h3>Clarity over claims</h3>
+            <p>No speculative features. Roadmap stays labeled until shipped.</p>
+          </div>
+          <div class="panel">
+            <h3>Standards first</h3>
+            <p>Conventional practices and government‑style documentation formats.</p>
+          </div>
+          <div class="panel">
+            <h3>Operational discipline</h3>
+            <p>Controls will be documented when they actually exist. Until then: placeholders.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="status">
+      <div class="wrap">
+        <h2>Current status</h2>
+        <table class="table panel" aria-label="Project status">
+          <thead>
+            <tr>
+              <th>Area</th>
+              <th>State</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Codebase</td>
+              <td>Pre‑Alpha</td>
+              <td>Fresh JVM rebuild.</td>
+            </tr>
+            <tr>
+              <td>Docs</td>
+              <td>Planned</td>
+              <td>Initial README & architecture notes pending.</td>
+            </tr>
+            <tr>
+              <td>Releases</td>
+              <td>Not yet</td>
+              <td>Track progress on GitHub.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="panel" style="margin-top:16px">
+          <h3>Repository</h3>
+          <p>Public, work‑in‑progress. Issues & discussions welcome.</p>
+          <p><a href="https://github.com/SimuCorps/Slopify" target="_blank"
+              rel="noopener">github.com/SimuCorps/Slopify</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footgrid">
+      <div>
+        <h4>Slopify Enterprise Suite</h4>
+        <p>Built by SimuCorps. Formal where needed, modern everywhere else.</p>
+        <p style="margin-top:8px; font-size:12px">© 2025 SimuCorps. All rights reserved.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#principles">Principles</a></li>
+          <li><a href="#status">Status</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://github.com/SimuCorps/Slopify" target="_blank" rel="noopener">GitHub Repository</a></li>
+          <li><a href="https://github.com/SimuCorps/Slopify/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://discord.gg/WYmXc7Y8sF" target="_blank" rel="noopener">SimuCorps Discord</a></li>
+        </ul>
+      </div>
+      <div id="contact">
+        <h4>Contact</h4>
+        <ul>
+          <li>Email: <a href="mailto:contact@simucorps.org">contact@simucorps.org</a></li>
+          <li>Org: <a href="https://simucorps.org" target="_blank" rel="noopener">SimuCorps</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
