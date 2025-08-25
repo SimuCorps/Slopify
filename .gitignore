@@ -1,2 +1,6 @@
 .vscode
 .idea
+*.class
+*.log
+*.iml
+out
