@@ -2,7 +2,7 @@ package org.simucorps.slopify;
 
 import javax.swing.*;
 
-public class HelloWorld {
+public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Slopify - Hello World");
