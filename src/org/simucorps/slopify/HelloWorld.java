@@ -1,3 +1,5 @@
+package org.simucorps.slopify;
+
 import javax.swing.*;
 
 public class HelloWorld {
