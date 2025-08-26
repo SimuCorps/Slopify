@@ -1,4 +1,4 @@
-package org.simucorps.slopify;
+package org.simucorps.slopify.client;
 
 import javax.swing.*;
 
