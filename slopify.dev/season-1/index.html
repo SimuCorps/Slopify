@@ -53,8 +53,9 @@
       </div>
     </div>
   </footer>
+  <button id="sloop-trigger" class="sloop-trigger" aria-label="Sloopify" title="Sloopify" color=White>F</button>
+
   <style>
-    /* Yoshi rain styles */
     .yoshi-drop {
       position: fixed;
       top: -10vh;
@@ -70,12 +71,60 @@
         opacity: 0.9;
       }
     }
+    .sloop-trigger {
+      position: fixed;
+      right: 12px;
+      bottom: 12px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg,#fff,#ffd1f7);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+      opacity: 0.08;
+      transform: scale(0.9);
+      transition: opacity .18s ease, transform .18s ease, box-shadow .18s ease;
+      z-index: 10000;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      line-height: 1;
+    }
+    .sloop-trigger:hover,
+    .sloop-trigger:focus {
+      opacity: 1;
+      transform: scale(1.06);
+      outline: none;
+    }
+
+    @keyframes sloop-hue {
+      from { filter: hue-rotate(0deg) saturate(1.6); }
+      to   { filter: hue-rotate(360deg) saturate(1.6); }
+    }
+
+    @keyframes sloop-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    html.sloop {
+      animation: sloop-hue 6s linear infinite;
+    }
+
+    html.sloop *, html.sloop *::before, html.sloop *::after {
+      animation: sloop-spin var(--sloop-spin-duration, 4s) linear infinite;
+      transform-origin: center center;
+    }
   </style>
 
   <script>
     (function () {
-      const audio = new Audio('assets/boom.mp3');
-      audio.preload = 'auto';
+      const boom = new Audio('assets/boom.mp3');
+      boom.preload = 'auto';
+
+      const nyan = new Audio('assets/nyan.mp3');
+      nyan.preload = 'auto';
+      nyan.loop = true;
 
       function spawnYoshi(count = 12) {
         for (let i = 0; i < count; i++) {
@@ -83,14 +132,10 @@
           img.src = 'assets/Yoshi.webp';
           img.className = 'yoshi-drop';
 
-          const size = Math.floor(Math.random() * 48) + 48; // 48-96px
+          const size = Math.floor(Math.random() * 48) + 48;
           img.style.width = size + 'px';
-
-          // horizontal position
-          const left = Math.random() * 92; // vw
+          const left = Math.random() * 92; // gay
           img.style.left = left + 'vw';
-
-          // random opacity and spin/speed
           img.style.opacity = (Math.random() * 0.5 + 0.5).toFixed(2);
           img.style.animationName = 'yoshi-fall';
           img.style.animationTimingFunction = 'linear';
@@ -105,13 +150,31 @@
 
       window.addEventListener('keydown', function (e) {
         try {
-          audio.currentTime = 0;
-          audio.play();
+          boom.currentTime = 0;
+          boom.play();
         } catch (err) {
-          // play may fail if browser blocks autoplay; ignore
+          
         }
         spawnYoshi(12);
       });
+
+      const trigger = document.getElementById('sloop-trigger');
+      if (trigger) {
+        trigger.addEventListener('click', function () {
+          const active = document.documentElement.classList.toggle('sloop');
+          try {
+            if (active) {
+              nyan.currentTime = 0;
+              nyan.play();
+            } else {
+              nyan.pause();
+              nyan.currentTime = 0;
+            }
+          } catch (err) {
+           
+          }
+        });
+      }
     })();
   </script>
 </body>
