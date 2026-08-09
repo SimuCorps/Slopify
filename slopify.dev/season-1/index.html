@@ -53,6 +53,67 @@
       </div>
     </div>
   </footer>
+  <style>
+    /* Yoshi rain styles */
+    .yoshi-drop {
+      position: fixed;
+      top: -10vh;
+      pointer-events: none;
+      z-index: 9999;
+      will-change: transform, opacity;
+      filter: drop-shadow(0 6px 6px rgba(0,0,0,0.25));
+    }
+
+    @keyframes yoshi-fall {
+      to {
+        transform: translateY(120vh) rotate(360deg);
+        opacity: 0.9;
+      }
+    }
+  </style>
+
+  <script>
+    (function () {
+      const audio = new Audio('assets/boom.mp3');
+      audio.preload = 'auto';
+
+      function spawnYoshi(count = 12) {
+        for (let i = 0; i < count; i++) {
+          const img = document.createElement('img');
+          img.src = 'assets/Yoshi.webp';
+          img.className = 'yoshi-drop';
+
+          const size = Math.floor(Math.random() * 48) + 48; // 48-96px
+          img.style.width = size + 'px';
+
+          // horizontal position
+          const left = Math.random() * 92; // vw
+          img.style.left = left + 'vw';
+
+          // random opacity and spin/speed
+          img.style.opacity = (Math.random() * 0.5 + 0.5).toFixed(2);
+          img.style.animationName = 'yoshi-fall';
+          img.style.animationTimingFunction = 'linear';
+          img.style.animationDuration = (Math.random() * 1.8 + 1.2).toFixed(2) + 's';
+          img.style.animationDelay = (Math.random() * 0.4).toFixed(2) + 's';
+
+          document.body.appendChild(img);
+
+          img.addEventListener('animationend', () => img.remove(), { once: true });
+        }
+      }
+
+      window.addEventListener('keydown', function (e) {
+        try {
+          audio.currentTime = 0;
+          audio.play();
+        } catch (err) {
+          // play may fail if browser blocks autoplay; ignore
+        }
+        spawnYoshi(12);
+      });
+    })();
+  </script>
 </body>
 
 </html>
