@@ -4,482 +4,269 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Slopify — SimuCorps</title>
+  <title>Slopify — the ideomotor effect of software</title>
   <meta name="description"
-    content="Slopify Enterprise Suite — clean‑slate, enterprise‑style software under active development by SimuCorps." />
-  <style>
-    /* --- modern corporate / gov / military aesthetic --- */
-    :root {
-      /* Ink & Surfaces */
-      --ink: #0b132b;
-      /* deep navy */
-      --ink-2: #1c2541;
-      /* navy */
-      --ink-dim: #5b6785;
-      /* muted slate */
-      --bg: #0a0f1e;
-      /* canvas dark */
-      --bg-soft: #0d1426;
-      /* soft dark */
-      --panel: #0f1a33;
-      /* card */
-      --panel-2: #101b36;
-      /* alt card */
-      --line: #1e2b4c;
-      /* border */
-      --line-2: #23345a;
-      /* Brand */
-      --brand: #2d6df6;
-      /* modern blue */
-      --brand-2: #1d4fd7;
-      /* darker brand */
-      --accent: #d7b253;
-      /* ceremonial gold */
-      --accent-2: #b48a2d;
-      /* deep gold */
-      --ok: #2fbf71;
-      --warn: #f2b84b;
-      --bad: #e35d5b;
-      /* Effects */
-      --radius: 14px;
-      --radius-sm: 10px;
-      --shadow: 0 30px 60px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .02);
-      --grid: radial-gradient(circle at 1px 1px, rgba(59, 91, 177, .18) 1px, transparent 0) 0 0/22px 22px;
-      --noise: linear-gradient(0deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .03)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="120" height="120" filter="url(%23n)" opacity="0.05"/></svg>');
-    }
+    content="Slopify is a seasonal build-anything repo. Any language, any framework, any level of seriousness. Ship software for software's sake. Contributions happen on GitCamp." />
+  <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0d0f0d" media="(prefers-color-scheme: dark)" />
+  <link rel="stylesheet" href="styles.css" />
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box
-    }
-
-    html,
-    body {
-      height: 100%
-    }
-
-    body {
-      margin: 0;
-      font: 14px/1.65 Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: #dfe7ff;
-      background:
-        radial-gradient(800px 300px at 50% -50px, rgba(45, 109, 246, .18), transparent 60%),
-        var(--bg);
-    }
-
-    a {
-      color: #aecdff;
-      text-decoration: none
-    }
-
-    a:hover {
-      text-decoration: underline
-    }
-
-    .wrap {
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 0 24px
-    }
-
-    /* Service band */
-    .band {
-      height: 6px;
-      background: linear-gradient(90deg, var(--accent-2), var(--accent), var(--brand));
-      border-bottom: 1px solid rgba(0, 0, 0, .35)
-    }
-
-    /* Top Nav */
-    header.nav {
-      position: sticky;
-      top: 0;
-      background: rgba(12, 19, 43, .75);
-      backdrop-filter: saturate(140%) blur(10px);
-      border-bottom: 1px solid var(--line);
-      z-index: 40
-    }
-
-    .nav-row {
-      height: 66px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      letter-spacing: .2px
-    }
-
-    .mark {
-      width: 22px;
-      height: 22px;
-      border-radius: 6px;
-      background: linear-gradient(135deg, var(--brand-2), var(--brand));
-      display: grid;
-      place-items: center;
-      color: #fff;
-      font-size: 12px;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25)
-    }
-
-    .tagline {
-      font-weight: 600;
-      color: #9fb0d9;
-      font-size: 12px
-    }
-
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 26px
-    }
-
-    nav a {
-      color: #dfe7ff
-    }
-
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--line-2);
-      color: #eaf1ff;
-      background: linear-gradient(180deg, #1b2b59, #142247);
-      text-decoration: none
-    }
-
-    .cta:hover {
-      filter: brightness(1.04)
-    }
-
-    /* Hero */
-    .hero {
-      position: relative;
-      padding: 96px 0 72px;
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(31, 48, 97, .65) 0%, rgba(14, 22, 45, .8) 65%, rgba(14, 22, 45, 1) 100%), var(--bg-soft)
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      mask: linear-gradient(#000, transparent 70%);
-      background: var(--grid), var(--noise);
-      opacity: .6;
-      pointer-events: none
-    }
-
-    .eyebrow {
-      color: #9fb0d9;
-      text-transform: uppercase;
-      letter-spacing: .22em;
-      font-size: 12px
-    }
-
-    .hero h1 {
-      font-size: 44px;
-      line-height: 1.12;
-      margin: 12px 0 12px
-    }
-
-    .sub {
-      color: #b7c4ea;
-      max-width: 920px;
-      margin: 0 0 16px
-    }
-
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-size: 12px;
-      background: rgba(16, 26, 51, .6)
-    }
-
-    .badge .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent)
-    }
-
-    /* Sections */
-    .section {
-      padding: 60px 0
-    }
-
-    .section h2 {
-      font-size: 24px;
-      margin: 0 0 12px;
-      letter-spacing: .2px
-    }
-
-    .lead {
-      color: #a6b4de
-    }
-
-    /* Grid & Cards */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px
-    }
-
-    .panel {
-      background: linear-gradient(180deg, rgba(28, 44, 90, .55), rgba(19, 31, 64, .85));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: var(--shadow)
-    }
-
-    .panel h3 {
-      margin: 0 0 6px;
-      font-size: 16px
-    }
-
-    .panel p {
-      margin: 0;
-      color: #c8d4ff
-    }
-
-    /* Table */
-    .table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      font-size: 13px;
-      color: #e8efff
-    }
-
-    .table thead th {
-      background: #13224a;
-      color: #e6edff
-    }
-
-    .table th,
-    .table td {
-      border-bottom: 1px solid var(--line);
-      padding: 12px 10px;
-      text-align: left
-    }
-
-    .table tr:first-child th:first-child {
-      border-top-left-radius: 10px
-    }
-
-    .table tr:first-child th:last-child {
-      border-top-right-radius: 10px
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--line);
-      background: #0d152b;
-      color: #9fb0d9;
-      padding: 40px 0 64px
-    }
-
-    .footgrid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 22px
-    }
-
-    footer h4 {
-      color: #e6edff;
-      margin: 0 0 8px
-    }
-
-    footer ul {
-      list-style: none;
-      padding: 0;
-      margin: 0
-    }
-
-    footer li {
-      margin: 6px 0
-    }
-
-    /* Responsive */
-    @media (max-width: 1000px) {
-      .grid {
-        grid-template-columns: 1fr 1fr
-      }
-
-      .footgrid {
-        grid-template-columns: 1fr 1fr
-      }
-    }
-
-    @media (max-width: 640px) {
-      nav ul {
-        display: none
-      }
-
-      .grid {
-        grid-template-columns: 1fr
-      }
-
-      .footgrid {
-        grid-template-columns: 1fr
-      }
-
-      .hero h1 {
-        font-size: 34px
-      }
-    }
-  </style>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Slopify — the ideomotor effect of software" />
+  <meta property="og:description"
+    content="A seasonal build-anything repo. Any language, any framework, any level of seriousness. Ship slop. Get paid." />
+  <meta property="og:url" content="https://slopify.dev" />
+  <meta name="twitter:card" content="summary_large_image" />
 </head>
 
 <body>
+  <a class="skip" href="#main">Skip to content</a>
   <div class="band" aria-hidden="true"></div>
-  <header class="nav">
-    <div class="wrap nav-row">
-      <div class="brand">
-        <div class="mark">◆</div> Slopify <span class="tagline">Enterprise Suite</span>
-      </div>
+
+  <header class="masthead">
+    <div class="wrap">
+      <a class="wordmark" href="/">Slopify <span class="season">S1</span></a>
       <nav aria-label="Primary">
-        <ul>
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#principles">Principles</a></li>
-          <li><a href="#status">Status</a></li>
-          <li><a href="https://discord.gg/WYmXc7Y8sF" target="_blank" rel="noopener">Community</a></li>
-          <li><a class="cta" href="#contact">Contact</a></li>
-        </ul>
+        <a class="hide-sm" href="#what">What</a>
+        <a class="hide-sm" href="#how">How</a>
+        <a class="hide-sm" href="#rules">Rules</a>
+        <a class="hide-sm" href="#bounties">Bounties</a>
+        <a class="btn btn-primary btn-sm" href="#how">Participate</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="hero" id="overview">
+  <main id="main">
+
+    <section class="hero">
       <div class="wrap">
-        <span class="eyebrow">SimuCorps</span>
-        <h1>Enterprise‑grade vibes. Clean‑slate reality.</h1>
-        <p class="sub">Slopify Enterprise Suite is being built from the ground up by <a href="https://simucorps.org"
-            target="_blank" rel="noopener">SimuCorps</a>. Formal standards. Predictable controls. JVM core. No feature
-          is claimed until it ships.</p>
-        <div class="badges">
-          <span class="badge"><span class="dot"></span> Pre‑Alpha</span>
-          <a class="badge" href="https://github.com/SimuCorps/Slopify" target="_blank" rel="noopener">GitHub:
-            SimuCorps/Slopify</a>
-          <a class="badge" href="https://discord.gg/WYmXc7Y8sF" target="_blank" rel="noopener">Join the SimuCorps
-            Discord</a>
+        <p class="status"><span class="dot" aria-hidden="true"></span> Season 1 — open for contributions</p>
+        <h1>Ship software for software&rsquo;s sake.</h1>
+        <p class="lede">Slopify is one repository where <strong>anybody can build any feature in any
+            language</strong>, no holds barred. There is no roadmap, no architecture review, and no definition of done.
+          Whatever gets built, gets built.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#how">Participate &rarr;</a>
+          <a class="btn btn-ghost" href="https://gitcamp.net/SimuCorps/Slopify" rel="noopener">Browse the repo</a>
+        </div>
+        <p class="fineprint">Contributions are accepted on GitCamp only.</p>
+      </div>
+    </section>
+
+    <section class="section" id="what">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">01 &mdash; What this is</span>
+          <h2>The ideomotor effect of software</h2>
+        </div>
+        <div class="prose">
+          <p>Slopify started as an experiment: a single repo with the rules taken off. Anyone could add anything, in
+            anything. Predictably, the result was a <strong>massive shitshow</strong> &mdash; which was the point. Nobody
+            steered it, and it went somewhere anyway.</p>
+          <p>That is the whole thesis. Like a Ouija board planchette, or like Reddit&rsquo;s r/place, the thing moves
+            because a lot of small unconscious pushes add up. Slopify is that, for code.</p>
+          <p>The goal is not to make <strong>good</strong> software. The goal is not to make <strong>bad</strong>
+            software. The goal is to <strong>make software</strong>, continuously, in public, and see what the pile
+            becomes. Hence: slop.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>527</b><span>Stars, era one</span></div>
+          <div class="stat"><b>121</b><span>Forks</span></div>
+          <div class="stat"><b>3</b><span>Watchers</span></div>
+          <div class="stat"><b>0</b><span>Acceptable features</span></div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="principles">
+    <section class="section" id="how">
       <div class="wrap">
-        <h2>Design principles</h2>
-        <p class="lead">Formal, modern, and intentionally boring where it counts.</p>
-        <div class="grid">
-          <div class="panel">
-            <h3>Clarity over claims</h3>
-            <p>No speculative features. Roadmap stays labeled until shipped.</p>
+        <div class="section-head">
+          <span class="kicker">02 &mdash; How to participate</span>
+          <h2>Six steps, one of which is thinking</h2>
+          <p>Everything happens on <a href="https://gitcamp.net" rel="noopener">GitCamp</a>, the open-source git host
+            built by SimuCorps. It is free, it takes a minute, and it is the only way in.</p>
+        </div>
+        <ol class="flow">
+          <li>
+            <h3>Make a GitCamp account</h3>
+            <p>Head to <a href="https://gitcamp.net" rel="noopener">gitcamp.net</a> and sign up. GitCamp is AGPL-3.0 and
+              self-hostable &mdash; leaving is a <code>git clone</code>, not a support ticket.</p>
+          </li>
+          <li>
+            <h3>Fork Slopify</h3>
+            <p>Fork <a href="https://gitcamp.net/SimuCorps/Slopify" rel="noopener">SimuCorps/Slopify</a>, then clone your
+              fork locally.</p>
+          </li>
+          <li>
+            <h3>Build something stupid</h3>
+            <p>Put it in <span class="path">slopify.dev/season-1/your-thing/</span>. Any language, any framework, any
+              size. One file or forty.</p>
+          </li>
+          <li>
+            <h3>Submit the contribution</h3>
+            <p>Open a pull request from your fork back into <code>main</code> on GitCamp. Describe it or don&rsquo;t.</p>
+          </li>
+          <li>
+            <h3>Watch it land</h3>
+            <p>Merged contributions ship to this site under the current season. Your slop is now permanent, public
+              record.</p>
+          </li>
+          <li>
+            <h3>Come back and ship more</h3>
+            <p>Read what everyone else built. Get worse ideas. Repeat until the season closes.</p>
+          </li>
+        </ol>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://gitcamp.net/register" rel="noopener">Create a GitCamp account &rarr;</a>
+          <a class="btn btn-ghost" href="season-1/">See Season 1 contributions</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="rules">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">03 &mdash; The rules</span>
+          <h2>There are two of them, really</h2>
+          <p>Ship it through GitCamp, and don&rsquo;t make it a crime. Everything past that is fair game.</p>
+        </div>
+        <div class="columns">
+          <div class="card allow">
+            <h3>Allowed</h3>
+            <ul>
+              <li>Any programming language, including ones you invented</li>
+              <li>Any framework, runtime, or build system</li>
+              <li>Any feature, however unrelated to the last one</li>
+              <li>Any level of seriousness &mdash; production-grade or two lines of nonsense</li>
+              <li>AI-generated code, wholesale. It&rsquo;s called Slopify</li>
+              <li>Breaking things other people built, if it&rsquo;s funny</li>
+              <li>Contributing every single day</li>
+            </ul>
           </div>
-          <div class="panel">
-            <h3>Standards first</h3>
-            <p>Conventional practices and government‑style documentation formats.</p>
-          </div>
-          <div class="panel">
-            <h3>Operational discipline</h3>
-            <p>Controls will be documented when they actually exist. Until then: placeholders.</p>
+          <div class="card deny">
+            <h3>Not allowed</h3>
+            <ul>
+              <li>Anything illegal</li>
+              <li>Malware, miners, or exfiltration of any kind</li>
+              <li>Harassment, or targeting real people</li>
+              <li>Secrets, credentials, or other people&rsquo;s private data</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="status">
+    <section class="section" id="seasons">
       <div class="wrap">
-        <h2>Current status</h2>
-        <table class="table panel" aria-label="Project status">
-          <thead>
-            <tr>
-              <th>Area</th>
-              <th>State</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Codebase</td>
-              <td>Pre‑Alpha</td>
-              <td>Fresh JVM rebuild.</td>
-            </tr>
-            <tr>
-              <td>Docs</td>
-              <td>Planned</td>
-              <td>Initial README & architecture notes pending.</td>
-            </tr>
-            <tr>
-              <td>Releases</td>
-              <td>Not yet</td>
-              <td>Track progress on GitHub.</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="panel" style="margin-top:16px">
-          <h3>Repository</h3>
-          <p>Public, work‑in‑progress. Issues & discussions welcome.</p>
-          <p><a href="https://github.com/SimuCorps/Slopify" target="_blank"
-              rel="noopener">github.com/SimuCorps/Slopify</a></p>
+        <div class="section-head">
+          <span class="kicker">04 &mdash; Seasons</span>
+          <h2>Slop ships in batches</h2>
+          <p>Each season is its own subdirectory and its own clean slate. When a season closes, it freezes as an
+            artifact of whatever the crowd was collectively thinking that round.</p>
         </div>
+        <div class="season-card">
+          <div>
+            <h3>Season 1</h3>
+            <p>The first batch under the new rules, and the first one hosted entirely on GitCamp. Everything merged this
+              season lands in <span class="path">slopify.dev/season-1/</span>.</p>
+            <div class="actions">
+              <a class="btn btn-primary btn-sm" href="season-1/">Browse Season 1</a>
+              <a class="btn btn-ghost btn-sm" href="https://gitcamp.net/SimuCorps/Slopify" rel="noopener">Fork on
+                GitCamp</a>
+            </div>
+          </div>
+          <dl class="meta">
+            <div>
+              <dt>Status</dt>
+              <dd>Open</dd>
+            </div>
+            <div>
+              <dt>Host</dt>
+              <dd>GitCamp</dd>
+            </div>
+            <div>
+              <dt>Directory</dt>
+              <dd>season-1/</dd>
+            </div>
+            <div>
+              <dt>Closes</dt>
+              <dd>TBA</dd>
+            </div>
+          </dl>
+        </div>
+        <p class="upcoming">Season 2 opens when Season 1 collapses under its own weight.</p>
       </div>
     </section>
+
+    <section class="section" id="bounties">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">05 &mdash; Bounties</span>
+          <h2>We pay you, not the other way around</h2>
+          <p>Slopify is funded by <a href="https://simucorps.org" rel="noopener">SimuCorps</a>. There is nothing to buy
+            here and no tier to subscribe to. Money moves outward: we put cash behind contributions we like.</p>
+        </div>
+        <div class="payouts">
+          <div class="payout">
+            <b>Season prizes</b>
+            <p>Cash awarded at the close of each season to the contributions that <strong>best embody the spirit of the thing</strong>.</p>
+          </div>
+          <div class="payout">
+            <b>Spot bounties</b>
+            <p>Posted mid-season for specific dumb ideas we want to see exist. First working submission
+              <strong>takes the payout</strong>.</p>
+          </div>
+          <div class="payout">
+            <b>Wildcard</b>
+            <p>Discretionary payouts for anything that makes the team stop and stare. <strong>No criteria, no
+                appeals.</strong></p>
+          </div>
+        </div>
+        <p class="callout"><strong>How to be eligible:</strong> have a merged contribution in the current season on
+          GitCamp. That&rsquo;s the entire qualification process. Payout details and amounts are posted in the
+          <a href="https://discord.gg/z3kjUmCCmv" rel="noopener">Discord</a>.
+        </p>
+      </div>
+    </section>
+
   </main>
 
   <footer>
-    <div class="wrap footgrid">
-      <div>
-        <h4>Slopify Enterprise Suite</h4>
-        <p>Built by SimuCorps. Formal where needed, modern everywhere else.</p>
-        <p style="margin-top:8px; font-size:12px">© 2025 SimuCorps. All rights reserved.</p>
+    <div class="wrap">
+      <div class="footgrid">
+        <div>
+          <h4>Slopify</h4>
+          <p style="margin:0; max-width:36ch">The ideomotor effect of software. A SimuCorps project, hosted on
+            GitCamp.</p>
+        </div>
+        <div>
+          <h4>Build</h4>
+          <ul>
+            <li><a href="https://gitcamp.net/SimuCorps/Slopify" rel="noopener">Repository</a></li>
+            <li><a href="https://gitcamp.net" rel="noopener">Create an account</a></li>
+            <li><a href="season-1/">Season 1</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Read</h4>
+          <ul>
+            <li><a href="#rules">Rules</a></li>
+            <li><a href="#how">How to contribute</a></li>
+            <li><a href="#bounties">Bounties</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Elsewhere</h4>
+          <ul>
+            <li><a href="https://gitcamp.net" rel="noopener">GitCamp</a></li>
+            <li><a href="https://discord.gg/z3kjUmCCmv" rel="noopener">Discord</a></li>
+            <li><a href="https://simucorps.org" rel="noopener">SimuCorps</a></li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <h4>Company</h4>
-        <ul>
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#principles">Principles</a></li>
-          <li><a href="#status">Status</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Resources</h4>
-        <ul>
-          <li><a href="https://github.com/SimuCorps/Slopify" target="_blank" rel="noopener">GitHub Repository</a></li>
-          <li><a href="https://github.com/SimuCorps/Slopify/issues" target="_blank" rel="noopener">Issues</a></li>
-          <li><a href="https://discord.gg/WYmXc7Y8sF" target="_blank" rel="noopener">SimuCorps Discord</a></li>
-        </ul>
-      </div>
-      <div id="contact">
-        <h4>Contact</h4>
-        <ul>
-          <li>Email: <a href="mailto:contact@simucorps.org">contact@simucorps.org</a></li>
-          <li>Org: <a href="https://simucorps.org" target="_blank" rel="noopener">SimuCorps</a></li>
-        </ul>
+      <div class="colophon">
+        <span>&copy; 2026 SimuCorps</span>
+        <span>Contributions via GitCamp only</span>
       </div>
     </div>
   </footer>
