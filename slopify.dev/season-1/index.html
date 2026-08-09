@@ -12,6 +12,7 @@
 </head>
 
 <body>
+  <div id="sloop-background" class="sloop-background" aria-hidden="true"></div>
   <a class="skip" href="#main">Skip to content</a>
   <div class="band" aria-hidden="true"></div>
 
@@ -55,6 +56,18 @@
   </footer>
   <button id="sloop-trigger" class="sloop-trigger" aria-label="Sloopify" title="Sloopify" color=White>F</button>
 
+  <marquee class="sloop-marquee" behavior="alternate" scrollamount="6" aria-hidden="true">&#128293; MORE SLOP THIS WAY &#128293; CLICK EVERYTHING &#128293;</marquee>
+
+  <div class="sloop-menu" id="sloop-menu" data-open="false">
+    <button id="sloop-menu-trigger" class="sloop-menu-trigger" aria-haspopup="true" aria-expanded="false"
+      aria-controls="sloop-menu-panel" title="More stupidity">
+      <span class="sloop-menu-badge" aria-hidden="true">&#128293;NEW!!1</span>
+      <span class="sloop-menu-trigger-label">MORE SLOP</span>
+      <span class="sloop-menu-trigger-icon" aria-hidden="true">&#9660;</span>
+    </button>
+    <ul class="sloop-menu-panel" id="sloop-menu-panel" role="menu" hidden></ul>
+  </div>
+
   <style>
     .yoshi-drop {
       position: fixed;
@@ -71,31 +84,320 @@
         opacity: 0.9;
       }
     }
+    .sloop-marquee {
+      position: fixed;
+      right: 12px;
+      bottom: 160px;
+      width: 190px;
+      z-index: 10000;
+      background: #000;
+      border: 3px dashed #ffd400;
+      border-radius: 6px;
+      padding: 3px 0;
+      font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+      font-weight: 900;
+      font-size: 0.75rem;
+      animation: sloop-text-rainbow 1s linear infinite;
+    }
+
+    @keyframes sloop-text-rainbow {
+      0% { color: #ff2ec4; }
+      25% { color: #ffd400; }
+      50% { color: #00e5ff; }
+      75% { color: #7c4dff; }
+      100% { color: #ff2ec4; }
+    }
+
+    .sloop-background {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-size: 400% 400%;
+      opacity: 0.4;
+    }
+
+    body,
+    .masthead,
+    .hero,
+    footer {
+      background: transparent !important;
+      backdrop-filter: none !important;
+    }
+
+    .sloop-bg-lava {
+      background-image: radial-gradient(circle at 20% 30%, #ff2ec4aa, transparent 40%),
+        radial-gradient(circle at 80% 70%, #00e5ffaa, transparent 40%),
+        radial-gradient(circle at 50% 50%, #ffd400aa, transparent 45%);
+      animation: sloop-bg-drift 8s ease-in-out infinite;
+    }
+
+    .sloop-bg-spin {
+      background-image: conic-gradient(from 0deg, #ff2ec4, #ffd400, #00e5ff, #7c4dff, #ff2ec4);
+      animation: sloop-bg-rotate 6s linear infinite;
+    }
+
+    .sloop-bg-stripes {
+      background-image: repeating-linear-gradient(45deg, #ff2ec455 0 20px, #00e5ff55 20px 40px);
+      animation: sloop-bg-shift-pos 3s linear infinite;
+    }
+
+    .sloop-bg-pulse {
+      background-image: radial-gradient(circle, #7c4dffcc, transparent 60%);
+      animation: sloop-bg-pulse-scale 2s ease-in-out infinite;
+    }
+
+    @keyframes sloop-bg-drift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes sloop-bg-rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes sloop-bg-shift-pos {
+      0% { background-position: 0 0; }
+      100% { background-position: 200px 0; }
+    }
+
+    @keyframes sloop-bg-pulse-scale {
+      0%, 100% { transform: scale(1); opacity: 0.3; }
+      50% { transform: scale(1.5); opacity: 0.6; }
+    }
+
     .sloop-trigger {
       position: fixed;
       right: 12px;
       bottom: 12px;
-      width: 48px;
-      height: 48px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
-      border: none;
-      background: linear-gradient(135deg,#fff,#ffd1f7);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-      opacity: 0.08;
-      transform: scale(0.9);
-      transition: opacity .18s ease, transform .18s ease, box-shadow .18s ease;
+      border: 3px solid #fff;
+      background: linear-gradient(135deg, #ff2ec4, #ffd400, #00e5ff, #7c4dff);
+      background-size: 300% 300%;
+      box-shadow: 0 0 24px 6px rgba(255, 46, 196, 0.55), 0 6px 18px rgba(0, 0, 0, 0.35);
+      opacity: 1;
       z-index: 10000;
       cursor: pointer;
       display: grid;
       place-items: center;
-      font-size: 20px;
+      font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.5), 0 0 2px #000;
       line-height: 1;
+      animation: sloop-bg-shift 1.2s ease infinite, sloop-bounce 0.6s ease-in-out infinite;
+      transition: box-shadow .18s ease;
     }
+
+    .sloop-trigger::before,
+    .sloop-trigger::after {
+      content: '\2728';
+      position: absolute;
+      font-size: 16px;
+      animation: sloop-twinkle 0.7s ease-in-out infinite;
+    }
+
+    .sloop-trigger::before { top: -12px; left: -12px; animation-delay: 0s; }
+    .sloop-trigger::after { bottom: -12px; right: -12px; animation-delay: 0.35s; }
+
+    @keyframes sloop-twinkle {
+      0%, 100% { opacity: 0.15; transform: scale(0.5) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.4) rotate(30deg); }
+    }
+
     .sloop-trigger:hover,
     .sloop-trigger:focus {
-      opacity: 1;
-      transform: scale(1.06);
+      box-shadow: 0 0 36px 10px rgba(255, 46, 196, 0.8), 0 6px 18px rgba(0, 0, 0, 0.4);
       outline: none;
+    }
+
+    @keyframes sloop-bg-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes sloop-bounce {
+      0%, 100% { transform: translate(0, 0) rotate(-6deg); }
+      25% { transform: translate(3px, -14px) rotate(6deg); }
+      50% { transform: translate(-3px, -4px) rotate(-4deg); }
+      75% { transform: translate(3px, -10px) rotate(5deg); }
+    }
+
+    .sloop-menu {
+      position: fixed;
+      right: 12px;
+      bottom: 88px;
+      z-index: 10000;
+    }
+
+    .sloop-menu-trigger {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1.1rem;
+      border-radius: 999px;
+      border: 3px solid #fff;
+      background: linear-gradient(135deg, #00e5ff, #7c4dff, #ff2ec4, #ffd400);
+      background-size: 300% 300%;
+      color: #fff;
+      font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.5), 0 0 2px #000;
+      box-shadow: 0 0 22px 5px rgba(124, 77, 255, 0.55), 0 6px 18px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      white-space: nowrap;
+      animation: sloop-bg-shift 1.1s ease infinite, sloop-wiggle 0.7s ease-in-out infinite;
+    }
+
+    .sloop-menu-trigger::before,
+    .sloop-menu-trigger::after {
+      content: '\2728';
+      position: absolute;
+      font-size: 14px;
+      animation: sloop-twinkle 0.6s ease-in-out infinite;
+    }
+
+    .sloop-menu-trigger::before { top: -10px; left: -6px; animation-delay: 0.15s; }
+    .sloop-menu-trigger::after { bottom: -10px; right: -6px; animation-delay: 0.5s; }
+
+    .sloop-menu-trigger-icon {
+      display: inline-block;
+      font-size: 0.7rem;
+      transition: transform .18s ease;
+    }
+
+    .sloop-menu[data-open="true"] .sloop-menu-trigger-icon {
+      transform: rotate(180deg);
+    }
+
+    .sloop-menu-trigger:hover,
+    .sloop-menu-trigger:focus,
+    .sloop-menu[data-open="true"] .sloop-menu-trigger {
+      box-shadow: 0 0 34px 9px rgba(124, 77, 255, 0.8), 0 6px 18px rgba(0, 0, 0, 0.4);
+      outline: none;
+    }
+
+    @keyframes sloop-wiggle {
+      0%, 100% { transform: rotate(-7deg) scale(1); }
+      50% { transform: rotate(7deg) scale(1.1); }
+    }
+
+    .sloop-menu-badge {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      background: #ff2ec4;
+      color: #fff;
+      font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+      font-size: 0.625rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      padding: 0.15rem 0.4rem;
+      border-radius: 999px;
+      border: 2px solid #fff;
+      box-shadow: 0 0 10px 2px rgba(255, 46, 196, 0.8);
+      animation: sloop-badge-pulse 0.5s ease-in-out infinite, sloop-hard-blink 0.5s steps(1) infinite;
+    }
+
+    @keyframes sloop-badge-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.4) rotate(-10deg); }
+    }
+
+    @keyframes sloop-hard-blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0.3; }
+    }
+
+    .sloop-menu-panel {
+      position: absolute;
+      right: 0;
+      bottom: 62px;
+      min-width: 15rem;
+      margin: 0;
+      padding: 0.5rem;
+      list-style: none;
+      background: #17141c;
+      border: 3px solid transparent;
+      border-radius: 12px;
+      background-image: linear-gradient(#17141c, #17141c),
+        linear-gradient(135deg, #ff2ec4, #ffd400, #00e5ff, #7c4dff);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      box-shadow: 0 0 32px 6px rgba(124, 77, 255, 0.45), 0 14px 34px rgba(0, 0, 0, 0.4);
+      outline: 3px solid #ff2ec4;
+      outline-offset: 4px;
+      display: grid;
+      gap: 0.35rem;
+      animation: sloop-siren 0.4s steps(1) infinite;
+    }
+
+    @keyframes sloop-siren {
+      0%, 100% { outline-color: #ff2ec4; }
+      50% { outline-color: #ffd400; }
+    }
+
+    .sloop-menu-panel[hidden] {
+      display: none;
+    }
+
+    .sloop-menu-item {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: #f2f0ff;
+      font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .sloop-menu-item:hover:not([disabled]),
+    .sloop-menu-item:focus-visible:not([disabled]) {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .sloop-menu-item[disabled] {
+      color: #2a2a2a;
+      background: repeating-linear-gradient(45deg, #ffd400, #ffd400 10px, #111 10px, #111 20px);
+      opacity: 0.85;
+      cursor: not-allowed;
+      text-shadow: none;
+    }
+
+    .sloop-menu-item.glow {
+      color: #fff;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      animation: sloop-glow-pulse 0.6s ease-in-out infinite, sloop-text-flicker 1.4s linear infinite;
+    }
+
+    @keyframes sloop-glow-pulse {
+      0%, 100% {
+        box-shadow: inset 0 0 0 2px rgba(255, 46, 196, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 22px 6px rgba(255, 46, 196, 0.85),
+          inset 0 0 0 2px rgba(255, 212, 0, 0.9);
+      }
+    }
+
+    @keyframes sloop-text-flicker {
+      0%, 19%, 21%, 23%, 100% { text-shadow: 0 0 6px #ff2ec4, 0 0 12px #ffd400; }
+      20%, 22% { text-shadow: none; }
     }
 
     @keyframes sloop-hue {
@@ -119,61 +421,374 @@
 
   <script>
     (function () {
-      const boom = new Audio('assets/boom.mp3');
-      boom.preload = 'auto';
+      'use strict';
 
-      const nyan = new Audio('assets/nyan.mp3');
-      nyan.preload = 'auto';
-      nyan.loop = true;
+      class EventBus {
+        constructor() { this._subscribers = Object.create(null); }
+        on(topic, handler) {
+          (this._subscribers[topic] || (this._subscribers[topic] = [])).push(handler);
+          return () => this.off(topic, handler);
+        }
+        off(topic, handler) {
+          this._subscribers[topic] = (this._subscribers[topic] || []).filter((h) => h !== handler);
+        }
+        emit(topic, payload) {
+          (this._subscribers[topic] || []).slice().forEach((h) => h(payload));
+        }
+      }
 
-      function spawnYoshi(count = 12) {
-        for (let i = 0; i < count; i++) {
-          const img = document.createElement('img');
-          img.src = 'assets/Yoshi.webp';
+      class CommandRegistry {
+        constructor() { this._commands = Object.create(null); }
+        register(key, factory) { this._commands[key] = factory; return this; }
+        resolve(key) {
+          const factory = this._commands[key];
+          if (!factory) throw new ReferenceError('No command registered for key "' + key + '"');
+          return factory();
+        }
+        dispatch(key, context) { this.resolve(key).execute(context); }
+      }
+
+      class TextTransformer {
+        transform(_text) { throw new Error('TextTransformer.transform must be implemented by subclass'); }
+      }
+
+      class UwuTransformer extends TextTransformer {
+        transform(text) {
+          return text
+            .replace(/[rl]/g, 'w')
+            .replace(/[RL]/g, 'W')
+            .replace(/n([aeiouAEIOU])/g, (_m, v) => 'ny' + v)
+            .replace(/N([aeiouAEIOU])/g, (_m, v) => 'Ny' + v)
+            .replace(/!+/g, (m) => m + '1')
+            + ' uwu';
+        }
+      }
+
+      class TextTransformPipeline {
+        constructor() { this._stages = []; }
+        use(transformer) { this._stages.push(transformer); return this; }
+        run(text) {
+          return this._stages.reduce((acc, stage) => stage.transform(acc), text);
+        }
+      }
+
+      class SubtreeTextRewriter {
+        constructor(textPipeline) {
+          this._textPipeline = textPipeline;
+        }
+        rewrite(rootEl) {
+          const walker = document.createTreeWalker(rootEl, NodeFilter.SHOW_TEXT, null);
+          const textNodes = [];
+          let node;
+          while ((node = walker.nextNode())) textNodes.push(node);
+          textNodes.forEach((textNode) => {
+            if (textNode.nodeValue.trim().length) {
+              textNode.nodeValue = this._textPipeline.run(textNode.nodeValue);
+            }
+          });
+        }
+      }
+
+      class SloopStrategy {
+        execute(_context) { throw new Error('SloopStrategy.execute must be implemented by subclass'); }
+      }
+
+      class AudioAsset {
+        constructor(src) {
+          this._el = new Audio(src);
+          this._el.preload = 'auto';
+        }
+        replay(opts) {
+          opts = opts || {};
+          if (opts.loop) this._el.loop = true;
+          try { this._el.currentTime = 0; this._el.play(); } catch (_err) { }
+        }
+        halt() {
+          try { this._el.pause(); this._el.currentTime = 0; } catch (_err) { }
+        }
+      }
+
+      class AudioAssetRegistry {
+        constructor(manifest) {
+          this._cache = Object.create(null);
+          this._manifest = manifest;
+        }
+        resolve(key) {
+          if (!this._cache[key]) this._cache[key] = new AudioAsset(this._manifest[key]);
+          return this._cache[key];
+        }
+      }
+
+      class ParticleService {
+        constructor(documentRef, assetSrc) {
+          this._document = documentRef;
+          this._src = assetSrc;
+        }
+        spawn(count) {
+          for (let i = 0; i < count; i++) this._spawnOne();
+        }
+        _spawnOne() {
+          const img = this._document.createElement('img');
+          img.src = this._src;
           img.className = 'yoshi-drop';
-
           const size = Math.floor(Math.random() * 48) + 48;
           img.style.width = size + 'px';
-          const left = Math.random() * 92; // gay
-          img.style.left = left + 'vw';
+          img.style.left = (Math.random() * 92) + 'vw';
           img.style.opacity = (Math.random() * 0.5 + 0.5).toFixed(2);
           img.style.animationName = 'yoshi-fall';
           img.style.animationTimingFunction = 'linear';
           img.style.animationDuration = (Math.random() * 1.8 + 1.2).toFixed(2) + 's';
           img.style.animationDelay = (Math.random() * 0.4).toFixed(2) + 's';
-
-          document.body.appendChild(img);
-
+          this._document.body.appendChild(img);
           img.addEventListener('animationend', () => img.remove(), { once: true });
         }
       }
 
-      window.addEventListener('keydown', function (e) {
-        try {
-          boom.currentTime = 0;
-          boom.play();
-        } catch (err) {
-          
+      class BoomYoshiStrategy extends SloopStrategy {
+        constructor(resolveAudio, particleService) {
+          super();
+          this._resolveAudio = resolveAudio;
+          this._particleService = particleService;
         }
-        spawnYoshi(12);
+        execute() {
+          this._resolveAudio('boom').replay();
+          this._particleService.spawn(12);
+        }
+      }
+
+      class SloopToggleStrategy extends SloopStrategy {
+        constructor(resolveAudio, documentElementProvider) {
+          super();
+          this._resolveAudio = resolveAudio;
+          this._documentElementProvider = documentElementProvider;
+        }
+        execute() {
+          const root = this._documentElementProvider();
+          const active = root.classList.toggle('sloop');
+          const nyan = this._resolveAudio('nyan');
+          if (active) nyan.replay({ loop: true }); else nyan.halt();
+        }
+      }
+
+      class AbstractStrategyFactory {
+        create(_key) { throw new Error('AbstractStrategyFactory.create must be implemented by subclass'); }
+      }
+
+      class SloopStrategyFactory extends AbstractStrategyFactory {
+        constructor(resolveAudio, particleService, documentElementProvider) {
+          super();
+          this._ctors = {
+            'sloop.keydown': () => new BoomYoshiStrategy(resolveAudio, particleService),
+            'sloop.trigger': () => new SloopToggleStrategy(resolveAudio, documentElementProvider)
+          };
+        }
+        create(key) {
+          const ctor = this._ctors[key];
+          if (!ctor) throw new ReferenceError('Unknown strategy key "' + key + '"');
+          return ctor();
+        }
+      }
+
+      class DestinationRegistry {
+        constructor(manifest) { this._manifest = manifest; }
+        resolve(key) {
+          const url = this._manifest[key];
+          if (!url) throw new ReferenceError('No destination registered for key "' + key + '"');
+          return url;
+        }
+      }
+
+      class NoOpStrategy extends SloopStrategy {
+        execute() { }
+      }
+
+      class ExternalNavigationStrategy extends SloopStrategy {
+        constructor(destinationRegistry, destinationKey, windowRef) {
+          super();
+          this._destinationRegistry = destinationRegistry;
+          this._destinationKey = destinationKey;
+          this._windowRef = windowRef;
+        }
+        execute() {
+          const url = this._destinationRegistry.resolve(this._destinationKey);
+          this._windowRef.open(url, '_blank', 'noopener');
+        }
+      }
+
+      class ToggleDropdownMenuStrategy extends SloopStrategy {
+        constructor(state) {
+          super();
+          this._state = state;
+        }
+        execute() {
+          this._state.dropdownOpen = !this._state.dropdownOpen;
+        }
+      }
+
+      class MenuStrategyFactory extends AbstractStrategyFactory {
+        constructor(destinationRegistry, windowRef, state) {
+          super();
+          this._ctors = {
+            'menu.toggle': () => new ToggleDropdownMenuStrategy(state),
+            'menu.navigate.architect': () => new ExternalNavigationStrategy(destinationRegistry, 'architect', windowRef),
+            'menu.noop': () => new NoOpStrategy()
+          };
+        }
+        create(key) {
+          const ctor = this._ctors[key];
+          if (!ctor) throw new ReferenceError('Unknown strategy key "' + key + '"');
+          return ctor();
+        }
+      }
+
+      const MENU_MANIFEST = [
+        { id: 'architect', label: 'guillotinemelody.dev', commandKey: 'menu.navigate.architect', variant: 'glow' },
+        { id: 'placeholder-alpha', label: 'Reserved // Slot A', commandKey: 'menu.noop', disabled: true },
+        { id: 'placeholder-beta', label: 'Reserved // Slot B', commandKey: 'menu.noop', disabled: true }
+      ];
+
+      class MenuRenderer {
+        constructor(panelEl, manifest, bus, textPipeline) {
+          this._panelEl = panelEl;
+          this._manifest = manifest;
+          this._bus = bus;
+          this._textPipeline = textPipeline;
+        }
+        render() {
+          this._manifest.forEach((item) => this._renderItem(item));
+        }
+        _renderItem(item) {
+          const li = document.createElement('li');
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.setAttribute('role', 'menuitem');
+          button.className = 'sloop-menu-item' + (item.variant === 'glow' ? ' glow' : '');
+          button.textContent = this._textPipeline.run(item.label);
+          if (item.disabled) button.disabled = true;
+          button.addEventListener('click', () => this._bus.emit('input:menu-item-click', { commandKey: item.commandKey }));
+          li.appendChild(button);
+          this._panelEl.appendChild(li);
+        }
+      }
+
+      class DropdownVisibilityController {
+        constructor(bus, state, containerEl, triggerEl, panelEl) {
+          this._state = state;
+          this._containerEl = containerEl;
+          this._triggerEl = triggerEl;
+          this._panelEl = panelEl;
+          bus.on('state:dropdownOpen:changed', ({ next }) => this._render(next));
+          document.addEventListener('click', (e) => this._handleOutsideClick(e));
+          this._render(false);
+        }
+        _render(open) {
+          this._containerEl.dataset.open = String(open);
+          this._panelEl.hidden = !open;
+          this._triggerEl.setAttribute('aria-expanded', String(open));
+        }
+        _handleOutsideClick(e) {
+          if (this._state.dropdownOpen && !this._containerEl.contains(e.target)) {
+            this._state.dropdownOpen = false;
+          }
+        }
+      }
+
+      function createObservableState(bus) {
+        const target = { sloopActive: false, lastEvent: null, dropdownOpen: false };
+        return new Proxy(target, {
+          set(obj, prop, value) {
+            const prev = obj[prop];
+            obj[prop] = value;
+            bus.emit('state:' + String(prop) + ':changed', { prev: prev, next: value });
+            return true;
+          }
+        });
+      }
+
+      class BackgroundAnimationDirector {
+        constructor(el, variants, intervalMs) {
+          this._el = el;
+          this._variants = variants;
+          this._intervalMs = intervalMs;
+        }
+        start() {
+          this._applyRandom();
+          setInterval(() => this._applyRandom(), this._intervalMs);
+        }
+        _applyRandom() {
+          const variant = this._variants[Math.floor(Math.random() * this._variants.length)];
+          this._el.className = 'sloop-background ' + variant;
+        }
+      }
+
+      const bus = new EventBus();
+      const registry = new CommandRegistry();
+      const audioAssets = new AudioAssetRegistry({
+        boom: 'assets/boom.mp3',
+        nyan: 'assets/nyan.mp3'
       });
+      const particleService = new ParticleService(document, 'assets/Yoshi.webp');
+      const strategyFactory = new SloopStrategyFactory(
+        (key) => audioAssets.resolve(key),
+        particleService,
+        () => document.documentElement
+      );
+
+      const state = createObservableState(bus);
+      const textPipeline = new TextTransformPipeline().use(new UwuTransformer());
+
+      const uwuTargets = document.querySelectorAll('.sloop-marquee, .sloop-menu-trigger-label, .sloop-menu-badge');
+      uwuTargets.forEach((el) => {
+        el.textContent = textPipeline.run(el.textContent);
+      });
+
+      const contentRewriter = new SubtreeTextRewriter(textPipeline);
+      ['header.masthead', '#main', 'footer'].forEach((selector) => {
+        const el = document.querySelector(selector);
+        if (el) contentRewriter.rewrite(el);
+      });
+
+      const backgroundEl = document.getElementById('sloop-background');
+      if (backgroundEl) {
+        new BackgroundAnimationDirector(
+          backgroundEl,
+          ['sloop-bg-lava', 'sloop-bg-spin', 'sloop-bg-stripes', 'sloop-bg-pulse'],
+          3500
+        ).start();
+      }
+
+      const destinationRegistry = new DestinationRegistry({ architect: 'https://guillotinemelody.dev' });
+      const menuStrategyFactory = new MenuStrategyFactory(destinationRegistry, window, state);
+
+      registry
+        .register('sloop.keydown', () => strategyFactory.create('sloop.keydown'))
+        .register('sloop.trigger', () => strategyFactory.create('sloop.trigger'))
+        .register('menu.toggle', () => menuStrategyFactory.create('menu.toggle'))
+        .register('menu.navigate.architect', () => menuStrategyFactory.create('menu.navigate.architect'))
+        .register('menu.noop', () => menuStrategyFactory.create('menu.noop'));
+
+      bus.on('input:keydown', () => registry.dispatch('sloop.keydown'));
+      bus.on('input:trigger-click', () => {
+        state.lastEvent = 'trigger-click';
+        registry.dispatch('sloop.trigger');
+      });
+      bus.on('input:menu-toggle', () => registry.dispatch('menu.toggle'));
+      bus.on('input:menu-item-click', ({ commandKey }) => registry.dispatch(commandKey));
+
+      window.addEventListener('keydown', () => bus.emit('input:keydown'));
 
       const trigger = document.getElementById('sloop-trigger');
       if (trigger) {
-        trigger.addEventListener('click', function () {
-          const active = document.documentElement.classList.toggle('sloop');
-          try {
-            if (active) {
-              nyan.currentTime = 0;
-              nyan.play();
-            } else {
-              nyan.pause();
-              nyan.currentTime = 0;
-            }
-          } catch (err) {
-           
-          }
-        });
+        trigger.addEventListener('click', () => bus.emit('input:trigger-click'));
+      }
+
+      const menuContainer = document.getElementById('sloop-menu');
+      const menuTrigger = document.getElementById('sloop-menu-trigger');
+      const menuPanel = document.getElementById('sloop-menu-panel');
+      if (menuContainer && menuTrigger && menuPanel) {
+        new MenuRenderer(menuPanel, MENU_MANIFEST, bus, textPipeline).render();
+        new DropdownVisibilityController(bus, state, menuContainer, menuTrigger, menuPanel);
+        menuTrigger.addEventListener('click', () => bus.emit('input:menu-toggle'));
       }
     })();
   </script>
