@@ -792,6 +792,209 @@
       }
     })();
   </script>
+  <style>
+    /* Chaotic cookie banner styles (bigger, uglier, more mobile) */
+    .chaos-banner {
+      position: fixed;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      min-width: 240px;
+      max-width: 720px;
+      color: #111;
+      background: linear-gradient(135deg,#ffefc2,#ffd6f0);
+      border: 8px dashed rgba(0,0,0,0.12);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+      z-index: 12000;
+      transform-origin: center;
+      font-family: 'Comic Sans MS', 'Comic Neue', system-ui, sans-serif;
+      cursor: default;
+      border-radius: 8px;
+      transition: transform 240ms ease, left 240ms ease, top 240ms ease;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    .chaos-banner img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border: 6px solid rgba(255,255,255,0.6);
+      transform: rotate(-8deg);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+    }
+
+    .chaos-content {
+      font-size: 16px;
+      line-height: 1.1;
+      max-height: 140px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .chaos-close {
+      margin-left: 12px;
+      background: crimson;
+      color: white;
+      border: none;
+      padding: 8px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 900;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    }
+
+    .chaos-banner.animated { animation: chaos-pulse 5s linear infinite; }
+
+    @keyframes chaos-pulse { 0% { filter: saturate(1); } 50% { filter: saturate(1.6) hue-rotate(10deg); } 100% { filter: saturate(1); } }
+
+    .chaos-banner.override-ugly { border-radius: 2px; background: repeating-linear-gradient(45deg, #ffb3b3 0 6px, #fff7b3 6px 12px); border: 10px solid black; transform-origin: left top; }
+  </style>
+
+  <script>
+    (function () {
+      const grandmaImgs = ['assets/grandmas/grandma1.jpg','assets/grandmas/grandma2.jpg','assets/grandmas/grandma3.webp','assets/grandmas/grandma4.webp','assets/grandmas/grandma5.webp','assets/grandmas/grandma6.png'];
+
+      const messages = [
+        "We use cookies to improve your feelings.",
+        "This site uses cookies, biscuits.",
+        "By closing you accept our terms & snacks.",
+        "Cookies keep grandma happy.",
+        "Important: Meow.",
+        "We need cookies for analytics pwease."
+      ];
+
+      function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+      const banners = new Set();
+      let mouseX = -9999, mouseY = -9999;
+
+      function viewportSize() {
+        const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+        return { vw, vh };
+      }
+
+      function createBanner(opts = {}) {
+        const el = document.createElement('div');
+        el.className = 'chaos-banner animated ' + (opts.ugly ? 'override-ugly' : '');
+        el.style.position = 'fixed';
+
+        const img = document.createElement('img');
+        img.src = rand(grandmaImgs) + '?v=' + Math.floor(Math.random() * 9999);
+        img.alt = 'grandma';
+
+        const content = document.createElement('div');
+        content.className = 'chaos-content';
+        content.innerText = rand(messages);
+
+        const close = document.createElement('button');
+        close.className = 'chaos-close';
+        close.type = 'button';
+        close.innerText = 'close';
+
+        el.appendChild(img);
+        el.appendChild(content);
+        el.appendChild(close);
+
+        const { vw, vh } = viewportSize();
+        const width = 300 + Math.floor(Math.random() * 480);
+        el.style.width = width + 'px';
+
+        const left = Math.floor(Math.random() * Math.max(16, vw - width - 32));
+        const top = Math.floor(Math.random() * Math.max(16, vh - 160));
+        el.style.left = left + 'px';
+        el.style.top = top + 'px';
+
+        const obj = {
+          el,
+          vx: (Math.random() - 0.5) * 1.4,
+          vy: (Math.random() - 0.5) * 1.2
+        };
+
+        document.body.appendChild(el);
+        banners.add(obj);
+
+        if (Math.random() < 0.18) {
+          setTimeout(() => createBanner({ ugly: Math.random() < 0.6 }), 80 + Math.random() * 400);
+        }
+
+        close.addEventListener('click', function () {
+          el.remove();
+          banners.delete(obj);
+          const count = 1 + Math.floor(Math.random() * 3);
+          for (let i = 0; i < count; i++) {
+            setTimeout(() => createBanner({ ugly: Math.random() < 0.6 }), 60 * i + Math.random() * 300);
+          }
+        });
+
+        el.addEventListener('click', function (e) {
+          if (e.target === close) return;
+          if (Math.random() < 0.22) {
+            createBanner({ ugly: true });
+            if (Math.random() < 0.32) createBanner({});
+          }
+        });
+
+        return obj;
+      }
+
+      function updatePhysics() {
+        const { vw, vh } = viewportSize();
+        const avoidRadius = 220;
+        banners.forEach((b) => {
+          const el = b.el;
+          const rect = el.getBoundingClientRect();
+          let x = rect.left;
+          let y = rect.top;
+
+          const cx = x + rect.width / 2;
+          const cy = y + rect.height / 2;
+          const dx = cx - mouseX;
+          const dy = cy - mouseY;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+
+          if (dist < avoidRadius) {
+            const push = (avoidRadius - dist) / avoidRadius * 2.4;
+            b.vx += (dx / dist) * push;
+            b.vy += (dy / dist) * push;
+          }
+
+          b.vx *= 0.96;
+          b.vy *= 0.96;
+
+          x += b.vx;
+          y += b.vy;
+
+          if (x < 8) { x = 8; b.vx = Math.abs(b.vx) * 0.6; }
+          if (y < 8) { y = 8; b.vy = Math.abs(b.vy) * 0.6; }
+          if (x + rect.width > vw - 8) { x = vw - rect.width - 8; b.vx = -Math.abs(b.vx) * 0.6; }
+          if (y + rect.height > vh - 8) { y = vh - rect.height - 8; b.vy = -Math.abs(b.vy) * 0.6; }
+
+          el.style.left = Math.round(x) + 'px';
+          el.style.top = Math.round(y) + 'px';
+        });
+        requestAnimationFrame(updatePhysics);
+      }
+
+      window.addEventListener('mousemove', function (e) {
+        mouseX = e.clientX; mouseY = e.clientY;
+      });
+
+      window.addEventListener('load', function () {
+        createBanner({ ugly: true });
+        requestAnimationFrame(updatePhysics);
+      });
+
+      window.addEventListener('keydown', function () {
+        if (Math.random() < 0.45) {
+          const n = 1 + Math.floor(Math.random() * 3);
+          for (let i = 0; i < n; i++) setTimeout(() => createBanner({ ugly: Math.random() < 0.6 }), i * 80);
+        }
+      });
+    })();
+  </script>
 </body>
 
 </html>
