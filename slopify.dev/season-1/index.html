@@ -54,6 +54,119 @@
       </div>
     </div>
   </footer>
+  <!-- Emulator windows -->
+  <div class="emu-container" aria-hidden="false">
+    <div class="emu-window" data-title="System 1.0 (Mac 128K)" style="left:20px; top:220px;">
+      <div class="emu-bar"><span class="emu-title">System 1.0 — Mac 128K</span>
+        <div class="emu-actions"><button class="emu-min">_</button><button class="emu-close">×</button></div>
+      </div>
+      <iframe src="https://infinitemac.org/embed?disk=System+1.0&infinite_hd=true&machine=Mac+128K" width="512" height="342" allow="cross-origin-isolated" frameborder="1"></iframe>
+    </div>
+
+    <div class="emu-window" data-title="Mac OS X 10.1 (Power Mac G3)" style="left:260px; top:140px;">
+      <div class="emu-bar"><span class="emu-title">Mac OS X 10.1 — Power Mac G3</span>
+        <div class="emu-actions"><button class="emu-min">_</button><button class="emu-close">×</button></div>
+      </div>
+      <iframe src="https://infinitemac.org/embed?disk=Mac+OS+X+10.1&infinite_hd=true&machine=Power+Macintosh+G3+%28Beige%29" width="1152" height="870" allow="cross-origin-isolated" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <style>
+    .emu-container { position: fixed; inset: 0; pointer-events: none; z-index: 11000; }
+    .emu-window { position: absolute; pointer-events: auto; background: repeating-linear-gradient(135deg,#1a1a1a 0 6px,#151515 6px 12px); border: 8px dashed rgba(255,46,196,0.85); border-radius: 6px; overflow: hidden; box-shadow: 0 18px 60px rgba(124,77,255,0.25), inset 0 0 0 6px rgba(255,212,0,0.06); resize: both; transform: rotate(-0.6deg); }
+    .emu-window iframe { display: block; background: #000; width: 100%; height: calc(100% - 40px); border: 0; transform-origin: center center; transition: transform 120ms ease; }
+    .emu-resizer { position: absolute; right: 8px; bottom: 8px; width: 22px; height: 22px; background: repeating-linear-gradient(45deg,#ffd400 0 6px,#ff2ec4 6px 12px); border-radius: 4px; cursor: se-resize; box-shadow: 0 8px 18px rgba(0,0,0,0.5); z-index: 10; transform: rotate(16deg); }
+    .emu-bar { height: 40px; display:flex; align-items:center; justify-content:space-between; gap:8px; padding:6px 10px; background: linear-gradient(90deg,#222,#333); color:#fff; font-weight:700; cursor:grab; }
+    .emu-bar:active { cursor:grabbing; }
+    .emu-title { font-family: 'Comic Sans MS', 'Comic Neue', system-ui, sans-serif; font-size:13px; }
+    .emu-actions button { margin-left:6px; background:#ff2ec4; color:#111; border:0; padding:4px 8px; border-radius:6px; font-weight:900; cursor:pointer; }
+    .emu-actions .emu-close { background: #ff3b3b; color:#fff; }
+    .emu-window.small { transform: scale(0.7); opacity:0.92; }
+    .emu-window[data-floating="true"] { transition: transform 160ms ease; transform: translateZ(0) scale(1.02); }
+    .emu-window[style] { max-width: 95vw; max-height: 85vh; }
+  </style>
+
+  <script>
+    (function () {
+      function makeDraggable(win) {
+        const bar = win.querySelector('.emu-bar');
+        let dragging = false, ox = 0, oy = 0;
+        bar.addEventListener('pointerdown', (e) => {
+          dragging = true; win.dataset.floating = 'true';
+          ox = e.clientX - win.offsetLeft; oy = e.clientY - win.offsetTop;
+          bar.setPointerCapture(e.pointerId);
+        });
+        document.addEventListener('pointermove', (e) => {
+          if (!dragging) return;
+          let nx = e.clientX - ox, ny = e.clientY - oy;
+          const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+          const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+          nx = Math.max(8, Math.min(vw - win.offsetWidth - 8, nx));
+          ny = Math.max(8, Math.min(vh - win.offsetHeight - 8, ny));
+          win.style.left = nx + 'px'; win.style.top = ny + 'px';
+        });
+        document.addEventListener('pointerup', (e) => { if (dragging) { dragging = false; win.dataset.floating = 'false'; } });
+      }
+
+      document.querySelectorAll('.emu-window').forEach((w) => {
+        const iframe = w.querySelector('iframe');
+        const fw = parseInt(iframe.getAttribute('width'),10) || 512;
+        const fh = parseInt(iframe.getAttribute('height'),10) || 342;
+        w.style.width = Math.min(fw + 16, window.innerWidth * 0.9) + 'px';
+        w.style.height = Math.min(fh + 46, window.innerHeight * 0.85) + 'px';
+        makeDraggable(w);
+        makeResizable(w);
+        const close = w.querySelector('.emu-close');
+        const min = w.querySelector('.emu-min');
+        // make buttons sillier
+        close.innerText = '💥'; close.title = 'obliterate';
+        min.innerText = '🍪'; min.title = 'hide (maybe)';
+        close.addEventListener('click', () => {
+          // dramatic remove with wobble
+          w.style.transition = 'transform 260ms ease, opacity 220ms ease';
+          w.style.transform += ' scale(0.3) rotate(12deg)';
+          w.style.opacity = '0';
+          setTimeout(() => w.remove(), 300);
+        });
+        min.addEventListener('click', () => w.classList.toggle('small'));
+      });
+      function makeResizable(win) {
+        const handle = document.createElement('div');
+        handle.className = 'emu-resizer';
+        win.appendChild(handle);
+        let resizing = false, startX = 0, startY = 0, startW = 0, startH = 0;
+        const iframe = win.querySelector('iframe');
+        handle.addEventListener('pointerdown', (e) => {
+          e.stopPropagation(); resizing = true; handle.setPointerCapture(e.pointerId);
+          startX = e.clientX; startY = e.clientY;
+          startW = win.offsetWidth; startH = win.offsetHeight;
+          win.dataset.floating = 'true';
+        });
+        document.addEventListener('pointermove', (e) => {
+          if (!resizing) return;
+          const dx = e.clientX - startX; const dy = e.clientY - startY;
+          const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+          const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+          let nw = Math.max(180, Math.min(vw - 16, Math.round(startW + dx)));
+          let nh = Math.max(120, Math.min(vh - 16, Math.round(startH + dy)));
+          win.style.width = nw + 'px'; win.style.height = nh + 'px';
+          // apply whacky transform to iframe element so content looks stretched/wacky
+          const sx = nw / Math.max(1, startW);
+          const sy = nh / Math.max(1, startH);
+          const skewX = (sx - 1) * 12;
+          const skewY = (sy - 1) * 8;
+          const rot = (sx - sy) * 8;
+          iframe.style.transform = `scale(${sx.toFixed(3)},${sy.toFixed(3)}) skew(${skewX.toFixed(2)}deg, ${skewY.toFixed(2)}deg) rotate(${rot.toFixed(2)}deg)`;
+        });
+        document.addEventListener('pointerup', (e) => { if (resizing) { resizing = false; win.dataset.floating = 'false';
+            // subtle bounce-back random wobble
+            iframe.style.transition = 'transform 420ms cubic-bezier(.2,.8,.2,1)';
+            iframe.style.transform += ' rotate(' + ((Math.random() - 0.5) * 6).toFixed(2) + 'deg)';
+            setTimeout(() => iframe.style.transition = '', 500);
+          } });
+      }
+    })();
+  </script>
   <button id="sloop-trigger" class="sloop-trigger" aria-label="Sloopify" title="Sloopify" color=White>F</button>
 
   <marquee class="sloop-marquee" behavior="alternate" scrollamount="6" aria-hidden="true">&#128293; MORE SLOP THIS WAY &#128293; CLICK EVERYTHING &#128293;</marquee>
